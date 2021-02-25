@@ -4,9 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using Random = UnityEngine.Random;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject manager;
     public GameObject[] prefabs;
 
     public GameObject[] blocks;
@@ -19,25 +21,40 @@ public class GameManager : MonoBehaviour
     int max = 10;
 
     //ore info
-    int stone = 0;
-    int coal = 0;
-    int bronze = 0;
-    int iron = 0;
+    public int stone = 0;
+    public int coal = 0;
+    public int bronze = 0;
+    public int iron = 0;
     public Text stoneValue;
     public Text coalValue;
     public Text bronzeValue;
     public Text ironValue;
 
     //equipment info
-    int eqLvl = 1;
+    public int eqLvl = 1;
     public Text eqLevel;
     void Start()
     {
-        for (int i = 0; i < 3; i++)
+        if (GameObject.Find("InventoryData"))
         {
-            Array.Clear(blocks, 0, blocks.Length);
-            blocks = GameObject.FindGameObjectsWithTag("ore");
-            TileMove();
+            GameObject temp = GameObject.Find("InventoryData");
+            InventoryData id = temp.GetComponent<InventoryData>();
+
+            stone = id.stone;
+            coal = id.coal;
+            bronze = id.bronze;
+            iron = id.iron;
+            eqLvl = id.eqLvl;
+        }
+
+        if (blocks.Length < 4)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                Array.Clear(blocks, 0, blocks.Length);
+                blocks = GameObject.FindGameObjectsWithTag("ore");
+                TileMove();
+            }
         }
     }
     // Update is called once per frame
@@ -53,7 +70,7 @@ public class GameManager : MonoBehaviour
 
             Transform tr = block.transform;
 
-            if (tr.transform.position.x <= 1f)
+            if (tr.transform.position.z <= 0.5f)
             {
                 ore.MakeOreActive();
 
@@ -109,7 +126,7 @@ public class GameManager : MonoBehaviour
         {
             Transform tr = block.transform;
 
-            tr.transform.position = new Vector3(tr.transform.position.x - 0.7f, tr.transform.position.y + 0.18f, tr.transform.position.z);
+            tr.transform.position = new Vector3(tr.transform.position.x, tr.transform.position.y, tr.transform.position.z - 1f);
         }
 
         TileGenerator();
@@ -127,19 +144,19 @@ public class GameManager : MonoBehaviour
         //stone 10, coal 5, bronze 4, iron 1
         if (randomOre < 10)
         {
-            Instantiate(prefabs[0], new Vector3(3.1f, -0.54f, 100), Quaternion.Euler(new Vector3(0, 0, 75)));
+            Instantiate(prefabs[0], new Vector3(2.45f, 0f, 3f), Quaternion.Euler(0, 0, 90));
         }
         else if (randomOre < 15)
         {
-            Instantiate(prefabs[1], new Vector3(3.1f, -0.54f, 100), Quaternion.Euler(new Vector3(0, 0, 75)));
+            Instantiate(prefabs[1], new Vector3(2.45f, 0f, 3f), Quaternion.Euler(0, 0, 90));
         }
         else if (randomOre < 19)
         {
-            Instantiate(prefabs[2], new Vector3(3.1f, -0.54f, 100), Quaternion.Euler(new Vector3(0, 0, 75)));
+            Instantiate(prefabs[2], new Vector3(2.45f, 0f, 3f), Quaternion.Euler(0, 0, 90));
         }
         else if (randomOre < 20)
         {
-            Instantiate(prefabs[3], new Vector3(3.1f, -0.54f, 100), Quaternion.Euler(new Vector3(0, 0, 75)));
+            Instantiate(prefabs[3], new Vector3(2.45f, 0f, 3f), Quaternion.Euler(0, 0, 90));
         }
     }
     void TileCheck()
@@ -169,12 +186,10 @@ public class GameManager : MonoBehaviour
         }
     }
     #endregion
-    public void UpgradeEquipment()
+    
+    public void GoToShop()
     {
-        if (eqLvl < 4)
-        {
-            eqLvl++;
-        }
-        else Debug.Log("max lvl reached");
+        SceneManager.LoadScene("Shop");
+        DontDestroyOnLoad(manager);
     }
 }
