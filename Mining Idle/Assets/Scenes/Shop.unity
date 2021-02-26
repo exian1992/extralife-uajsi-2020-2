@@ -757,7 +757,7 @@ GameObject:
   - component: {fileID: 636834260}
   m_Layer: 0
   m_Name: InventoryData
-  m_TagString: Untagged
+  m_TagString: iData
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -788,6 +788,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e240e742f0881149bf7f1e913e8a4bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gmChecker: []
   stone: 0
   coal: 0
   bronze: 0

@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject[] blocks;
 
-    int currentOre = 1;
+    float currentOre = 1;
     public Text currentOreHealth;
     public Text currentOreName;
 
@@ -30,11 +30,18 @@ public class GameManager : MonoBehaviour
     public Text bronzeValue;
     public Text ironValue;
 
+    //orechance
+    public int stoneChance = 20;
+    public int coalChance = 0;
+    public int bronzeChance = 0;
+    public int ironChance = 0;
+
     //equipment info
     public int eqLvl = 1;
     public Text eqLevel;
+    public float attackSpeed = 1;
     void Start()
-    {
+    {        
         if (GameObject.Find("InventoryData"))
         {
             GameObject temp = GameObject.Find("InventoryData");
@@ -81,11 +88,12 @@ public class GameManager : MonoBehaviour
                 currentOreHealth.text = currentOre.ToString();
 
                 currentOreName.text = ore.GetName();
+                Debug.Log("Current ore Health = " + currentOre);
             }
         }
 
         //tile moving
-        if (currentOre == 0)
+        if (currentOre < 0)
         {
             TileCheck();
             Destroy(blocks[0]);
@@ -142,21 +150,21 @@ public class GameManager : MonoBehaviour
         if (eqLvl == 4) max = 20;
 
         //stone 10, coal 5, bronze 4, iron 1
-        if (randomOre < 10)
+        if (randomOre < ironChance)
         {
-            Instantiate(prefabs[0], new Vector3(2.45f, 0f, 3f), Quaternion.Euler(0, 0, 90));
+            Instantiate(prefabs[3], new Vector3(2.45f, 0f, 3f), Quaternion.Euler(0, 0, 90));
         }
-        else if (randomOre < 15)
-        {
-            Instantiate(prefabs[1], new Vector3(2.45f, 0f, 3f), Quaternion.Euler(0, 0, 90));
-        }
-        else if (randomOre < 19)
+        else if (randomOre < bronzeChance)
         {
             Instantiate(prefabs[2], new Vector3(2.45f, 0f, 3f), Quaternion.Euler(0, 0, 90));
         }
-        else if (randomOre < 20)
+        else if (randomOre < coalChance)
         {
-            Instantiate(prefabs[3], new Vector3(2.45f, 0f, 3f), Quaternion.Euler(0, 0, 90));
+            Instantiate(prefabs[1], new Vector3(2.45f, 0f, 3f), Quaternion.Euler(0, 0, 90));
+        }
+        else if (randomOre < stoneChance)
+        {
+            Instantiate(prefabs[0], new Vector3(2.45f, 0f, 3f), Quaternion.Euler(0, 0, 90));
         }
     }
     void TileCheck()
@@ -190,6 +198,11 @@ public class GameManager : MonoBehaviour
     public void GoToShop()
     {
         SceneManager.LoadScene("Shop");
+        Destroy(GameObject.Find("InventoryData"));
         DontDestroyOnLoad(manager);
+    }
+    public float Damage()
+    {
+        return attackSpeed;
     }
 }

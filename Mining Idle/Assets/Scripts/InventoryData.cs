@@ -11,6 +11,7 @@ public class InventoryData : MonoBehaviour
 
     //item collection
     public int stone, coal, bronze, iron, eqLvl;
+    public float attSpd;
     public Text stoneValue;
     public Text coalValue;
     public Text bronzeValue;
@@ -26,6 +27,7 @@ public class InventoryData : MonoBehaviour
         bronze = gManager.bronze;
         iron = gManager.iron;
         eqLvl = gManager.eqLvl;
+        attSpd = gManager.attackSpeed;
 
         stoneValue.text = stone.ToString();
         coalValue.text = coal.ToString();
@@ -36,6 +38,7 @@ public class InventoryData : MonoBehaviour
     public void Back()
     {
         SceneManager.LoadScene("MainGameplay");
+        Destroy(GameObject.Find("GameManager"));
         DontDestroyOnLoad(this.gameObject);
     }
     public void UpgradeEquipment()
@@ -47,6 +50,9 @@ public class InventoryData : MonoBehaviour
                 if (stone >= 10)
                 {
                     stone -= 10;
+                    gManager.stoneChance = 15;
+                    gManager.coalChance = 5;
+                    attSpd += 0.3f;
                     eqLvl++;
                 }
             }
@@ -56,6 +62,10 @@ public class InventoryData : MonoBehaviour
                 {
                     stone -= 20;
                     coal -= 10;
+                    gManager.stoneChance = 12;
+                    gManager.coalChance = 6;
+                    gManager.bronzeChance = 2;
+                    attSpd += 0.3f;
                     eqLvl++;
                 }
             }
@@ -66,6 +76,11 @@ public class InventoryData : MonoBehaviour
                     stone -= 30;
                     coal -= 20;
                     bronze -= 10;
+                    gManager.stoneChance = 9;
+                    gManager.coalChance = 7;
+                    gManager.bronzeChance = 3;
+                    gManager.ironChance = 1;
+                    attSpd += 0.3f;
                     eqLvl++;
                 }
             }
@@ -77,10 +92,11 @@ public class InventoryData : MonoBehaviour
                     coal -= 30;
                     bronze -= 20;
                     iron -= 10;
+                    attSpd += 0.3f;
                     eqLvl++;
                 }
             }
-            else Debug.Log("not enough materials");
+            else Debug.Log("not enough materials"   );
         }
         else Debug.Log("max lvl reached");
         RefreshText();
