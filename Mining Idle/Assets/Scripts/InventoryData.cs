@@ -19,15 +19,9 @@ public class InventoryData : MonoBehaviour
     public Text eqLevel;
     void Start()
     {
-        //grabbing previous data
         manager = GameObject.Find("GameManager");
         gManager = manager.GetComponent<GameManager>();
-        stone = gManager.stone;
-        coal = gManager.coal;
-        bronze = gManager.bronze;
-        iron = gManager.iron;
-        eqLvl = gManager.eqLvl;
-        attSpd = gManager.attackSpeed;
+        LoadData();
 
         stoneValue.text = stone.ToString();
         coalValue.text = coal.ToString();
@@ -108,5 +102,16 @@ public class InventoryData : MonoBehaviour
         bronzeValue.text = bronze.ToString();
         ironValue.text = iron.ToString();
         eqLevel.text = eqLvl.ToString();
+    }
+    public void LoadData()
+    {
+        GameData data = SaveSystem.LoadData();
+        stone = data.stone;
+        coal = data.coal;
+        bronze = data.bronze;
+        iron = data.iron;
+
+        eqLvl = data.eqLvl;
+        attSpd = data.attSpd;
     }
 }

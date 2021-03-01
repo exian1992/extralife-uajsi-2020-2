@@ -40,18 +40,28 @@ public class GameManager : MonoBehaviour
     public int eqLvl = 1;
     public Text eqLevel;
     public float attackSpeed = 1;
-    void Start()
-    {        
-        if (GameObject.Find("InventoryData"))
-        {
-            GameObject temp = GameObject.Find("InventoryData");
-            InventoryData id = temp.GetComponent<InventoryData>();
 
-            stone = id.stone;
-            coal = id.coal;
-            bronze = id.bronze;
-            iron = id.iron;
-            eqLvl = id.eqLvl;
+    //checker
+    public bool isItLoaded = false;
+    void Start()
+    {
+        if (!isItLoaded)
+        {
+            LoadData();
+            isItLoaded = true;
+        }
+        else
+        {
+            GameObject iDataObject = GameObject.Find("InventoryData");
+            InventoryData iData = iDataObject.GetComponent<InventoryData>();
+
+            stone = iData.stone;
+            coal = iData.coal;
+            bronze = iData.bronze;
+            iron = iData.iron;
+
+            eqLvl = iData.eqLvl;
+            attackSpeed = iData.attSpd;
         }
 
         if (blocks.Length < 4)
@@ -93,7 +103,7 @@ public class GameManager : MonoBehaviour
         }
 
         //tile moving
-        if (currentOre < 0)
+        if (currentOre <= 0)
         {
             TileCheck();
             Destroy(blocks[0]);
@@ -197,6 +207,7 @@ public class GameManager : MonoBehaviour
     
     public void GoToShop()
     {
+        SaveSystem.SaveData(this);
         SceneManager.LoadScene("Shop");
         Destroy(GameObject.Find("InventoryData"));
         DontDestroyOnLoad(manager);
@@ -204,5 +215,21 @@ public class GameManager : MonoBehaviour
     public float Damage()
     {
         return attackSpeed;
+    }
+    public void LoadData()
+    {
+        GameData data = SaveSystem.LoadData();
+        stone = data.stone;
+        coal = data.coal;
+        bronze = data.bronze;
+        iron = data.iron;
+
+        eqLvl = data.eqLvl;
+        attackSpeed = data.attSpd;
+    }
+    void OnApplicationQuit()
+    {
+        isItLoaded = false;
+        SaveSystem.SaveData(this);
     }
 }
