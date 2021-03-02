@@ -10,15 +10,13 @@ public class GameManager : MonoBehaviour
 {
     public GameObject manager;
     public GameObject[] prefabs;
+    GameData data;
 
     public GameObject[] blocks;
 
     float currentOre = 1;
     public Text currentOreHealth;
     public Text currentOreName;
-
-    //for maximum random rumber
-    int max = 10;
 
     //ore info
     public int stone = 0;
@@ -39,29 +37,21 @@ public class GameManager : MonoBehaviour
     //equipment info
     public int eqLvl = 1;
     public Text eqLevel;
-    public float attackSpeed = 1;
+    public float attSpd = 1f;
+
+    //coin
+    public int coin = 0;
+    public Text coinValue;
 
     //checker
     public bool isItLoaded = false;
     void Start()
     {
-        if (!isItLoaded)
+        InvokeRepeating("AttackOre", 0.1f, 0.1f);
+        if (isItLoaded == false)
         {
             LoadData();
             isItLoaded = true;
-        }
-        else
-        {
-            GameObject iDataObject = GameObject.Find("InventoryData");
-            InventoryData iData = iDataObject.GetComponent<InventoryData>();
-
-            stone = iData.stone;
-            coal = iData.coal;
-            bronze = iData.bronze;
-            iron = iData.iron;
-
-            eqLvl = iData.eqLvl;
-            attackSpeed = iData.attSpd;
         }
 
         if (blocks.Length < 4)
@@ -98,7 +88,6 @@ public class GameManager : MonoBehaviour
                 currentOreHealth.text = currentOre.ToString();
 
                 currentOreName.text = ore.GetName();
-                Debug.Log("Current ore Health = " + currentOre);
             }
         }
 
@@ -136,6 +125,8 @@ public class GameManager : MonoBehaviour
         bronzeValue.text = bronze.ToString();
         ironValue.text = iron.ToString();
         eqLevel.text = eqLvl.ToString();
+
+        coinValue.text = coin.ToString();
     }
     #region Tile Stuff
     void TileMove()
@@ -152,27 +143,22 @@ public class GameManager : MonoBehaviour
     void TileGenerator()
     {
         //random generator
-        int randomOre = Random.Range(0, max);
-
-        //eq lvl checker
-        if (eqLvl == 2) max = 15;
-        if (eqLvl == 3) max = 19;
-        if (eqLvl == 4) max = 20;
+        int randomOre = Random.Range(0, 20);
 
         //stone 10, coal 5, bronze 4, iron 1
         if (randomOre < ironChance)
         {
             Instantiate(prefabs[3], new Vector3(2.45f, 0f, 3f), Quaternion.Euler(0, 0, 90));
         }
-        else if (randomOre < bronzeChance)
+        else if (randomOre < bronzeChance)//2
         {
             Instantiate(prefabs[2], new Vector3(2.45f, 0f, 3f), Quaternion.Euler(0, 0, 90));
         }
-        else if (randomOre < coalChance)
+        else if (randomOre < coalChance)//6
         {
             Instantiate(prefabs[1], new Vector3(2.45f, 0f, 3f), Quaternion.Euler(0, 0, 90));
         }
-        else if (randomOre < stoneChance)
+        else if (randomOre < stoneChance)//12
         {
             Instantiate(prefabs[0], new Vector3(2.45f, 0f, 3f), Quaternion.Euler(0, 0, 90));
         }
@@ -210,22 +196,29 @@ public class GameManager : MonoBehaviour
         SaveSystem.SaveData(this);
         SceneManager.LoadScene("Shop");
         Destroy(GameObject.Find("InventoryData"));
-        DontDestroyOnLoad(manager);
+        DontDestroyOnLoad(this);
     }
     public float Damage()
     {
-        return attackSpeed;
+        return attSpd;
     }
     public void LoadData()
     {
-        GameData data = SaveSystem.LoadData();
+        data = SaveSystem.LoadData();
         stone = data.stone;
         coal = data.coal;
         bronze = data.bronze;
         iron = data.iron;
 
         eqLvl = data.eqLvl;
-        attackSpeed = data.attSpd;
+        attSpd = data.attSpd;
+
+        stoneChance = data.stoneChance;
+        coalChance = data.coalChance;
+        bronzeChance = data.bronzeChance;
+        ironChance = data.ironChance;
+
+        coin = data.coin;
     }
     void OnApplicationQuit()
     {
