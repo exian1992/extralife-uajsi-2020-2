@@ -7,6 +7,7 @@ TagManager:
   - ore
   - gManager
   - iData
+  - stopPoint
   layers:
   - Default
   - TransparentFX
@@ -43,4 +44,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: BG
+    uniqueID: 1280123871
+    locked: 0
+  - name: Char
+    uniqueID: 1124814743
     locked: 0
