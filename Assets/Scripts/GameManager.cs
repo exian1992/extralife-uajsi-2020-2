@@ -5,12 +5,17 @@ using UnityEngine.UI;
 using System;
 using Random = UnityEngine.Random;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
+using System.IO;
 
 public class GameManager : MonoBehaviour
 {
     public GameObject manager;
     public GameObject[] prefabs;
+    //public GameObject[] floatingOreIcon;
     GameData data;
+    GameObject qManager;
+    QuestManager questManager;
 
     public GameObject[] blocks;
 
@@ -45,14 +50,26 @@ public class GameManager : MonoBehaviour
 
     //checker
     public bool isItLoaded = false;
+
+    //etc
+    public GameObject questPopUp;
     void Start()
     {
-        InvokeRepeating("AttackOre", 0.1f, 0.1f);
+        qManager = GameObject.Find("QuestManager");
+        questManager = qManager.GetComponent<QuestManager>();
+
+        string saveData = "D:/SaveFile/data.uwansummoney";
+        if (!File.Exists(saveData))
+        {
+            SaveSystem.SaveData(this);
+        }
         if (isItLoaded == false)
         {
+            questManager.LoadQuestState();
             LoadData();
             isItLoaded = true;
         }
+        InvokeRepeating("AttackOre", 1f, 0.5f);
 
         if (blocks.Length < 4)
         {
@@ -91,6 +108,13 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        //touch input
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (EventSystem.current.IsPointerOverGameObject()) return;
+            AttackOre();
+        }
+
         //tile moving
         if (currentOre <= 0)
         {
@@ -113,6 +137,16 @@ public class GameManager : MonoBehaviour
                 ore.OreDamage();
                 currentOre = ore.GetOreHealth();
             }
+        }
+        //tap quest
+        if(questManager.isThereQuest)
+        {
+            if (questManager.currentActiveQuest[0].questType == QuestType.Tap)
+            {
+                questManager.currentActiveQuest[0].Increase(1);
+                questManager.QuestCompleteCheck();
+            }
+            
         }
         RefreshText();
     }
@@ -148,19 +182,19 @@ public class GameManager : MonoBehaviour
         //stone 10, coal 5, bronze 4, iron 1
         if (randomOre < ironChance)
         {
-            Instantiate(prefabs[3], new Vector3(2.45f, 0f, 3f), Quaternion.Euler(0, 0, 90));
+            Instantiate(prefabs[3], new Vector3(2.45f, -1.5f, 3f), Quaternion.Euler(0, 0, 90));
         }
         else if (randomOre < bronzeChance)//2
         {
-            Instantiate(prefabs[2], new Vector3(2.45f, 0f, 3f), Quaternion.Euler(0, 0, 90));
+            Instantiate(prefabs[2], new Vector3(2.45f, -1.5f, 3f), Quaternion.Euler(0, 0, 90));
         }
         else if (randomOre < coalChance)//6
         {
-            Instantiate(prefabs[1], new Vector3(2.45f, 0f, 3f), Quaternion.Euler(0, 0, 90));
+            Instantiate(prefabs[1], new Vector3(2.45f, -1.5f, 3f), Quaternion.Euler(0, 0, 90));
         }
         else if (randomOre < stoneChance)//12
         {
-            Instantiate(prefabs[0], new Vector3(2.45f, 0f, 3f), Quaternion.Euler(0, 0, 90));
+            Instantiate(prefabs[0], new Vector3(2.45f, -1.5f, 3f), Quaternion.Euler(0, 0, 90));
         }
     }
     void TileCheck()
@@ -173,18 +207,35 @@ public class GameManager : MonoBehaviour
                 if (ore.GetName() == "Stone")
                 {
                     stone++;
+                    //GameObject temp = Instantiate(floatingOreIcon[0], new Vector3(2.5f, 0f, 0f), Quaternion.identity);
+                    //Destroy(temp, 1);
+                    //stone quest
+                    if (questManager.isThereQuest)
+                    {
+                        if (questManager.currentActiveQuest[0].questType == QuestType.MineStone)
+                        {
+                            questManager.currentActiveQuest[0].Increase(1);
+                            questManager.QuestCompleteCheck();
+                        }
+                    }
                 }
                 if (ore.GetName() == "Coal")
                 {
                     coal++;
+                    //GameObject temp = Instantiate(floatingOreIcon[1], new Vector3(2.5f, 0f, 0f), Quaternion.identity);
+                    //Destroy(temp, 1);
                 }
                 if (ore.GetName() == "Bronze")
                 {
                     bronze++;
+                    //GameObject temp = Instantiate(floatingOreIcon[2], new Vector3(2.5f, 0f, 0f), Quaternion.identity);
+                    //Destroy(temp, 1);
                 }
                 if (ore.GetName() == "Iron")
                 {
                     iron++;
+                    //GameObject temp = Instantiate(floatingOreIcon[3], new Vector3(2.5f, 0f, 0f), Quaternion.identity);
+                    //Destroy(temp, 1);
                 }
             }
         }
@@ -194,9 +245,11 @@ public class GameManager : MonoBehaviour
     public void GoToShop()
     {
         SaveSystem.SaveData(this);
+        SaveSystem.SaveQuestState(questManager);
         SceneManager.LoadScene("Shop");
         Destroy(GameObject.Find("InventoryData"));
         DontDestroyOnLoad(this);
+        DontDestroyOnLoad(qManager);
     }
     public float Damage()
     {
@@ -219,6 +272,14 @@ public class GameManager : MonoBehaviour
         ironChance = data.ironChance;
 
         coin = data.coin;
+    }
+    public void ShowQuest()
+    {
+        questPopUp.SetActive(true);
+    }
+    public void HideQuest()
+    {
+        questPopUp.SetActive(false);
     }
     void OnApplicationQuit()
     {

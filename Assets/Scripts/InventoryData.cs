@@ -6,8 +6,9 @@ using UnityEngine.UI;
 
 public class InventoryData : MonoBehaviour
 {
-    GameObject manager;
+    GameObject manager, qManager;
     GameManager gManager;
+    QuestManager questManager;
 
     //item collection
     public Text stoneValue;
@@ -24,6 +25,8 @@ public class InventoryData : MonoBehaviour
     {
         manager = GameObject.Find("GameManager");
         gManager = manager.GetComponent<GameManager>();
+        qManager = GameObject.Find("QuestManager");
+        questManager = qManager.GetComponent<QuestManager>();
         RefreshText();
     }
     private void Update()
@@ -47,6 +50,8 @@ public class InventoryData : MonoBehaviour
     {
         SaveSystem.SaveData(gManager);
         Destroy(manager);
+        SaveSystem.SaveQuestState(questManager);
+        Destroy(qManager);
         SceneManager.LoadScene("MainGameplay");
     }
     public void UpgradeEquipment()
@@ -125,18 +130,42 @@ public class InventoryData : MonoBehaviour
     {
         gManager.coin += 1;
         gManager.stone -= 1;
+        //sell stone quest
+        if (questManager.isThereQuest)
+        {
+            if (questManager.currentActiveQuest[0].questType == QuestType.SellStone)
+            {
+                questManager.currentActiveQuest[0].Increase(1);
+            }
+        }
         RefreshText();
     }
     public void Stone10()
     {
         gManager.coin += 10;
         gManager.stone -= 10;
+        //sell stone quest
+        if (questManager.isThereQuest)
+        {
+            if (questManager.currentActiveQuest[0].questType == QuestType.SellStone)
+            {
+                questManager.currentActiveQuest[0].Increase(10);
+            }
+        }
         RefreshText();
     }
     public void Stone100()
     {
         gManager.coin += 100;
         gManager.stone -= 100;
+        //sell stone quest
+        if (questManager.isThereQuest)
+        {
+            if (questManager.currentActiveQuest[0].questType == QuestType.SellStone)
+            {
+                questManager.currentActiveQuest[0].Increase(100);
+            }
+        }
         RefreshText();
     }
     public void Coal1()
