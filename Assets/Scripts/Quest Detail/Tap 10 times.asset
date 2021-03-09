@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 875777ef6e1002243a27f55f943f322a, type: 3}
   m_Name: Tap 10 times
   m_EditorClassIdentifier: 
-  isActive: 0
+  isActive: 1
   questDescription: Tap 10 times!
   coinReward: 15
   questType: 2
