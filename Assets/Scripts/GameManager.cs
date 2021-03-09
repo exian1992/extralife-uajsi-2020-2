@@ -10,6 +10,7 @@ using System.IO;
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject allManager;
     public GameObject manager;
     public GameObject[] prefabs;
     //public GameObject[] floatingOreIcon;
@@ -141,9 +142,9 @@ public class GameManager : MonoBehaviour
         //tap quest
         if(questManager.isThereQuest)
         {
-            if (questManager.currentActiveQuest[0].questType == QuestType.Tap)
+            if (questManager.currentActiveQuest.questType == QuestType.Tap)
             {
-                questManager.currentActiveQuest[0].Increase(1);
+                questManager.currentActiveQuest.Increase(1);
                 questManager.QuestCompleteCheck();
             }
             
@@ -152,15 +153,18 @@ public class GameManager : MonoBehaviour
     }
     void RefreshText()
     {
-        currentOreHealth.text = currentOre.ToString();
+        if (SceneManager.GetActiveScene().name == "MainGameplay")
+        {
+            currentOreHealth.text = currentOre.ToString();
 
-        stoneValue.text = stone.ToString();
-        coalValue.text = coal.ToString();
-        bronzeValue.text = bronze.ToString();
-        ironValue.text = iron.ToString();
-        eqLevel.text = eqLvl.ToString();
+            stoneValue.text = stone.ToString();
+            coalValue.text = coal.ToString();
+            bronzeValue.text = bronze.ToString();
+            ironValue.text = iron.ToString();
+            eqLevel.text = eqLvl.ToString();
 
-        coinValue.text = coin.ToString();
+            coinValue.text = coin.ToString();
+        }
     }
     #region Tile Stuff
     void TileMove()
@@ -212,9 +216,9 @@ public class GameManager : MonoBehaviour
                     //stone quest
                     if (questManager.isThereQuest)
                     {
-                        if (questManager.currentActiveQuest[0].questType == QuestType.MineStone)
+                        if (questManager.currentActiveQuest.questType == QuestType.MineStone)
                         {
-                            questManager.currentActiveQuest[0].Increase(1);
+                            questManager.currentActiveQuest.Increase(1);
                             questManager.QuestCompleteCheck();
                         }
                     }
@@ -244,12 +248,15 @@ public class GameManager : MonoBehaviour
     
     public void GoToShop()
     {
-        SaveSystem.SaveData(this);
-        SaveSystem.SaveQuestState(questManager);
+        SaveAllProgress();
         SceneManager.LoadScene("Shop");
-        Destroy(GameObject.Find("InventoryData"));
-        DontDestroyOnLoad(this);
-        DontDestroyOnLoad(qManager);
+        DontDestroyOnLoad(allManager);
+    }
+    public void GoToPetSelection()
+    {
+        SaveAllProgress();
+        SceneManager.LoadScene("PetSelection");
+        DontDestroyOnLoad(allManager);
     }
     public float Damage()
     {
@@ -284,6 +291,11 @@ public class GameManager : MonoBehaviour
     void OnApplicationQuit()
     {
         isItLoaded = false;
+        SaveAllProgress();
+    }
+    void SaveAllProgress()
+    {
         SaveSystem.SaveData(this);
+        SaveSystem.SaveQuestState(questManager);
     }
 }

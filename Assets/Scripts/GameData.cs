@@ -13,6 +13,10 @@ public class GameData
     //QuestManager
     public int randomQuest = 0;
     public bool isThereQuest = false;
+
+    //PetManager
+    public int currentActivePetId = 0;
+    public bool isItEquipped = false;
     public GameData (GameManager gManager)
     {
         eqLvl = gManager.eqLvl;
@@ -34,5 +38,10 @@ public class GameData
     {
         randomQuest = qManager.randomQuest;
         isThereQuest = qManager.isThereQuest;
+    }
+    public GameData (PetManager pManager)
+    {
+        currentActivePetId = pManager.petId;
+        isItEquipped = pManager.petEquipped;
     }
 }

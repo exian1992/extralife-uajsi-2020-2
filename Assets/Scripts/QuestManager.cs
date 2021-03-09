@@ -11,7 +11,7 @@ public class QuestManager : MonoBehaviour
     GameData data;
 
     public QuestInfo[] questInfo;
-    public QuestInfo[] currentActiveQuest;
+    public QuestInfo currentActiveQuest;
     public bool isThereQuest;
 
     public Text description;
@@ -33,8 +33,8 @@ public class QuestManager : MonoBehaviour
         else LoadQuestState();
         if (isThereQuest)
         {
-            currentActiveQuest[0] = questInfo[randomQuest];
-            currentQuest.text = currentActiveQuest[0].questDescription;
+            currentActiveQuest = questInfo[randomQuest];
+            currentQuest.text = currentActiveQuest.questDescription;
             QuestCompleteCheck();
         }
 
@@ -45,7 +45,7 @@ public class QuestManager : MonoBehaviour
     {
         description.text = questInfo[randomQuest].questDescription;
         coinRewardValue.text = questInfo[randomQuest].coinReward.ToString();
-        if (currentActiveQuest[0] == null)
+        if (currentActiveQuest == null)
         {
             isThereQuest = false;
             currentQuest.text = "unassigned quest"; 
@@ -54,27 +54,27 @@ public class QuestManager : MonoBehaviour
     public void AcceptQuest()
     {
         //int questTotal = currentActiveQuest.Length;
-        if (currentActiveQuest[0] != null)
+        if (currentActiveQuest != null)
         {
             Debug.Log("you have an ongoing quest!");
         }
         else
         {
-            currentActiveQuest[0] = questInfo[randomQuest];
-            currentQuest.text = currentActiveQuest[0].questDescription;
+            currentActiveQuest = questInfo[randomQuest];
+            currentQuest.text = currentActiveQuest.questDescription;
             isThereQuest = true;
         }        
     }
     public void ClaimQuestReward()
     {
-        currentActiveQuest[0].currentAmount = 0;
+        currentActiveQuest.currentAmount = 0;
         GameObject temp = GameObject.Find("GameManager");
         GameManager mTemp = temp.GetComponent<GameManager>();
 
-        mTemp.coin += currentActiveQuest[0].coinReward;
+        mTemp.coin += currentActiveQuest.coinReward;
         notification.SetActive(false);
         claimReward.SetActive(false);
-        Array.Clear(currentActiveQuest, 0, currentActiveQuest.Length);
+        currentActiveQuest = null;
         randomQuest = Random.Range(0, questInfo.Length);
         isThereQuest = false;
     }
@@ -90,7 +90,7 @@ public class QuestManager : MonoBehaviour
     }
     public void QuestCompleteCheck()
     {
-        if (currentActiveQuest[0].IsReached())
+        if (currentActiveQuest.IsReached())
         {
             claimReward.SetActive(true);
             notification.SetActive(true);

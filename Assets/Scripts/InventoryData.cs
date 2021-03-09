@@ -49,9 +49,8 @@ public class InventoryData : MonoBehaviour
     public void Back()
     {
         SaveSystem.SaveData(gManager);
-        Destroy(manager);
         SaveSystem.SaveQuestState(questManager);
-        Destroy(qManager);
+        Destroy(GameObject.Find("AllManager")); 
         SceneManager.LoadScene("MainGameplay");
     }
     public void UpgradeEquipment()
@@ -133,9 +132,9 @@ public class InventoryData : MonoBehaviour
         //sell stone quest
         if (questManager.isThereQuest)
         {
-            if (questManager.currentActiveQuest[0].questType == QuestType.SellStone)
+            if (questManager.currentActiveQuest.questType == QuestType.SellStone)
             {
-                questManager.currentActiveQuest[0].Increase(1);
+                questManager.currentActiveQuest.Increase(1);
             }
         }
         RefreshText();
@@ -147,9 +146,9 @@ public class InventoryData : MonoBehaviour
         //sell stone quest
         if (questManager.isThereQuest)
         {
-            if (questManager.currentActiveQuest[0].questType == QuestType.SellStone)
+            if (questManager.currentActiveQuest.questType == QuestType.SellStone)
             {
-                questManager.currentActiveQuest[0].Increase(10);
+                questManager.currentActiveQuest.Increase(10);
             }
         }
         RefreshText();
@@ -161,9 +160,9 @@ public class InventoryData : MonoBehaviour
         //sell stone quest
         if (questManager.isThereQuest)
         {
-            if (questManager.currentActiveQuest[0].questType == QuestType.SellStone)
+            if (questManager.currentActiveQuest.questType == QuestType.SellStone)
             {
-                questManager.currentActiveQuest[0].Increase(100);
+                questManager.currentActiveQuest.Increase(100);
             }
         }
         RefreshText();
