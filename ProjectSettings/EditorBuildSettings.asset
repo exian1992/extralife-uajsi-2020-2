@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PetSelection.unity
     guid: 8b7721e3fcc3f1d4591382b9a5803829
+  - enabled: 1
+    path: Assets/Scenes/Village.unity
+    guid: ce3945aa295c0af48b2256579e9f8773
+  - enabled: 1
+    path: Assets/Scenes/Shop(UI).unity
+    guid: 6a8f63e74ea055542910b299971386d9
   m_configObjects: {}
