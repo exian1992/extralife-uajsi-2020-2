@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   petName: Golden Tick
   petDescription: Provides +50% speed in auto-mining (for Klein only)
-  statusType: 1
+  statusTypePet: 0
   statusValue: 50
   spriteSource: {fileID: 21300000, guid: f4e2af082188c194aaac24a128fee02f, type: 3}
   isActive: 0

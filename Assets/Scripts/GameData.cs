@@ -16,7 +16,12 @@ public class GameData
 
     //PetManager
     public int currentActivePetId = 0;
-    public bool isItEquipped = false;
+    public bool isItEquippedPet = false;
+
+    //CostumeManager
+    public int currentActiveCostumeId = 0;
+    public bool isItEquippedCostume = false;
+    public bool otherCostumeUnlocked = false;
     public GameData (GameManager gManager)
     {
         eqLvl = gManager.eqLvl;
@@ -45,6 +50,15 @@ public class GameData
         {
             currentActivePetId = pManager.petId;
         }
-        isItEquipped = pManager.petEquipped;
+        isItEquippedPet = pManager.petEquipped;
+    }
+    public GameData(CostumeManager cManager)
+    {
+        if (cManager.costumeEquipped)
+        {
+            currentActiveCostumeId = cManager.costumeId;
+        }
+        otherCostumeUnlocked = cManager.otherCostumeUnlocked;
+        isItEquippedCostume = cManager.costumeEquipped;
     }
 }
