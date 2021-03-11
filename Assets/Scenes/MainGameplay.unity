@@ -843,7 +843,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a009718f144536f4989b2796ef2574fd, type: 2}
   - {fileID: 11400000, guid: 9f113e3c093879843ad9cc98ed6e19f9, type: 2}
   currentActivePet: {fileID: 0}
+  petId: 0
   petEquipped: 0
+  isItLoaded: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -4002,10 +4004,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 270, y: 600}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3

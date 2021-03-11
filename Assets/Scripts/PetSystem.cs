@@ -6,8 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class PetSystem : MonoBehaviour
 {
-    GameObject temp;
-    PetManager pManager;
+    GameObject pManager, gManager;
+    PetManager petManager;
+    GameManager gameManager;
 
     public int petId; //0 = doge, 1 = goldentick etc etc
     public PetInfo currentPetOnScreen;
@@ -15,46 +16,56 @@ public class PetSystem : MonoBehaviour
     public Text petDescription;
     public Text petName;
 
-    public GameObject equip, unequip;
+    public GameObject equip, unequip, locked;
 
     private void Start()
     {
-        temp = GameObject.Find("PetManager");
-        pManager = temp.GetComponent<PetManager>();
+        pManager = GameObject.Find("PetManager");
+        petManager = pManager.GetComponent<PetManager>();
+        gManager = GameObject.Find("GameManager");
+        gameManager = gManager.GetComponent<GameManager>();
 
-        if (pManager.petEquipped)
+        if (petManager.petEquipped)
         {
-            currentPetOnScreen = pManager.currentActivePet;
-            for (petId = 0; petId < pManager.allPetsList.Length; petId++)
+            currentPetOnScreen = petManager.currentActivePet;
+            for (petId = 0; petId < petManager.allPetsList.Length; petId++)
             {
-                if (currentPetOnScreen.petName != pManager.allPetsList[petId].petName)
+                if (currentPetOnScreen.petName == petManager.allPetsList[petId].petName)
                 {
-                    petId++;
+                    break;
                 }
             }
         }
         else
         {
             petId = 0;
-            currentPetOnScreen = pManager.allPetsList[petId];
+            currentPetOnScreen = petManager.allPetsList[petId];
         }
         RefreshText();
     }
     private void Update()
     {
-        currentPetOnScreen = pManager.allPetsList[petId];
+        currentPetOnScreen = petManager.allPetsList[petId];
         RefreshText();
 
         //equip button manager
-        if (pManager.allPetsList[petId].isActive)
+        if (!petManager.allPetsList[petId].purchaseStatus)
+        {
+            unequip.SetActive(false);
+            equip.SetActive(false);
+            locked.SetActive(true);
+        }
+        else if (petManager.allPetsList[petId].isActive)
         {
             unequip.SetActive(true);
             equip.SetActive(false);
+            locked.SetActive(false);
         }
-        else if (!pManager.allPetsList[petId].isActive)
+        else if (!petManager.allPetsList[petId].isActive)
         {
             unequip.SetActive(false);
             equip.SetActive(true);
+            locked.SetActive(false);
         }
         else Debug.Log("somethings wrong here...");
     }
@@ -66,7 +77,7 @@ public class PetSystem : MonoBehaviour
     }
     public void NextPet()
     {
-        if(petId == pManager.allPetsList.Length - 1)
+        if(petId == petManager.allPetsList.Length - 1)
         {
             petId = 0;
         }
@@ -76,25 +87,28 @@ public class PetSystem : MonoBehaviour
     {
         if (petId == 0)
         {
-            petId = pManager.allPetsList.Length - 1;
+            petId = petManager.allPetsList.Length - 1;
         }
         else petId--;
     }
     public void EquipPet()
     {
-        if(pManager.currentActivePet != null) pManager.currentActivePet.isActive = false;
-        pManager.currentActivePet = pManager.allPetsList[petId];
-        pManager.allPetsList[petId].isActive = true;
-        pManager.petEquipped = true;
+        if(petManager.currentActivePet != null) petManager.currentActivePet.isActive = false;
+        petManager.currentActivePet = petManager.allPetsList[petId];
+        petManager.allPetsList[petId].isActive = true;
+        petManager.petEquipped = true;
+        petManager.petId = petId;
     }
     public void UnequipPet()
     {
-        pManager.petEquipped = false;
-        pManager.currentActivePet = null;
-        pManager.allPetsList[petId].isActive = false;
+        petManager.petEquipped = false;
+        petManager.currentActivePet = null;
+        petManager.allPetsList[petId].isActive = false;
     }
     public void Back()
     {
         SceneManager.LoadScene("MainGameplay");
+        gameManager.SaveAllProgress();
+        Destroy(GameObject.Find("AllManager"));
     }
 }
