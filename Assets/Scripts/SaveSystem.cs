@@ -41,6 +41,18 @@ public static class SaveSystem
         formatter.Serialize(stream, data);
         stream.Close();
     }
+    public static void SaveCostumeManager(CostumeManager cManager)
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+
+        string path = "D:/SaveFile/costumeData.uwansummoney";
+        FileStream stream = new FileStream(path, FileMode.Create);
+
+        GameData data = new GameData(cManager);
+
+        formatter.Serialize(stream, data);
+        stream.Close();
+    }
 
     //load data
     public static GameData LoadData ()
@@ -84,6 +96,25 @@ public static class SaveSystem
     public static GameData LoadPetManager()
     {
         string path = "D:/SaveFile/petData.uwansummoney";
+        if (File.Exists(path))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+
+            GameData data = formatter.Deserialize(stream) as GameData;
+            stream.Close();
+
+            return data;
+        }
+        else
+        {
+            Debug.LogError("save file not found in " + path);
+            return null;
+        }
+    }
+    public static GameData LoadCostumeManager()
+    {
+        string path = "D:/SaveFile/costumeData.uwansummoney";
         if (File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();

@@ -6,10 +6,11 @@ using UnityEngine.UI;
 
 public class ShopSystem : MonoBehaviour
 {
-    GameObject manager, qManager, pManager;
+    GameObject manager, qManager, pManager, cManager;
     GameManager gManager;
     QuestManager questManager;
     PetManager petManager;
+    CostumeManager costumeManager;
 
     //item collection
     public Text stoneValue;
@@ -26,6 +27,14 @@ public class ShopSystem : MonoBehaviour
     public GameObject buyDoge, buyTick;
     Button buyDogeBtn, buyTickBtn;
     public GameObject dogeHave, tickHave;
+
+    //costume shop buttons
+    public GameObject buyLynn, buyBrook;
+    Button buyLynnBtn, buyBrookBtn;
+    public GameObject lynnHave, brookHave;
+
+    //UI organizer
+    public GameObject petScreen, costumeScreen;
     void Start()
     {
         manager = GameObject.Find("GameManager");
@@ -34,9 +43,14 @@ public class ShopSystem : MonoBehaviour
         questManager = qManager.GetComponent<QuestManager>();
         pManager = GameObject.Find("PetManager");
         petManager = pManager.GetComponent<PetManager>();
+        cManager = GameObject.Find("CostumeManager");
+        costumeManager = cManager.GetComponent<CostumeManager>();
 
         buyDogeBtn = buyDoge.GetComponent<Button>();
         buyTickBtn = buyTick.GetComponent<Button>();
+
+        buyLynnBtn = buyLynn.GetComponent<Button>();
+        buyBrookBtn = buyBrook.GetComponent<Button>();
         RefreshText();
     }
     private void Update()
@@ -57,8 +71,9 @@ public class ShopSystem : MonoBehaviour
         if (gManager.iron >= 1) iron1.SetActive(true); else iron1.SetActive(false);
         if (gManager.iron >= 10) iron10.SetActive(true); else iron10.SetActive(false);
         if (gManager.iron >= 100) iron100.SetActive(true); else iron100.SetActive(false);
+        #endregion
 
-        //for pet shop
+        #region For pet shop
         if (!petManager.allPetsList[0].purchaseStatus)
         {
             if (gManager.coin >= 50) buyDogeBtn.interactable = true;
@@ -79,6 +94,30 @@ public class ShopSystem : MonoBehaviour
         {
             tickHave.SetActive(true);
             buyTick.SetActive(false);
+        }
+        #endregion
+
+        #region For costume shop
+        if (!costumeManager.allCostumesList[1].purchaseStatus)
+        {
+            if (gManager.coin >= 100) buyLynnBtn.interactable = true;
+            else buyLynnBtn.interactable = false;
+        }
+        else
+        {
+            lynnHave.SetActive(true);
+            buyLynn.SetActive(false);
+        }
+
+        if (!costumeManager.allCostumesList[2].purchaseStatus)
+        {
+            if (gManager.coin >= 200) buyBrookBtn.interactable = true;
+            else buyBrookBtn.interactable = false;
+        }
+        else
+        {
+            brookHave.SetActive(true);
+            buyBrook.SetActive(false);
         }
         #endregion
     }
@@ -149,29 +188,30 @@ public class ShopSystem : MonoBehaviour
         else Debug.Log("max lvl reached");
         RefreshText();
     }
+    #region Buy Stuff
     public void BuyDoge()
     {
         petManager.allPetsList[0].purchaseStatus = true;
-        buyDoge.SetActive(false);
-        dogeHave.SetActive(true);
         gManager.coin -= 50;
     }
     public void BuyTick()
     {
         petManager.allPetsList[1].purchaseStatus = true;
-        buyTick.SetActive(false);
-        tickHave.SetActive(true);
         gManager.coin -= 100;
     }
-    void RefreshText()
+    public void BuyLynn()
     {
-        stoneValue.text = gManager.stone.ToString();
-        coalValue.text = gManager.coal.ToString();
-        bronzeValue.text = gManager.bronze.ToString();
-        ironValue.text = gManager.iron.ToString();
-        eqLevel.text = gManager.eqLvl.ToString();
-        coinValue.text = gManager.coin.ToString();
+        costumeManager.allCostumesList[1].purchaseStatus = true;
+        costumeManager.otherCostumeUnlocked = true;
+        gManager.coin -= 100;
     }
+    public void BuyBrook()
+    {
+        costumeManager.allCostumesList[2].purchaseStatus = true;
+        costumeManager.otherCostumeUnlocked = true;
+        gManager.coin -= 200;
+    }
+    #endregion
 
     #region Sell Value
     public void Stone1()
@@ -259,4 +299,23 @@ public class ShopSystem : MonoBehaviour
         gManager.iron -= 100;
     }
     #endregion
+    public void PetScreen()
+    {
+        petScreen.SetActive(true);
+        costumeScreen.SetActive(false);
+    }
+    public void CostumeScreen()
+    {
+        petScreen.SetActive(false);
+        costumeScreen.SetActive(true);
+    }
+    void RefreshText()
+    {
+        stoneValue.text = gManager.stone.ToString();
+        coalValue.text = gManager.coal.ToString();
+        bronzeValue.text = gManager.bronze.ToString();
+        ironValue.text = gManager.iron.ToString();
+        eqLevel.text = gManager.eqLvl.ToString();
+        coinValue.text = gManager.coin.ToString();
+    }
 }

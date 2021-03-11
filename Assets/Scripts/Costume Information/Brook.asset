@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1af2150020530f3458844eb6fa3f7206, type: 3}
+  m_Name: Brook
+  m_EditorClassIdentifier: 
+  costumeName: Brook
+  costumeDescription: One strong man that can REALLY handles his tool, his strength
+    will break all the ore in his way (+20% mining speed)
+  statusTypeCostume: 1
+  statusValue: 20
+  spriteSource: {fileID: 21300000, guid: c950192badd8e4e4ebe7875ab17cdb8d, type: 3}
+  isActive: 0
+  purchaseStatus: 0

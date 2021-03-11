@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEngine.UI;
 
 [System.Serializable]
 public class PetManager : MonoBehaviour
@@ -14,6 +15,8 @@ public class PetManager : MonoBehaviour
     public bool petEquipped;
 
     public bool isItLoaded;
+
+    public SpriteRenderer pet;
 
     public void Start()
     { 
@@ -29,7 +32,9 @@ public class PetManager : MonoBehaviour
             if (allPetsList[petId].isActive)
             {
                 currentActivePet = allPetsList[petId];
+                pet.sprite = currentActivePet.spriteSource;
             }
+            else pet.sprite = null;
         }
     }
     void LoadData()
@@ -43,11 +48,7 @@ public class PetManager : MonoBehaviour
         {
             petId = data.currentActivePetId;
         }
-        petEquipped = data.isItEquipped;
-    }
-    public void Back()
-    {
-
+        petEquipped = data.isItEquippedPet;
     }
     private void OnApplicationQuit()
     {

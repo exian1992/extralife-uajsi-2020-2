@@ -15,9 +15,10 @@ public class GameManager : MonoBehaviour
     public GameObject[] prefabs;
     //public GameObject[] floatingOreIcon;
     GameData data;
-    GameObject qManager, pManager;
+    GameObject qManager, pManager, cManager;
     QuestManager questManager;
     PetManager petManager;
+    CostumeManager costumeManager;
 
     public GameObject[] blocks;
 
@@ -55,13 +56,15 @@ public class GameManager : MonoBehaviour
 
     //etc
     public GameObject questPopUp;
-    public float miningSpeed = 0.5f;
+    public float miningSpeed = 1f;
     void Start()
     {
         qManager = GameObject.Find("QuestManager");
         questManager = qManager.GetComponent<QuestManager>();
         pManager = GameObject.Find("PetManager");
         petManager = pManager.GetComponent<PetManager>();
+        cManager = GameObject.Find("CostumeManager");
+        costumeManager = cManager.GetComponent<CostumeManager>();
 
         string saveData = "D:/SaveFile/data.uwansummoney";
         if (!File.Exists(saveData))
@@ -75,16 +78,55 @@ public class GameManager : MonoBehaviour
             isItLoaded = true;
         }
 
-        //check if pet equipped with SpeedUp (auto-clicker)
-        if (petManager.petEquipped)
+        //check if equipped with SpeedUp buff (auto-clicker)
+        float temp;
+        if (petManager.petEquipped && costumeManager.costumeEquipped && costumeManager.currentActiveCostume.statusTypeCostume != StatusTypeCostume.None)
         {
-            if (petManager.currentActivePet.statusType == StatusType.SpeedUp)
+            if (petManager.currentActivePet.statusTypePet == StatusTypePet.SpeedUp)
             {
-                InvokeRepeating("AttackOre", 1f, miningSpeed * petManager.currentActivePet.statusValue / 100);
+                temp = miningSpeed - (miningSpeed * petManager.currentActivePet.statusValue / 100) - (miningSpeed * costumeManager.currentActiveCostume.statusValue / 100);
+                Debug.Log("speed = " + temp + "f");
+                InvokeRepeating("AttackOre", 1f, temp);
             }
-            else InvokeRepeating("AttackOre", 1f, miningSpeed);
+            else
+            {
+                Debug.Log("speed = " + miningSpeed + "f");
+                InvokeRepeating("AttackOre", 1f, miningSpeed);
+            }
         }
-        else InvokeRepeating("AttackOre", 1f, miningSpeed);
+        else if (petManager.petEquipped)
+        {
+            if (petManager.currentActivePet.statusTypePet == StatusTypePet.SpeedUp)
+            {
+                temp = miningSpeed - (miningSpeed * petManager.currentActivePet.statusValue / 100);
+                Debug.Log("speed = " + temp + "f");
+                InvokeRepeating("AttackOre", 1f, temp);
+            }
+            else
+            {
+                Debug.Log("speed = " + miningSpeed + "f");
+                InvokeRepeating("AttackOre", 1f, miningSpeed);
+            }
+        }
+        else if (costumeManager.costumeEquipped && costumeManager.currentActiveCostume.statusTypeCostume != StatusTypeCostume.None)
+        {
+            if (costumeManager.currentActiveCostume.statusTypeCostume == StatusTypeCostume.SpeedUp)
+            {
+                temp = miningSpeed - (miningSpeed * costumeManager.currentActiveCostume.statusValue / 100);
+                Debug.Log("speed = " + temp + "f");
+                InvokeRepeating("AttackOre", 1f, temp);
+            }
+            else
+            {
+                Debug.Log("speed = " + miningSpeed + "f");
+                InvokeRepeating("AttackOre", 1f, miningSpeed);
+            }
+        }
+        else
+        {
+            Debug.Log("speed = " + miningSpeed + "f");
+            InvokeRepeating("AttackOre", 1f, miningSpeed);
+        }
 
         if (blocks.Length < 4)
         {
@@ -268,21 +310,59 @@ public class GameManager : MonoBehaviour
     public void GoToPetSelection()
     {
         SaveAllProgress();
-        SceneManager.LoadScene("PetSelection");
+        SceneManager.LoadScene("PetCostume");
         DontDestroyOnLoad(allManager);
     }
     public float Damage()
     {
-        if (petManager.petEquipped)
+        float temp;
+        if (petManager.petEquipped && costumeManager.costumeEquipped && costumeManager.currentActiveCostume.statusTypeCostume != StatusTypeCostume.None)
         {
-            if (petManager.currentActivePet.statusType == StatusType.PowerUp)
+            if (petManager.currentActivePet.statusTypePet == StatusTypePet.PowerUp && costumeManager.currentActiveCostume.statusTypeCostume == StatusTypeCostume.PowerUp)
             {
-                return attSpd + (attSpd * petManager.currentActivePet.statusValue / 100);
+                temp = attSpd + (attSpd * petManager.currentActivePet.statusValue / 100) + (attSpd * costumeManager.currentActiveCostume.statusValue / 100);
+                Debug.Log("attack = " + temp);
+                return temp;
             }
-            else return attSpd;
+            else
+            {
+                Debug.Log("attack = " + attSpd);
+                return attSpd;
+            }
         }
-        else return attSpd;
-
+        else if (petManager.petEquipped)
+        {
+            if (petManager.currentActivePet.statusTypePet == StatusTypePet.PowerUp)
+            {
+                temp = attSpd + (attSpd * petManager.currentActivePet.statusValue / 100);
+                Debug.Log("attack = " + temp);
+                return temp;
+            }
+            else
+            {
+                Debug.Log("attack = " + attSpd);
+                return attSpd;
+            }
+        }
+        else if (costumeManager.costumeEquipped && costumeManager.currentActiveCostume.statusTypeCostume != StatusTypeCostume.None)
+        {
+            if (costumeManager.currentActiveCostume.statusTypeCostume == StatusTypeCostume.PowerUp)
+            {
+                temp = attSpd + (attSpd * costumeManager.currentActiveCostume.statusValue / 100);
+                Debug.Log("attack = " + temp);
+                return temp;
+            }
+            else
+            {
+                Debug.Log("attack = " + attSpd);
+                return attSpd;
+            }
+        }
+        else
+        {
+            Debug.Log("attack = " + attSpd);
+            return attSpd;
+        }
     }
     public void LoadData()
     {
@@ -320,5 +400,6 @@ public class GameManager : MonoBehaviour
         SaveSystem.SaveData(this);
         SaveSystem.SaveQuestState(questManager);
         SaveSystem.SavePetManager(petManager);
+        SaveSystem.SaveCostumeManager(costumeManager);
     }
 }
