@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b66ee6533bba85b49a108d01bf5df626, type: 3}
-  m_Name: Rabbit
+  m_Name: Dogedoge
   m_EditorClassIdentifier: 
   petName: Mr. Dogedoge blyat
   petDescription: Provides +50% mining damage

@@ -41,7 +41,10 @@ public class GameData
     }
     public GameData (PetManager pManager)
     {
-        currentActivePetId = pManager.petId;
+        if (pManager.petEquipped)
+        {
+            currentActivePetId = pManager.petId;
+        }
         isItEquipped = pManager.petEquipped;
     }
 }

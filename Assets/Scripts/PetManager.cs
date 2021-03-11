@@ -16,7 +16,7 @@ public class PetManager : MonoBehaviour
     public bool isItLoaded;
 
     public void Start()
-    {
+    { 
         string saveData = "D:/SaveFile/petData.uwansummoney";
         if (!File.Exists(saveData))
         {
@@ -44,5 +44,13 @@ public class PetManager : MonoBehaviour
             petId = data.currentActivePetId;
         }
         petEquipped = data.isItEquipped;
+    }
+    public void Back()
+    {
+
+    }
+    private void OnApplicationQuit()
+    {
+        isItLoaded = false;
     }
 }

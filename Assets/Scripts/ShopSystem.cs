@@ -4,11 +4,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class InventoryData : MonoBehaviour
+public class ShopSystem : MonoBehaviour
 {
-    GameObject manager, qManager;
+    GameObject manager, qManager, pManager;
     GameManager gManager;
     QuestManager questManager;
+    PetManager petManager;
 
     //item collection
     public Text stoneValue;
@@ -21,17 +22,29 @@ public class InventoryData : MonoBehaviour
     //collection Variable
     public GameObject stone1, stone10, stone100, coal1, coal10, coal100, bronze1, bronze10, bronze100, iron1, iron10, iron100;
 
+    //pet shop buttons
+    public GameObject buyDoge, buyTick;
+    Button buyDogeBtn, buyTickBtn;
+    public GameObject dogeHave, tickHave;
     void Start()
     {
         manager = GameObject.Find("GameManager");
         gManager = manager.GetComponent<GameManager>();
         qManager = GameObject.Find("QuestManager");
         questManager = qManager.GetComponent<QuestManager>();
+        pManager = GameObject.Find("PetManager");
+        petManager = pManager.GetComponent<PetManager>();
+
+        buyDogeBtn = buyDoge.GetComponent<Button>();
+        buyTickBtn = buyTick.GetComponent<Button>();
         RefreshText();
     }
     private void Update()
     {
+        RefreshText();
+
         #region Button Manager
+        //for selling ore
         if (gManager.stone >= 1) stone1.SetActive(true); else stone1.SetActive(false);
         if (gManager.stone >= 10) stone10.SetActive(true); else stone10.SetActive(false);
         if (gManager.stone >= 100) stone100.SetActive(true); else stone100.SetActive(false);
@@ -44,12 +57,34 @@ public class InventoryData : MonoBehaviour
         if (gManager.iron >= 1) iron1.SetActive(true); else iron1.SetActive(false);
         if (gManager.iron >= 10) iron10.SetActive(true); else iron10.SetActive(false);
         if (gManager.iron >= 100) iron100.SetActive(true); else iron100.SetActive(false);
+
+        //for pet shop
+        if (!petManager.allPetsList[0].purchaseStatus)
+        {
+            if (gManager.coin >= 50) buyDogeBtn.interactable = true;
+            else buyDogeBtn.interactable = false;
+        }
+        else
+        {
+            dogeHave.SetActive(true);
+            buyDoge.SetActive(false);
+        }
+
+        if (!petManager.allPetsList[1].purchaseStatus)
+        {
+            if (gManager.coin >= 100) buyTickBtn.interactable = true; 
+            else buyTickBtn.interactable = false;
+        }
+        else
+        {
+            tickHave.SetActive(true);
+            buyTick.SetActive(false);
+        }
         #endregion
     }
     public void Back()
     {
-        SaveSystem.SaveData(gManager);
-        SaveSystem.SaveQuestState(questManager);
+        gManager.SaveAllProgress();
         Destroy(GameObject.Find("AllManager")); 
         SceneManager.LoadScene("MainGameplay");
     }
@@ -114,6 +149,20 @@ public class InventoryData : MonoBehaviour
         else Debug.Log("max lvl reached");
         RefreshText();
     }
+    public void BuyDoge()
+    {
+        petManager.allPetsList[0].purchaseStatus = true;
+        buyDoge.SetActive(false);
+        dogeHave.SetActive(true);
+        gManager.coin -= 50;
+    }
+    public void BuyTick()
+    {
+        petManager.allPetsList[1].purchaseStatus = true;
+        buyTick.SetActive(false);
+        tickHave.SetActive(true);
+        gManager.coin -= 100;
+    }
     void RefreshText()
     {
         stoneValue.text = gManager.stone.ToString();
@@ -137,7 +186,6 @@ public class InventoryData : MonoBehaviour
                 questManager.currentActiveQuest.Increase(1);
             }
         }
-        RefreshText();
     }
     public void Stone10()
     {
@@ -151,7 +199,6 @@ public class InventoryData : MonoBehaviour
                 questManager.currentActiveQuest.Increase(10);
             }
         }
-        RefreshText();
     }
     public void Stone100()
     {
@@ -165,61 +212,51 @@ public class InventoryData : MonoBehaviour
                 questManager.currentActiveQuest.Increase(100);
             }
         }
-        RefreshText();
     }
     public void Coal1()
     {
         gManager.coin += 5;
         gManager.coal -= 1;
-        RefreshText();
     }
     public void Coal10()
     {
         gManager.coin += 50;
         gManager.coal -= 10;
-        RefreshText();
     }
     public void Coal100()
     {
         gManager.coin += 500;
         gManager.coal -= 100;
-        RefreshText();
     }
     public void Bronze1()
     {
         gManager.coin += 10;
         gManager.bronze -= 1;
-        RefreshText();
     }
     public void Bronze10()
     {
         gManager.coin += 100;
         gManager.bronze -= 10;
-        RefreshText();
     }
     public void Bronze100()
     {
         gManager.coin += 1000;
         gManager.bronze -= 100;
-        RefreshText();
     }
     public void Iron1()
     {
         gManager.coin += 25;
         gManager.iron -= 1;
-        RefreshText();
     }
     public void Iron10()
     {
         gManager.coin += 250;
         gManager.iron -= 10;
-        RefreshText();
     }
     public void Iron100()
     {
         gManager.coin += 2500;
         gManager.iron -= 100;
-        RefreshText();
     }
     #endregion
 }

@@ -15,8 +15,9 @@ public class GameManager : MonoBehaviour
     public GameObject[] prefabs;
     //public GameObject[] floatingOreIcon;
     GameData data;
-    GameObject qManager;
+    GameObject qManager, pManager;
     QuestManager questManager;
+    PetManager petManager;
 
     public GameObject[] blocks;
 
@@ -54,10 +55,13 @@ public class GameManager : MonoBehaviour
 
     //etc
     public GameObject questPopUp;
+    public float miningSpeed = 0.5f;
     void Start()
     {
         qManager = GameObject.Find("QuestManager");
         questManager = qManager.GetComponent<QuestManager>();
+        pManager = GameObject.Find("PetManager");
+        petManager = pManager.GetComponent<PetManager>();
 
         string saveData = "D:/SaveFile/data.uwansummoney";
         if (!File.Exists(saveData))
@@ -70,7 +74,17 @@ public class GameManager : MonoBehaviour
             LoadData();
             isItLoaded = true;
         }
-        InvokeRepeating("AttackOre", 1f, 0.5f);
+
+        //check if pet equipped with SpeedUp (auto-clicker)
+        if (petManager.petEquipped)
+        {
+            if (petManager.currentActivePet.statusType == StatusType.SpeedUp)
+            {
+                InvokeRepeating("AttackOre", 1f, miningSpeed * petManager.currentActivePet.statusValue / 100);
+            }
+            else InvokeRepeating("AttackOre", 1f, miningSpeed);
+        }
+        else InvokeRepeating("AttackOre", 1f, miningSpeed);
 
         if (blocks.Length < 4)
         {
@@ -113,6 +127,15 @@ public class GameManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             if (EventSystem.current.IsPointerOverGameObject()) return;
+            //tap quest
+            if (questManager.isThereQuest)
+            {
+                if (questManager.currentActiveQuest.questType == QuestType.Tap)
+                {
+                    questManager.currentActiveQuest.Increase(1);
+                    questManager.QuestCompleteCheck();
+                }
+            }
             AttackOre();
         }
 
@@ -138,16 +161,6 @@ public class GameManager : MonoBehaviour
                 ore.OreDamage();
                 currentOre = ore.GetOreHealth();
             }
-        }
-        //tap quest
-        if(questManager.isThereQuest)
-        {
-            if (questManager.currentActiveQuest.questType == QuestType.Tap)
-            {
-                questManager.currentActiveQuest.Increase(1);
-                questManager.QuestCompleteCheck();
-            }
-            
         }
         RefreshText();
     }
@@ -260,7 +273,16 @@ public class GameManager : MonoBehaviour
     }
     public float Damage()
     {
-        return attSpd;
+        if (petManager.petEquipped)
+        {
+            if (petManager.currentActivePet.statusType == StatusType.PowerUp)
+            {
+                return attSpd + (attSpd * petManager.currentActivePet.statusValue / 100);
+            }
+            else return attSpd;
+        }
+        else return attSpd;
+
     }
     public void LoadData()
     {
@@ -293,9 +315,10 @@ public class GameManager : MonoBehaviour
         isItLoaded = false;
         SaveAllProgress();
     }
-    void SaveAllProgress()
+    public void SaveAllProgress()
     {
         SaveSystem.SaveData(this);
         SaveSystem.SaveQuestState(questManager);
+        SaveSystem.SavePetManager(petManager);
     }
 }
