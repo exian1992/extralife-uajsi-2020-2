@@ -25,7 +25,7 @@ public class GameData
     public GameData (GameManager gManager)
     {
         eqLvl = gManager.eqLvl;
-        attSpd = gManager.attSpd;
+        attSpd = gManager.defaultMiningPower;
 
         stone = gManager.stone;
         coal = gManager.coal;
