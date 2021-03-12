@@ -45,7 +45,10 @@ public class GameManager : MonoBehaviour
     //equipment info
     public int eqLvl = 1;
     public Text eqLevel;
-    public float attSpd = 1f;
+    public float defaultMiningPower = 1f;
+    public float defaultMiningSpeed = 1f;
+    public float trueMiningSpeed;
+    public float trueMiningPower;
 
     //coin
     public int coin = 0;
@@ -54,9 +57,15 @@ public class GameManager : MonoBehaviour
     //checker
     public bool isItLoaded = false;
 
+    //booster variable
+    public bool speedUpToggle = false;
+    public bool powerUpToggle = false;
+    public float tempMiningSpeed;
+    public float tempMiningPower;
+
     //etc
     public GameObject questPopUp;
-    public float miningSpeed = 1f;
+
     void Start()
     {
         qManager = GameObject.Find("QuestManager");
@@ -79,54 +88,77 @@ public class GameManager : MonoBehaviour
         }
 
         //check if equipped with SpeedUp buff (auto-clicker)
-        float temp;
+        #region Old Speed Formula
+        /*float temp;
         if (petManager.petEquipped && costumeManager.costumeEquipped && costumeManager.currentActiveCostume.statusTypeCostume != StatusTypeCostume.None)
         {
             if (petManager.currentActivePet.statusTypePet == StatusTypePet.SpeedUp)
             {
-                temp = miningSpeed - (miningSpeed * petManager.currentActivePet.statusValue / 100) - (miningSpeed * costumeManager.currentActiveCostume.statusValue / 100);
+                temp = defaultMiningSpeed - (defaultMiningSpeed * petManager.currentActivePet.statusValue / 100) - (defaultMiningSpeed * costumeManager.currentActiveCostume.statusValue / 100);
                 Debug.Log("speed = " + temp + "f");
                 InvokeRepeating("AttackOre", 1f, temp);
             }
             else
             {
-                Debug.Log("speed = " + miningSpeed + "f");
-                InvokeRepeating("AttackOre", 1f, miningSpeed);
+                Debug.Log("speed = " + defaultMiningSpeed + "f");
+                InvokeRepeating("AttackOre", 1f, defaultMiningSpeed);
             }
         }
         else if (petManager.petEquipped)
         {
             if (petManager.currentActivePet.statusTypePet == StatusTypePet.SpeedUp)
             {
-                temp = miningSpeed - (miningSpeed * petManager.currentActivePet.statusValue / 100);
+                temp = defaultMiningSpeed - (defaultMiningSpeed * petManager.currentActivePet.statusValue / 100);
                 Debug.Log("speed = " + temp + "f");
                 InvokeRepeating("AttackOre", 1f, temp);
             }
             else
             {
-                Debug.Log("speed = " + miningSpeed + "f");
-                InvokeRepeating("AttackOre", 1f, miningSpeed);
+                Debug.Log("speed = " + defaultMiningSpeed + "f");
+                InvokeRepeating("AttackOre", 1f, defaultMiningSpeed);
             }
         }
         else if (costumeManager.costumeEquipped && costumeManager.currentActiveCostume.statusTypeCostume != StatusTypeCostume.None)
         {
             if (costumeManager.currentActiveCostume.statusTypeCostume == StatusTypeCostume.SpeedUp)
             {
-                temp = miningSpeed - (miningSpeed * costumeManager.currentActiveCostume.statusValue / 100);
+                temp = defaultMiningSpeed - (defaultMiningSpeed * costumeManager.currentActiveCostume.statusValue / 100);
                 Debug.Log("speed = " + temp + "f");
                 InvokeRepeating("AttackOre", 1f, temp);
             }
             else
             {
-                Debug.Log("speed = " + miningSpeed + "f");
-                InvokeRepeating("AttackOre", 1f, miningSpeed);
+                Debug.Log("speed = " + defaultMiningSpeed + "f");
+                InvokeRepeating("AttackOre", 1f, defaultMiningSpeed);
             }
         }
         else
         {
-            Debug.Log("speed = " + miningSpeed + "f");
-            InvokeRepeating("AttackOre", 1f, miningSpeed);
+            Debug.Log("speed = " + defaultMiningSpeed + "f");
+            InvokeRepeating("AttackOre", 1f, defaultMiningSpeed);
+        }*/
+        #endregion
+
+        trueMiningSpeed = 1f;
+        if (costumeManager.costumeEquipped && costumeManager.currentActiveCostume.statusTypeCostume == StatusTypeCostume.SpeedUp)
+        {
+            trueMiningSpeed = defaultMiningSpeed - (defaultMiningSpeed * costumeManager.currentActiveCostume.statusValue / 100);
         }
+        if (petManager.petEquipped && petManager.currentActivePet.statusTypePet == StatusTypePet.SpeedUp)
+        {
+            if (trueMiningSpeed == 1f)
+            {
+                trueMiningSpeed = defaultMiningSpeed - (defaultMiningSpeed * petManager.currentActivePet.statusValue / 100);
+            }
+            else
+                trueMiningSpeed -= trueMiningSpeed - (trueMiningSpeed * petManager.currentActivePet.statusValue / 100);
+        }
+        tempMiningSpeed = trueMiningSpeed;
+        if (speedUpToggle)
+        {
+            trueMiningSpeed *= 50 / 100;
+        }
+        InvokeRepeating("AttackOre", 1f, trueMiningSpeed);
 
         if (blocks.Length < 4)
         {
@@ -300,7 +332,56 @@ public class GameManager : MonoBehaviour
         }
     }
     #endregion
-    
+
+    #region Boosters
+    public void InstantGain()
+    {
+        for (int i = 0; i < 1000; i++)
+        {
+            int randomGain = Random.Range(0, 20);
+            //stone 10, coal 5, bronze 4, iron 1
+            if (randomGain < ironChance)
+            {
+                iron++;
+            }
+            else if (randomGain < bronzeChance)//2
+            {
+                bronze++;
+            }
+            else if (randomGain < coalChance)//6
+            {
+                coal++;
+            }
+            else if (randomGain < stoneChance)//12
+            {
+                stone++;
+            }
+        }
+    }
+    public void AutoClicker()
+    {
+        if (!speedUpToggle)
+        {
+            trueMiningSpeed = trueMiningSpeed * 50 / 100;
+            speedUpToggle = true;
+        }
+        else
+        {
+            trueMiningSpeed = tempMiningSpeed;
+            speedUpToggle = false;
+        }
+        CancelInvoke();
+        InvokeRepeating("AttackOre", 1f, trueMiningSpeed);
+    }
+    public void PowerUp()
+    {
+        if (!powerUpToggle)
+        {
+            powerUpToggle = true;
+        }
+        else powerUpToggle = false;
+    }
+    #endregion
     public void GoToShop()
     {
         SaveAllProgress();
@@ -315,54 +396,70 @@ public class GameManager : MonoBehaviour
     }
     public float Damage()
     {
-        float temp;
+        #region Old Damage Formula
+        /*float temp;
         if (petManager.petEquipped && costumeManager.costumeEquipped && costumeManager.currentActiveCostume.statusTypeCostume != StatusTypeCostume.None)
         {
             if (petManager.currentActivePet.statusTypePet == StatusTypePet.PowerUp && costumeManager.currentActiveCostume.statusTypeCostume == StatusTypeCostume.PowerUp)
             {
-                temp = attSpd + (attSpd * petManager.currentActivePet.statusValue / 100) + (attSpd * costumeManager.currentActiveCostume.statusValue / 100);
+                temp = defaultMiningPower + (defaultMiningPower * petManager.currentActivePet.statusValue / 100) + (defaultMiningPower * costumeManager.currentActiveCostume.statusValue / 100);
                 Debug.Log("attack = " + temp);
                 return temp;
             }
             else
             {
-                Debug.Log("attack = " + attSpd);
-                return attSpd;
+                Debug.Log("attack = " + defaultMiningPower);
+                return defaultMiningPower;
             }
         }
         else if (petManager.petEquipped)
         {
             if (petManager.currentActivePet.statusTypePet == StatusTypePet.PowerUp)
             {
-                temp = attSpd + (attSpd * petManager.currentActivePet.statusValue / 100);
+                temp = defaultMiningPower + (defaultMiningPower * petManager.currentActivePet.statusValue / 100);
                 Debug.Log("attack = " + temp);
                 return temp;
             }
             else
             {
-                Debug.Log("attack = " + attSpd);
-                return attSpd;
+                Debug.Log("attack = " + defaultMiningPower);
+                return defaultMiningPower;
             }
         }
         else if (costumeManager.costumeEquipped && costumeManager.currentActiveCostume.statusTypeCostume != StatusTypeCostume.None)
         {
             if (costumeManager.currentActiveCostume.statusTypeCostume == StatusTypeCostume.PowerUp)
             {
-                temp = attSpd + (attSpd * costumeManager.currentActiveCostume.statusValue / 100);
+                temp = defaultMiningPower + (defaultMiningPower * costumeManager.currentActiveCostume.statusValue / 100);
                 Debug.Log("attack = " + temp);
                 return temp;
             }
             else
             {
-                Debug.Log("attack = " + attSpd);
-                return attSpd;
+                Debug.Log("attack = " + defaultMiningPower);
+                return defaultMiningPower;
             }
         }
         else
         {
-            Debug.Log("attack = " + attSpd);
-            return attSpd;
+            Debug.Log("attack = " + defaultMiningPower);
+            return defaultMiningPower;
+        }*/
+        #endregion
+        trueMiningPower = defaultMiningPower;
+        if (costumeManager.costumeEquipped && costumeManager.currentActiveCostume.statusTypeCostume == StatusTypeCostume.PowerUp)
+        {
+            trueMiningPower += trueMiningPower * costumeManager.currentActiveCostume.statusValue / 100;
         }
+        if (petManager.petEquipped && petManager.currentActivePet.statusTypePet == StatusTypePet.PowerUp)
+        {
+            trueMiningPower += trueMiningPower * petManager.currentActivePet.statusValue / 100;
+        }
+        if (powerUpToggle)
+        {
+            trueMiningPower += trueMiningPower * 50 / 100;
+        }
+        return trueMiningPower;
     }
     public void LoadData()
     {
@@ -373,7 +470,7 @@ public class GameManager : MonoBehaviour
         iron = data.iron;
 
         eqLvl = data.eqLvl;
-        attSpd = data.attSpd;
+        defaultMiningPower = data.attSpd;
 
         stoneChance = data.stoneChance;
         coalChance = data.coalChance;

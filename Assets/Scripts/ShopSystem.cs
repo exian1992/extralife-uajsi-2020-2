@@ -137,7 +137,7 @@ public class ShopSystem : MonoBehaviour
                 {
                     gManager.stone -= 10;
                     gManager.coalChance = 5;
-                    gManager.attSpd += 0.3f;
+                    gManager.defaultMiningPower += 0.3f;
                     gManager.eqLvl++;
                     gManager.coin -= 100;
                 }
@@ -150,7 +150,7 @@ public class ShopSystem : MonoBehaviour
                     gManager.coal -= 10;
                     gManager.coalChance = 6;
                     gManager.bronzeChance = 2;
-                    gManager.attSpd += 0.3f;
+                    gManager.defaultMiningPower += 0.3f;
                     gManager.eqLvl++;
                     gManager.coin -= 500;
                 }
@@ -165,7 +165,7 @@ public class ShopSystem : MonoBehaviour
                     gManager.coalChance = 7;
                     gManager.bronzeChance = 3;
                     gManager.ironChance = 1;
-                    gManager.attSpd += 0.3f;
+                    gManager.defaultMiningPower += 0.3f;
                     gManager.eqLvl++;
                     gManager.coin -= 5000;
                 }
@@ -178,7 +178,7 @@ public class ShopSystem : MonoBehaviour
                     gManager.coal -= 30;
                     gManager.bronze -= 20;
                     gManager.iron -= 10;
-                    gManager.attSpd += 0.3f;
+                    gManager.defaultMiningPower += 0.3f;
                     gManager.eqLvl++;
                     gManager.coin -= 10000;
                 }

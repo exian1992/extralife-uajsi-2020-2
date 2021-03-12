@@ -18,5 +18,5 @@ MonoBehaviour:
   statusTypeCostume: 0
   statusValue: 20
   spriteSource: {fileID: 21300000, guid: 7bd75a8379f7e894bb28e7c26f9b1656, type: 3}
-  isActive: 0
-  purchaseStatus: 0
+  isActive: 1
+  purchaseStatus: 1
