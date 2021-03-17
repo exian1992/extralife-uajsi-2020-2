@@ -13,6 +13,8 @@ public class GameData
     //QuestManager
     public int randomQuest = 0;
     public bool isThereQuest = false;
+    public int dQuestE = 0, dQuestI = 1, dQuestH = 2;
+    public bool eComplete, iComplete, hComplete;
 
     //PetManager
     public int currentActivePetId = 0;
@@ -43,6 +45,13 @@ public class GameData
     {
         randomQuest = qManager.randomQuest;
         isThereQuest = qManager.isThereQuest;
+
+        dQuestE = qManager.dQuestE;
+        dQuestI = qManager.dQuestI;
+        dQuestH = qManager.dQuestH;
+        eComplete = qManager.eComplete;
+        iComplete = qManager.iComplete;
+        hComplete = qManager.hComplete;
     }
     public GameData (PetManager pManager)
     {

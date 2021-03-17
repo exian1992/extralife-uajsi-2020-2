@@ -218,7 +218,7 @@ public class ShopSystem : MonoBehaviour
     {
         gManager.coin += 1;
         gManager.stone -= 1;
-        //sell stone quest
+        #region Stone selling quest
         if (questManager.isThereQuest)
         {
             if (questManager.currentActiveQuest.questType == QuestType.SellStone)
@@ -226,12 +226,25 @@ public class ShopSystem : MonoBehaviour
                 questManager.currentActiveQuest.Increase(1);
             }
         }
+        if (questManager.activeEQuest.questType == QuestType.SellStone)
+        {
+            questManager.activeEQuest.Increase(1);
+        }
+        if (questManager.activeIQuest.questType == QuestType.SellStone)
+        {
+            questManager.activeIQuest.Increase(1);
+        }
+        if (questManager.activeHQuest.questType == QuestType.SellStone)
+        {
+            questManager.activeHQuest.Increase(1);
+        }
+        #endregion
     }
     public void Stone10()
     {
         gManager.coin += 10;
         gManager.stone -= 10;
-        //sell stone quest
+        #region Stone selling quest
         if (questManager.isThereQuest)
         {
             if (questManager.currentActiveQuest.questType == QuestType.SellStone)
@@ -239,12 +252,25 @@ public class ShopSystem : MonoBehaviour
                 questManager.currentActiveQuest.Increase(10);
             }
         }
+        if (questManager.activeEQuest.questType == QuestType.SellStone)
+        {
+            questManager.activeEQuest.Increase(10);
+        }
+        if (questManager.activeIQuest.questType == QuestType.SellStone)
+        {
+            questManager.activeIQuest.Increase(10);
+        }
+        if (questManager.activeHQuest.questType == QuestType.SellStone)
+        {
+            questManager.activeHQuest.Increase(10);
+        }
+        #endregion
     }
     public void Stone100()
     {
         gManager.coin += 100;
         gManager.stone -= 100;
-        //sell stone quest
+        #region Stone selling quest
         if (questManager.isThereQuest)
         {
             if (questManager.currentActiveQuest.questType == QuestType.SellStone)
@@ -252,51 +278,253 @@ public class ShopSystem : MonoBehaviour
                 questManager.currentActiveQuest.Increase(100);
             }
         }
+        if (questManager.activeEQuest.questType == QuestType.SellStone)
+        {
+            questManager.activeEQuest.Increase(100);
+        }
+        if (questManager.activeIQuest.questType == QuestType.SellStone)
+        {
+            questManager.activeIQuest.Increase(100);
+        }
+        if (questManager.activeHQuest.questType == QuestType.SellStone)
+        {
+            questManager.activeHQuest.Increase(100);
+        }
+        #endregion
     }
     public void Coal1()
     {
         gManager.coin += 5;
         gManager.coal -= 1;
+        #region Coal selling quest
+        if (questManager.isThereQuest)
+        {
+            if (questManager.currentActiveQuest.questType == QuestType.SellCoal)
+            {
+                questManager.currentActiveQuest.Increase(1);
+            }
+        }
+        if (questManager.activeEQuest.questType == QuestType.SellCoal)
+        {
+            questManager.activeEQuest.Increase(1);
+        }
+        if (questManager.activeIQuest.questType == QuestType.SellCoal)
+        {
+            questManager.activeIQuest.Increase(1);
+        }
+        if (questManager.activeHQuest.questType == QuestType.SellCoal)
+        {
+            questManager.activeHQuest.Increase(1);
+        }
+        #endregion
     }
     public void Coal10()
     {
         gManager.coin += 50;
         gManager.coal -= 10;
+        #region Coal selling quest
+        if (questManager.isThereQuest)
+        {
+            if (questManager.currentActiveQuest.questType == QuestType.SellCoal)
+            {
+                questManager.currentActiveQuest.Increase(10);
+            }
+        }
+        if (questManager.activeEQuest.questType == QuestType.SellCoal)
+        {
+            questManager.activeEQuest.Increase(10);
+        }
+        if (questManager.activeIQuest.questType == QuestType.SellCoal)
+        {
+            questManager.activeIQuest.Increase(10);
+        }
+        if (questManager.activeHQuest.questType == QuestType.SellCoal)
+        {
+            questManager.activeHQuest.Increase(10);
+        }
+        #endregion
     }
     public void Coal100()
     {
         gManager.coin += 500;
         gManager.coal -= 100;
+        #region Coal selling quest
+        if (questManager.isThereQuest)
+        {
+            if (questManager.currentActiveQuest.questType == QuestType.SellCoal)
+            {
+                questManager.currentActiveQuest.Increase(100);
+            }
+        }
+        if (questManager.activeEQuest.questType == QuestType.SellCoal)
+        {
+            questManager.activeEQuest.Increase(100);
+        }
+        if (questManager.activeIQuest.questType == QuestType.SellCoal)
+        {
+            questManager.activeIQuest.Increase(100);
+        }
+        if (questManager.activeHQuest.questType == QuestType.SellCoal)
+        {
+            questManager.activeHQuest.Increase(100);
+        }
+        #endregion
     }
     public void Bronze1()
     {
         gManager.coin += 10;
         gManager.bronze -= 1;
+        #region Bronze selling quest
+        if (questManager.isThereQuest)
+        {
+            if (questManager.currentActiveQuest.questType == QuestType.SellBronze)
+            {
+                questManager.currentActiveQuest.Increase(1);
+            }
+        }
+        if (questManager.activeEQuest.questType == QuestType.SellBronze)
+        {
+            questManager.activeEQuest.Increase(1);
+        }
+        if (questManager.activeIQuest.questType == QuestType.SellBronze)
+        {
+            questManager.activeIQuest.Increase(1);
+        }
+        if (questManager.activeHQuest.questType == QuestType.SellBronze)
+        {
+            questManager.activeHQuest.Increase(1);
+        }
+        #endregion
     }
     public void Bronze10()
     {
         gManager.coin += 100;
         gManager.bronze -= 10;
+        #region Bronze selling quest
+        if (questManager.isThereQuest)
+        {
+            if (questManager.currentActiveQuest.questType == QuestType.SellBronze)
+            {
+                questManager.currentActiveQuest.Increase(10);
+            }
+        }
+        if (questManager.activeEQuest.questType == QuestType.SellBronze)
+        {
+            questManager.activeEQuest.Increase(10);
+        }
+        if (questManager.activeIQuest.questType == QuestType.SellBronze)
+        {
+            questManager.activeIQuest.Increase(10);
+        }
+        if (questManager.activeHQuest.questType == QuestType.SellBronze)
+        {
+            questManager.activeHQuest.Increase(10);
+        }
+        #endregion
     }
     public void Bronze100()
     {
         gManager.coin += 1000;
         gManager.bronze -= 100;
+        #region Bronze selling quest
+        if (questManager.isThereQuest)
+        {
+            if (questManager.currentActiveQuest.questType == QuestType.SellBronze)
+            {
+                questManager.currentActiveQuest.Increase(100);
+            }
+        }
+        if (questManager.activeEQuest.questType == QuestType.SellBronze)
+        {
+            questManager.activeEQuest.Increase(100);
+        }
+        if (questManager.activeIQuest.questType == QuestType.SellBronze)
+        {
+            questManager.activeIQuest.Increase(100);
+        }
+        if (questManager.activeHQuest.questType == QuestType.SellBronze)
+        {
+            questManager.activeHQuest.Increase(100);
+        }
+        #endregion
     }
     public void Iron1()
     {
         gManager.coin += 25;
         gManager.iron -= 1;
+        #region Iron selling quest
+        if (questManager.isThereQuest)
+        {
+            if (questManager.currentActiveQuest.questType == QuestType.SellIron)
+            {
+                questManager.currentActiveQuest.Increase(1);
+            }
+        }
+        if (questManager.activeEQuest.questType == QuestType.SellIron)
+        {
+            questManager.activeEQuest.Increase(1);
+        }
+        if (questManager.activeIQuest.questType == QuestType.SellIron)
+        {
+            questManager.activeIQuest.Increase(1);
+        }
+        if (questManager.activeHQuest.questType == QuestType.SellIron)
+        {
+            questManager.activeHQuest.Increase(1);
+        }
+        #endregion
     }
     public void Iron10()
     {
         gManager.coin += 250;
         gManager.iron -= 10;
+        #region Iron selling quest
+        if (questManager.isThereQuest)
+        {
+            if (questManager.currentActiveQuest.questType == QuestType.SellIron)
+            {
+                questManager.currentActiveQuest.Increase(10);
+            }
+        }
+        if (questManager.activeEQuest.questType == QuestType.SellIron)
+        {
+            questManager.activeEQuest.Increase(10);
+        }
+        if (questManager.activeIQuest.questType == QuestType.SellIron)
+        {
+            questManager.activeIQuest.Increase(10);
+        }
+        if (questManager.activeHQuest.questType == QuestType.SellIron)
+        {
+            questManager.activeHQuest.Increase(10);
+        }
+        #endregion
     }
     public void Iron100()
     {
         gManager.coin += 2500;
         gManager.iron -= 100;
+        #region Iron selling quest
+        if (questManager.isThereQuest)
+        {
+            if (questManager.currentActiveQuest.questType == QuestType.SellIron)
+            {
+                questManager.currentActiveQuest.Increase(100);
+            }
+        }
+        if (questManager.activeEQuest.questType == QuestType.SellIron)
+        {
+            questManager.activeEQuest.Increase(100);
+        }
+        if (questManager.activeIQuest.questType == QuestType.SellIron)
+        {
+            questManager.activeIQuest.Increase(100);
+        }
+        if (questManager.activeHQuest.questType == QuestType.SellIron)
+        {
+            questManager.activeHQuest.Increase(100);
+        }
+        #endregion
     }
     #endregion
     public void PetScreen()

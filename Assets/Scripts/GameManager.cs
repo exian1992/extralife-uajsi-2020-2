@@ -64,7 +64,7 @@ public class GameManager : MonoBehaviour
     public float tempMiningPower;
 
     //etc
-    public GameObject questPopUp;
+    public GameObject questPopUp, dQuestPopUp;
 
     void Start()
     {
@@ -201,7 +201,19 @@ public class GameManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             if (EventSystem.current.IsPointerOverGameObject()) return;
-            //tap quest
+            #region Tap Quest
+            if (questManager.activeEQuest.questType == QuestType.Tap)
+            {
+                questManager.activeEQuest.Increase(1);
+            }
+            if (questManager.activeIQuest.questType == QuestType.Tap)
+            {
+                questManager.activeIQuest.Increase(1);
+            }
+            if (questManager.activeHQuest.questType == QuestType.Tap)
+            {
+                questManager.activeHQuest.Increase(1);
+            }
             if (questManager.isThereQuest)
             {
                 if (questManager.currentActiveQuest.questType == QuestType.Tap)
@@ -210,6 +222,7 @@ public class GameManager : MonoBehaviour
                     questManager.QuestCompleteCheck();
                 }
             }
+            #endregion
             AttackOre();
         }
 
@@ -298,35 +311,106 @@ public class GameManager : MonoBehaviour
                 if (ore.GetName() == "Stone")
                 {
                     stone++;
-                    //GameObject temp = Instantiate(floatingOreIcon[0], new Vector3(2.5f, 0f, 0f), Quaternion.identity);
-                    //Destroy(temp, 1);
-                    //stone quest
+                    #region Stone mining quest
                     if (questManager.isThereQuest)
                     {
                         if (questManager.currentActiveQuest.questType == QuestType.MineStone)
                         {
                             questManager.currentActiveQuest.Increase(1);
-                            questManager.QuestCompleteCheck();
                         }
                     }
+                    if (questManager.activeEQuest.questType == QuestType.MineStone)
+                    {
+                        questManager.activeEQuest.Increase(1);
+                    }
+                    if (questManager.activeIQuest.questType == QuestType.MineStone)
+                    {
+                        questManager.activeIQuest.Increase(1);
+                    }
+                    if (questManager.activeHQuest.questType == QuestType.MineStone)
+                    {
+                        questManager.activeHQuest.Increase(1);
+                    }
+                    questManager.QuestCompleteCheck();
+                    #endregion
                 }
                 if (ore.GetName() == "Coal")
                 {
                     coal++;
-                    //GameObject temp = Instantiate(floatingOreIcon[1], new Vector3(2.5f, 0f, 0f), Quaternion.identity);
-                    //Destroy(temp, 1);
+                    #region Coal mining quest
+                    if (questManager.isThereQuest)
+                    {
+                        if (questManager.currentActiveQuest.questType == QuestType.MineCoal)
+                        {
+                            questManager.currentActiveQuest.Increase(1);
+                        }
+                    }
+                    if (questManager.activeEQuest.questType == QuestType.MineCoal)
+                    {
+                        questManager.activeEQuest.Increase(1);
+                    }
+                    if (questManager.activeIQuest.questType == QuestType.MineCoal)
+                    {
+                        questManager.activeIQuest.Increase(1);
+                    }
+                    if (questManager.activeHQuest.questType == QuestType.MineCoal)
+                    {
+                        questManager.activeHQuest.Increase(1);
+                    }
+                    questManager.QuestCompleteCheck();
+                    #endregion
                 }
                 if (ore.GetName() == "Bronze")
                 {
                     bronze++;
-                    //GameObject temp = Instantiate(floatingOreIcon[2], new Vector3(2.5f, 0f, 0f), Quaternion.identity);
-                    //Destroy(temp, 1);
+                    #region Bronze mining quest
+                    if (questManager.isThereQuest)
+                    {
+                        if (questManager.currentActiveQuest.questType == QuestType.MineBronze)
+                        {
+                            questManager.currentActiveQuest.Increase(1);
+                        }
+                    }
+                    if (questManager.activeEQuest.questType == QuestType.MineBronze)
+                    {
+                        questManager.activeEQuest.Increase(1);
+                    }
+                    if (questManager.activeIQuest.questType == QuestType.MineBronze)
+                    {
+                        questManager.activeIQuest.Increase(1);
+                    }
+                    if (questManager.activeHQuest.questType == QuestType.MineBronze)
+                    {
+                        questManager.activeHQuest.Increase(1);
+                    }
+                    questManager.QuestCompleteCheck();
+                    #endregion
                 }
                 if (ore.GetName() == "Iron")
                 {
                     iron++;
-                    //GameObject temp = Instantiate(floatingOreIcon[3], new Vector3(2.5f, 0f, 0f), Quaternion.identity);
-                    //Destroy(temp, 1);
+                    #region Iron mining quest
+                    if (questManager.isThereQuest)
+                    {
+                        if (questManager.currentActiveQuest.questType == QuestType.MineIron)
+                        {
+                            questManager.currentActiveQuest.Increase(1);
+                        }
+                    }
+                    if (questManager.activeEQuest.questType == QuestType.MineIron)
+                    {
+                        questManager.activeEQuest.Increase(1);
+                    }
+                    if (questManager.activeIQuest.questType == QuestType.MineIron)
+                    {
+                        questManager.activeIQuest.Increase(1);
+                    }
+                    if (questManager.activeHQuest.questType == QuestType.MineIron)
+                    {
+                        questManager.activeHQuest.Increase(1);
+                    }
+                    questManager.QuestCompleteCheck();
+                    #endregion
                 }
             }
         }
@@ -486,6 +570,17 @@ public class GameManager : MonoBehaviour
     public void HideQuest()
     {
         questPopUp.SetActive(false);
+        dQuestPopUp.SetActive(false);
+    }
+    public void SwitchDaily()
+    {
+        questPopUp.SetActive(false);
+        dQuestPopUp.SetActive(true);
+    }
+    public void SwitchQuest()
+    {
+        questPopUp.SetActive(true);
+        dQuestPopUp.SetActive(false);
     }
     void OnApplicationQuit()
     {
