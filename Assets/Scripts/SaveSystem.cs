@@ -9,7 +9,8 @@ public static class SaveSystem
     {
         BinaryFormatter formatter = new BinaryFormatter();
 
-        string path = "D:/SaveFile/data.uwansummoney";
+        //string path = "D:/SaveFile/data.uwansummoney";
+        string path = Application.persistentDataPath + "/data.uwansummoney";
         FileStream stream = new FileStream(path, FileMode.Create);
 
         GameData data = new GameData(manager);
@@ -21,7 +22,8 @@ public static class SaveSystem
     {
         BinaryFormatter formatter = new BinaryFormatter();
 
-        string path = "D:/SaveFile/questData.uwansummoney";
+        //string path = "D:/SaveFile/questData.uwansummoney";
+        string path = Application.persistentDataPath + "/questData.uwansummoney";
         FileStream stream = new FileStream(path, FileMode.Create);
 
         GameData data = new GameData(qManager);
@@ -33,7 +35,8 @@ public static class SaveSystem
     {
         BinaryFormatter formatter = new BinaryFormatter();
 
-        string path = "D:/SaveFile/petData.uwansummoney";
+        //string path = "D:/SaveFile/petData.uwansummoney";
+        string path = Application.persistentDataPath + "/petData.uwansummoney";
         FileStream stream = new FileStream(path, FileMode.Create);
 
         GameData data = new GameData(pManager);
@@ -45,7 +48,8 @@ public static class SaveSystem
     {
         BinaryFormatter formatter = new BinaryFormatter();
 
-        string path = "D:/SaveFile/costumeData.uwansummoney";
+        //string path = "D:/SaveFile/costumeData.uwansummoney";
+        string path = Application.persistentDataPath + "/costumeData.uwansummoney";
         FileStream stream = new FileStream(path, FileMode.Create);
 
         GameData data = new GameData(cManager);
@@ -57,7 +61,8 @@ public static class SaveSystem
     //load data
     public static GameData LoadData ()
     {
-        string path = "D:/SaveFile/data.uwansummoney";
+        //string path = "D:/SaveFile/data.uwansummoney";
+        string path = Application.persistentDataPath + "/data.uwansummoney";
         if (File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();
@@ -76,7 +81,8 @@ public static class SaveSystem
     }
     public static GameData LoadQuestState()
     {
-        string path = "D:/SaveFile/questData.uwansummoney";
+        //string path = "D:/SaveFile/questData.uwansummoney";
+        string path = Application.persistentDataPath + "/questData.uwansummoney";
         if (File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();
@@ -95,7 +101,8 @@ public static class SaveSystem
     }
     public static GameData LoadPetManager()
     {
-        string path = "D:/SaveFile/petData.uwansummoney";
+        //string path = "D:/SaveFile/petData.uwansummoney";
+        string path = Application.persistentDataPath + "/petData.uwansummoney";
         if (File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();
@@ -114,7 +121,8 @@ public static class SaveSystem
     }
     public static GameData LoadCostumeManager()
     {
-        string path = "D:/SaveFile/costumeData.uwansummoney";
+        //string path = "D:/SaveFile/costumeData.uwansummoney";
+        string path = Application.persistentDataPath + "/costumeData.uwansummoney";
         if (File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();
