@@ -15,6 +15,6 @@ MonoBehaviour:
   isActive: 0
   questDescription: Sell 50 stone
   coinReward: 20
-  questType: 1
+  questType: 4
   requiredAmount: 50
   currentAmount: 0

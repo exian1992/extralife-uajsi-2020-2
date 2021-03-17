@@ -82,7 +82,7 @@ public class QuestManager : MonoBehaviour
             currentQuest.text = "unassigned quest"; 
         }
 
-        //daily quest refreshText
+        #region Daily quest refreshText
         eQuestText.text = activeEQuest.questDescription;
         iQuestText.text = activeIQuest.questDescription;
         hQuestText.text = activeHQuest.questDescription;
@@ -91,16 +91,32 @@ public class QuestManager : MonoBehaviour
             eProgress.text = activeEQuest.currentAmount + " / " + activeEQuest.requiredAmount;
             eSlider.value = activeEQuest.currentAmount / activeEQuest.requiredAmount;
         }
+        else
+        {
+            eProgress.text = activeEQuest.requiredAmount + " / " + activeEQuest.requiredAmount;
+            eSlider.value = 1f;
+        }
         if (activeIQuest.currentAmount <= activeIQuest.requiredAmount)
         {
             iProgress.text = activeIQuest.currentAmount + " / " + activeIQuest.requiredAmount;
             iSlider.value = activeIQuest.currentAmount / activeIQuest.requiredAmount;
+        }
+        else
+        {
+            iProgress.text = activeIQuest.requiredAmount + " / " + activeIQuest.requiredAmount;
+            iSlider.value = 1f;
         }
         if (activeIQuest.currentAmount <= activeIQuest.requiredAmount)
         {
             hProgress.text = activeHQuest.currentAmount + " / " + activeHQuest.requiredAmount;
             hSlider.value = activeHQuest.currentAmount / activeHQuest.requiredAmount;
         }
+        else
+        {
+            hProgress.text = activeHQuest.requiredAmount + " / " + activeHQuest.requiredAmount;
+            hSlider.value = 1f;
+        }
+        #endregion
     }
     public void AcceptQuest()
     {
