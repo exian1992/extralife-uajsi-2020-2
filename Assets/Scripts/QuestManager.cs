@@ -43,7 +43,8 @@ public class QuestManager : MonoBehaviour
 
     private void Start()
     {
-        string path = "D:/SaveFile/questData.uwansummoney";
+        //string path = "D:/SaveFile/questData.uwansummoney";
+        string path = Application.persistentDataPath + "/questData.uwansummoney";
         if (!File.Exists(path))
         {
             dQuestE = Random.Range(0, 3);

@@ -20,7 +20,8 @@ public class PetManager : MonoBehaviour
 
     public void Start()
     { 
-        string saveData = "D:/SaveFile/petData.uwansummoney";
+        //string saveData = "D:/SaveFile/petData.uwansummoney";
+        string saveData = Application.persistentDataPath + "/petData.uwansummoney";
         if (!File.Exists(saveData))
         {
             SaveSystem.SavePetManager(this);

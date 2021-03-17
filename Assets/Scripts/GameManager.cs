@@ -75,7 +75,8 @@ public class GameManager : MonoBehaviour
         cManager = GameObject.Find("CostumeManager");
         costumeManager = cManager.GetComponent<CostumeManager>();
 
-        string saveData = "D:/SaveFile/data.uwansummoney";
+        //string saveData = "D:/SaveFile/data.uwansummoney";
+        string saveData = Application.persistentDataPath + "/data.uwansummoney";
         if (!File.Exists(saveData))
         {
             SaveSystem.SaveData(this);

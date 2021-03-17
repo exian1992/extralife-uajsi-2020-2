@@ -20,7 +20,8 @@ public class CostumeManager : MonoBehaviour
 
     public void Start()
     {
-        string saveData = "D:/SaveFile/costumeData.uwansummoney";
+        //string saveData = "D:/SaveFile/costumeData.uwansummoney";
+        string saveData = Application.persistentDataPath + "/costumeData.uwansummoney";
         if (!File.Exists(saveData))
         {
             SaveSystem.SaveCostumeManager(this);
