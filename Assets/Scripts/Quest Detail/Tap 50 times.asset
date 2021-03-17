@@ -15,6 +15,6 @@ MonoBehaviour:
   isActive: 0
   questDescription: Tap 50 times!
   coinReward: 150
-  questType: 2
+  questType: 8
   requiredAmount: 50
   currentAmount: 0
