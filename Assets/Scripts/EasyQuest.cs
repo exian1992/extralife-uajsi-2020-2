@@ -2,24 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "QuestInfo")]
+[CreateAssetMenu(menuName = "EasyQuest")]
 [System.Serializable]
-public class QuestInfo : ScriptableObject
+public class EasyQuest : ScriptableObject
 {
-    public bool isActive;
     public string questDescription;
     public int coinReward;
 
     //quest detail
     public QuestType questType;
 
-    public int requiredAmount;
-    public int currentAmount;
+    public float requiredAmount;
+    public float currentAmount;
 
-    public void Increase(int a)
+    public void Increase(float a)
     {
         currentAmount += a;
-        Debug.Log(currentAmount);
     }
     public bool IsReached()
     {
