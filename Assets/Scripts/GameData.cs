@@ -6,9 +6,9 @@ using UnityEngine;
 public class GameData
 {
     //GameManager
-    public int eqLvl = 1, stone = 0, coal = 0, bronze = 0, iron = 0;
+    public int eqLvl = 1, stone = 0, coal = 0, bronze = 0, iron = 0, coin = 0;
     public float attSpd = 1f;
-    public int stoneChance = 20, coalChance = 0, bronzeChance = 0, ironChance = 0, coin = 0;
+    public int[] map1OreChance = new int[4];
 
     //QuestManager
     public int randomQuest = 0;
@@ -29,15 +29,15 @@ public class GameData
         eqLvl = gManager.eqLvl;
         attSpd = gManager.defaultMiningPower;
 
-        stone = gManager.stone;
-        coal = gManager.coal;
-        bronze = gManager.bronze;
-        iron = gManager.iron;
+        stone = gManager.map1OreCollection[0];
+        coal = gManager.map1OreCollection[1];
+        bronze = gManager.map1OreCollection[2];
+        iron = gManager.map1OreCollection[3];
 
-        stoneChance = gManager.stoneChance;
-        coalChance = gManager.coalChance;
-        bronzeChance = gManager.bronzeChance;
-        ironChance = gManager.ironChance;
+        map1OreChance[0] = gManager.map1OreChance[0];
+        map1OreChance[1] = gManager.map1OreChance[1];
+        map1OreChance[2] = gManager.map1OreChance[2];
+        map1OreChance[3] = gManager.map1OreChance[3];
 
         coin = gManager.coin;
     }

@@ -882,75 +882,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!1001 &257521584
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 632649328115384497, guid: 621a613d3ed4ba54398549eb787824eb,
-        type: 3}
-      propertyPath: m_Name
-      value: stone
-      objectReference: {fileID: 0}
-    - target: {fileID: 632649328115384499, guid: 621a613d3ed4ba54398549eb787824eb,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 632649328115384499, guid: 621a613d3ed4ba54398549eb787824eb,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 2.45
-      objectReference: {fileID: 0}
-    - target: {fileID: 632649328115384499, guid: 621a613d3ed4ba54398549eb787824eb,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 632649328115384499, guid: 621a613d3ed4ba54398549eb787824eb,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 632649328115384499, guid: 621a613d3ed4ba54398549eb787824eb,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 632649328115384499, guid: 621a613d3ed4ba54398549eb787824eb,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 632649328115384499, guid: 621a613d3ed4ba54398549eb787824eb,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 632649328115384499, guid: 621a613d3ed4ba54398549eb787824eb,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 632649328115384499, guid: 621a613d3ed4ba54398549eb787824eb,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 632649328115384499, guid: 621a613d3ed4ba54398549eb787824eb,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 632649328115384499, guid: 621a613d3ed4ba54398549eb787824eb,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 90
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 621a613d3ed4ba54398549eb787824eb, type: 3}
 --- !u!1 &262471883
 GameObject:
   m_ObjectHideFlags: 0
@@ -6134,34 +6065,28 @@ MonoBehaviour:
   - {fileID: 8659591104843737072, guid: 628ed581f78de5e4cb9eabb5496de04d, type: 3}
   - {fileID: 8823725712865877447, guid: 9f46aef9166081f419ba117f413d72e1, type: 3}
   - {fileID: 322795317684218722, guid: bcbe35014785eab47a1f6b084aa8fe65, type: 3}
-  blocks: []
-  currentOreHealth: {fileID: 262471884}
+  currentBlock: {fileID: 0}
+  currentOreHealthText: {fileID: 262471884}
   currentOreName: {fileID: 1368923997}
-  stone: 0
-  coal: 0
-  bronze: 0
-  iron: 0
-  stoneValue: {fileID: 2056364348}
-  coalValue: {fileID: 680309927}
-  bronzeValue: {fileID: 392405831}
-  ironValue: {fileID: 457944212}
-  stoneChance: 20
-  coalChance: 0
-  bronzeChance: 0
-  ironChance: 0
+  map1OreCollection: 00000000000000000000000000000000
+  map1OreValueText:
+  - {fileID: 2056364348}
+  - {fileID: 680309927}
+  - {fileID: 392405831}
+  - {fileID: 457944212}
+  map1OreChance: 14000000000000000000000000000000
   eqLvl: 1
   eqLevel: {fileID: 1216619272}
   defaultMiningPower: 1
   defaultMiningSpeed: 1
+  tempMiningSpeed: 0
+  tempMiningPower: 0
   trueMiningSpeed: 0
   trueMiningPower: 0
   coin: 0
   coinValue: {fileID: 1921695056}
-  isItLoaded: 0
   speedUpToggle: 0
   powerUpToggle: 0
-  tempMiningSpeed: 0
-  tempMiningPower: 0
   questPopUp: {fileID: 864036076}
   dQuestPopUp: {fileID: 125047162}
 --- !u!4 &1744729391

@@ -59,18 +59,18 @@ public class ShopSystem : MonoBehaviour
 
         #region Button Manager
         //for selling ore
-        if (gManager.stone >= 1) stone1.SetActive(true); else stone1.SetActive(false);
-        if (gManager.stone >= 10) stone10.SetActive(true); else stone10.SetActive(false);
-        if (gManager.stone >= 100) stone100.SetActive(true); else stone100.SetActive(false);
-        if (gManager.coal >= 1) coal1.SetActive(true); else coal1.SetActive(false);
-        if (gManager.coal >= 10) coal10.SetActive(true); else coal10.SetActive(false);
-        if (gManager.coal >= 100) coal100.SetActive(true); else coal100.SetActive(false);
-        if (gManager.bronze >= 1) bronze1.SetActive(true); else bronze1.SetActive(false);
-        if (gManager.bronze >= 10) bronze10.SetActive(true); else bronze10.SetActive(false);
-        if (gManager.bronze >= 100) bronze100.SetActive(true); else bronze100.SetActive(false);
-        if (gManager.iron >= 1) iron1.SetActive(true); else iron1.SetActive(false);
-        if (gManager.iron >= 10) iron10.SetActive(true); else iron10.SetActive(false);
-        if (gManager.iron >= 100) iron100.SetActive(true); else iron100.SetActive(false);
+        if (gManager.map1OreCollection[0] >= 1) stone1.SetActive(true); else stone1.SetActive(false);
+        if (gManager.map1OreCollection[0] >= 10) stone10.SetActive(true); else stone10.SetActive(false);
+        if (gManager.map1OreCollection[0] >= 100) stone100.SetActive(true); else stone100.SetActive(false);
+        if (gManager.map1OreCollection[1] >= 1) coal1.SetActive(true); else coal1.SetActive(false);
+        if (gManager.map1OreCollection[1] >= 10) coal10.SetActive(true); else coal10.SetActive(false);
+        if (gManager.map1OreCollection[1] >= 100) coal100.SetActive(true); else coal100.SetActive(false);
+        if (gManager.map1OreCollection[2] >= 1) bronze1.SetActive(true); else bronze1.SetActive(false);
+        if (gManager.map1OreCollection[2] >= 10) bronze10.SetActive(true); else bronze10.SetActive(false);
+        if (gManager.map1OreCollection[2] >= 100) bronze100.SetActive(true); else bronze100.SetActive(false);
+        if (gManager.map1OreCollection[3] >= 1) iron1.SetActive(true); else iron1.SetActive(false);
+        if (gManager.map1OreCollection[3] >= 10) iron10.SetActive(true); else iron10.SetActive(false);
+        if (gManager.map1OreCollection[3] >= 100) iron100.SetActive(true); else iron100.SetActive(false);
         #endregion
 
         #region For pet shop
@@ -133,10 +133,10 @@ public class ShopSystem : MonoBehaviour
         {
             if (gManager.eqLvl == 1)
             {
-                if (gManager.stone >= 10 && gManager.coin >= 100)
+                if (gManager.map1OreCollection[0] >= 10 && gManager.coin >= 100)
                 {
-                    gManager.stone -= 10;
-                    gManager.coalChance = 5;
+                    gManager.map1OreCollection[0] -= 10;
+                    gManager.map1OreChance[1] = 5;
                     gManager.defaultMiningPower += 0.3f;
                     gManager.eqLvl++;
                     gManager.coin -= 100;
@@ -144,12 +144,12 @@ public class ShopSystem : MonoBehaviour
             }
             else if (gManager.eqLvl == 2)
             {
-                if (gManager.stone >= 20 && gManager.coal >= 10 && gManager.coin >= 500)
+                if (gManager.map1OreCollection[0] >= 20 && gManager.map1OreCollection[1] >= 10 && gManager.coin >= 500)
                 {
-                    gManager.stone -= 20;
-                    gManager.coal -= 10;
-                    gManager.coalChance = 6;
-                    gManager.bronzeChance = 2;
+                    gManager.map1OreCollection[0] -= 20;
+                    gManager.map1OreCollection[1] -= 10;
+                    gManager.map1OreChance[1] = 6;
+                    gManager.map1OreChance[2] = 2;
                     gManager.defaultMiningPower += 0.3f;
                     gManager.eqLvl++;
                     gManager.coin -= 500;
@@ -157,14 +157,14 @@ public class ShopSystem : MonoBehaviour
             }
             else if (gManager.eqLvl == 3)
             {
-                if (gManager.stone >= 30 && gManager.coal >= 20 && gManager.bronze >= 10 && gManager.coin >= 5000)
+                if (gManager.map1OreCollection[0] >= 30 && gManager.map1OreCollection[1] >= 20 && gManager.map1OreCollection[2] >= 10 && gManager.coin >= 5000)
                 {
-                    gManager.stone -= 30;
-                    gManager.coal -= 20;
-                    gManager.bronze -= 10;
-                    gManager.coalChance = 7;
-                    gManager.bronzeChance = 3;
-                    gManager.ironChance = 1;
+                    gManager.map1OreCollection[0] -= 30;
+                    gManager.map1OreCollection[1] -= 20;
+                    gManager.map1OreCollection[2] -= 10;
+                    gManager.map1OreChance[1] = 7;
+                    gManager.map1OreChance[2] = 3;
+                    gManager.map1OreChance[3] = 1;
                     gManager.defaultMiningPower += 0.3f;
                     gManager.eqLvl++;
                     gManager.coin -= 5000;
@@ -172,12 +172,12 @@ public class ShopSystem : MonoBehaviour
             }
             else if (gManager.eqLvl == 4)
             {
-                if (gManager.stone >= 40 && gManager.coal >= 30 && gManager.bronze >= 20 && gManager.iron >= 10 && gManager.coin >= 10000)
+                if (gManager.map1OreCollection[0] >= 40 && gManager.map1OreCollection[1] >= 30 && gManager.map1OreCollection[2] >= 20 && gManager.map1OreCollection[3] >= 10 && gManager.coin >= 10000)
                 {
-                    gManager.stone -= 40;
-                    gManager.coal -= 30;
-                    gManager.bronze -= 20;
-                    gManager.iron -= 10;
+                    gManager.map1OreCollection[0] -= 40;
+                    gManager.map1OreCollection[1] -= 30;
+                    gManager.map1OreCollection[2] -= 20;
+                    gManager.map1OreCollection[3] -= 10;
                     gManager.defaultMiningPower += 0.3f;
                     gManager.eqLvl++;
                     gManager.coin -= 10000;
@@ -217,7 +217,7 @@ public class ShopSystem : MonoBehaviour
     public void Stone1()
     {
         gManager.coin += 1;
-        gManager.stone -= 1;
+        gManager.map1OreCollection[0] -= 1;
         #region Stone selling quest
         if (questManager.isThereQuest)
         {
@@ -243,7 +243,7 @@ public class ShopSystem : MonoBehaviour
     public void Stone10()
     {
         gManager.coin += 10;
-        gManager.stone -= 10;
+        gManager.map1OreCollection[0] -= 10;
         #region Stone selling quest
         if (questManager.isThereQuest)
         {
@@ -269,7 +269,7 @@ public class ShopSystem : MonoBehaviour
     public void Stone100()
     {
         gManager.coin += 100;
-        gManager.stone -= 100;
+        gManager.map1OreCollection[0] -= 100;
         #region Stone selling quest
         if (questManager.isThereQuest)
         {
@@ -295,7 +295,7 @@ public class ShopSystem : MonoBehaviour
     public void Coal1()
     {
         gManager.coin += 5;
-        gManager.coal -= 1;
+        gManager.map1OreCollection[1] -= 1;
         #region Coal selling quest
         if (questManager.isThereQuest)
         {
@@ -321,7 +321,7 @@ public class ShopSystem : MonoBehaviour
     public void Coal10()
     {
         gManager.coin += 50;
-        gManager.coal -= 10;
+        gManager.map1OreCollection[1] -= 10;
         #region Coal selling quest
         if (questManager.isThereQuest)
         {
@@ -347,7 +347,7 @@ public class ShopSystem : MonoBehaviour
     public void Coal100()
     {
         gManager.coin += 500;
-        gManager.coal -= 100;
+        gManager.map1OreCollection[1] -= 100;
         #region Coal selling quest
         if (questManager.isThereQuest)
         {
@@ -373,7 +373,7 @@ public class ShopSystem : MonoBehaviour
     public void Bronze1()
     {
         gManager.coin += 10;
-        gManager.bronze -= 1;
+        gManager.map1OreCollection[2] -= 1;
         #region Bronze selling quest
         if (questManager.isThereQuest)
         {
@@ -399,7 +399,7 @@ public class ShopSystem : MonoBehaviour
     public void Bronze10()
     {
         gManager.coin += 100;
-        gManager.bronze -= 10;
+        gManager.map1OreCollection[2] -= 10;
         #region Bronze selling quest
         if (questManager.isThereQuest)
         {
@@ -425,7 +425,7 @@ public class ShopSystem : MonoBehaviour
     public void Bronze100()
     {
         gManager.coin += 1000;
-        gManager.bronze -= 100;
+        gManager.map1OreCollection[2] -= 100;
         #region Bronze selling quest
         if (questManager.isThereQuest)
         {
@@ -451,7 +451,7 @@ public class ShopSystem : MonoBehaviour
     public void Iron1()
     {
         gManager.coin += 25;
-        gManager.iron -= 1;
+        gManager.map1OreCollection[3] -= 1;
         #region Iron selling quest
         if (questManager.isThereQuest)
         {
@@ -477,7 +477,7 @@ public class ShopSystem : MonoBehaviour
     public void Iron10()
     {
         gManager.coin += 250;
-        gManager.iron -= 10;
+        gManager.map1OreCollection[3] -= 10;
         #region Iron selling quest
         if (questManager.isThereQuest)
         {
@@ -503,7 +503,7 @@ public class ShopSystem : MonoBehaviour
     public void Iron100()
     {
         gManager.coin += 2500;
-        gManager.iron -= 100;
+        gManager.map1OreCollection[3] -= 100;
         #region Iron selling quest
         if (questManager.isThereQuest)
         {
@@ -539,10 +539,10 @@ public class ShopSystem : MonoBehaviour
     }
     void RefreshText()
     {
-        stoneValue.text = gManager.stone.ToString();
-        coalValue.text = gManager.coal.ToString();
-        bronzeValue.text = gManager.bronze.ToString();
-        ironValue.text = gManager.iron.ToString();
+        stoneValue.text = gManager.map1OreCollection[0].ToString();
+        coalValue.text = gManager.map1OreCollection[1].ToString();
+        bronzeValue.text = gManager.map1OreCollection[2].ToString();
+        ironValue.text = gManager.map1OreCollection[3].ToString();
         eqLevel.text = gManager.eqLvl.ToString();
         coinValue.text = gManager.coin.ToString();
     }
