@@ -6,7 +6,6 @@ public class Ore : MonoBehaviour
 {
     [SerializeField] string oreName;
     [SerializeField] float oreHeatlh;
-    [SerializeField] bool oreActive = false;
 
     GameObject manager;
     GameManager gManager;
@@ -29,15 +28,5 @@ public class Ore : MonoBehaviour
     public void OreDamage()
     {
         oreHeatlh -= gManager.Damage();
-    }
-    public bool IsOreActive()
-    {
-        if (oreActive)
-            return true;
-        else return false;
-    }
-    public void MakeOreActive()
-    {
-        oreActive = true;
     }
 }

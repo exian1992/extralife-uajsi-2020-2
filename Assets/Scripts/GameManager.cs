@@ -13,40 +13,36 @@ public class GameManager : MonoBehaviour
     public GameObject allManager;
     public GameObject manager;
     public GameObject[] prefabs;
-    //public GameObject[] floatingOreIcon;
     GameData data;
     GameObject qManager, pManager, cManager;
     QuestManager questManager;
     PetManager petManager;
     CostumeManager costumeManager;
 
-    public GameObject[] blocks;
+    public GameObject currentBlock;
 
-    float currentOre = 1;
-    public Text currentOreHealth;
+    float currentOreHealth;
+    public Text currentOreHealthText;
     public Text currentOreName;
 
     //ore info
-    public int stone = 0;
-    public int coal = 0;
-    public int bronze = 0;
-    public int iron = 0;
-    public Text stoneValue;
-    public Text coalValue;
-    public Text bronzeValue;
-    public Text ironValue;
+    public int[] map1OreCollection = new int[4];
+    public Text[] map1OreValueText = new Text[4];
+    //public Text stoneValue;
+    //public Text coalValue;
+    //public Text bronzeValue;
+    //public Text ironValue;
 
     //orechance
-    public int stoneChance = 20;
-    public int coalChance = 0;
-    public int bronzeChance = 0;
-    public int ironChance = 0;
+    public int[] map1OreChance = new int[4];
 
     //equipment info
     public int eqLvl = 1;
     public Text eqLevel;
     public float defaultMiningPower = 1f;
     public float defaultMiningSpeed = 1f;
+    public float tempMiningSpeed;
+    public float tempMiningPower;
     public float trueMiningSpeed;
     public float trueMiningPower;
 
@@ -54,14 +50,9 @@ public class GameManager : MonoBehaviour
     public int coin = 0;
     public Text coinValue;
 
-    //checker
-    public bool isItLoaded = false;
-
     //booster variable
     public bool speedUpToggle = false;
     public bool powerUpToggle = false;
-    public float tempMiningSpeed;
-    public float tempMiningPower;
 
     //etc
     public GameObject questPopUp, dQuestPopUp;
@@ -81,11 +72,10 @@ public class GameManager : MonoBehaviour
         {
             SaveSystem.SaveData(this);
         }
-        if (isItLoaded == false)
+        else
         {
             questManager.LoadQuestState();
             LoadData();
-            isItLoaded = true;
         }
 
         //check if equipped with SpeedUp buff (auto-clicker)
@@ -161,42 +151,23 @@ public class GameManager : MonoBehaviour
         }
         InvokeRepeating("AttackOre", 1f, trueMiningSpeed);
 
-        if (blocks.Length < 4)
+        if (currentBlock == null)
         {
-            for (int i = 0; i < 3; i++)
-            {
-                Array.Clear(blocks, 0, blocks.Length);
-                blocks = GameObject.FindGameObjectsWithTag("ore");
-                TileMove();
-            }
+            TileGenerator();
         }
     }
     // Update is called once per frame
     void Update()
     {
-        Array.Clear(blocks, 0, blocks.Length);
-        blocks = GameObject.FindGameObjectsWithTag("ore");
+        //ore remover + generator
+        currentBlock = GameObject.FindGameObjectWithTag("ore");
+        Ore ore = currentBlock.GetComponent<Ore>();
 
-        foreach (GameObject block in blocks)
-        {
-            //ore remover + generator
-            Ore ore = block.GetComponent<Ore>();
+        Transform tr = currentBlock.transform;
 
-            Transform tr = block.transform;
-
-            if (tr.transform.position.z <= 0.5f)
-            {
-                ore.MakeOreActive();
-
-            }
-            if (ore.IsOreActive())
-            {
-                currentOre = ore.GetOreHealth();
-                currentOreHealth.text = currentOre.ToString();
-
-                currentOreName.text = ore.GetName();
-            }
-        }
+        currentOreHealth = ore.GetOreHealth();
+        currentOreHealthText.text = currentOreHealth.ToString();
+        currentOreName.text = ore.GetName();
 
         //touch input
         if (Input.GetMouseButtonDown(0))
@@ -228,192 +199,170 @@ public class GameManager : MonoBehaviour
         }
 
         //tile moving
-        if (currentOre <= 0)
+        if (currentOreHealth <= 0)
         {
             TileCheck();
-            Destroy(blocks[0]);
-            TileMove();
+            Destroy(currentBlock);
+            TileGenerator();
         }
 
         RefreshText();
     }
     public void AttackOre()
     {
-        Array.Clear(blocks, 0, blocks.Length);
-        blocks = GameObject.FindGameObjectsWithTag("ore");
-        foreach (GameObject block in blocks)
-        {
-            Ore ore = block.GetComponent<Ore>();
-            if (ore.IsOreActive())
-            {
-                ore.OreDamage();
-                currentOre = ore.GetOreHealth();
-            }
-        }
+        currentBlock = GameObject.FindGameObjectWithTag("ore");
+        Ore ore = currentBlock.GetComponent<Ore>();
+
+        ore.OreDamage();
+        currentOreHealth = ore.GetOreHealth();
+    
         RefreshText();
     }
     void RefreshText()
     {
         if (SceneManager.GetActiveScene().name == "MainGameplay")
         {
-            currentOreHealth.text = currentOre.ToString();
+            currentOreHealthText.text = currentOreHealth.ToString();
 
-            stoneValue.text = stone.ToString();
-            coalValue.text = coal.ToString();
-            bronzeValue.text = bronze.ToString();
-            ironValue.text = iron.ToString();
+            map1OreValueText[0].text = map1OreCollection[0].ToString();
+            map1OreValueText[1].text = map1OreCollection[1].ToString();
+            map1OreValueText[2].text = map1OreCollection[2].ToString();
+            map1OreValueText[3].text = map1OreCollection[3].ToString();
             eqLevel.text = eqLvl.ToString();
 
             coinValue.text = coin.ToString();
         }
-    }
+    }   
     #region Tile Stuff
-    void TileMove()
-    {
-        foreach (GameObject block in blocks)
-        {
-            Transform tr = block.transform;
-
-            tr.transform.position = new Vector3(tr.transform.position.x, tr.transform.position.y, tr.transform.position.z - 1f);
-        }
-
-        TileGenerator();
-    }
     void TileGenerator()
     {
         //random generator
         int randomOre = Random.Range(0, 20);
 
         //stone 10, coal 5, bronze 4, iron 1
-        if (randomOre < ironChance)
+        if (randomOre < map1OreChance[3])//ironChance)
         {
-            Instantiate(prefabs[3], new Vector3(2.45f, -1.5f, 3f), Quaternion.Euler(0, 0, 90));
+            Instantiate(prefabs[3], new Vector3(2.45f, -1.5f, 0f), Quaternion.Euler(0, 0, 90));
         }
-        else if (randomOre < bronzeChance)//2
+        else if (randomOre < map1OreChance[2])//bronzeChance)
         {
-            Instantiate(prefabs[2], new Vector3(2.45f, -1.5f, 3f), Quaternion.Euler(0, 0, 90));
+            Instantiate(prefabs[2], new Vector3(2.45f, -1.5f, 0f), Quaternion.Euler(0, 0, 90));
         }
-        else if (randomOre < coalChance)//6
+        else if (randomOre < map1OreChance[1])//coalChance)
         {
-            Instantiate(prefabs[1], new Vector3(2.45f, -1.5f, 3f), Quaternion.Euler(0, 0, 90));
+            Instantiate(prefabs[1], new Vector3(2.45f, -1.5f, 0f), Quaternion.Euler(0, 0, 90));
         }
-        else if (randomOre < stoneChance)//12
+        else if (randomOre < map1OreChance[0])//stoneChance)
         {
-            Instantiate(prefabs[0], new Vector3(2.45f, -1.5f, 3f), Quaternion.Euler(0, 0, 90));
+            Instantiate(prefabs[0], new Vector3(2.45f, -1.5f, 0f), Quaternion.Euler(0, 0, 90));
         }
     }
     void TileCheck()
     {
-        foreach (GameObject block in blocks)
+        Ore ore = currentBlock.GetComponent<Ore>();
+        if (ore.GetName() == "Stone")
         {
-            Ore ore = block.GetComponent<Ore>();
-            if (ore.IsOreActive())
-            {
-                if (ore.GetName() == "Stone")
+            map1OreCollection[0]++;
+            #region Stone mining quest
+                if (questManager.isThereQuest)
                 {
-                    stone++;
-                    #region Stone mining quest
-                    if (questManager.isThereQuest)
+                    if (questManager.currentActiveQuest.questType == QuestType.MineStone)
                     {
-                        if (questManager.currentActiveQuest.questType == QuestType.MineStone)
-                        {
-                            questManager.currentActiveQuest.Increase(1);
-                        }
+                        questManager.currentActiveQuest.Increase(1);
                     }
-                    if (questManager.activeEQuest.questType == QuestType.MineStone)
-                    {
-                        questManager.activeEQuest.Increase(1);
-                    }
-                    if (questManager.activeIQuest.questType == QuestType.MineStone)
-                    {
-                        questManager.activeIQuest.Increase(1);
-                    }
-                    if (questManager.activeHQuest.questType == QuestType.MineStone)
-                    {
-                        questManager.activeHQuest.Increase(1);
-                    }
-                    questManager.QuestCompleteCheck();
-                    #endregion
                 }
-                if (ore.GetName() == "Coal")
+                if (questManager.activeEQuest.questType == QuestType.MineStone)
                 {
-                    coal++;
-                    #region Coal mining quest
-                    if (questManager.isThereQuest)
-                    {
-                        if (questManager.currentActiveQuest.questType == QuestType.MineCoal)
-                        {
-                            questManager.currentActiveQuest.Increase(1);
-                        }
-                    }
-                    if (questManager.activeEQuest.questType == QuestType.MineCoal)
-                    {
-                        questManager.activeEQuest.Increase(1);
-                    }
-                    if (questManager.activeIQuest.questType == QuestType.MineCoal)
-                    {
-                        questManager.activeIQuest.Increase(1);
-                    }
-                    if (questManager.activeHQuest.questType == QuestType.MineCoal)
-                    {
-                        questManager.activeHQuest.Increase(1);
-                    }
-                    questManager.QuestCompleteCheck();
-                    #endregion
+                    questManager.activeEQuest.Increase(1);
                 }
-                if (ore.GetName() == "Bronze")
+                if (questManager.activeIQuest.questType == QuestType.MineStone)
                 {
-                    bronze++;
-                    #region Bronze mining quest
-                    if (questManager.isThereQuest)
-                    {
-                        if (questManager.currentActiveQuest.questType == QuestType.MineBronze)
-                        {
-                            questManager.currentActiveQuest.Increase(1);
-                        }
-                    }
-                    if (questManager.activeEQuest.questType == QuestType.MineBronze)
-                    {
-                        questManager.activeEQuest.Increase(1);
-                    }
-                    if (questManager.activeIQuest.questType == QuestType.MineBronze)
-                    {
-                        questManager.activeIQuest.Increase(1);
-                    }
-                    if (questManager.activeHQuest.questType == QuestType.MineBronze)
-                    {
-                        questManager.activeHQuest.Increase(1);
-                    }
-                    questManager.QuestCompleteCheck();
-                    #endregion
+                    questManager.activeIQuest.Increase(1);
                 }
-                if (ore.GetName() == "Iron")
+                if (questManager.activeHQuest.questType == QuestType.MineStone)
                 {
-                    iron++;
-                    #region Iron mining quest
-                    if (questManager.isThereQuest)
-                    {
-                        if (questManager.currentActiveQuest.questType == QuestType.MineIron)
-                        {
-                            questManager.currentActiveQuest.Increase(1);
-                        }
-                    }
-                    if (questManager.activeEQuest.questType == QuestType.MineIron)
-                    {
-                        questManager.activeEQuest.Increase(1);
-                    }
-                    if (questManager.activeIQuest.questType == QuestType.MineIron)
-                    {
-                        questManager.activeIQuest.Increase(1);
-                    }
-                    if (questManager.activeHQuest.questType == QuestType.MineIron)
-                    {
-                        questManager.activeHQuest.Increase(1);
-                    }
-                    questManager.QuestCompleteCheck();
-                    #endregion
+                    questManager.activeHQuest.Increase(1);
                 }
-            }
+                questManager.QuestCompleteCheck();
+            #endregion
+        }
+        if (ore.GetName() == "Coal")
+        {
+            map1OreCollection[1]++;
+            #region Coal mining quest
+                if (questManager.isThereQuest)
+                {
+                    if (questManager.currentActiveQuest.questType == QuestType.MineCoal)
+                    {
+                        questManager.currentActiveQuest.Increase(1);
+                    }
+                }
+                if (questManager.activeEQuest.questType == QuestType.MineCoal)
+                {
+                    questManager.activeEQuest.Increase(1);
+                }
+                if (questManager.activeIQuest.questType == QuestType.MineCoal)
+                {
+                    questManager.activeIQuest.Increase(1);
+                }
+                if (questManager.activeHQuest.questType == QuestType.MineCoal)
+                {
+                    questManager.activeHQuest.Increase(1);
+                }
+                questManager.QuestCompleteCheck();
+                #endregion
+        }
+        if (ore.GetName() == "Bronze")
+        {
+            map1OreCollection[2]++;
+            #region Bronze mining quest
+                if (questManager.isThereQuest)
+                {
+                    if (questManager.currentActiveQuest.questType == QuestType.MineBronze)
+                    {
+                        questManager.currentActiveQuest.Increase(1);
+                    }
+                }
+                if (questManager.activeEQuest.questType == QuestType.MineBronze)
+                {
+                    questManager.activeEQuest.Increase(1);
+                }
+                if (questManager.activeIQuest.questType == QuestType.MineBronze)
+                {
+                    questManager.activeIQuest.Increase(1);
+                }
+                if (questManager.activeHQuest.questType == QuestType.MineBronze)
+                {
+                    questManager.activeHQuest.Increase(1);
+                }
+                questManager.QuestCompleteCheck();
+                #endregion
+        }
+        if (ore.GetName() == "Iron")
+        {
+            map1OreCollection[3]++;
+            #region Iron mining quest
+                if (questManager.isThereQuest)
+                {
+                    if (questManager.currentActiveQuest.questType == QuestType.MineIron)
+                    {
+                        questManager.currentActiveQuest.Increase(1);
+                    }
+                }
+                if (questManager.activeEQuest.questType == QuestType.MineIron)
+                {
+                    questManager.activeEQuest.Increase(1);
+                }
+                if (questManager.activeIQuest.questType == QuestType.MineIron)
+                {
+                    questManager.activeIQuest.Increase(1);
+                }
+                if (questManager.activeHQuest.questType == QuestType.MineIron)
+                {
+                    questManager.activeHQuest.Increase(1);
+                }
+                questManager.QuestCompleteCheck();
+                #endregion
         }
     }
     #endregion
@@ -425,21 +374,21 @@ public class GameManager : MonoBehaviour
         {
             int randomGain = Random.Range(0, 20);
             //stone 10, coal 5, bronze 4, iron 1
-            if (randomGain < ironChance)
+            if (randomGain < map1OreChance[3])//ironChance)
             {
-                iron++;
+                map1OreCollection[3]++;
             }
-            else if (randomGain < bronzeChance)//2
+            else if (randomGain < map1OreChance[2])//bronzeChance)//2
             {
-                bronze++;
+                map1OreCollection[2]++;
             }
-            else if (randomGain < coalChance)//6
+            else if (randomGain < map1OreChance[1])//coalChance)//6
             {
-                coal++;
+                map1OreCollection[1]++;
             }
-            else if (randomGain < stoneChance)//12
+            else if (randomGain < map1OreChance[0])//stoneChance)//12
             {
-                stone++;
+                map1OreCollection[0]++;
             }
         }
     }
@@ -549,18 +498,18 @@ public class GameManager : MonoBehaviour
     public void LoadData()
     {
         data = SaveSystem.LoadData();
-        stone = data.stone;
-        coal = data.coal;
-        bronze = data.bronze;
-        iron = data.iron;
+        map1OreCollection[0] = data.stone;
+        map1OreCollection[1] = data.coal;
+        map1OreCollection[2] = data.bronze;
+        map1OreCollection[3] = data.iron;
 
         eqLvl = data.eqLvl;
         defaultMiningPower = data.attSpd;
 
-        stoneChance = data.stoneChance;
-        coalChance = data.coalChance;
-        bronzeChance = data.bronzeChance;
-        ironChance = data.ironChance;
+        map1OreChance[0] = data.map1OreChance[0];
+        map1OreChance[1] = data.map1OreChance[1];
+        map1OreChance[2] = data.map1OreChance[2];
+        map1OreChance[3] = data.map1OreChance[3];
 
         coin = data.coin;
     }
@@ -585,7 +534,6 @@ public class GameManager : MonoBehaviour
     }
     void OnApplicationQuit()
     {
-        isItLoaded = false;
         SaveAllProgress();
     }
     public void SaveAllProgress()
