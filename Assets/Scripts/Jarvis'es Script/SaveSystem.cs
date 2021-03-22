@@ -18,6 +18,19 @@ public static class SaveSystem
         formatter.Serialize(stream, data);
         stream.Close();
     }
+    public static void SaveData(IdleManager manager)
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+
+        //string path = "D:/SaveFile/data.uwansummoney";
+        string path = Application.persistentDataPath + "/data.uwansummoney";
+        FileStream stream = new FileStream(path, FileMode.Create);
+
+        GameData data = new GameData(manager);
+
+        formatter.Serialize(stream, data);
+        stream.Close();
+    }
     public static void SaveQuestState(QuestManager qManager)
     {
         BinaryFormatter formatter = new BinaryFormatter();

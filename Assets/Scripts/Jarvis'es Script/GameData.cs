@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class GameData
 {
-    //GameManager
+    //GameManager or IdleManager
     public int eqLvl = 1, stone = 0, coal = 0, bronze = 0, iron = 0, coin = 0;
     public float attSpd = 1f;
     public int[] map1OreChance = new int[4];
@@ -40,6 +40,23 @@ public class GameData
         map1OreChance[3] = gManager.map1OreChance[3];
 
         coin = gManager.coin;
+    }
+    public GameData (IdleManager iManager)
+    {
+        eqLvl = iManager.eqLvl;
+        attSpd = iManager.defaultMiningPower;
+
+        stone = iManager.map1OreCollection[0];
+        coal = iManager.map1OreCollection[1];
+        bronze = iManager.map1OreCollection[2];
+        iron = iManager.map1OreCollection[3];
+
+        map1OreChance[0] = iManager.map1OreChance[0];
+        map1OreChance[1] = iManager.map1OreChance[1];
+        map1OreChance[2] = iManager.map1OreChance[2];
+        map1OreChance[3] = iManager.map1OreChance[3];
+
+        coin = iManager.coin;
     }
     public GameData (QuestManager qManager)
     {

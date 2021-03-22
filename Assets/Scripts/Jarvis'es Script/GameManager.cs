@@ -159,54 +159,57 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //ore remover + generator
-        currentBlock = GameObject.FindGameObjectWithTag("ore");
-        Ore ore = currentBlock.GetComponent<Ore>();
-
-        Transform tr = currentBlock.transform;
-
-        currentOreHealth = ore.GetOreHealth();
-        currentOreHealthText.text = currentOreHealth.ToString();
-        currentOreName.text = ore.GetName();
-
-        //touch input
-        if (Input.GetMouseButtonDown(0))
+        if (SceneManager.GetActiveScene().name == "MainGameplay")
         {
-            if (EventSystem.current.IsPointerOverGameObject()) return;
-            #region Tap Quest
-            if (questManager.activeEQuest.questType == QuestType.Tap)
+            //ore remover + generator
+            currentBlock = GameObject.FindGameObjectWithTag("ore");
+            Ore ore = currentBlock.GetComponent<Ore>();
+
+            Transform tr = currentBlock.transform;
+
+            currentOreHealth = ore.GetOreHealth();
+            currentOreHealthText.text = currentOreHealth.ToString();
+            currentOreName.text = ore.GetName();
+
+            //touch input
+            if (Input.GetMouseButtonDown(0))
             {
-                questManager.activeEQuest.Increase(1);
-            }
-            if (questManager.activeIQuest.questType == QuestType.Tap)
-            {
-                questManager.activeIQuest.Increase(1);
-            }
-            if (questManager.activeHQuest.questType == QuestType.Tap)
-            {
-                questManager.activeHQuest.Increase(1);
-            }
-            if (questManager.isThereQuest)
-            {
-                if (questManager.currentActiveQuest.questType == QuestType.Tap)
+                if (EventSystem.current.IsPointerOverGameObject()) return;
+                #region Tap Quest
+                if (questManager.activeEQuest.questType == QuestType.Tap)
                 {
-                    questManager.currentActiveQuest.Increase(1);
-                    questManager.QuestCompleteCheck();
+                    questManager.activeEQuest.Increase(1);
                 }
+                if (questManager.activeIQuest.questType == QuestType.Tap)
+                {
+                    questManager.activeIQuest.Increase(1);
+                }
+                if (questManager.activeHQuest.questType == QuestType.Tap)
+                {
+                    questManager.activeHQuest.Increase(1);
+                }
+                if (questManager.isThereQuest)
+                {
+                    if (questManager.currentActiveQuest.questType == QuestType.Tap)
+                    {
+                        questManager.currentActiveQuest.Increase(1);
+                        questManager.QuestCompleteCheck();
+                    }
+                }
+                #endregion
+                AttackOre();
             }
-            #endregion
-            AttackOre();
-        }
 
-        //tile moving
-        if (currentOreHealth <= 0)
-        {
-            TileCheck();
-            Destroy(currentBlock);
-            TileGenerator();
-        }
+            //tile moving
+            if (currentOreHealth <= 0)
+            {
+                TileCheck();
+                Destroy(currentBlock);
+                TileGenerator();
+            }
 
-        RefreshText();
+            RefreshText();
+        }
     }
     public void AttackOre()
     {
@@ -418,12 +421,14 @@ public class GameManager : MonoBehaviour
     #endregion
     public void GoToShop()
     {
+        CancelInvoke();
         SaveAllProgress();
         SceneManager.LoadScene("Shop");
         DontDestroyOnLoad(allManager);
     }
     public void GoToPetSelection()
     {
+        CancelInvoke();
         SaveAllProgress();
         SceneManager.LoadScene("PetCostume");
         DontDestroyOnLoad(allManager);
