@@ -13,15 +13,13 @@ public class ShopSystem : MonoBehaviour
     CostumeManager costumeManager;
 
     //item collection
-    public Text stoneValue;
-    public Text coalValue;
-    public Text bronzeValue;
-    public Text ironValue;
+    public Text[] oreCollection;
     public Text eqLevel;
     public Text coinValue;
 
     //collection Variable
-    public GameObject stone1, stone10, stone100, coal1, coal10, coal100, bronze1, bronze10, bronze100, iron1, iron10, iron100;
+    public int[] oreSell;
+    public Text[] oreSellValue;
 
     //pet shop buttons
     public GameObject buyDoge, buyTick;
@@ -35,6 +33,9 @@ public class ShopSystem : MonoBehaviour
 
     //UI organizer
     public GameObject petScreen, costumeScreen;
+
+    //for click delay
+    int i, j, k, l;
     void Start()
     {
         manager = GameObject.Find("GameManager");
@@ -56,22 +57,6 @@ public class ShopSystem : MonoBehaviour
     private void Update()
     {
         RefreshText();
-
-        #region Button Manager
-        //for selling ore
-        if (gManager.map1OreCollection[0] >= 1) stone1.SetActive(true); else stone1.SetActive(false);
-        if (gManager.map1OreCollection[0] >= 10) stone10.SetActive(true); else stone10.SetActive(false);
-        if (gManager.map1OreCollection[0] >= 100) stone100.SetActive(true); else stone100.SetActive(false);
-        if (gManager.map1OreCollection[1] >= 1) coal1.SetActive(true); else coal1.SetActive(false);
-        if (gManager.map1OreCollection[1] >= 10) coal10.SetActive(true); else coal10.SetActive(false);
-        if (gManager.map1OreCollection[1] >= 100) coal100.SetActive(true); else coal100.SetActive(false);
-        if (gManager.map1OreCollection[2] >= 1) bronze1.SetActive(true); else bronze1.SetActive(false);
-        if (gManager.map1OreCollection[2] >= 10) bronze10.SetActive(true); else bronze10.SetActive(false);
-        if (gManager.map1OreCollection[2] >= 100) bronze100.SetActive(true); else bronze100.SetActive(false);
-        if (gManager.map1OreCollection[3] >= 1) iron1.SetActive(true); else iron1.SetActive(false);
-        if (gManager.map1OreCollection[3] >= 10) iron10.SetActive(true); else iron10.SetActive(false);
-        if (gManager.map1OreCollection[3] >= 100) iron100.SetActive(true); else iron100.SetActive(false);
-        #endregion
 
         #region For pet shop
         if (!petManager.allPetsList[0].purchaseStatus)
@@ -214,318 +199,305 @@ public class ShopSystem : MonoBehaviour
     #endregion
 
     #region Sell Value
-    public void Stone1()
+    public void ConfirmSell()
     {
-        gManager.coin += 1;
-        gManager.map1OreCollection[0] -= 1;
-        #region Stone selling quest
-        if (questManager.isThereQuest)
+        if (oreSell[0] > 0) //stone
         {
-            if (questManager.currentActiveQuest.questType == QuestType.SellStone)
+            gManager.coin += oreSell[0] * 1;
+            gManager.map1OreCollection[0] -= oreSell[0];
+            #region Stone selling quest
+            if (questManager.isThereQuest)
             {
-                questManager.currentActiveQuest.Increase(1);
+                if (questManager.currentActiveQuest.questType == QuestType.SellStone)
+                {
+                    questManager.currentActiveQuest.Increase(oreSell[0]);
+                }
+            }
+            if (questManager.activeEQuest.questType == QuestType.SellStone)
+            {
+                questManager.activeEQuest.Increase(oreSell[0]);
+            }
+            if (questManager.activeIQuest.questType == QuestType.SellStone)
+            {
+                questManager.activeIQuest.Increase(oreSell[0]);
+            }
+            if (questManager.activeHQuest.questType == QuestType.SellStone)
+            {
+                questManager.activeHQuest.Increase(oreSell[0]);
+            }
+            #endregion
+
+            oreSell[0] = 0;
+        }
+        if (oreSell[1] > 0) //coal
+        {
+            gManager.coin += oreSell[1] * 5;
+            gManager.map1OreCollection[1] -= oreSell[1];
+            #region Coal selling quest
+            if (questManager.isThereQuest)
+            {
+                if (questManager.currentActiveQuest.questType == QuestType.SellCoal)
+                {
+                    questManager.currentActiveQuest.Increase(oreSell[1]);
+                }
+            }
+            if (questManager.activeEQuest.questType == QuestType.SellCoal)
+            {
+                questManager.activeEQuest.Increase(oreSell[1]);
+            }
+            if (questManager.activeIQuest.questType == QuestType.SellCoal)
+            {
+                questManager.activeIQuest.Increase(oreSell[1]);
+            }
+            if (questManager.activeHQuest.questType == QuestType.SellCoal)
+            {
+                questManager.activeHQuest.Increase(oreSell[1]);
+            }
+            #endregion
+
+            oreSell[1] = 0;
+        }
+        if (oreSell[2] > 0) //bronze
+        {
+            gManager.coin += oreSell[2] * 10;
+            gManager.map1OreCollection[2] -= oreSell[2];
+            #region Bronze selling quest
+            if (questManager.isThereQuest)
+            {
+                if (questManager.currentActiveQuest.questType == QuestType.SellBronze)
+                {
+                    questManager.currentActiveQuest.Increase(oreSell[2]);
+                }
+            }
+            if (questManager.activeEQuest.questType == QuestType.SellBronze)
+            {
+                questManager.activeEQuest.Increase(oreSell[2]);
+            }
+            if (questManager.activeIQuest.questType == QuestType.SellBronze)
+            {
+                questManager.activeIQuest.Increase(oreSell[2]);
+            }
+            if (questManager.activeHQuest.questType == QuestType.SellBronze)
+            {
+                questManager.activeHQuest.Increase(oreSell[2]);
+            }
+            #endregion
+
+            oreSell[2] = 0;
+        }
+        if (oreSell[3] > 0) //iron
+        {
+            gManager.coin += oreSell[3] * 25;
+            gManager.map1OreCollection[3] -= oreSell[3];
+            #region Iron selling quest
+            if (questManager.isThereQuest)
+            {
+                if (questManager.currentActiveQuest.questType == QuestType.SellIron)
+                {
+                    questManager.currentActiveQuest.Increase(oreSell[3]);
+                }
+            }
+            if (questManager.activeEQuest.questType == QuestType.SellIron)
+            {
+                questManager.activeEQuest.Increase(oreSell[3]);
+            }
+            if (questManager.activeIQuest.questType == QuestType.SellIron)
+            {
+                questManager.activeIQuest.Increase(oreSell[3]);
+            }
+            if (questManager.activeHQuest.questType == QuestType.SellIron)
+            {
+                questManager.activeHQuest.Increase(oreSell[3]);
+            }
+            #endregion
+
+            oreSell[3] = 0;
+        }
+    }
+        #region StoneInc
+        public void StoneIncDown()
+        {
+            StartCoroutine("StoneIncDelay");
+        }
+        public void StoneIncUp()
+        {
+            StopCoroutine("StoneIncDelay");
+            i = 0;
+        }
+        IEnumerator StoneIncDelay()
+        {
+            for (i = 0; i > -1; i++)
+            {
+                if (i < 3) oreSell[0] += 1;
+                else if ((gManager.map1OreCollection[0] - oreSell[0]) < 10) oreSell[0] = gManager.map1OreCollection[0];
+                else if (i < 5) oreSell[0] += 10;
+                else if ((gManager.map1OreCollection[0] - oreSell[0]) < 100) oreSell[0] = gManager.map1OreCollection[0];
+                else oreSell[0] += 100;
+                yield return new WaitForSeconds(0.2f);            
             }
         }
-        if (questManager.activeEQuest.questType == QuestType.SellStone)
-        {
-            questManager.activeEQuest.Increase(1);
-        }
-        if (questManager.activeIQuest.questType == QuestType.SellStone)
-        {
-            questManager.activeIQuest.Increase(1);
-        }
-        if (questManager.activeHQuest.questType == QuestType.SellStone)
-        {
-            questManager.activeHQuest.Increase(1);
-        }
         #endregion
-    }
-    public void Stone10()
-    {
-        gManager.coin += 10;
-        gManager.map1OreCollection[0] -= 10;
-        #region Stone selling quest
-        if (questManager.isThereQuest)
+        #region StoneDec
+        public void StoneDecDown()
         {
-            if (questManager.currentActiveQuest.questType == QuestType.SellStone)
+            StartCoroutine("StoneDecDelay");
+        }
+        public void StoneDecUp()
+        {
+            StopCoroutine("StoneDecDelay");
+            i = 0;
+        }
+        IEnumerator StoneDecDelay()
+        {
+            for (i = 0; i > -1; i++)
             {
-                questManager.currentActiveQuest.Increase(10);
+                if (i < 3) oreSell[0] -= 1;
+                else if (oreSell[0] < 10) oreSell[0] = 0;
+                else if (i < 5) oreSell[0] -= 10;
+                else if (oreSell[0] < 100) oreSell[0] = 0;
+                else oreSell[0] -= 100;
+                yield return new WaitForSeconds(0.2f);            
             }
         }
-        if (questManager.activeEQuest.questType == QuestType.SellStone)
-        {
-            questManager.activeEQuest.Increase(10);
-        }
-        if (questManager.activeIQuest.questType == QuestType.SellStone)
-        {
-            questManager.activeIQuest.Increase(10);
-        }
-        if (questManager.activeHQuest.questType == QuestType.SellStone)
-        {
-            questManager.activeHQuest.Increase(10);
-        }
         #endregion
-    }
-    public void Stone100()
-    {
-        gManager.coin += 100;
-        gManager.map1OreCollection[0] -= 100;
-        #region Stone selling quest
-        if (questManager.isThereQuest)
+        #region CoalInc
+        public void CoalIncDown()
         {
-            if (questManager.currentActiveQuest.questType == QuestType.SellStone)
+            StartCoroutine("CoalIncDelay");
+        }
+        public void CoalIncUp()
+        {
+            StopCoroutine("CoalIncDelay");
+            j = 0;
+        }
+        IEnumerator CoalIncDelay()
+        {
+            for (j = 0; j > -1; j++)
             {
-                questManager.currentActiveQuest.Increase(100);
+                if (j < 3) oreSell[1] += 1;
+                else if ((gManager.map1OreCollection[1] - oreSell[1]) < 10) oreSell[1] = gManager.map1OreCollection[1];
+                else if (j < 5) oreSell[1] += 10;
+                else if ((gManager.map1OreCollection[1] - oreSell[1]) < 100) oreSell[1] = gManager.map1OreCollection[1];
+                else oreSell[1] += 100;
+                yield return new WaitForSeconds(0.2f);            
             }
         }
-        if (questManager.activeEQuest.questType == QuestType.SellStone)
-        {
-            questManager.activeEQuest.Increase(100);
-        }
-        if (questManager.activeIQuest.questType == QuestType.SellStone)
-        {
-            questManager.activeIQuest.Increase(100);
-        }
-        if (questManager.activeHQuest.questType == QuestType.SellStone)
-        {
-            questManager.activeHQuest.Increase(100);
-        }
         #endregion
-    }
-    public void Coal1()
-    {
-        gManager.coin += 5;
-        gManager.map1OreCollection[1] -= 1;
-        #region Coal selling quest
-        if (questManager.isThereQuest)
+        #region CoalDec
+        public void CoalDecDown()
         {
-            if (questManager.currentActiveQuest.questType == QuestType.SellCoal)
+            StartCoroutine("CoalDecDelay");
+        }
+        public void CoalDecUp()
+        {
+            StopCoroutine("CoalDecDelay");
+            j = 0;
+        }
+        IEnumerator CoalDecDelay()
+        {
+            for (j = 0; j > -1; j++)
             {
-                questManager.currentActiveQuest.Increase(1);
+                if (j < 3) oreSell[1] -= 1;
+                else if (oreSell[1] < 10) oreSell[1] = 0;
+                else if (j < 5) oreSell[1] -= 10;
+                else if (oreSell[1] < 100) oreSell[1] = 0;
+                else oreSell[1] -= 100;
+                yield return new WaitForSeconds(0.2f);            
             }
         }
-        if (questManager.activeEQuest.questType == QuestType.SellCoal)
-        {
-            questManager.activeEQuest.Increase(1);
-        }
-        if (questManager.activeIQuest.questType == QuestType.SellCoal)
-        {
-            questManager.activeIQuest.Increase(1);
-        }
-        if (questManager.activeHQuest.questType == QuestType.SellCoal)
-        {
-            questManager.activeHQuest.Increase(1);
-        }
         #endregion
-    }
-    public void Coal10()
-    {
-        gManager.coin += 50;
-        gManager.map1OreCollection[1] -= 10;
-        #region Coal selling quest
-        if (questManager.isThereQuest)
+        #region BronzeInc
+        public void BronzeIncDown()
         {
-            if (questManager.currentActiveQuest.questType == QuestType.SellCoal)
+            StartCoroutine("BronzeIncDelay");
+        }
+        public void BronzeIncUp()
+        {
+            StopCoroutine("BronzeIncDelay");
+            k = 0;
+        }
+        IEnumerator BronzeIncDelay()
+        {
+            for (k = 0; k > -1; k++)
             {
-                questManager.currentActiveQuest.Increase(10);
+                if (k < 3) oreSell[2] += 1;
+                else if ((gManager.map1OreCollection[2] - oreSell[2]) < 10) oreSell[2] = gManager.map1OreCollection[2];
+                else if (k < 5) oreSell[2] += 10;
+                else if ((gManager.map1OreCollection[2] - oreSell[2]) < 100) oreSell[2] = gManager.map1OreCollection[2];
+                else oreSell[2] += 100;
+                yield return new WaitForSeconds(0.2f);            
             }
         }
-        if (questManager.activeEQuest.questType == QuestType.SellCoal)
-        {
-            questManager.activeEQuest.Increase(10);
-        }
-        if (questManager.activeIQuest.questType == QuestType.SellCoal)
-        {
-            questManager.activeIQuest.Increase(10);
-        }
-        if (questManager.activeHQuest.questType == QuestType.SellCoal)
-        {
-            questManager.activeHQuest.Increase(10);
-        }
         #endregion
-    }
-    public void Coal100()
-    {
-        gManager.coin += 500;
-        gManager.map1OreCollection[1] -= 100;
-        #region Coal selling quest
-        if (questManager.isThereQuest)
+        #region BronzeDec
+        public void BronzeDecDown()
         {
-            if (questManager.currentActiveQuest.questType == QuestType.SellCoal)
+            StartCoroutine("BronzeDecDelay");
+        }
+        public void BronzeDecUp()
+        {
+            StopCoroutine("BronzeDecDelay");
+            k = 0;
+        }
+        IEnumerator BronzeDecDelay()
+        {
+            for (k = 0; k > -1; k++)
             {
-                questManager.currentActiveQuest.Increase(100);
+                if (k < 3) oreSell[2] -= 1;
+                else if (oreSell[2] < 10) oreSell[2] = 0;
+                else if (k < 5) oreSell[2] -= 10;
+                else if (oreSell[2] < 100) oreSell[2] = 0;
+                else oreSell[2] -= 100;
+                yield return new WaitForSeconds(0.2f);            
             }
         }
-        if (questManager.activeEQuest.questType == QuestType.SellCoal)
-        {
-            questManager.activeEQuest.Increase(100);
-        }
-        if (questManager.activeIQuest.questType == QuestType.SellCoal)
-        {
-            questManager.activeIQuest.Increase(100);
-        }
-        if (questManager.activeHQuest.questType == QuestType.SellCoal)
-        {
-            questManager.activeHQuest.Increase(100);
-        }
         #endregion
-    }
-    public void Bronze1()
-    {
-        gManager.coin += 10;
-        gManager.map1OreCollection[2] -= 1;
-        #region Bronze selling quest
-        if (questManager.isThereQuest)
+        #region IronInc
+        public void IronIncDown()
         {
-            if (questManager.currentActiveQuest.questType == QuestType.SellBronze)
+            StartCoroutine("IronIncDelay");
+        }
+        public void IronIncUp()
+        {
+            StopCoroutine("IronIncDelay");
+            l = 0;
+        }
+        IEnumerator IronIncDelay()
+        {
+            for (l = 0; l > -1; l++)
             {
-                questManager.currentActiveQuest.Increase(1);
+                if (l < 3) oreSell[3] += 1;
+                else if ((gManager.map1OreCollection[3] - oreSell[3]) < 10) oreSell[3] = gManager.map1OreCollection[3];
+                else if (l < 5) oreSell[3] += 10;
+                else if ((gManager.map1OreCollection[3] - oreSell[3]) < 100) oreSell[3] = gManager.map1OreCollection[3];
+                else oreSell[3] += 100;
+                yield return new WaitForSeconds(0.2f);            
             }
         }
-        if (questManager.activeEQuest.questType == QuestType.SellBronze)
-        {
-            questManager.activeEQuest.Increase(1);
-        }
-        if (questManager.activeIQuest.questType == QuestType.SellBronze)
-        {
-            questManager.activeIQuest.Increase(1);
-        }
-        if (questManager.activeHQuest.questType == QuestType.SellBronze)
-        {
-            questManager.activeHQuest.Increase(1);
-        }
         #endregion
-    }
-    public void Bronze10()
-    {
-        gManager.coin += 100;
-        gManager.map1OreCollection[2] -= 10;
-        #region Bronze selling quest
-        if (questManager.isThereQuest)
+        #region IronDec
+        public void IronDecDown()
         {
-            if (questManager.currentActiveQuest.questType == QuestType.SellBronze)
+            StartCoroutine("IronDecDelay");
+        }
+        public void IronDecUp()
+        {
+            StopCoroutine("IronDecDelay");
+            l = 0;
+        }
+        IEnumerator IronDecDelay()
+        {
+            for (l = 0; l > -1; l++)
             {
-                questManager.currentActiveQuest.Increase(10);
+                if (l < 3) oreSell[3] -= 1;
+                else if (oreSell[3] < 10) oreSell[3] = 0;
+                else if (l < 5) oreSell[3] -= 10;
+                else if (oreSell[3] < 100) oreSell[3] = 0;
+                else oreSell[3] -= 100;
+                yield return new WaitForSeconds(0.2f);            
             }
         }
-        if (questManager.activeEQuest.questType == QuestType.SellBronze)
-        {
-            questManager.activeEQuest.Increase(10);
-        }
-        if (questManager.activeIQuest.questType == QuestType.SellBronze)
-        {
-            questManager.activeIQuest.Increase(10);
-        }
-        if (questManager.activeHQuest.questType == QuestType.SellBronze)
-        {
-            questManager.activeHQuest.Increase(10);
-        }
         #endregion
-    }
-    public void Bronze100()
-    {
-        gManager.coin += 1000;
-        gManager.map1OreCollection[2] -= 100;
-        #region Bronze selling quest
-        if (questManager.isThereQuest)
-        {
-            if (questManager.currentActiveQuest.questType == QuestType.SellBronze)
-            {
-                questManager.currentActiveQuest.Increase(100);
-            }
-        }
-        if (questManager.activeEQuest.questType == QuestType.SellBronze)
-        {
-            questManager.activeEQuest.Increase(100);
-        }
-        if (questManager.activeIQuest.questType == QuestType.SellBronze)
-        {
-            questManager.activeIQuest.Increase(100);
-        }
-        if (questManager.activeHQuest.questType == QuestType.SellBronze)
-        {
-            questManager.activeHQuest.Increase(100);
-        }
-        #endregion
-    }
-    public void Iron1()
-    {
-        gManager.coin += 25;
-        gManager.map1OreCollection[3] -= 1;
-        #region Iron selling quest
-        if (questManager.isThereQuest)
-        {
-            if (questManager.currentActiveQuest.questType == QuestType.SellIron)
-            {
-                questManager.currentActiveQuest.Increase(1);
-            }
-        }
-        if (questManager.activeEQuest.questType == QuestType.SellIron)
-        {
-            questManager.activeEQuest.Increase(1);
-        }
-        if (questManager.activeIQuest.questType == QuestType.SellIron)
-        {
-            questManager.activeIQuest.Increase(1);
-        }
-        if (questManager.activeHQuest.questType == QuestType.SellIron)
-        {
-            questManager.activeHQuest.Increase(1);
-        }
-        #endregion
-    }
-    public void Iron10()
-    {
-        gManager.coin += 250;
-        gManager.map1OreCollection[3] -= 10;
-        #region Iron selling quest
-        if (questManager.isThereQuest)
-        {
-            if (questManager.currentActiveQuest.questType == QuestType.SellIron)
-            {
-                questManager.currentActiveQuest.Increase(10);
-            }
-        }
-        if (questManager.activeEQuest.questType == QuestType.SellIron)
-        {
-            questManager.activeEQuest.Increase(10);
-        }
-        if (questManager.activeIQuest.questType == QuestType.SellIron)
-        {
-            questManager.activeIQuest.Increase(10);
-        }
-        if (questManager.activeHQuest.questType == QuestType.SellIron)
-        {
-            questManager.activeHQuest.Increase(10);
-        }
-        #endregion
-    }
-    public void Iron100()
-    {
-        gManager.coin += 2500;
-        gManager.map1OreCollection[3] -= 100;
-        #region Iron selling quest
-        if (questManager.isThereQuest)
-        {
-            if (questManager.currentActiveQuest.questType == QuestType.SellIron)
-            {
-                questManager.currentActiveQuest.Increase(100);
-            }
-        }
-        if (questManager.activeEQuest.questType == QuestType.SellIron)
-        {
-            questManager.activeEQuest.Increase(100);
-        }
-        if (questManager.activeIQuest.questType == QuestType.SellIron)
-        {
-            questManager.activeIQuest.Increase(100);
-        }
-        if (questManager.activeHQuest.questType == QuestType.SellIron)
-        {
-            questManager.activeHQuest.Increase(100);
-        }
-        #endregion
-    }
     #endregion
     public void PetScreen()
     {
@@ -539,10 +511,16 @@ public class ShopSystem : MonoBehaviour
     }
     void RefreshText()
     {
-        stoneValue.text = gManager.map1OreCollection[0].ToString();
-        coalValue.text = gManager.map1OreCollection[1].ToString();
-        bronzeValue.text = gManager.map1OreCollection[2].ToString();
-        ironValue.text = gManager.map1OreCollection[3].ToString();
+        oreCollection[0].text = gManager.map1OreCollection[0].ToString();
+        oreCollection[1].text = gManager.map1OreCollection[1].ToString();
+        oreCollection[2].text = gManager.map1OreCollection[2].ToString();
+        oreCollection[3].text = gManager.map1OreCollection[3].ToString();
+
+        oreSellValue[0].text = oreSell[0].ToString();
+        oreSellValue[1].text = oreSell[1].ToString();
+        oreSellValue[2].text = oreSell[2].ToString();
+        oreSellValue[3].text = oreSell[3].ToString();
+
         eqLevel.text = gManager.eqLvl.ToString();
         coinValue.text = gManager.coin.ToString();
     }
