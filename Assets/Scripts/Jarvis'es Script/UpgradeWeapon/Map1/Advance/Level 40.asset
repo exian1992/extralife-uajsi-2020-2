@@ -20,3 +20,4 @@ MonoBehaviour:
   - Bronze
   - Iron
   oreRequirementValue: 88130000ac0d0000d606000058020000
+  coinNeeded: 20000

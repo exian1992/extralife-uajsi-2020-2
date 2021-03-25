@@ -19,3 +19,4 @@ MonoBehaviour:
   - Coal
   - Bronze
   oreRequirementValue: dc0500005802000045010000
+  coinNeeded: 5000

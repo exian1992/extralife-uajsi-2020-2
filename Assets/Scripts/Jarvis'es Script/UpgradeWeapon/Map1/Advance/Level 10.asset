@@ -17,3 +17,4 @@ MonoBehaviour:
   oreRequirementName:
   - Stone
   oreRequirementValue: 64000000
+  coinNeeded: 100

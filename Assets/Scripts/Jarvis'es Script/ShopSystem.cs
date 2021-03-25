@@ -42,7 +42,8 @@ public class ShopSystem : MonoBehaviour
     public GameObject[] howMuchMaterials;
     public Sprite[] materialImagesSprite; //0 stone, 1 coal, 2 bronze, 3 iron
     public GameObject[] materialOnScreen;
-    public Text[] materialRequirement;
+    public GameObject[] materialRequirement;
+    public Text coinNeeded;
 
     //for click delay
     int i, j, k, l;
@@ -64,7 +65,7 @@ public class ShopSystem : MonoBehaviour
         buyLynnBtn = buyLynn.GetComponent<Button>();
         buyBrookBtn = buyBrook.GetComponent<Button>();
         #endregion
-        AdvanceInfoRefresh();
+        
         RefreshText();
     }
     private void Update()
@@ -529,6 +530,8 @@ public class ShopSystem : MonoBehaviour
             mbChangeText.text = "Merchant";
             bScreen.SetActive(true);
             mScreen.SetActive(false);
+
+            AdvanceInfoRefresh();
         }
         else
         {
@@ -541,10 +544,10 @@ public class ShopSystem : MonoBehaviour
     public void ConfirmAdvance()
     {
         bool enough = false;
-        int i = currentLevel.oreRequirementValue.Length;
+        int i = currentLevel.upgradeLevel;
         for (int j = 0; j < i; j++)
         {
-            if (gManager.map1OreCollection[j] < currentLevel.oreRequirementValue[j])
+            if (gManager.map1OreCollection[j] > currentLevel.oreRequirementValue[j])
             {
                 enough = true;
             }
@@ -554,48 +557,59 @@ public class ShopSystem : MonoBehaviour
                 break;
             }
         }
-        if (enough)
+        if (enough && gManager.coin >= currentLevel.coinNeeded)
         {
             for (int j = 0; j < i; j++)
             {
                 gManager.map1OreCollection[j] -= currentLevel.oreRequirementValue[j];
             }
             gManager.eqLvl++;
+            gManager.coin -= currentLevel.coinNeeded;
         }
         else
         {
-            Debug.Log("Not enough material(s)!");
+            Debug.Log("Not enough material(s)/coin!");
         }
+        AdvanceInfoRefresh();
     }
     void AdvanceInfoRefresh()
     {
         currentLevel = allAdvanceScript[gManager.eqLvl - 1];
-        int i = currentLevel.oreRequirementValue.Length;
-        howMuchMaterials[currentLevel.upgradeLevel - 1].SetActive(true);
-        Debug.Log(i);
+        int i = currentLevel.upgradeLevel;
+
+        coinNeeded.text = gManager.coin + " / " + currentLevel.coinNeeded.ToString();
+        for (int j = 0; j < 4; j++)
+        {
+            if (j != (i - 1))
+            {
+                howMuchMaterials[j].SetActive(false);
+            }
+            else howMuchMaterials[j].SetActive(true);
+        }
+
         for (int j = 0; j < i; j++)
         {
-            Debug.Log(i.ToString() + "_material" + (j + 1).ToString() + "Sprite");
-            materialOnScreen[j] = GameObject.Find(i.ToString() + "_material" + (j+1).ToString() + "Sprite");
+            materialOnScreen[j] = GameObject.Find(i.ToString() + "_material" + (j + 1).ToString() + "Sprite");
+            materialRequirement[j] = GameObject.Find(i.ToString() + "_material" + (j + 1).ToString() + "Value");
             if (currentLevel.oreRequirementName[j] == "Stone")
             {
                 materialOnScreen[j].GetComponent<Image>().sprite = materialImagesSprite[0];
-                materialRequirement[j].text = gManager.map1OreCollection[0].ToString() + " / " + currentLevel.oreRequirementValue[j].ToString();
+                materialRequirement[j].GetComponent<Text>().text = gManager.map1OreCollection[0].ToString() + " / " + currentLevel.oreRequirementValue[j].ToString();
             }
             else if (currentLevel.oreRequirementName[j] == "Coal")
             {
                 materialOnScreen[j].GetComponent<Image>().sprite = materialImagesSprite[1];
-                materialRequirement[j].text = gManager.map1OreCollection[1].ToString() + " / " + currentLevel.oreRequirementValue[j].ToString();
+                materialRequirement[j].GetComponent<Text>().text = gManager.map1OreCollection[1].ToString() + " / " + currentLevel.oreRequirementValue[j].ToString();
             }
             else if (currentLevel.oreRequirementName[j] == "Bronze")
             {
                 materialOnScreen[j].GetComponent<Image>().sprite = materialImagesSprite[2];
-                materialRequirement[j].text = gManager.map1OreCollection[2].ToString() + " / " + currentLevel.oreRequirementValue[j].ToString();
+                materialRequirement[j].GetComponent<Text>().text = gManager.map1OreCollection[2].ToString() + " / " + currentLevel.oreRequirementValue[j].ToString();
             }
             else if (currentLevel.oreRequirementName[j] == "Iron")
             {
                 materialOnScreen[j].GetComponent<Image>().sprite = materialImagesSprite[3];
-                materialRequirement[j].text = gManager.map1OreCollection[3].ToString() + " / " + currentLevel.oreRequirementValue[j].ToString();
+                materialRequirement[j].GetComponent<Text>().text = gManager.map1OreCollection[3].ToString() + " / " + currentLevel.oreRequirementValue[j].ToString();
             }
         }
     }

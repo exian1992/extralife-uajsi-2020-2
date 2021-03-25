@@ -5,6 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - ore
+  - iData
+  - gManager
+  - 1_material
+  - 2_material
+  - 3_material
+  - 4_material
   layers:
   - Default
   - TransparentFX

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using System;
 using System.IO;
 using Random = UnityEngine.Random;
+using UnityEngine.SceneManagement;
 
 public class QuestManager : MonoBehaviour
 {
@@ -86,35 +87,38 @@ public class QuestManager : MonoBehaviour
         eQuestText.text = activeEQuest.questDescription;
         iQuestText.text = activeIQuest.questDescription;
         hQuestText.text = activeHQuest.questDescription;
-        if (activeEQuest.currentAmount <= activeEQuest.requiredAmount)
+        if (SceneManager.GetActiveScene().name == "MainGameplay")
         {
-            eProgress.text = activeEQuest.currentAmount + " / " + activeEQuest.requiredAmount;
-            eSlider.value = activeEQuest.currentAmount / activeEQuest.requiredAmount;
-        }
-        else
-        {
-            eProgress.text = activeEQuest.requiredAmount + " / " + activeEQuest.requiredAmount;
-            eSlider.value = 1f;
-        }
-        if (activeIQuest.currentAmount <= activeIQuest.requiredAmount)
-        {
-            iProgress.text = activeIQuest.currentAmount + " / " + activeIQuest.requiredAmount;
-            iSlider.value = activeIQuest.currentAmount / activeIQuest.requiredAmount;
-        }
-        else
-        {
-            iProgress.text = activeIQuest.requiredAmount + " / " + activeIQuest.requiredAmount;
-            iSlider.value = 1f;
-        }
-        if (activeIQuest.currentAmount <= activeIQuest.requiredAmount)
-        {
-            hProgress.text = activeHQuest.currentAmount + " / " + activeHQuest.requiredAmount;
-            hSlider.value = activeHQuest.currentAmount / activeHQuest.requiredAmount;
-        }
-        else
-        {
-            hProgress.text = activeHQuest.requiredAmount + " / " + activeHQuest.requiredAmount;
-            hSlider.value = 1f;
+            if (activeEQuest.currentAmount <= activeEQuest.requiredAmount)
+            {
+                eProgress.text = activeEQuest.currentAmount + " / " + activeEQuest.requiredAmount;
+                eSlider.value = activeEQuest.currentAmount / activeEQuest.requiredAmount;
+            }
+            else
+            {
+                eProgress.text = activeEQuest.requiredAmount + " / " + activeEQuest.requiredAmount;
+                eSlider.value = 1f;
+            }
+            if (activeIQuest.currentAmount <= activeIQuest.requiredAmount)
+            {
+                iProgress.text = activeIQuest.currentAmount + " / " + activeIQuest.requiredAmount;
+                iSlider.value = activeIQuest.currentAmount / activeIQuest.requiredAmount;
+            }
+            else
+            {
+                iProgress.text = activeIQuest.requiredAmount + " / " + activeIQuest.requiredAmount;
+                iSlider.value = 1f;
+            }
+            if (activeIQuest.currentAmount <= activeIQuest.requiredAmount)
+            {
+                hProgress.text = activeHQuest.currentAmount + " / " + activeHQuest.requiredAmount;
+                hSlider.value = activeHQuest.currentAmount / activeHQuest.requiredAmount;
+            }
+            else
+            {
+                hProgress.text = activeHQuest.requiredAmount + " / " + activeHQuest.requiredAmount;
+                hSlider.value = 1f;
+            }
         }
         #endregion
     }

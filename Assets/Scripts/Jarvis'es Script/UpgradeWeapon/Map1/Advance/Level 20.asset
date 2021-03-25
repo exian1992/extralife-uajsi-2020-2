@@ -18,3 +18,4 @@ MonoBehaviour:
   - Stone
   - Coal
   oreRequirementValue: f4010000fa000000
+  coinNeeded: 1000

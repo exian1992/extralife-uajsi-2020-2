@@ -9,7 +9,7 @@ public class Ore : MonoBehaviour
 
     GameObject manager;
     GameManager gManager;
-    IdleManager iManager;
+    //IdleManager iManager;
 
     //MSH ADA MASALAH DISINI, MSLH DAMAGE YG GBS KE INPUT PAS PAKE VOID
     void Start()
@@ -17,8 +17,8 @@ public class Ore : MonoBehaviour
         manager = GameObject.FindGameObjectWithTag("gManager");
         gManager = manager.GetComponent<GameManager>();
 
-        manager = GameObject.Find("IdleManager");
-        iManager = manager.GetComponent<IdleManager>();
+        //manager = GameObject.Find("IdleManager");
+        //iManager = manager.GetComponent<IdleManager>();
     }
 
     public string GetName()
