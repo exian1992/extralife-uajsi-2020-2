@@ -33,11 +33,22 @@ public class ShopSystem : MonoBehaviour
 
     //UI organizer
     public GameObject petScreen, costumeScreen;
+    public GameObject mScreen, bScreen;
+    public Text mbChangeText;
+
+    //advance weapon
+    public AdvanceWeapon[] allAdvanceScript;
+    public AdvanceWeapon currentLevel;
+    public GameObject[] howMuchMaterials;
+    public Sprite[] materialImagesSprite; //0 stone, 1 coal, 2 bronze, 3 iron
+    public GameObject[] materialOnScreen;
+    public Text[] materialRequirement;
 
     //for click delay
     int i, j, k, l;
     void Start()
     {
+        #region GameObject Initiation
         manager = GameObject.Find("GameManager");
         gManager = manager.GetComponent<GameManager>();
         qManager = GameObject.Find("QuestManager");
@@ -52,6 +63,8 @@ public class ShopSystem : MonoBehaviour
 
         buyLynnBtn = buyLynn.GetComponent<Button>();
         buyBrookBtn = buyBrook.GetComponent<Button>();
+        #endregion
+        AdvanceInfoRefresh();
         RefreshText();
     }
     private void Update()
@@ -109,7 +122,7 @@ public class ShopSystem : MonoBehaviour
     public void Back()
     {
         gManager.SaveAllProgress();
-        Destroy(GameObject.Find("AllManager")); 
+        Destroy(GameObject.Find("AllManager"));
         SceneManager.LoadScene("MainGameplay");
     }
     public void UpgradeEquipment()
@@ -197,7 +210,6 @@ public class ShopSystem : MonoBehaviour
         gManager.coin -= 200;
     }
     #endregion
-
     #region Sell Value
     public void ConfirmSell()
     {
@@ -497,8 +509,9 @@ public class ShopSystem : MonoBehaviour
                 yield return new WaitForSeconds(0.2f);            
             }
         }
-        #endregion
     #endregion
+    #endregion
+    #region UI Switching
     public void PetScreen()
     {
         petScreen.SetActive(true);
@@ -508,6 +521,83 @@ public class ShopSystem : MonoBehaviour
     {
         petScreen.SetActive(false);
         costumeScreen.SetActive(true);
+    }
+    public void BlacksmithMerchantSwitch()
+    {
+        if (mScreen.activeSelf)
+        {
+            mbChangeText.text = "Merchant";
+            bScreen.SetActive(true);
+            mScreen.SetActive(false);
+        }
+        else
+        {
+            mbChangeText.text = "Blacksmith";
+            bScreen.SetActive(false);
+            mScreen.SetActive(true);
+        }
+    }
+    #endregion
+    public void ConfirmAdvance()
+    {
+        bool enough = false;
+        int i = currentLevel.oreRequirementValue.Length;
+        for (int j = 0; j < i; j++)
+        {
+            if (gManager.map1OreCollection[j] < currentLevel.oreRequirementValue[j])
+            {
+                enough = true;
+            }
+            else
+            {
+                enough = false;
+                break;
+            }
+        }
+        if (enough)
+        {
+            for (int j = 0; j < i; j++)
+            {
+                gManager.map1OreCollection[j] -= currentLevel.oreRequirementValue[j];
+            }
+            gManager.eqLvl++;
+        }
+        else
+        {
+            Debug.Log("Not enough material(s)!");
+        }
+    }
+    void AdvanceInfoRefresh()
+    {
+        currentLevel = allAdvanceScript[gManager.eqLvl - 1];
+        int i = currentLevel.oreRequirementValue.Length;
+        howMuchMaterials[currentLevel.upgradeLevel - 1].SetActive(true);
+        Debug.Log(i);
+        for (int j = 0; j < i; j++)
+        {
+            Debug.Log(i.ToString() + "_material" + (j + 1).ToString() + "Sprite");
+            materialOnScreen[j] = GameObject.Find(i.ToString() + "_material" + (j+1).ToString() + "Sprite");
+            if (currentLevel.oreRequirementName[j] == "Stone")
+            {
+                materialOnScreen[j].GetComponent<Image>().sprite = materialImagesSprite[0];
+                materialRequirement[j].text = gManager.map1OreCollection[0].ToString() + " / " + currentLevel.oreRequirementValue[j].ToString();
+            }
+            else if (currentLevel.oreRequirementName[j] == "Coal")
+            {
+                materialOnScreen[j].GetComponent<Image>().sprite = materialImagesSprite[1];
+                materialRequirement[j].text = gManager.map1OreCollection[1].ToString() + " / " + currentLevel.oreRequirementValue[j].ToString();
+            }
+            else if (currentLevel.oreRequirementName[j] == "Bronze")
+            {
+                materialOnScreen[j].GetComponent<Image>().sprite = materialImagesSprite[2];
+                materialRequirement[j].text = gManager.map1OreCollection[2].ToString() + " / " + currentLevel.oreRequirementValue[j].ToString();
+            }
+            else if (currentLevel.oreRequirementName[j] == "Iron")
+            {
+                materialOnScreen[j].GetComponent<Image>().sprite = materialImagesSprite[3];
+                materialRequirement[j].text = gManager.map1OreCollection[3].ToString() + " / " + currentLevel.oreRequirementValue[j].ToString();
+            }
+        }
     }
     void RefreshText()
     {
