@@ -1,0 +1,37 @@
+Level 1 Waterfall
+-player (Gloves)
+-village chief
+
+Level 2 Cave
+-Player (Pickaxe)
+-blacksmith
+-merchant
+-village chief
+
+Level 3 Deep Cave
+-Player (TNT)
+-Hire npc
+-blacksmith
+-merchant
+-village chief
+
+Level 4 Earth Mantle
+-Player (Hand Drill)
+-Hire npc
+-blacksmith
+-merchant
+-village chief
+
+Level 5 Dwarf Village
+-Player (Dwarf Hand Drill / Lazer Drill)
+-Hire npc
+-blacksmith
+-merchant
+-village chief
+
+Level 6 Earth Core
+-Player (Plasma Drill)
+-Hire npc
+-blacksmith
+-merchant
+-village chief

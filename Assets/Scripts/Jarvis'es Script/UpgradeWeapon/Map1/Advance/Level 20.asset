@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: Level 20
   m_EditorClassIdentifier: 
   toolName: Pickaxe
-  upgradeLevel: 2
   oreRequirementName:
   - Stone
   - Coal

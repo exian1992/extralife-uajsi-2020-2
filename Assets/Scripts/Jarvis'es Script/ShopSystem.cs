@@ -544,7 +544,7 @@ public class ShopSystem : MonoBehaviour
     public void ConfirmAdvance()
     {
         bool enough = false;
-        int i = currentLevel.upgradeLevel;
+        int i = currentLevel.oreRequirementValue.Length;
         for (int j = 0; j < i; j++)
         {
             if (gManager.map1OreCollection[j] > currentLevel.oreRequirementValue[j])
@@ -575,7 +575,7 @@ public class ShopSystem : MonoBehaviour
     void AdvanceInfoRefresh()
     {
         currentLevel = allAdvanceScript[gManager.eqLvl - 1];
-        int i = currentLevel.upgradeLevel;
+        int i = currentLevel.oreRequirementValue.Length;
 
         coinNeeded.text = gManager.coin + " / " + currentLevel.coinNeeded.ToString();
         for (int j = 0; j < 4; j++)

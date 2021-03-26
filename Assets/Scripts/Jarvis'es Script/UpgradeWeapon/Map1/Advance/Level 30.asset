@@ -13,10 +13,9 @@ MonoBehaviour:
   m_Name: Level 30
   m_EditorClassIdentifier: 
   toolName: Pickaxe
-  upgradeLevel: 3
   oreRequirementName:
   - Stone
   - Coal
   - Bronze
-  oreRequirementValue: dc0500005802000045010000
+  oreRequirementValue: dc050000580200002c010000
   coinNeeded: 5000

@@ -7,7 +7,6 @@ using UnityEngine;
 public class AdvanceWeapon : ScriptableObject
 {
     public string toolName;
-    public int upgradeLevel;
 
     public string[] oreRequirementName;
     public int[] oreRequirementValue;
