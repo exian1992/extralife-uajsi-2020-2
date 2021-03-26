@@ -10,5 +10,6 @@ public class AdvanceWeapon : ScriptableObject
 
     public string[] oreRequirementName;
     public int[] oreRequirementValue;
-    public int coinNeeded;
+    public int basePrice;
+    public int latestPrice;
 }

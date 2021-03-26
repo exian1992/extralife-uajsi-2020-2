@@ -6083,7 +6083,7 @@ MonoBehaviour:
   tempMiningPower: 0
   trueMiningSpeed: 0
   trueMiningPower: 0
-  coin: 0
+  coin: 999999
   coinValue: {fileID: 1921695056}
   speedUpToggle: 0
   powerUpToggle: 0

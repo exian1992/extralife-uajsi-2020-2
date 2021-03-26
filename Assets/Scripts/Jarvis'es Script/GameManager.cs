@@ -78,58 +78,9 @@ public class GameManager : MonoBehaviour
             LoadData();
         }
 
-        //check if equipped with SpeedUp buff (auto-clicker)
-        #region Old Speed Formula
-        /*float temp;
-        if (petManager.petEquipped && costumeManager.costumeEquipped && costumeManager.currentActiveCostume.statusTypeCostume != StatusTypeCostume.None)
-        {
-            if (petManager.currentActivePet.statusTypePet == StatusTypePet.SpeedUp)
-            {
-                temp = defaultMiningSpeed - (defaultMiningSpeed * petManager.currentActivePet.statusValue / 100) - (defaultMiningSpeed * costumeManager.currentActiveCostume.statusValue / 100);
-                Debug.Log("speed = " + temp + "f");
-                InvokeRepeating("AttackOre", 1f, temp);
-            }
-            else
-            {
-                Debug.Log("speed = " + defaultMiningSpeed + "f");
-                InvokeRepeating("AttackOre", 1f, defaultMiningSpeed);
-            }
-        }
-        else if (petManager.petEquipped)
-        {
-            if (petManager.currentActivePet.statusTypePet == StatusTypePet.SpeedUp)
-            {
-                temp = defaultMiningSpeed - (defaultMiningSpeed * petManager.currentActivePet.statusValue / 100);
-                Debug.Log("speed = " + temp + "f");
-                InvokeRepeating("AttackOre", 1f, temp);
-            }
-            else
-            {
-                Debug.Log("speed = " + defaultMiningSpeed + "f");
-                InvokeRepeating("AttackOre", 1f, defaultMiningSpeed);
-            }
-        }
-        else if (costumeManager.costumeEquipped && costumeManager.currentActiveCostume.statusTypeCostume != StatusTypeCostume.None)
-        {
-            if (costumeManager.currentActiveCostume.statusTypeCostume == StatusTypeCostume.SpeedUp)
-            {
-                temp = defaultMiningSpeed - (defaultMiningSpeed * costumeManager.currentActiveCostume.statusValue / 100);
-                Debug.Log("speed = " + temp + "f");
-                InvokeRepeating("AttackOre", 1f, temp);
-            }
-            else
-            {
-                Debug.Log("speed = " + defaultMiningSpeed + "f");
-                InvokeRepeating("AttackOre", 1f, defaultMiningSpeed);
-            }
-        }
-        else
-        {
-            Debug.Log("speed = " + defaultMiningSpeed + "f");
-            InvokeRepeating("AttackOre", 1f, defaultMiningSpeed);
-        }*/
-        #endregion
+        ChanceChecker();
 
+        //check if equipped with SpeedUp buff (auto-clicker)
         trueMiningSpeed = 1f;
         if (costumeManager.costumeEquipped && costumeManager.currentActiveCostume.statusTypeCostume == StatusTypeCostume.SpeedUp)
         {
@@ -547,5 +498,36 @@ public class GameManager : MonoBehaviour
         SaveSystem.SaveQuestState(questManager);
         SaveSystem.SavePetManager(petManager);
         SaveSystem.SaveCostumeManager(costumeManager);
+    }
+    public void ChanceChecker()
+    {
+        if (eqLvl <= 10)
+        {
+            map1OreChance[0] = 20;
+            map1OreChance[1] = 0;
+            map1OreChance[2] = 0;
+            map1OreChance[3] = 0;
+        }
+        else if (eqLvl <= 20)
+        {
+            map1OreChance[0] = 20;
+            map1OreChance[1] = 5;
+            map1OreChance[2] = 0;
+            map1OreChance[3] = 0;
+        }
+        else if (eqLvl <= 30)
+        {
+            map1OreChance[0] = 20;
+            map1OreChance[1] = 6;
+            map1OreChance[2] = 2;
+            map1OreChance[3] = 0;
+        }
+        else if (eqLvl <= 40)
+        {
+            map1OreChance[0] = 20;
+            map1OreChance[1] = 7;
+            map1OreChance[2] = 3;
+            map1OreChance[3] = 1;
+        }
     }
 }
