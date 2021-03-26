@@ -28,6 +28,16 @@ public class Transition : MonoBehaviour
         {
             SceneManager.LoadScene("Village");
         }
+
+        if (CrossPlatformInputManager.GetButtonDown("Map"))
+        {
+            SceneManager.LoadScene("Map");
+        }
+
+        if (CrossPlatformInputManager.GetButtonDown("WaterFall"))
+        {
+            SceneManager.LoadScene("Idle");
+        }
     }
 
     public void LoadNextLevel()
