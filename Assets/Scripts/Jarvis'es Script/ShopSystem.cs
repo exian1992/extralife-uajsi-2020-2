@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class ShopSystem : MonoBehaviour
 {
-    GameObject manager, qManager, pManager, cManager;
     GameManager gManager;
     QuestManager questManager;
     PetManager petManager;
@@ -49,14 +48,10 @@ public class ShopSystem : MonoBehaviour
     void Start()
     {
         #region GameObject Initiation
-        manager = GameObject.Find("GameManager");
-        gManager = manager.GetComponent<GameManager>();
-        qManager = GameObject.Find("QuestManager");
-        questManager = qManager.GetComponent<QuestManager>();
-        pManager = GameObject.Find("PetManager");
-        petManager = pManager.GetComponent<PetManager>();
-        cManager = GameObject.Find("CostumeManager");
-        costumeManager = cManager.GetComponent<CostumeManager>();
+        gManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        questManager = GameObject.Find("QuestManager").GetComponent<QuestManager>();
+        petManager = GameObject.Find("PetManager").GetComponent<PetManager>();
+        costumeManager = GameObject.Find("CostumeManager").GetComponent<CostumeManager>();
 
         buyDogeBtn = buyDoge.GetComponent<Button>();
         buyTickBtn = buyTick.GetComponent<Button>();
@@ -124,67 +119,6 @@ public class ShopSystem : MonoBehaviour
         gManager.SaveAllProgress();
         Destroy(GameObject.Find("AllManager"));
         SceneManager.LoadScene("MainGameplay");
-    }
-    public void UpgradeEquipment()
-    {
-        if (gManager.eqLvl < 5)
-        {
-            if (gManager.eqLvl == 1)
-            {
-                if (gManager.map1OreCollection[0] >= 10 && gManager.coin >= 100)
-                {
-                    gManager.map1OreCollection[0] -= 10;
-                    gManager.map1OreChance[1] = 5;
-                    gManager.defaultMiningPower += 0.3f;
-                    gManager.eqLvl++;
-                    gManager.coin -= 100;
-                }
-            }
-            else if (gManager.eqLvl == 2)
-            {
-                if (gManager.map1OreCollection[0] >= 20 && gManager.map1OreCollection[1] >= 10 && gManager.coin >= 500)
-                {
-                    gManager.map1OreCollection[0] -= 20;
-                    gManager.map1OreCollection[1] -= 10;
-                    gManager.map1OreChance[1] = 6;
-                    gManager.map1OreChance[2] = 2;
-                    gManager.defaultMiningPower += 0.3f;
-                    gManager.eqLvl++;
-                    gManager.coin -= 500;
-                }
-            }
-            else if (gManager.eqLvl == 3)
-            {
-                if (gManager.map1OreCollection[0] >= 30 && gManager.map1OreCollection[1] >= 20 && gManager.map1OreCollection[2] >= 10 && gManager.coin >= 5000)
-                {
-                    gManager.map1OreCollection[0] -= 30;
-                    gManager.map1OreCollection[1] -= 20;
-                    gManager.map1OreCollection[2] -= 10;
-                    gManager.map1OreChance[1] = 7;
-                    gManager.map1OreChance[2] = 3;
-                    gManager.map1OreChance[3] = 1;
-                    gManager.defaultMiningPower += 0.3f;
-                    gManager.eqLvl++;
-                    gManager.coin -= 5000;
-                }
-            }
-            else if (gManager.eqLvl == 4)
-            {
-                if (gManager.map1OreCollection[0] >= 40 && gManager.map1OreCollection[1] >= 30 && gManager.map1OreCollection[2] >= 20 && gManager.map1OreCollection[3] >= 10 && gManager.coin >= 10000)
-                {
-                    gManager.map1OreCollection[0] -= 40;
-                    gManager.map1OreCollection[1] -= 30;
-                    gManager.map1OreCollection[2] -= 20;
-                    gManager.map1OreCollection[3] -= 10;
-                    gManager.defaultMiningPower += 0.3f;
-                    gManager.eqLvl++;
-                    gManager.coin -= 10000;
-                }
-            }
-            else Debug.Log("not enough materials");
-        }
-        else Debug.Log("max lvl reached");
-        RefreshText();
     }
     #region Buy Stuff
     public void BuyDoge()

@@ -14,6 +14,7 @@ public class IdleManager : MonoBehaviour
     public GameObject idleManager;
     public GameObject[] prefabs;
     GameData data;
+    
     //GameObject qManager, pManager, cManager;
     //QuestManager questManager;
     //PetManager petManager;
@@ -162,6 +163,7 @@ public class IdleManager : MonoBehaviour
 
         RefreshText();
         Debug.Log(currentOreHealth);
+        
     }
     void RefreshText()
     {
@@ -359,18 +361,11 @@ public class IdleManager : MonoBehaviour
         else powerUpToggle = false;*/
     }
     #endregion
-    public void GoToShop()
+    public void GoToMap()
     {
         CancelInvoke();
         SaveAllProgress();
-        SceneManager.LoadScene("Shop");
-        DontDestroyOnLoad(allManager);
-    }
-    public void GoToPetSelection()
-    {
-        CancelInvoke();
-        SaveAllProgress();
-        SceneManager.LoadScene("PetCostume");
+        SceneManager.LoadScene("Map");
         DontDestroyOnLoad(allManager);
     }
     public float Damage()
