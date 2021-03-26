@@ -10,11 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: de31ea5bb1462ca4c9983a24ae7eacd9, type: 3}
-  m_Name: Level 20
+  m_Name: Pickaxe
   m_EditorClassIdentifier: 
   toolName: Pickaxe
   oreRequirementName:
   - Stone
   - Coal
-  oreRequirementValue: f4010000fa000000
-  coinNeeded: 1000
+  - Bronze
+  - Iron
+  oreRequirementValue: e8030000e8030000e8030000e8030000
+  basePrice: 1000
+  latestPrice: 1000

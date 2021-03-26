@@ -36,13 +36,12 @@ public class ShopSystem : MonoBehaviour
     public GameObject mScreen, bScreen;
     public Text mbChangeText;
 
-    //advance weapon
-    public AdvanceWeapon[] allAdvanceScript;
+    //advance weapon    
     public AdvanceWeapon currentLevel;
-    public GameObject[] howMuchMaterials;
+    public GameObject materialLocation;
     public Sprite[] materialImagesSprite; //0 stone, 1 coal, 2 bronze, 3 iron
-    public GameObject[] materialOnScreen;
-    public GameObject[] materialRequirement;
+    public Image materialOnScreen;
+    public Text materialRequirement;
     public Text coinNeeded;
 
     //for click delay
@@ -345,7 +344,9 @@ public class ShopSystem : MonoBehaviour
                 else if ((gManager.map1OreCollection[0] - oreSell[0]) < 10) oreSell[0] = gManager.map1OreCollection[0];
                 else if (i < 5) oreSell[0] += 10;
                 else if ((gManager.map1OreCollection[0] - oreSell[0]) < 100) oreSell[0] = gManager.map1OreCollection[0];
-                else oreSell[0] += 100;
+                else if (i < 8) oreSell[0] += 100;
+                else if ((gManager.map1OreCollection[0] - oreSell[0]) < 1000) oreSell[0] = gManager.map1OreCollection[0];
+                else oreSell[0] += 1000;
                 yield return new WaitForSeconds(0.2f);            
             }
         }
@@ -368,7 +369,9 @@ public class ShopSystem : MonoBehaviour
                 else if (oreSell[0] < 10) oreSell[0] = 0;
                 else if (i < 5) oreSell[0] -= 10;
                 else if (oreSell[0] < 100) oreSell[0] = 0;
-                else oreSell[0] -= 100;
+                else if (i < 8) oreSell[0] -= 100;
+                else if (oreSell[0] < 1000) oreSell[0] = 0;
+                else oreSell[0] -= 1000;
                 yield return new WaitForSeconds(0.2f);            
             }
         }
@@ -391,7 +394,9 @@ public class ShopSystem : MonoBehaviour
                 else if ((gManager.map1OreCollection[1] - oreSell[1]) < 10) oreSell[1] = gManager.map1OreCollection[1];
                 else if (j < 5) oreSell[1] += 10;
                 else if ((gManager.map1OreCollection[1] - oreSell[1]) < 100) oreSell[1] = gManager.map1OreCollection[1];
-                else oreSell[1] += 100;
+                else if (i < 8) oreSell[1] += 100;
+                else if ((gManager.map1OreCollection[1] - oreSell[1]) < 1000) oreSell[1] = gManager.map1OreCollection[1];
+                else oreSell[1] += 1000;
                 yield return new WaitForSeconds(0.2f);            
             }
         }
@@ -414,7 +419,9 @@ public class ShopSystem : MonoBehaviour
                 else if (oreSell[1] < 10) oreSell[1] = 0;
                 else if (j < 5) oreSell[1] -= 10;
                 else if (oreSell[1] < 100) oreSell[1] = 0;
-                else oreSell[1] -= 100;
+                else if (i < 8) oreSell[1] -= 100;
+                else if (oreSell[1] < 1000) oreSell[1] = 0;
+                else oreSell[1] -= 1000;
                 yield return new WaitForSeconds(0.2f);            
             }
         }
@@ -437,7 +444,9 @@ public class ShopSystem : MonoBehaviour
                 else if ((gManager.map1OreCollection[2] - oreSell[2]) < 10) oreSell[2] = gManager.map1OreCollection[2];
                 else if (k < 5) oreSell[2] += 10;
                 else if ((gManager.map1OreCollection[2] - oreSell[2]) < 100) oreSell[2] = gManager.map1OreCollection[2];
-                else oreSell[2] += 100;
+                else if (i < 8) oreSell[2] += 100;
+                else if ((gManager.map1OreCollection[2] - oreSell[2]) < 1000) oreSell[2] = gManager.map1OreCollection[2];
+                else oreSell[2] += 1000;
                 yield return new WaitForSeconds(0.2f);            
             }
         }
@@ -460,7 +469,9 @@ public class ShopSystem : MonoBehaviour
                 else if (oreSell[2] < 10) oreSell[2] = 0;
                 else if (k < 5) oreSell[2] -= 10;
                 else if (oreSell[2] < 100) oreSell[2] = 0;
-                else oreSell[2] -= 100;
+                else if (i < 8) oreSell[2] -= 100;
+                else if (oreSell[2] < 1000) oreSell[2] = 0;
+                else oreSell[2] -= 1000;
                 yield return new WaitForSeconds(0.2f);            
             }
         }
@@ -483,7 +494,9 @@ public class ShopSystem : MonoBehaviour
                 else if ((gManager.map1OreCollection[3] - oreSell[3]) < 10) oreSell[3] = gManager.map1OreCollection[3];
                 else if (l < 5) oreSell[3] += 10;
                 else if ((gManager.map1OreCollection[3] - oreSell[3]) < 100) oreSell[3] = gManager.map1OreCollection[3];
-                else oreSell[3] += 100;
+                else if (i < 8) oreSell[3] += 100;
+                else if ((gManager.map1OreCollection[3] - oreSell[3]) < 1000) oreSell[3] = gManager.map1OreCollection[3];
+                else oreSell[3] += 1000;
                 yield return new WaitForSeconds(0.2f);            
             }
         }
@@ -506,7 +519,9 @@ public class ShopSystem : MonoBehaviour
                 else if (oreSell[3] < 10) oreSell[3] = 0;
                 else if (l < 5) oreSell[3] -= 10;
                 else if (oreSell[3] < 100) oreSell[3] = 0;
-                else oreSell[3] -= 100;
+                else if (i < 8) oreSell[3] -= 100;
+                else if (oreSell[3] < 1000) oreSell[3] = 0;
+                else oreSell[3] -= 1000;
                 yield return new WaitForSeconds(0.2f);            
             }
         }
@@ -544,73 +559,97 @@ public class ShopSystem : MonoBehaviour
     public void ConfirmAdvance()
     {
         bool enough = false;
-        int i = currentLevel.oreRequirementValue.Length;
-        for (int j = 0; j < i; j++)
+
+        if (gManager.eqLvl == 10 && gManager.map1OreCollection[0] >= currentLevel.oreRequirementValue[0] && gManager.coin >= currentLevel.latestPrice)
         {
-            if (gManager.map1OreCollection[j] > currentLevel.oreRequirementValue[j])
-            {
-                enough = true;
-            }
-            else
-            {
-                enough = false;
-                break;
-            }
+            enough = true;
         }
-        if (enough && gManager.coin >= currentLevel.coinNeeded)
+        else if (gManager.eqLvl == 20 && gManager.map1OreCollection[1] >= currentLevel.oreRequirementValue[1] && gManager.coin >= currentLevel.latestPrice)
         {
-            for (int j = 0; j < i; j++)
-            {
-                gManager.map1OreCollection[j] -= currentLevel.oreRequirementValue[j];
-            }
+            enough = true;
+        }
+        else if (gManager.eqLvl == 30 && gManager.map1OreCollection[2] >= currentLevel.oreRequirementValue[2] && gManager.coin >= currentLevel.latestPrice)
+        {
+            enough = true;
+        }
+        else if (gManager.eqLvl == 40 && gManager.map1OreCollection[3] >= currentLevel.oreRequirementValue[3] && gManager.coin >= currentLevel.latestPrice)
+        {
+            enough = true;
+        }
+        else if (gManager.coin >= currentLevel.latestPrice && gManager.eqLvl != 10 && gManager.eqLvl != 20 && gManager.eqLvl != 30 && gManager.eqLvl != 40)
+        {
+            enough = true;        
+        } 
+        else
+        {
+            enough = false;
+        }
+        if (enough)
+        {
             gManager.eqLvl++;
-            gManager.coin -= currentLevel.coinNeeded;
+            gManager.coin -= currentLevel.latestPrice;
         }
         else
         {
             Debug.Log("Not enough material(s)/coin!");
         }
+
+        if (enough && (gManager.eqLvl != 10 || gManager.eqLvl != 20 || gManager.eqLvl != 30))
+        {
+            if (gManager.eqLvl == 11 || gManager.eqLvl == 21 || gManager.eqLvl == 31)
+            {
+                materialLocation.SetActive(false);
+                currentLevel.latestPrice += (currentLevel.latestPrice * 50 / 100);
+                gManager.ChanceChecker();
+            }
+            else currentLevel.latestPrice += (currentLevel.basePrice * 50 / 100);
+            if (gManager.eqLvl == 41)
+            {
+                Debug.Log("Max lvl reached!");
+            }
+        }
+        
+        else if (enough)
+        {
+            currentLevel.latestPrice += (currentLevel.latestPrice * 50 / 100);
+        }
+
         AdvanceInfoRefresh();
     }
     void AdvanceInfoRefresh()
     {
-        currentLevel = allAdvanceScript[gManager.eqLvl - 1];
-        int i = currentLevel.oreRequirementValue.Length;
-
-        coinNeeded.text = gManager.coin + " / " + currentLevel.coinNeeded.ToString();
-        for (int j = 0; j < 4; j++)
+        coinNeeded.text = gManager.coin + " / " + currentLevel.latestPrice.ToString();
+        if (gManager.eqLvl == 10)
         {
-            if (j != (i - 1))
-            {
-                howMuchMaterials[j].SetActive(false);
-            }
-            else howMuchMaterials[j].SetActive(true);
+            materialLocation.SetActive(true);
+            materialOnScreen.sprite = materialImagesSprite[0];
+            materialRequirement.text = gManager.map1OreCollection[0].ToString() + " / " + currentLevel.oreRequirementValue[0].ToString();
         }
-
-        for (int j = 0; j < i; j++)
+        else if (gManager.eqLvl == 20)
         {
-            materialOnScreen[j] = GameObject.Find(i.ToString() + "_material" + (j + 1).ToString() + "Sprite");
-            materialRequirement[j] = GameObject.Find(i.ToString() + "_material" + (j + 1).ToString() + "Value");
-            if (currentLevel.oreRequirementName[j] == "Stone")
-            {
-                materialOnScreen[j].GetComponent<Image>().sprite = materialImagesSprite[0];
-                materialRequirement[j].GetComponent<Text>().text = gManager.map1OreCollection[0].ToString() + " / " + currentLevel.oreRequirementValue[j].ToString();
-            }
-            else if (currentLevel.oreRequirementName[j] == "Coal")
-            {
-                materialOnScreen[j].GetComponent<Image>().sprite = materialImagesSprite[1];
-                materialRequirement[j].GetComponent<Text>().text = gManager.map1OreCollection[1].ToString() + " / " + currentLevel.oreRequirementValue[j].ToString();
-            }
-            else if (currentLevel.oreRequirementName[j] == "Bronze")
-            {
-                materialOnScreen[j].GetComponent<Image>().sprite = materialImagesSprite[2];
-                materialRequirement[j].GetComponent<Text>().text = gManager.map1OreCollection[2].ToString() + " / " + currentLevel.oreRequirementValue[j].ToString();
-            }
-            else if (currentLevel.oreRequirementName[j] == "Iron")
-            {
-                materialOnScreen[j].GetComponent<Image>().sprite = materialImagesSprite[3];
-                materialRequirement[j].GetComponent<Text>().text = gManager.map1OreCollection[3].ToString() + " / " + currentLevel.oreRequirementValue[j].ToString();
-            }
+            materialLocation.SetActive(true);
+            materialOnScreen.sprite = materialImagesSprite[1];
+            materialRequirement.text = gManager.map1OreCollection[1].ToString() + " / " + currentLevel.oreRequirementValue[1].ToString();
+        }
+        else if (gManager.eqLvl == 30)
+        {
+            materialLocation.SetActive(true);
+            materialOnScreen.sprite = materialImagesSprite[2];
+            materialRequirement.text = gManager.map1OreCollection[2].ToString() + " / " + currentLevel.oreRequirementValue[2].ToString();
+        }
+        else if (gManager.eqLvl == 40)
+        {
+            materialLocation.SetActive(true);
+            materialOnScreen.sprite = materialImagesSprite[3];
+            materialRequirement.text = gManager.map1OreCollection[3].ToString() + " / " + currentLevel.oreRequirementValue[3].ToString();
+        }
+        else if (gManager.eqLvl == 41)
+        {
+            materialLocation.SetActive(false);
+            Text temp = GameObject.Find("materialText").GetComponent<Text>();
+            temp.text = "Max lvl reached!";
+            GameObject.Find("coinNeeded").SetActive(false);
+            GameObject.Find("advanceBtn").SetActive(false);
         }
     }
     void RefreshText()
