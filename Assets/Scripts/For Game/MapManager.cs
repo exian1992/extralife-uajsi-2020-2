@@ -20,7 +20,6 @@ public class MapManager : MonoBehaviour
     }
     public void GoToVillage()
     {
-        iManager.SaveAllProgress();
         SceneManager.LoadScene("Village");
         DontDestroyOnLoad(allManager);
     }

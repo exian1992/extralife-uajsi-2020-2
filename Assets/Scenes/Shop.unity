@@ -7196,7 +7196,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'This is the shop
 
-    Welkam kant'
+    Welcome back'
 --- !u!222 &1647167141
 CanvasRenderer:
   m_ObjectHideFlags: 0

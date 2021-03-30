@@ -20,13 +20,20 @@ public class Transition : MonoBehaviour
     {
         if (CrossPlatformInputManager.GetButtonDown("Merchant"))
         {
-           // LoadNextLevel();
-            SceneManager.LoadScene("Shop(UI)");
+            //LoadNextLevel();
+            //SceneManager.LoadScene("Shop(UI)");
+            SceneManager.LoadScene("Shop");
+            DontDestroyOnLoad(GameObject.Find("allManager"));
         }
 
         if (CrossPlatformInputManager.GetButtonDown("Village"))
         {
             SceneManager.LoadScene("Village");
+        }
+
+        if (CrossPlatformInputManager.GetButtonDown("Map"))
+        {
+            SceneManager.LoadScene("Map");
         }
     }
 

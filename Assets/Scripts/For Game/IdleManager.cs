@@ -433,4 +433,35 @@ public class IdleManager : MonoBehaviour
         //SaveSystem.SavePetManager(petManager);
         //SaveSystem.SaveCostumeManager(costumeManager);
     }
+    public void ChanceChecker()
+    {
+        if (eqLvl <= 10)
+        {
+            map1OreChance[0] = 20;
+            map1OreChance[1] = 0;
+            map1OreChance[2] = 0;
+            map1OreChance[3] = 0;
+        }
+        else if (eqLvl <= 20)
+        {
+            map1OreChance[0] = 20;
+            map1OreChance[1] = 5;
+            map1OreChance[2] = 0;
+            map1OreChance[3] = 0;
+        }
+        else if (eqLvl <= 30)
+        {
+            map1OreChance[0] = 20;
+            map1OreChance[1] = 6;
+            map1OreChance[2] = 2;
+            map1OreChance[3] = 0;
+        }
+        else if (eqLvl <= 40)
+        {
+            map1OreChance[0] = 20;
+            map1OreChance[1] = 7;
+            map1OreChance[2] = 3;
+            map1OreChance[3] = 1;
+        }
+    }
 }
