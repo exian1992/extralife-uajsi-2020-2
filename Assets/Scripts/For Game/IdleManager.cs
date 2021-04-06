@@ -14,6 +14,7 @@ public class IdleManager : MonoBehaviour
     public GameObject idleManager;
     public GameObject[] prefabs;
     GameData data;
+    
     //GameObject qManager, pManager, cManager;
     //QuestManager questManager;
     //PetManager petManager;
@@ -162,6 +163,7 @@ public class IdleManager : MonoBehaviour
 
         RefreshText();
         Debug.Log(currentOreHealth);
+        
     }
     void RefreshText()
     {
@@ -359,18 +361,11 @@ public class IdleManager : MonoBehaviour
         else powerUpToggle = false;*/
     }
     #endregion
-    public void GoToShop()
+    public void GoToMap()
     {
         CancelInvoke();
         SaveAllProgress();
-        SceneManager.LoadScene("Shop");
-        DontDestroyOnLoad(allManager);
-    }
-    public void GoToPetSelection()
-    {
-        CancelInvoke();
-        SaveAllProgress();
-        SceneManager.LoadScene("PetCostume");
+        SceneManager.LoadScene("Map");
         DontDestroyOnLoad(allManager);
     }
     public float Damage()
@@ -437,5 +432,36 @@ public class IdleManager : MonoBehaviour
         //SaveSystem.SaveQuestState(questManager);
         //SaveSystem.SavePetManager(petManager);
         //SaveSystem.SaveCostumeManager(costumeManager);
+    }
+    public void ChanceChecker()
+    {
+        if (eqLvl <= 10)
+        {
+            map1OreChance[0] = 20;
+            map1OreChance[1] = 0;
+            map1OreChance[2] = 0;
+            map1OreChance[3] = 0;
+        }
+        else if (eqLvl <= 20)
+        {
+            map1OreChance[0] = 20;
+            map1OreChance[1] = 5;
+            map1OreChance[2] = 0;
+            map1OreChance[3] = 0;
+        }
+        else if (eqLvl <= 30)
+        {
+            map1OreChance[0] = 20;
+            map1OreChance[1] = 6;
+            map1OreChance[2] = 2;
+            map1OreChance[3] = 0;
+        }
+        else if (eqLvl <= 40)
+        {
+            map1OreChance[0] = 20;
+            map1OreChance[1] = 7;
+            map1OreChance[2] = 3;
+            map1OreChance[3] = 1;
+        }
     }
 }

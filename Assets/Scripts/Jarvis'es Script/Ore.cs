@@ -11,7 +11,6 @@ public class Ore : MonoBehaviour
     //GameManager gManager;
     IdleManager iManager;
 
-    //MSH ADA MASALAH DISINI, MSLH DAMAGE YG GBS KE INPUT PAS PAKE VOID
     void Start()
     {
         //manager = GameObject.FindGameObjectWithTag("gManager");
