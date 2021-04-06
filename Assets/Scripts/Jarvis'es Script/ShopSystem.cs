@@ -150,7 +150,7 @@ public class ShopSystem : MonoBehaviour
     #region Sell Value
     public void ConfirmSell()
     {
-        if (oreSell[0] > 0) //stone
+        if (oreSell[0] > 0 && oreSell[0] <= iManager.map1OreCollection[0]) //stone
         {
             iManager.coin += oreSell[0] * 1;
             iManager.map1OreCollection[0] -= oreSell[0];
@@ -178,7 +178,7 @@ public class ShopSystem : MonoBehaviour
 
             oreSell[0] = 0;
         }
-        if (oreSell[1] > 0) //coal
+        if (oreSell[1] > 0 && oreSell[1] <= iManager.map1OreCollection[1]) //coal
         {
             iManager.coin += oreSell[1] * 5;
             iManager.map1OreCollection[1] -= oreSell[1];
@@ -206,7 +206,7 @@ public class ShopSystem : MonoBehaviour
 
             oreSell[1] = 0;
         }
-        if (oreSell[2] > 0) //bronze
+        if (oreSell[2] > 0 && oreSell[2] <= iManager.map1OreCollection[2]) //bronze
         {
             iManager.coin += oreSell[2] * 10;
             iManager.map1OreCollection[2] -= oreSell[2];
@@ -234,7 +234,7 @@ public class ShopSystem : MonoBehaviour
 
             oreSell[2] = 0;
         }
-        if (oreSell[3] > 0) //iron
+        if (oreSell[3] > 0 && oreSell[3] <= iManager.map1OreCollection[3]) //iron
         {
             iManager.coin += oreSell[3] * 25;
             iManager.map1OreCollection[3] -= oreSell[3];
@@ -262,6 +262,8 @@ public class ShopSystem : MonoBehaviour
 
             oreSell[3] = 0;
         }
+        Debug.Log("oresell = " + oreSell[0]);
+        RefreshText();
     }
         #region StoneInc
         public void StoneIncDown()
@@ -277,7 +279,8 @@ public class ShopSystem : MonoBehaviour
         {
             for (i = 0; i > -1; i++)
             {
-                if (i < 3) oreSell[0] += 1;
+                if (oreSell[0] >= iManager.map1OreCollection[0]) oreSell[0] = iManager.map1OreCollection[0];
+                else if (i < 3) oreSell[0] += 1;
                 else if ((iManager.map1OreCollection[0] - oreSell[0]) < 10) oreSell[0] = iManager.map1OreCollection[0];
                 else if (i < 5) oreSell[0] += 10;
                 else if ((iManager.map1OreCollection[0] - oreSell[0]) < 100) oreSell[0] = iManager.map1OreCollection[0];
@@ -302,7 +305,8 @@ public class ShopSystem : MonoBehaviour
         {
             for (i = 0; i > -1; i++)
             {
-                if (i < 3) oreSell[0] -= 1;
+                if (oreSell[0] <= 0) oreSell[0] = 0;
+                else if (i < 3) oreSell[0] -= 1;
                 else if (oreSell[0] < 10) oreSell[0] = 0;
                 else if (i < 5) oreSell[0] -= 10;
                 else if (oreSell[0] < 100) oreSell[0] = 0;
@@ -327,7 +331,8 @@ public class ShopSystem : MonoBehaviour
         {
             for (j = 0; j > -1; j++)
             {
-                if (j < 3) oreSell[1] += 1;
+                if (oreSell[1] >= iManager.map1OreCollection[1]) oreSell[1] = iManager.map1OreCollection[1];
+                else if (j < 3) oreSell[1] += 1;
                 else if ((iManager.map1OreCollection[1] - oreSell[1]) < 10) oreSell[1] = iManager.map1OreCollection[1];
                 else if (j < 5) oreSell[1] += 10;
                 else if ((iManager.map1OreCollection[1] - oreSell[1]) < 100) oreSell[1] = iManager.map1OreCollection[1];
@@ -352,7 +357,8 @@ public class ShopSystem : MonoBehaviour
         {
             for (j = 0; j > -1; j++)
             {
-                if (j < 3) oreSell[1] -= 1;
+                if (oreSell[1] <= 0) oreSell[1] = 0;
+                else if (j < 3) oreSell[1] -= 1;
                 else if (oreSell[1] < 10) oreSell[1] = 0;
                 else if (j < 5) oreSell[1] -= 10;
                 else if (oreSell[1] < 100) oreSell[1] = 0;
@@ -377,7 +383,8 @@ public class ShopSystem : MonoBehaviour
         {
             for (k = 0; k > -1; k++)
             {
-                if (k < 3) oreSell[2] += 1;
+                if (oreSell[2] >= iManager.map1OreCollection[2]) oreSell[2] = iManager.map1OreCollection[2];
+                else if (k < 3) oreSell[2] += 1;
                 else if ((iManager.map1OreCollection[2] - oreSell[2]) < 10) oreSell[2] = iManager.map1OreCollection[2];
                 else if (k < 5) oreSell[2] += 10;
                 else if ((iManager.map1OreCollection[2] - oreSell[2]) < 100) oreSell[2] = iManager.map1OreCollection[2];
@@ -402,7 +409,8 @@ public class ShopSystem : MonoBehaviour
         {
             for (k = 0; k > -1; k++)
             {
-                if (k < 3) oreSell[2] -= 1;
+                if (oreSell[2] <= 0) oreSell[2] = 0;
+                else if (k < 3) oreSell[2] -= 1;
                 else if (oreSell[2] < 10) oreSell[2] = 0;
                 else if (k < 5) oreSell[2] -= 10;
                 else if (oreSell[2] < 100) oreSell[2] = 0;
@@ -427,7 +435,8 @@ public class ShopSystem : MonoBehaviour
         {
             for (l = 0; l > -1; l++)
             {
-                if (l < 3) oreSell[3] += 1;
+                if (oreSell[3] >= iManager.map1OreCollection[3]) oreSell[3] = iManager.map1OreCollection[3];
+                else if (l < 3) oreSell[3] += 1;
                 else if ((iManager.map1OreCollection[3] - oreSell[3]) < 10) oreSell[3] = iManager.map1OreCollection[3];
                 else if (l < 5) oreSell[3] += 10;
                 else if ((iManager.map1OreCollection[3] - oreSell[3]) < 100) oreSell[3] = iManager.map1OreCollection[3];
@@ -452,7 +461,8 @@ public class ShopSystem : MonoBehaviour
         {
             for (l = 0; l > -1; l++)
             {
-                if (l < 3) oreSell[3] -= 1;
+                if (oreSell[3] <= 0) oreSell[3] = 0;
+                else if (l < 3) oreSell[3] -= 1;
                 else if (oreSell[3] < 10) oreSell[3] = 0;
                 else if (l < 5) oreSell[3] -= 10;
                 else if (oreSell[3] < 100) oreSell[3] = 0;
