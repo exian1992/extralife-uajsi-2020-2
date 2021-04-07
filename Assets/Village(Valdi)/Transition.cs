@@ -35,6 +35,10 @@ public class Transition : MonoBehaviour
         {
             SceneManager.LoadScene("Map");
         }
+        //if (CrossPlatformInputManager.GetButtonDown("BlackSmith"))
+        {
+           // SceneManager.LoadScene("BlackSmith");
+        }
     }
 
     public void LoadNextLevel()
