@@ -119,7 +119,6 @@ public class ShopSystem : MonoBehaviour
     public void Back()
     {
         iManager.SaveAllProgress();
-        Destroy(GameObject.Find("AllManager"));
         //SceneManager.LoadScene("MainGameplay");
         SceneManager.LoadScene("Village");
     }

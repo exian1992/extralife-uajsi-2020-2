@@ -64,6 +64,8 @@ public class IdleManager : MonoBehaviour
         //costumeManager = cManager.GetComponent<CostumeManager>();
 
         //string saveData = "D:/SaveFile/data.uwansummoney";
+        DontDestroyOnLoad(allManager);
+
         string saveData = Application.persistentDataPath + "/data.uwansummoney";
         if (!File.Exists(saveData))
         {
@@ -366,7 +368,6 @@ public class IdleManager : MonoBehaviour
         CancelInvoke();
         SaveAllProgress();
         SceneManager.LoadScene("Map");
-        DontDestroyOnLoad(allManager);
     }
     public float Damage()
     {
