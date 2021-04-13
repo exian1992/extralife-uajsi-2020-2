@@ -257,6 +257,9 @@
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.18f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.WebGL.Extensions">
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.18f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor.Android.Extensions">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.18f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll</HintPath>
     </Reference>
@@ -264,16 +267,52 @@
       <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/16.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Editor">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/PackageCache/com.unity.analytics@3.3.5/Unity.Analytics.Editor.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/PackageCache/com.unity.analytics@3.3.5/Unity.Analytics.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/PackageCache/com.unity.analytics@3.3.5/Unity.Analytics.Tracker.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/PackageCache/com.unity.analytics@3.3.5/Unity.Analytics.Tracker.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/PackageCache/com.unity.analytics@3.3.5/AnalyticsStandardEvents/Unity.Analytics.StandardEvents.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/PackageCache/com.unity.analytics@3.3.5/AnalyticsStandardEvents/Unity.Analytics.StandardEvents.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.App">
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/PackageCache/com.google.firebase.app@7.1.0/Firebase/Plugins/Firebase.App.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.IOSResolver_v1.2.164">
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/PackageCache/com.google.external-dependency-manager@1.2.164/ExternalDependencyManager/Editor/Google.IOSResolver_v1.2.164.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.Platform">
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/PackageCache/com.google.firebase.app@7.1.0/Firebase/Plugins/Firebase.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.JarResolver_v1.2.164">
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/PackageCache/com.google.external-dependency-manager@1.2.164/ExternalDependencyManager/Editor/Google.JarResolver_v1.2.164.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.VersionHandlerImpl_v1.2.164">
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/PackageCache/com.google.external-dependency-manager@1.2.164/ExternalDependencyManager/Editor/Google.VersionHandlerImpl_v1.2.164.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Tasks">
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/PackageCache/com.google.firebase.app@7.1.0/Parse/Plugins/dotNet45/Unity.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.MiniJson">
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/PackageCache/com.google.firebase.app@7.1.0/Firebase/Plugins/Google.MiniJson.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.PackageManagerResolver_v1.2.164">
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/PackageCache/com.google.external-dependency-manager@1.2.164/ExternalDependencyManager/Editor/Google.PackageManagerResolver_v1.2.164.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.VersionHandler">
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/PackageCache/com.google.external-dependency-manager@1.2.164/ExternalDependencyManager/Editor/Google.VersionHandler.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.Editor">
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/PackageCache/com.google.firebase.app@7.1.0/Firebase/Editor/Firebase.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Compat">
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/PackageCache/com.google.firebase.app@7.1.0/Parse/Plugins/dotNet45/Unity.Compat.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.TaskExtension">
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/PackageCache/com.google.firebase.app@7.1.0/Firebase/Plugins/Firebase.TaskExtension.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/PackageCache/com.unity.ext.nunit@1.0.6/net35/unity-custom/nunit.framework.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/PackageCache/com.unity.ext.nunit@1.0.6/net35/unity-custom/nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.18f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>
@@ -630,82 +669,82 @@
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.18f1/Editor/Data/MonoBleedingEdge/lib/mono/unityscript/Boo.Lang.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.TestRunner">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.TestRunner">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEngine.TestRunner.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEngine.TestRunner.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline.Editor">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Monetization">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEngine.Monetization.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEngine.Monetization.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.multiplayer-hlapi.Editor">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Editor.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Advertisements">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEngine.Advertisements.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEngine.Advertisements.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Purchasing">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEngine.Purchasing.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEngine.Purchasing.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.Purchasing">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEditor.Purchasing.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEditor.Purchasing.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.multiplayer-weaver.Editor">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/com.unity.multiplayer-weaver.Editor.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/com.unity.multiplayer-weaver.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.XR.LegacyInputHelpers">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Sprite.Editor">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Tilemap.Editor">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.SpatialTracking">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.SpatialTracking">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Advertisements.Editor">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEngine.Advertisements.Editor.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEngine.Advertisements.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.DataPrivacy">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.XR.LegacyInputHelpers">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.multiplayer-hlapi.Runtime">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
