@@ -11,6 +11,7 @@ using System.IO;
 public class IdleManager : MonoBehaviour
 {
     public GameObject allManager;
+    public GameObject[] managerChecker;
     public GameObject idleManager;
     public GameObject[] prefabs;
     GameData data;
@@ -25,10 +26,8 @@ public class IdleManager : MonoBehaviour
     float currentOreHealth;
 
     //ore info
-    public Text stoneOreValueText;
-
     public int[] map1OreCollection;
-    public Text[] map1OreValueText;
+    public Text[] mapOreValueText;
 
     //orechance
     public int[] map1OreChance = new int[4];
@@ -56,6 +55,16 @@ public class IdleManager : MonoBehaviour
 
     void Start()
     {
+        managerChecker = GameObject.FindGameObjectsWithTag("gManager");
+        if (managerChecker.Length == 2)
+        {
+            Destroy(managerChecker[0]);
+            DontDestroyOnLoad(managerChecker[1]);
+        }
+        else
+        {
+            DontDestroyOnLoad(managerChecker[0]);
+        }
         //qManager = GameObject.Find("QuestManager");
         //questManager = qManager.GetComponent<QuestManager>();
         //pManager = GameObject.Find("PetManager");
@@ -63,8 +72,7 @@ public class IdleManager : MonoBehaviour
         //cManager = GameObject.Find("CostumeManager");
         //costumeManager = cManager.GetComponent<CostumeManager>();
 
-        //string saveData = "D:/SaveFile/data.uwansummoney";
-        DontDestroyOnLoad(allManager);
+        //string saveData = "D:/SaveFile/data.uwansummoney";       
 
         string saveData = Application.persistentDataPath + "/data.uwansummoney";
         if (!File.Exists(saveData))
@@ -103,11 +111,13 @@ public class IdleManager : MonoBehaviour
         {
             TileGenerator();
         }
+        ChanceChecker();
     }
     // Update is called once per frame
     void Update()
     {
-        if (SceneManager.GetActiveScene().name == "Idle")
+        if (SceneManager.GetActiveScene().name == "Waterfall" ||
+            SceneManager.GetActiveScene().name == "Cave")
         {
             //ore remover + generator
             currentBlock = GameObject.FindGameObjectWithTag("ore");
@@ -157,28 +167,32 @@ public class IdleManager : MonoBehaviour
     }
     public void AttackOre()
     {
-        currentBlock = GameObject.FindGameObjectWithTag("ore");
-        Ore ore = currentBlock.GetComponent<Ore>();
+        if (SceneManager.GetActiveScene().name == "Waterfall" ||
+            SceneManager.GetActiveScene().name == "Cave")
+        {
+            currentBlock = GameObject.FindGameObjectWithTag("ore");
+            Ore ore = currentBlock.GetComponent<Ore>();
 
-        ore.OreDamage();
-        currentOreHealth = ore.GetOreHealth();
+            ore.OreDamage();
+            currentOreHealth = ore.GetOreHealth();
 
-        RefreshText();
-        Debug.Log(currentOreHealth);
-        
+            RefreshText();
+            Debug.Log(currentOreHealth);
+        }
     }
     void RefreshText()
     {
-        if (SceneManager.GetActiveScene().name == "Idle")
+        if (SceneManager.GetActiveScene().name == "Waterfall")
         {
-            //map1OreValueText[0].text = map1OreCollection[0].ToString();
-            stoneOreValueText.text = map1OreCollection[0].ToString();
-            //map1OreValueText[1].text = map1OreCollection[1].ToString();
-            //map1OreValueText[2].text = map1OreCollection[2].ToString();
-            //map1OreValueText[3].text = map1OreCollection[3].ToString();
-
-            coinValue.text = coin.ToString();
+            mapOreValueText[0].text = map1OreCollection[0].ToString();
         }
+        else if (SceneManager.GetActiveScene().name == "Cave")
+        {
+            mapOreValueText[0].text = map1OreCollection[1].ToString();
+            mapOreValueText[1].text = map1OreCollection[2].ToString();
+            mapOreValueText[2].text = map1OreCollection[3].ToString();
+        }
+        coinValue.text = coin.ToString();
     }
     #region Tile Stuff
     void TileGenerator()
@@ -187,21 +201,26 @@ public class IdleManager : MonoBehaviour
         int randomOre = Random.Range(0, 20);
 
         //stone 10, coal 5, bronze 4, iron 1
-        if (randomOre < map1OreChance[3])//ironChance)
+        if(SceneManager.GetActiveScene().name == "Waterfall")
+            if (randomOre < map1OreChance[0])//stoneChance)
+            {
+                Instantiate(prefabs[0], new Vector3(0f, 0f, 0f), Quaternion.Euler(0, 0, 90));
+            }
+
+        if (SceneManager.GetActiveScene().name == "Cave")
         {
-            Instantiate(prefabs[3], new Vector3(0f, 0f, 0f), Quaternion.Euler(0, 0, 90));
-        }
-        else if (randomOre < map1OreChance[2])//bronzeChance)
-        {
-            Instantiate(prefabs[2], new Vector3(0f, 0f, 0f), Quaternion.Euler(0, 0, 90));
-        }
-        else if (randomOre < map1OreChance[1])//coalChance)
-        {
-            Instantiate(prefabs[1], new Vector3(0f, 0f, 0f), Quaternion.Euler(0, 0, 90));
-        }
-        else if (randomOre < map1OreChance[0])//stoneChance)
-        {
-            Instantiate(prefabs[0], new Vector3(0f, 0f, 0f), Quaternion.Euler(0, 0, 90));
+            if (randomOre < map1OreChance[3])//ironChance)
+            {
+                Instantiate(prefabs[2], new Vector3(0f, 0f, 0f), Quaternion.Euler(0, 0, 90));
+            }
+            else if (randomOre < map1OreChance[2])//copperChance)
+            {
+                Instantiate(prefabs[1], new Vector3(0f, 0f, 0f), Quaternion.Euler(0, 0, 90));
+            }
+            else if (randomOre < map1OreChance[1])//coalChance)
+            {
+                Instantiate(prefabs[0], new Vector3(0f, 0f, 0f), Quaternion.Euler(0, 0, 90));
+            }
         }
     }
     void TileCheck()
@@ -259,26 +278,26 @@ public class IdleManager : MonoBehaviour
             questManager.QuestCompleteCheck();*/
             #endregion
         }
-        if (ore.GetName() == "Bronze")
+        if (ore.GetName() == "Copper")
         {
             map1OreCollection[2]++;
-            #region Bronze mining quest
+            #region Copper mining quest
             /*if (questManager.isThereQuest)
             {
-                if (questManager.currentActiveQuest.questType == QuestType.MineBronze)
+                if (questManager.currentActiveQuest.questType == QuestType.MineCopper)
                 {
                     questManager.currentActiveQuest.Increase(1);
                 }
             }
-            if (questManager.activeEQuest.questType == QuestType.MineBronze)
+            if (questManager.activeEQuest.questType == QuestType.MineCopper)
             {
                 questManager.activeEQuest.Increase(1);
             }
-            if (questManager.activeIQuest.questType == QuestType.MineBronze)
+            if (questManager.activeIQuest.questType == QuestType.MineCopper)
             {
                 questManager.activeIQuest.Increase(1);
             }
-            if (questManager.activeHQuest.questType == QuestType.MineBronze)
+            if (questManager.activeHQuest.questType == QuestType.MineCopper)
             {
                 questManager.activeHQuest.Increase(1);
             }
@@ -325,7 +344,7 @@ public class IdleManager : MonoBehaviour
             {
                 map1OreCollection[3]++;
             }
-            else if (randomGain < map1OreChance[2])//bronzeChance)//2
+            else if (randomGain < map1OreChance[2])//copperChance)//2
             {
                 map1OreCollection[2]++;
             }
@@ -391,7 +410,7 @@ public class IdleManager : MonoBehaviour
         data = SaveSystem.LoadData();
         map1OreCollection[0] = data.stone;
         map1OreCollection[1] = data.coal;
-        map1OreCollection[2] = data.bronze;
+        map1OreCollection[2] = data.copper;
         map1OreCollection[3] = data.iron;
 
         eqLvl = data.eqLvl;
@@ -439,30 +458,30 @@ public class IdleManager : MonoBehaviour
         if (eqLvl <= 10)
         {
             map1OreChance[0] = 20;
-            map1OreChance[1] = 0;
+            map1OreChance[1] = 20;
             map1OreChance[2] = 0;
             map1OreChance[3] = 0;
         }
         else if (eqLvl <= 20)
         {
             map1OreChance[0] = 20;
-            map1OreChance[1] = 5;
-            map1OreChance[2] = 0;
+            map1OreChance[1] = 20;
+            map1OreChance[2] = 1;
             map1OreChance[3] = 0;
         }
         else if (eqLvl <= 30)
         {
             map1OreChance[0] = 20;
-            map1OreChance[1] = 6;
-            map1OreChance[2] = 2;
+            map1OreChance[1] = 20;
+            map1OreChance[2] = 9;
             map1OreChance[3] = 0;
         }
         else if (eqLvl <= 40)
         {
             map1OreChance[0] = 20;
-            map1OreChance[1] = 7;
-            map1OreChance[2] = 3;
-            map1OreChance[3] = 1;
+            map1OreChance[1] = 20;
+            map1OreChance[2] = 8;
+            map1OreChance[3] = 2;
         }
     }
 }

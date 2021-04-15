@@ -456,7 +456,7 @@ public class GameManager : MonoBehaviour
         data = SaveSystem.LoadData();
         map1OreCollection[0] = data.stone;
         map1OreCollection[1] = data.coal;
-        map1OreCollection[2] = data.bronze;
+        map1OreCollection[2] = data.copper;
         map1OreCollection[3] = data.iron;
 
         eqLvl = data.eqLvl;

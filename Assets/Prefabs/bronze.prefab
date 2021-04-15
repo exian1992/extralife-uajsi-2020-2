@@ -43,5 +43,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a67299e84202ef499c5f9ef3fe9a459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  oreName: Bronze
+  oreName: Copper
   oreHeatlh: 7

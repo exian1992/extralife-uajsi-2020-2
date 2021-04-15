@@ -5,22 +5,43 @@ using UnityEngine.SceneManagement;
 
 public class MapManager : MonoBehaviour
 {
-    GameObject allManager;
-    IdleManager iManager;
-
+    public string toWhatShop;
+    public GameObject[] managerChecker;
     private void Start()
     {
-        allManager = GameObject.Find("AllManager");
-        iManager = GameObject.Find("IdleManager").GetComponent<IdleManager>();
+        managerChecker = GameObject.FindGameObjectsWithTag("mManager");
+        if (managerChecker.Length == 2)
+        {
+            Destroy(managerChecker[0]);
+            DontDestroyOnLoad(managerChecker[1]);
+        }
+        else
+        {
+            DontDestroyOnLoad(managerChecker[0]);
+        }
     }
-    public void Map1()
+    public void Waterfall()
     {
-        SceneManager.LoadScene("Idle");
-        Destroy(allManager);
+        SceneManager.LoadScene("Waterfall");
+        Destroy(managerChecker[0]);
     }
-    public void GoToVillage()
+    public void Cave()
+    {
+        SceneManager.LoadScene("Cave");
+        Destroy(managerChecker[0]);
+    }
+    public void Village()
     {
         SceneManager.LoadScene("Village");
-        DontDestroyOnLoad(allManager);
+    }
+    public void Merchant()
+    {
+        SceneManager.LoadScene("Shop");
+        toWhatShop = "merchant";
+    }
+    public void Blacksmith()
+    {
+        SceneManager.LoadScene("Shop");
+        toWhatShop = "blacksmith";
     }
 }
