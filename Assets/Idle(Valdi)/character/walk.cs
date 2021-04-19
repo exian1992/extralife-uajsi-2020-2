@@ -16,7 +16,7 @@ public class walk : MonoBehaviour
         anim.SetBool("isWalk", true);
         transform.Translate(2 * Time.deltaTime * speed, 0, 0);
 
-        if ( CrossPlatformInputManager.GetButtonDown("Down"))
+        if (Input.GetMouseButtonDown(0))//CrossPlatformInputManager.GetButtonDown("Down"))
         {
             anim.SetBool("Down", true);
         }

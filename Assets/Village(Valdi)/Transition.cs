@@ -17,19 +17,7 @@ public class Transition : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*if (CrossPlatformInputManager.GetButtonDown("Merchant"))
-        {
-            SceneManager.LoadScene("Shop");
-        }*/
-        if (CrossPlatformInputManager.GetButtonDown("Map"))
-        {
-            SceneManager.LoadScene("Map");
-            iManager.SaveAllProgress();
-        }
-        if (iManager == null)
-        {
-            iManager = GameObject.Find("IdleManager").GetComponent<IdleManager>();
-        }
+
     }
 
     IEnumerator LoadLevel(int levelIndex)
@@ -39,6 +27,5 @@ public class Transition : MonoBehaviour
         yield return new WaitForSeconds(time);
 
         SceneManager.LoadScene(levelIndex);
-
     }
 }
