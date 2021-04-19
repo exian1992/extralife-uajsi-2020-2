@@ -17,7 +17,7 @@ public class Mining : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (CrossPlatformInputManager.GetButtonDown("Mine"))
+        if (Input.GetMouseButtonDown(0))//CrossPlatformInputManager.GetButtonDown("Mine"))
         {
             anim.SetBool("Mine", true);
         }

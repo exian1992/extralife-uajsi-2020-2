@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Idle.unity
+    path: Assets/Scenes/Waterfall.unity
     guid: 8b83f1688e8a5a44f9ce73e911a85d99
   - enabled: 1
     path: Assets/Scenes/Map.unity
@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BlackSmith.unity
     guid: decfd33df360fc84e90a6007c86e0a65
+  - enabled: 1
+    path: Assets/Scenes/Cave.unity
+    guid: 4b90226a2fd472042b34253de4e7ff63
   m_configObjects: {}

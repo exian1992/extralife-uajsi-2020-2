@@ -11,6 +11,8 @@ TagManager:
   - 2_material
   - 3_material
   - 4_material
+  - stopPoint
+  - mManager
   layers:
   - Default
   - TransparentFX

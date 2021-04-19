@@ -6,7 +6,7 @@ using UnityEngine;
 public class GameData
 {
     //GameManager or IdleManager
-    public int eqLvl = 1, stone = 0, coal = 0, bronze = 0, iron = 0, coin = 0;
+    public int eqLvl = 1, stone = 0, coal = 0, copper = 0, iron = 0, coin = 0;
     public float attSpd = 1f;
     public int[] map1OreChance = new int[4];
 
@@ -31,7 +31,7 @@ public class GameData
 
         stone = gManager.map1OreCollection[0];
         coal = gManager.map1OreCollection[1];
-        bronze = gManager.map1OreCollection[2];
+        copper = gManager.map1OreCollection[2];
         iron = gManager.map1OreCollection[3];
 
         map1OreChance[0] = gManager.map1OreChance[0];
@@ -48,7 +48,7 @@ public class GameData
 
         stone = iManager.map1OreCollection[0];
         coal = iManager.map1OreCollection[1];
-        bronze = iManager.map1OreCollection[2];
+        copper = iManager.map1OreCollection[2];
         iron = iManager.map1OreCollection[3];
 
         map1OreChance[0] = iManager.map1OreChance[0];

@@ -6,11 +6,12 @@ using UnityEngine.UI;
 
 public class ShopSystem : MonoBehaviour
 {
-    //GameManager iManager;
+    //GameManager gManager;
     IdleManager iManager;
     QuestManager questManager;
     PetManager petManager;
     CostumeManager costumeManager;
+    public MapManager mapManager;
 
     //item collection
     public Text[] oreCollection;
@@ -51,9 +52,10 @@ public class ShopSystem : MonoBehaviour
         #region GameObject Initiation
         //gManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         iManager = GameObject.Find("IdleManager").GetComponent<IdleManager>();
-        questManager = GameObject.Find("QuestManager").GetComponent<QuestManager>();
-        petManager = GameObject.Find("PetManager").GetComponent<PetManager>();
-        costumeManager = GameObject.Find("CostumeManager").GetComponent<CostumeManager>();
+        //questManager = GameObject.Find("QuestManager").GetComponent<QuestManager>();
+        //petManager = GameObject.Find("PetManager").GetComponent<PetManager>();
+        //costumeManager = GameObject.Find("CostumeManager").GetComponent<CostumeManager>();
+        mapManager = GameObject.Find("MapManager").GetComponent<MapManager>();
 
         buyDogeBtn = buyDoge.GetComponent<Button>();
         buyTickBtn = buyTick.GetComponent<Button>();
@@ -61,7 +63,21 @@ public class ShopSystem : MonoBehaviour
         buyLynnBtn = buyLynn.GetComponent<Button>();
         buyBrookBtn = buyBrook.GetComponent<Button>();
         #endregion
-        
+
+        if (mapManager.toWhatShop == "merchant")
+        {
+            Debug.Log("this works");
+            mScreen.SetActive(true);
+            bScreen.SetActive(false);
+        }
+        else if (mapManager.toWhatShop == "blacksmith")
+        {
+            bScreen.SetActive(true);
+            mScreen.SetActive(false);
+
+            AdvanceInfoRefresh();
+        }
+
         RefreshText();
     }
     private void Update()
@@ -483,23 +499,6 @@ public class ShopSystem : MonoBehaviour
     {
         petScreen.SetActive(false);
         costumeScreen.SetActive(true);
-    }
-    public void BlacksmithMerchantSwitch()
-    {
-        if (mScreen.activeSelf)
-        {
-            mbChangeText.text = "Merchant";
-            bScreen.SetActive(true);
-            mScreen.SetActive(false);
-
-            AdvanceInfoRefresh();
-        }
-        else
-        {
-            mbChangeText.text = "Blacksmith";
-            bScreen.SetActive(false);
-            mScreen.SetActive(true);
-        }
     }
     #endregion
     public void ConfirmAdvance()
