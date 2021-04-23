@@ -8,6 +8,7 @@ public class Mining : MonoBehaviour
 {
 
     public Animator anim;
+    public GameObject menu;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,9 +18,14 @@ public class Mining : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))//CrossPlatformInputManager.GetButtonDown("Mine"))
+        if (Input.GetMouseButtonDown(0) && !(menu.activeSelf))//CrossPlatformInputManager.GetButtonDown("Down"))
         {
+            anim.SetBool("Mine", false);
             anim.SetBool("Mine", true);
+        }
+        else if (Input.GetMouseButtonDown(0) && menu.activeSelf)
+        {
+            anim.SetBool("Mine", false);
         }
         else
         {

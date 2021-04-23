@@ -32,6 +32,33 @@ public class MapManager : MonoBehaviour
     {
         coin = GameObject.Find("CoinText").GetComponent<Text>();
         coin.text = iManager.coin.ToString();
+
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                if (SceneManager.GetActiveScene().name == "Waterfall" ||
+                    SceneManager.GetActiveScene().name == "Cave" ||
+                    SceneManager.GetActiveScene().name == "DeepCave")
+                {
+                    //"are u sure?" thing
+                    Application.Quit();
+                }
+                else if (SceneManager.GetActiveScene().name == "Village")
+                {
+                    SceneManager.LoadScene("Map");
+                }
+                else if (SceneManager.GetActiveScene().name == "Shop")
+                {
+                    iManager.SaveAllProgress();
+                    SceneManager.LoadScene("Village");
+                }
+                else if (SceneManager.GetActiveScene().name == "Map")
+                {
+                    SceneManager.LoadScene(iManager.lastMap);
+                }
+            }
+        }
     }
     public void MoveScene(string sceneName)
     {
@@ -54,6 +81,13 @@ public class MapManager : MonoBehaviour
             {
                 SceneManager.LoadScene(sceneName);
             }
+        }
+        else if (SceneManager.GetActiveScene().name == "Waterfall" ||
+                 SceneManager.GetActiveScene().name == "Cave" ||
+                 SceneManager.GetActiveScene().name == "DeepCave")
+        {
+            iManager.lastMap = SceneManager.GetActiveScene().name;
+            SceneManager.LoadScene(sceneName);
         }
         else SceneManager.LoadScene(sceneName);
     }

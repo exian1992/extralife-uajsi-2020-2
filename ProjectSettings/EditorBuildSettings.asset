@@ -6,11 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Waterfall.unity
+    path: Assets/Scenes/Maps/Waterfall.unity
     guid: 8b83f1688e8a5a44f9ce73e911a85d99
-  - enabled: 1
-    path: Assets/Scenes/Map.unity
-    guid: b564aa2a5805e834dbaa0a2419fe7e56
   - enabled: 1
     path: Assets/Scenes/Village.unity
     guid: ce3945aa295c0af48b2256579e9f8773
@@ -27,6 +24,9 @@ EditorBuildSettings:
     path: Assets/Scenes/BlackSmith.unity
     guid: decfd33df360fc84e90a6007c86e0a65
   - enabled: 1
-    path: Assets/Scenes/Cave.unity
+    path: Assets/Scenes/Maps/Cave.unity
     guid: 4b90226a2fd472042b34253de4e7ff63
+  - enabled: 1
+    path: Assets/Scenes/Maps/DeepCave.unity
+    guid: 0e830d3f628ee3345a629874d8ee436e
   m_configObjects: {}
