@@ -460,12 +460,6 @@ public class GameManager : MonoBehaviour
         map1OreCollection[3] = data.iron;
 
         eqLvl = data.eqLvl;
-        defaultMiningPower = data.attSpd;
-
-        map1OreChance[0] = data.map12OreChance[0];
-        map1OreChance[1] = data.map12OreChance[1];
-        map1OreChance[2] = data.map12OreChance[2];
-        map1OreChance[3] = data.map12OreChance[3];
 
         coin = data.coin;
     }

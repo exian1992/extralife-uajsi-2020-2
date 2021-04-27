@@ -13,9 +13,6 @@ public class Ore : MonoBehaviour
 
     void Start()
     {
-        //manager = GameObject.FindGameObjectWithTag("gManager");
-        //gManager = manager.GetComponent<GameManager>();
-
         manager = GameObject.Find("IdleManager");
         iManager = manager.GetComponent<IdleManager>();
     }
@@ -31,6 +28,5 @@ public class Ore : MonoBehaviour
     public void OreDamage()
     {
         oreHeatlh -= iManager.Damage();
-        //oreHeatlh -= gManager.Damage();
     }
 }
