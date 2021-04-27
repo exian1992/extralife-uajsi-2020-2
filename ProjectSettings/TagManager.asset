@@ -13,6 +13,7 @@ TagManager:
   - 4_material
   - stopPoint
   - mManager
+  - audio
   layers:
   - Default
   - TransparentFX

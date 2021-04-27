@@ -2,30 +2,47 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class MapManager : MonoBehaviour
 {
     public IdleManager iManager;
     public string toWhatShop;
-    public GameObject[] managerChecker;
+    public GameObject[] managerChecker, audioChecker;
     public Text coin;
+    public GameObject settings;
+    
     private void Start()
     {
         iManager = GameObject.Find("IdleManager").GetComponent<IdleManager>();
 
-        if (!(SceneManager.GetActiveScene().name == "Shop"))
+        //map manager gameobject check
+        managerChecker = GameObject.FindGameObjectsWithTag("mManager"); //mManager = mapManager
+        if (managerChecker.Length == 2)
         {
-            managerChecker = GameObject.FindGameObjectsWithTag("mManager"); //mManager = mapManager
-            if (managerChecker.Length == 2)
+            if (managerChecker[0].GetComponent<MapManager>().toWhatShop != null)
             {
-                Destroy(managerChecker[0]);
-                DontDestroyOnLoad(managerChecker[1]);
+                managerChecker[1].GetComponent<MapManager>().toWhatShop = managerChecker[0].GetComponent<MapManager>().toWhatShop;
             }
-            else
-            {
-                DontDestroyOnLoad(managerChecker[0]);
-            }
+            Destroy(managerChecker[0]);
+            DontDestroyOnLoad(managerChecker[1]);
+        }
+        else
+        {
+            DontDestroyOnLoad(managerChecker[0]);
+        }
+
+        //audio gameobject check
+        audioChecker = GameObject.FindGameObjectsWithTag("audio");
+        if (audioChecker.Length == 2)
+        {
+            Destroy(audioChecker[1]);
+            DontDestroyOnLoad(audioChecker[0]);
+        }
+        else
+        {
+            DontDestroyOnLoad(audioChecker[0]);
         }
     }
     private void Update()
@@ -33,20 +50,20 @@ public class MapManager : MonoBehaviour
         coin = GameObject.Find("CoinText").GetComponent<Text>();
         coin.text = iManager.coin.ToString();
 
-        if (Application.platform == RuntimePlatform.Android)
-        {
+        //if (Application.platform == RuntimePlatform.Android)
+        //{
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 if (SceneManager.GetActiveScene().name == "Waterfall" ||
                     SceneManager.GetActiveScene().name == "Cave" ||
                     SceneManager.GetActiveScene().name == "DeepCave")
-                {
-                    //"are u sure?" thing
-                    Application.Quit();
+                {                    
+                    SceneManager.LoadScene("Map");
                 }
                 else if (SceneManager.GetActiveScene().name == "Village")
                 {
-                    SceneManager.LoadScene("Map");
+                    //"are u sure?" thing
+                    Application.Quit();
                 }
                 else if (SceneManager.GetActiveScene().name == "Shop")
                 {
@@ -55,9 +72,21 @@ public class MapManager : MonoBehaviour
                 }
                 else if (SceneManager.GetActiveScene().name == "Map")
                 {
-                    SceneManager.LoadScene(iManager.lastMap);
+                    SceneManager.LoadScene("Village");
                 }
             }
+        //}
+
+        //setting menu close when clicked outside setting area
+        if (Input.GetMouseButtonUp(0) && 
+            (EventSystem.current.currentSelectedGameObject == null || 
+            !(EventSystem.current.currentSelectedGameObject.name == "audio" || 
+            EventSystem.current.currentSelectedGameObject.name == "googlePlay" || 
+            EventSystem.current.currentSelectedGameObject.name == "credits" ||
+            EventSystem.current.currentSelectedGameObject.name == "settingArea" ||
+            EventSystem.current.currentSelectedGameObject.name == "Setting")))
+        {
+            settings.SetActive(false);
         }
     }
     public void MoveScene(string sceneName)
@@ -82,13 +111,17 @@ public class MapManager : MonoBehaviour
                 SceneManager.LoadScene(sceneName);
             }
         }
-        else if (SceneManager.GetActiveScene().name == "Waterfall" ||
-                 SceneManager.GetActiveScene().name == "Cave" ||
-                 SceneManager.GetActiveScene().name == "DeepCave")
-        {
-            iManager.lastMap = SceneManager.GetActiveScene().name;
-            SceneManager.LoadScene(sceneName);
-        }
         else SceneManager.LoadScene(sceneName);
+    }
+    public void Settings()
+    {
+        if (settings.activeSelf)
+        {
+            settings.SetActive(false);
+        }
+        else
+        {
+            settings.SetActive(true);
+        }
     }
 }
