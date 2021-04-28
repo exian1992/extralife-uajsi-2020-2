@@ -9,13 +9,15 @@ public class MapManager : MonoBehaviour
 {
     public IdleManager iManager;
     public string toWhatShop;
-    public GameObject[] managerChecker, audioChecker;
+    public GameObject[] managerChecker, musicChecker;
     public Text coin;
     public GameObject settings;
-    public AudioSource audio;
+    public AudioSource music;
     
     private void Start()
     {
+        Application.targetFrameRate = 30;
+
         iManager = GameObject.Find("IdleManager").GetComponent<IdleManager>();
 
         //map manager gameobject check
@@ -34,19 +36,19 @@ public class MapManager : MonoBehaviour
             DontDestroyOnLoad(managerChecker[0]);
         }
 
-        //audio gameobject check
-        audioChecker = GameObject.FindGameObjectsWithTag("audio");
-        if (audioChecker.Length == 2)
+        //music gameobject check
+        musicChecker = GameObject.FindGameObjectsWithTag("audio");
+        if (musicChecker.Length == 2)
         {
-            Destroy(audioChecker[1]);
-            DontDestroyOnLoad(audioChecker[0]);
+            Destroy(musicChecker[1]);
+            DontDestroyOnLoad(musicChecker[0]);
         }
         else
         {
-            DontDestroyOnLoad(audioChecker[0]);
+            DontDestroyOnLoad(musicChecker[0]);
         }
 
-        audio = GameObject.Find("Music").GetComponent<AudioSource>();
+        music = GameObject.Find("Music").GetComponent<AudioSource>();
     }
     private void Update()
     {
@@ -129,7 +131,7 @@ public class MapManager : MonoBehaviour
     }
     public void AudioSetting()
     {
-        if (audio.volume == 0) audio.volume = 1;
-        else audio.volume = 0;
+        if (music.volume == 0) music.volume = 1;
+        else music.volume = 0;
     }
 }
