@@ -12,6 +12,7 @@ public class MapManager : MonoBehaviour
     public GameObject[] managerChecker, audioChecker;
     public Text coin;
     public GameObject settings;
+    public AudioSource audio;
     
     private void Start()
     {
@@ -44,6 +45,8 @@ public class MapManager : MonoBehaviour
         {
             DontDestroyOnLoad(audioChecker[0]);
         }
+
+        audio = GameObject.Find("Music").GetComponent<AudioSource>();
     }
     private void Update()
     {
@@ -123,5 +126,10 @@ public class MapManager : MonoBehaviour
         {
             settings.SetActive(true);
         }
+    }
+    public void AudioSetting()
+    {
+        if (audio.volume == 0) audio.volume = 1;
+        else audio.volume = 0;
     }
 }

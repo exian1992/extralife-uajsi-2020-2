@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Gloves
   m_EditorClassIdentifier: 
   EquipmentName: Gloves
-  eqLvl: 5
-  att: 1.5999999
+  eqLvl: 1
+  att: 1
   oreRequirementName: []
   oreRequirementValue: 
   basePrice: 100
-  latestPrice: 300
+  latestPrice: 100

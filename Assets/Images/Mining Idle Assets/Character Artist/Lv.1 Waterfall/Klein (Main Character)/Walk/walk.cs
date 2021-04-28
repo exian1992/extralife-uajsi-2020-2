@@ -9,21 +9,19 @@ public class walk : MonoBehaviour
 {
     public float speed;
     public Animator anim;
-    public GameObject menu;
 
     // Update is called once per frame
     void Update()
     {
-        anim.SetBool("isWalk", true);
         transform.Translate(2 * Time.deltaTime * speed, 0, 0);
 
-        if (Input.GetMouseButtonDown(0) && EventSystem.current.currentSelectedGameObject == null)
+        if (Input.GetMouseButtonDown(0) && EventSystem.current.currentSelectedGameObject == null && anim.GetBool("Idle") == true)
         {
-            anim.SetBool("Down", false);
+            anim.SetBool("Mine", true);
         }
         else
         {
-            anim.SetBool("Down", false);
+            anim.SetBool("Mine", false);
         }
     }
 
@@ -31,11 +29,9 @@ public class walk : MonoBehaviour
     {
         if (collider2D.gameObject.CompareTag("stopPoint"))
         {
-            anim.SetBool("isWalk", false);
+            anim.SetBool("Down", true);            
             speed = 0;
-            anim.SetBool("Mine", true);
+            anim.SetBool("Idle", true);
         }
-    }
-
-    
+    }    
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class GameData
 {
-    //GameManager or IdleManager
+    //IdleManager
     public int eqLvl = 1, stone = 0, coal = 0, copper = 0, iron = 0, gold = 0, ruby = 0, titanium = 0, coin = 0;
     public bool isLoaded = true;
 

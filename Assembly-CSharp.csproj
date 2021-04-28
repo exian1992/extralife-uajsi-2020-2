@@ -64,27 +64,27 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Cave(Valdi)\Mining.cs" />
     <Compile Include="Assets\Firebase Init.cs" />
-    <Compile Include="Assets\Idle(Valdi)\character\walk.cs" />
+    <Compile Include="Assets\Images\Mining Idle Assets\Character Artist\Lv.1 Waterfall\Klein (Main Character)\Walk\walk.cs" />
     <Compile Include="Assets\Scripts\For Game\IdleManager.cs" />
     <Compile Include="Assets\Scripts\For Game\MapManager.cs" />
-    <Compile Include="Assets\Scripts\Jarvis'es Script\AdvanceWeapon.cs" />
-    <Compile Include="Assets\Scripts\Jarvis'es Script\CostumeInfo.cs" />
-    <Compile Include="Assets\Scripts\Jarvis'es Script\CostumeManager.cs" />
-    <Compile Include="Assets\Scripts\Jarvis'es Script\DailyQuest\EasyQuest.cs" />
-    <Compile Include="Assets\Scripts\Jarvis'es Script\DailyQuest\HardQuest.cs" />
-    <Compile Include="Assets\Scripts\Jarvis'es Script\DailyQuest\IntermediateQuest.cs" />
+    <Compile Include="Assets\Scripts\For Game\Mining.cs" />
+    <Compile Include="Assets\Scripts\Jarvis'es Script\Costume Information\CostumeInfo.cs" />
+    <Compile Include="Assets\Scripts\Jarvis'es Script\Costume Information\CostumeManager.cs" />
     <Compile Include="Assets\Scripts\Jarvis'es Script\Equipment\EquipmentInfo.cs" />
     <Compile Include="Assets\Scripts\Jarvis'es Script\GameData.cs" />
     <Compile Include="Assets\Scripts\Jarvis'es Script\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Jarvis'es Script\HireNPC.cs" />
     <Compile Include="Assets\Scripts\Jarvis'es Script\Ore.cs" />
+    <Compile Include="Assets\Scripts\Jarvis'es Script\Pet Information\PetInfo.cs" />
+    <Compile Include="Assets\Scripts\Jarvis'es Script\Pet Information\PetManager.cs" />
     <Compile Include="Assets\Scripts\Jarvis'es Script\PetCostumeSystem.cs" />
-    <Compile Include="Assets\Scripts\Jarvis'es Script\PetInfo.cs" />
-    <Compile Include="Assets\Scripts\Jarvis'es Script\PetManager.cs" />
-    <Compile Include="Assets\Scripts\Jarvis'es Script\QuestInfo.cs" />
-    <Compile Include="Assets\Scripts\Jarvis'es Script\QuestManager.cs" />
-    <Compile Include="Assets\Scripts\Jarvis'es Script\QuestType.cs" />
+    <Compile Include="Assets\Scripts\Jarvis'es Script\Quests\DailyQuest\EasyQuest.cs" />
+    <Compile Include="Assets\Scripts\Jarvis'es Script\Quests\DailyQuest\HardQuest.cs" />
+    <Compile Include="Assets\Scripts\Jarvis'es Script\Quests\DailyQuest\IntermediateQuest.cs" />
+    <Compile Include="Assets\Scripts\Jarvis'es Script\Quests\QuestInfo.cs" />
+    <Compile Include="Assets\Scripts\Jarvis'es Script\Quests\QuestManager.cs" />
+    <Compile Include="Assets\Scripts\Jarvis'es Script\Quests\QuestType.cs" />
     <Compile Include="Assets\Scripts\Jarvis'es Script\SaveSystem.cs" />
     <Compile Include="Assets\Scripts\Jarvis'es Script\ShopSystem.cs" />
     <Compile Include="Assets\Unity-Logs-Viewer\Reporter\MultiKeyDictionary.cs" />
@@ -108,7 +108,6 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
-    <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-analytics-unity\maven-metadata.xml" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
@@ -296,7 +295,7 @@
       <HintPath>G:/Unity Project/2019.4.18f1/Editor/Data/Managed/UnityEditor.dll</HintPath>
     </Reference>
     <Reference Include="Firebase.Analytics">
-      <HintPath>G:/Unity Project/extralife-uajsi-2020-2/Assets/Firebase/Plugins/Firebase.Analytics.dll</HintPath>
+      <HintPath>G:/Unity Project/extralife-uajsi-2020-2/Library/PackageCache/com.google.firebase.analytics@7.1.0/Firebase/Plugins/Firebase.Analytics.dll</HintPath>
     </Reference>
     <Reference Include="Firebase.App">
       <HintPath>G:/Unity Project/extralife-uajsi-2020-2/Library/PackageCache/com.google.firebase.app@7.1.0/Firebase/Plugins/Firebase.App.dll</HintPath>
