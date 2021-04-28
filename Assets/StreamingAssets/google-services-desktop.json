@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "966838999920",
+    "project_id": "mining-adventure",
+    "storage_bucket": "mining-adventure.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:966838999920:android:aa620d5b127432b91b0db5",
+        "android_client_info": {
+          "package_name": "com.DefaultCompany.extralifeuajsi20202"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "966838999920-jomgg6fkrcn7v9o2o0en36eomt1rg6js.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATEkLYsCy7XDcGrubpfFnW2XzRpa9hzU4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "966838999920-jomgg6fkrcn7v9o2o0en36eomt1rg6js.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
