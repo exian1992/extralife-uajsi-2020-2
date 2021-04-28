@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:966838999920:android:aa620d5b127432b91b0db5",
+        "mobilesdk_app_id": "1:966838999920:android:5b409941c66dd93c1b0db5",
         "android_client_info": {
-          "package_name": "com.DefaultCompany.extralifeuajsi20202"
+          "package_name": "com.ExtraLifeEntertainment.MiningAdventure"
         }
       },
       "oauth_client": [

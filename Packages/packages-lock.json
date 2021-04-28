@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.google.android.appbundle": {
+      "version": "1.4.0",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://unityregistry-pa.googleapis.com"
+    },
     "com.google.external-dependency-manager": {
       "version": "1.2.164",
       "depth": 1,
@@ -22,6 +29,34 @@
       "source": "registry",
       "dependencies": {
         "com.google.external-dependency-manager": "1.2.164"
+      },
+      "url": "https://unityregistry-pa.googleapis.com"
+    },
+    "com.google.firebase.auth": {
+      "version": "7.1.0",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.google.firebase.app": "7.1.0"
+      },
+      "url": "https://unityregistry-pa.googleapis.com"
+    },
+    "com.google.firebase.database": {
+      "version": "7.1.0",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.google.firebase.auth": "7.1.0"
+      },
+      "url": "https://unityregistry-pa.googleapis.com"
+    },
+    "com.google.play.billing": {
+      "version": "3.1.2",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.google.android.appbundle": "1.4.0",
+        "com.unity.purchasing": "2.1.1"
       },
       "url": "https://unityregistry-pa.googleapis.com"
     },

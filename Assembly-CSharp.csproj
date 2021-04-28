@@ -316,6 +316,9 @@
     <Reference Include="Unity.Tasks">
       <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/PackageCache/com.google.firebase.app@7.1.0/Parse/Plugins/dotNet45/Unity.Tasks.dll</HintPath>
     </Reference>
+    <Reference Include="Firebase.Auth">
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/PackageCache/com.google.firebase.auth@7.1.0/Firebase/Plugins/Firebase.Auth.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Analytics.Editor">
       <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/PackageCache/com.unity.analytics@3.3.5/Unity.Analytics.Editor.dll</HintPath>
     </Reference>
@@ -324,6 +327,9 @@
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
       <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/PackageCache/com.unity.analytics@3.3.5/AnalyticsStandardEvents/Unity.Analytics.StandardEvents.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.Database">
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/PackageCache/com.google.firebase.database@7.1.0/Firebase/Plugins/Firebase.Database.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.18f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
@@ -685,6 +691,9 @@
     <Reference Include="UnityEngine.Advertisements">
       <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEngine.Advertisements.dll</HintPath>
     </Reference>
+    <Reference Include="Google.Play.Billing.Editor">
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Google.Play.Billing.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.Purchasing">
       <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEngine.Purchasing.dll</HintPath>
     </Reference>
@@ -694,8 +703,14 @@
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Google.Play.Billing">
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Google.Play.Billing.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Android.AppBundle.Editor">
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Google.Android.AppBundle.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
       <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>

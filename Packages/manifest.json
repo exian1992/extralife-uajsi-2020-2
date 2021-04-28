@@ -2,6 +2,9 @@
   "dependencies": {
     "com.google.firebase.analytics": "7.1.0",
     "com.google.firebase.app": "7.1.0",
+    "com.google.firebase.auth": "7.1.0",
+    "com.google.firebase.database": "7.1.0",
+    "com.google.play.billing": "3.1.2",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.2d.tilemap": "1.0.0",
     "com.unity.ads": "3.5.2",
