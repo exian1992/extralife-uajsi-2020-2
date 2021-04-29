@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 
 public class walk : MonoBehaviour
 {
-    public float speed;
+    private float speed = 30f;
     public Animator anim;
 
     // Update is called once per frame
@@ -15,7 +15,7 @@ public class walk : MonoBehaviour
     {
         transform.Translate(2 * Time.deltaTime * speed, 0, 0);
 
-        if (Input.GetMouseButtonDown(0) && EventSystem.current.currentSelectedGameObject == null && anim.GetBool("Idle") == true)
+        if (Input.GetMouseButtonDown(0) && EventSystem.current.currentSelectedGameObject == null && anim.GetBool("Mine") == false)
         {
             anim.SetBool("Mine", true);
         }

@@ -16,7 +16,7 @@ public class MapManager : MonoBehaviour
     
     private void Start()
     {
-        Application.targetFrameRate = 30;
+        Application.targetFrameRate = -1;
 
         iManager = GameObject.Find("IdleManager").GetComponent<IdleManager>();
 
