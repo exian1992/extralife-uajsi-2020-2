@@ -23,7 +23,7 @@ public static class SaveSystem
         BinaryFormatter formatter = new BinaryFormatter();
 
         //string path = "D:/SaveFile/data.uwansummoney";
-        string path = Application.persistentDataPath + "/data.uwansummoney";
+        string path = Application.persistentDataPath + "/dataBank.uwansummoney"; //this change every update
         FileStream stream = new FileStream(path, FileMode.Create);
 
         GameData data = new GameData(manager);
@@ -75,7 +75,27 @@ public static class SaveSystem
     public static GameData LoadData ()
     {
         //string path = "D:/SaveFile/data.uwansummoney";
-        string path = Application.persistentDataPath + "/data.uwansummoney";
+        string path = Application.persistentDataPath + "/dataBank.uwansummoney"; //change this every update
+        if (File.Exists(path))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+
+            GameData data = formatter.Deserialize(stream) as GameData;
+            stream.Close();
+
+            return data;
+        }
+        else
+        {
+            Debug.LogError("save file not found in " + path);
+            return null;
+        }
+    }
+    public static GameData LoadPreviousData()
+    {
+        //string path = "D:/SaveFile/data.uwansummoney";
+        string path = Application.persistentDataPath + "/data.uwansummoney"; //change this every update
         if (File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();

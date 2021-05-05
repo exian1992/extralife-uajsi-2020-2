@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8823725712865877441}
   - component: {fileID: 7075361588546824508}
   m_Layer: 0
-  m_Name: bronze
+  m_Name: copper
   m_TagString: ore
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

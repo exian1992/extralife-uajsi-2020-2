@@ -11,10 +11,9 @@ using System.IO;
 public class IdleManager : MonoBehaviour
 {
     public GameObject[] managerChecker;
-    public GameObject idleManager;
     public GameObject[] prefabs;
-    GameData data;
-    
+    GameData data, pData;
+
     //GameObject qManager, pManager, cManager;
     //QuestManager questManager;
     //PetManager petManager;
@@ -25,7 +24,7 @@ public class IdleManager : MonoBehaviour
     float currentOreHealth;
 
     //ore info
-    public int[] mapOreCollection;
+    public int[] oreCollection;
     public Text[] mapOreValueText;
 
     //orechance
@@ -33,7 +32,10 @@ public class IdleManager : MonoBehaviour
     public int[] map3OreChance;
 
     #region Equipment Info
-    public EquipmentInfo[] equipmentList;
+    public int[] eqLevel;
+    public float[] eqAttack;
+    public int[] eqBasePrice;
+    public int[] eqLatestPrice;
     public float tempMiningSpeed;
     public float tempMiningPower;
     public float trueMiningSpeed;
@@ -49,7 +51,6 @@ public class IdleManager : MonoBehaviour
 
     //etc
     //public GameObject questPopUp, dQuestPopUp;
-    public bool isLoaded;
 
     void Start()
     {
@@ -57,12 +58,12 @@ public class IdleManager : MonoBehaviour
         if (managerChecker.Length == 2)
         {
             Destroy(managerChecker[0]);
-            DontDestroyOnLoad(managerChecker[1]);
+            DontDestroyOnLoad(managerChecker[1]);     
         }
         else
         {
-            DontDestroyOnLoad(managerChecker[0]);
-        }
+            DontDestroyOnLoad(managerChecker[0]);            
+        }        
         //qManager = GameObject.Find("QuestManager");
         //questManager = qManager.GetComponent<QuestManager>();
         //pManager = GameObject.Find("PetManager");
@@ -70,35 +71,29 @@ public class IdleManager : MonoBehaviour
         //cManager = GameObject.Find("CostumeManager");
         //costumeManager = cManager.GetComponent<CostumeManager>();
 
-        //string saveData = "D:/SaveFile/data.uwansummoney";       
-
-        
-        string saveData = Application.persistentDataPath + "/data.uwansummoney";
+        string saveData = Application.persistentDataPath + "/dataBank.uwansummoney"; //always change this every update, and on saveSystem
+        string previousData = Application.persistentDataPath + "/data.uwansummoney"; //this too, on saveSystem also
         if (!File.Exists(saveData))
         {
             Debug.Log("opt 1");
+            if (File.Exists(previousData))
+            {
+                TransferData();
+                File.Delete(previousData);
+            }
+
             ChanceChecker();
-            isLoaded = true;
             SaveAllProgress();
-            data = SaveSystem.LoadData();
+            data = SaveSystem.LoadData();            
         }
         else
         {
             data = SaveSystem.LoadData();
-            if (!data.isLoaded)
-            {
-                //questManager.LoadQuestState();
-                Debug.Log("opt 2");
-                LoadData();
-                isLoaded = true;
-                SaveAllProgress();
-            }
-            else if (data.isLoaded)
-            {
-                Debug.Log("opt 3");
-                LoadData();
-            }
-            else Debug.Log("Welp, ur f*ck*d...");
+
+            //questManager.LoadQuestState();
+            Debug.Log("opt 2");
+            LoadData();
+            SaveAllProgress();
         }
 
 
@@ -134,6 +129,8 @@ public class IdleManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+
         if (SceneManager.GetActiveScene().name == "Waterfall" ||
             SceneManager.GetActiveScene().name == "Cave" ||
             SceneManager.GetActiveScene().name == "DeepCave")
@@ -184,7 +181,6 @@ public class IdleManager : MonoBehaviour
 
             RefreshText();
         }
-        isLoaded = data.isLoaded;
     }
     public void AttackOre()
     {
@@ -205,19 +201,19 @@ public class IdleManager : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "Waterfall")
         {
-            mapOreValueText[0].text = mapOreCollection[0].ToString();
+            mapOreValueText[0].text = oreCollection[0].ToString();
         }
         else if (SceneManager.GetActiveScene().name == "Cave")
         {
-            mapOreValueText[0].text = mapOreCollection[1].ToString();
-            mapOreValueText[1].text = mapOreCollection[2].ToString();
-            mapOreValueText[2].text = mapOreCollection[3].ToString();
+            mapOreValueText[0].text = oreCollection[1].ToString();
+            mapOreValueText[1].text = oreCollection[2].ToString();
+            mapOreValueText[2].text = oreCollection[3].ToString();
         }
         else if (SceneManager.GetActiveScene().name == "DeepCave")
         {
-            mapOreValueText[0].text = mapOreCollection[4].ToString();
-            mapOreValueText[1].text = mapOreCollection[5].ToString();
-            mapOreValueText[2].text = mapOreCollection[6].ToString();
+            mapOreValueText[0].text = oreCollection[4].ToString();
+            mapOreValueText[1].text = oreCollection[5].ToString();
+            mapOreValueText[2].text = oreCollection[6].ToString();
         }
     }
     #region Tile Stuff
@@ -269,7 +265,7 @@ public class IdleManager : MonoBehaviour
         Ore ore = currentBlock.GetComponent<Ore>();
         if (ore.GetName() == "Stone")
         {
-            mapOreCollection[0]++;
+            oreCollection[0]++;
             #region Stone mining quest
             /*if (questManager.isThereQuest)
             {
@@ -295,7 +291,7 @@ public class IdleManager : MonoBehaviour
         }
         if (ore.GetName() == "Coal")
         {
-            mapOreCollection[1]++;
+            oreCollection[1]++;
             #region Coal mining quest
             /*if (questManager.isThereQuest)
             {
@@ -321,7 +317,7 @@ public class IdleManager : MonoBehaviour
         }
         if (ore.GetName() == "Copper")
         {
-            mapOreCollection[2]++;
+            oreCollection[2]++;
             #region Copper mining quest
             /*if (questManager.isThereQuest)
             {
@@ -347,7 +343,7 @@ public class IdleManager : MonoBehaviour
         }
         if (ore.GetName() == "Iron")
         {
-            mapOreCollection[3]++;
+            oreCollection[3]++;
             #region Iron mining quest
             /*if (questManager.isThereQuest)
             {
@@ -373,15 +369,15 @@ public class IdleManager : MonoBehaviour
         }
         if (ore.GetName() == "Gold")
         {
-            mapOreCollection[4]++;
+            oreCollection[4]++;
         }
         if (ore.GetName() == "Ruby")
         {
-            mapOreCollection[5]++;
+            oreCollection[5]++;
         }
         if (ore.GetName() == "Titanium")
         {
-            mapOreCollection[6]++;
+            oreCollection[6]++;
         }
     }
     #endregion
@@ -395,19 +391,19 @@ public class IdleManager : MonoBehaviour
             //stone 10, coal 5, bronze 4, iron 1
             if (randomGain < map12OreChance[3])//ironChance)
             {
-                mapOreCollection[3]++;
+                oreCollection[3]++;
             }
             else if (randomGain < map12OreChance[2])//copperChance)//2
             {
-                mapOreCollection[2]++;
+                oreCollection[2]++;
             }
             else if (randomGain < map12OreChance[1])//coalChance)//6
             {
-                mapOreCollection[1]++;
+                oreCollection[1]++;
             }
             else if (randomGain < map12OreChance[0])//stoneChance)//12
             {
-                mapOreCollection[0]++;
+                oreCollection[0]++;
             }
         }
     }
@@ -440,15 +436,15 @@ public class IdleManager : MonoBehaviour
         #region Equipment Check
         if (SceneManager.GetActiveScene().name == "Waterfall")
         {
-            trueMiningPower = equipmentList[0].GetAttInfo();
+            trueMiningPower = eqAttack[0];
         }
         else if (SceneManager.GetActiveScene().name == "Cave")
         {
-            trueMiningPower = equipmentList[1].GetAttInfo();
+            trueMiningPower = eqAttack[1];
         }
         else if (SceneManager.GetActiveScene().name == "DeepCave")
         {
-            trueMiningPower = equipmentList[2].GetAttInfo();
+            trueMiningPower = eqAttack[2];
         }
         #endregion
         /*if (costumeManager.costumeEquipped && costumeManager.currentActiveCostume.statusTypeCostume == StatusTypeCostume.PowerUp)
@@ -467,13 +463,18 @@ public class IdleManager : MonoBehaviour
     }
     public void LoadData()
     {
-        mapOreCollection[0] = data.stone;
-        mapOreCollection[1] = data.coal;
-        mapOreCollection[2] = data.copper;
-        mapOreCollection[3] = data.iron;
-        mapOreCollection[4] = data.gold;
-        mapOreCollection[5] = data.ruby;
-        mapOreCollection[6] = data.titanium;
+        for (int i = 0; i < oreCollection.Length; i++)
+        {
+            oreCollection[i] = data.oreCollection[i];
+        }
+
+        for (int i = 0; i < eqLevel.Length; i++)
+        {
+            eqLevel[i] = data.eqLevel[i];
+            eqAttack[i] = data.eqAttack[i];
+            eqBasePrice[i] = data.eqBasePrice[i];
+            eqLatestPrice[i] = data.eqLatestPrice[i];
+        }
 
         coin = data.coin;
     }
@@ -498,7 +499,6 @@ public class IdleManager : MonoBehaviour
     }
     void OnApplicationQuit()
     {
-        isLoaded = false;
         SaveAllProgress();
     }
     public void SaveAllProgress()
@@ -511,25 +511,25 @@ public class IdleManager : MonoBehaviour
     public void ChanceChecker()
     {
         #region Gloves/Waterfall
-        if (equipmentList[0].eqLvl <= 10)
+        if (eqLevel[0] <= 10)
         {
             map12OreChance[0] = 20;
         }
         #endregion
         #region Pickaxe/Cave
-        if (equipmentList[1].eqLvl <= 10)
+        if (eqLevel[1] <= 10)
         {
             map12OreChance[1] = 20;
             map12OreChance[2] = 0;
             map12OreChance[3] = 0;
         }
-        else if (equipmentList[1].eqLvl <= 20)
+        else if (eqLevel[1] <= 20)
         {
             map12OreChance[1] = 20;
             map12OreChance[2] = 6;
             map12OreChance[3] = 0;
         }
-        else if (equipmentList[1].eqLvl <= 30)
+        else if (eqLevel[1] <= 30)
         {
             map12OreChance[1] = 20;
             map12OreChance[2] = 8;
@@ -537,25 +537,38 @@ public class IdleManager : MonoBehaviour
         }
         #endregion
         #region TNT/DeepCave
-        if (equipmentList[2].eqLvl <= 10)
+        if (eqLevel[2] <= 10)
         {
             map3OreChance[0] = 20;
             map3OreChance[1] = 0;
             map3OreChance[2] = 0;
         }
-        else if (equipmentList[2].eqLvl <= 20)
+        else if (eqLevel[2] <= 20)
         {
             map3OreChance[0] = 20;
             map3OreChance[1] = 6;
             map3OreChance[2] = 0;
         }
-        else if (equipmentList[2].eqLvl <= 30)
+        else if (eqLevel[2] <= 30)
         {
             map3OreChance[0] = 20;
             map3OreChance[1] = 8;
             map3OreChance[2] = 2;
         }
         #endregion
+    }
+    public void TransferData()
+    {
+        pData = SaveSystem.LoadPreviousData();
+        oreCollection[0] = pData.stone;
+        oreCollection[1] = pData.coal;
+        oreCollection[2] = pData.copper;
+        oreCollection[3] = pData.iron;
+        oreCollection[4] = pData.gold;
+        oreCollection[5] = pData.ruby;
+        oreCollection[6] = pData.titanium;
+
+        coin = pData.coin;
     }
     public void FeedbackLink()
     {

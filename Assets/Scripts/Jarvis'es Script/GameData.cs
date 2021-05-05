@@ -6,8 +6,14 @@ using UnityEngine;
 public class GameData
 {
     //IdleManager
-    public int eqLvl = 1, stone = 0, coal = 0, copper = 0, iron = 0, gold = 0, ruby = 0, titanium = 0, coin = 0;
-    public bool isLoaded = true;
+    public int eqLvl = 1, coin = 0, stone, coal, copper, iron, gold, ruby, titanium;
+    public int[] oreCollection = new int[16];
+    //public bool isLoaded = true;
+
+    public int[] eqLevel = new int[6];
+    public float[] eqAttack = new float[6];
+    public int[] eqBasePrice = new int[6];
+    public int[] eqLatestPrice = new int[6];
 
     //QuestManager
     public int randomQuest = 0;
@@ -27,26 +33,33 @@ public class GameData
     {
         eqLvl = gManager.eqLvl;
 
-        stone = gManager.map1OreCollection[0];
-        coal = gManager.map1OreCollection[1];
-        copper = gManager.map1OreCollection[2];
-        iron = gManager.map1OreCollection[3];
+        oreCollection[0] = gManager.map1OreCollection[0];
+        oreCollection[1] = gManager.map1OreCollection[1];
+        oreCollection[2] = gManager.map1OreCollection[2];
+        oreCollection[3] = gManager.map1OreCollection[3];
 
         coin = gManager.coin;
     }
     public GameData (IdleManager iManager)
     {
-        stone = iManager.mapOreCollection[0];
-        coal = iManager.mapOreCollection[1];
-        copper = iManager.mapOreCollection[2];
-        iron = iManager.mapOreCollection[3];
-        gold = iManager.mapOreCollection[4];
-        ruby = iManager.mapOreCollection[5];
-        titanium = iManager.mapOreCollection[6];
+        //ore
+        for (int i = 0; i < iManager.oreCollection.Length; i++)
+        {
+            oreCollection[i] = iManager.oreCollection[i];
+        }
+
+        //equipment
+        for (int i = 0; i < iManager.eqLevel.Length; i++)
+        {
+            eqLevel[i] = iManager.eqLevel[i];
+            eqAttack[i] = iManager.eqAttack[i];
+            eqBasePrice[i] = iManager.eqBasePrice[i];
+            eqLatestPrice[i] = iManager.eqLatestPrice[i];
+        }
 
         coin = iManager.coin;
 
-        isLoaded = iManager.isLoaded;
+        //isLoaded = iManager.isLoaded;
     }
     public GameData (QuestManager qManager)
     {

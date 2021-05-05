@@ -65,12 +65,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Images\Mining Idle Assets\Character Artist\Lv.1 Waterfall\Klein (Main Character)\Walk\walk.cs" />
+    <Compile Include="Assets\Scripts\Experimental\TimeTest.cs" />
     <Compile Include="Assets\Scripts\For Game\IdleManager.cs" />
     <Compile Include="Assets\Scripts\For Game\MapManager.cs" />
     <Compile Include="Assets\Scripts\For Game\Mining.cs" />
     <Compile Include="Assets\Scripts\Jarvis'es Script\Costume Information\CostumeInfo.cs" />
     <Compile Include="Assets\Scripts\Jarvis'es Script\Costume Information\CostumeManager.cs" />
-    <Compile Include="Assets\Scripts\Jarvis'es Script\Equipment\EquipmentInfo.cs" />
     <Compile Include="Assets\Scripts\Jarvis'es Script\GameData.cs" />
     <Compile Include="Assets\Scripts\Jarvis'es Script\GameManager.cs" />
     <Compile Include="Assets\Scripts\Jarvis'es Script\HireNPC.cs" />
@@ -88,6 +88,7 @@
     <Compile Include="Assets\Scripts\Jarvis'es Script\ShopSystem.cs" />
     <Compile Include="Assets\Scripts\Plugin\Firebase Init.cs" />
     <Compile Include="Assets\Scripts\Plugin\Realtime.cs" />
+    <Compile Include="Assets\Scripts\UI\SimpleFade.cs" />
     <Compile Include="Assets\Unity-Logs-Viewer\Reporter\MultiKeyDictionary.cs" />
     <Compile Include="Assets\Unity-Logs-Viewer\Reporter\Reporter.cs" />
     <Compile Include="Assets\Unity-Logs-Viewer\Reporter\ReporterGUI.cs" />

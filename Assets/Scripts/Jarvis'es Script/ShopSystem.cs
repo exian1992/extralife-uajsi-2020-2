@@ -14,7 +14,8 @@ public class ShopSystem : MonoBehaviour
     public MapManager mapManager;
 
     public TMPro.TextMeshProUGUI eqLevel;
-    public Sprite[] materialImagesSprite; //0 stone, 1 coal, 2 bronze, 3 iron
+    public string[] materialNames;
+    public Sprite[] materialImagesSprite;
 
     #region Merchant
     //pet shop buttons
@@ -109,7 +110,7 @@ public class ShopSystem : MonoBehaviour
         else sellButton.interactable = false;
 
         //sell all
-        if (iManager.mapOreCollection[0] != 0 || iManager.mapOreCollection[1] != 0 || iManager.mapOreCollection[2] != 0 || iManager.mapOreCollection[3] != 0 || iManager.mapOreCollection[4] != 0 || iManager.mapOreCollection[5] != 0 || iManager.mapOreCollection[6] != 0)
+        if (iManager.oreCollection[0] != 0 || iManager.oreCollection[1] != 0 || iManager.oreCollection[2] != 0 || iManager.oreCollection[3] != 0 || iManager.oreCollection[4] != 0 || iManager.oreCollection[5] != 0 || iManager.oreCollection[6] != 0)
         {
             sellAllButton.interactable = true;
         }
@@ -197,7 +198,7 @@ public class ShopSystem : MonoBehaviour
     {
         for (int temp = 0; temp < oreSell.Length; temp++)
         {
-            if (oreSell[temp] > 0 && oreSell[temp] <= iManager.mapOreCollection[temp])
+            if (oreSell[temp] > 0 && oreSell[temp] <= iManager.oreCollection[temp])
             {
                 #region Pricing
                 int price = 0;
@@ -231,7 +232,7 @@ public class ShopSystem : MonoBehaviour
                 }
                 #endregion
                 iManager.coin += oreSell[temp] * price;
-                iManager.mapOreCollection[temp] -= oreSell[temp];
+                iManager.oreCollection[temp] -= oreSell[temp];
                 #region Stone selling quest
                 /*if (questManager.isThereQuest)
                 {
@@ -419,27 +420,27 @@ public class ShopSystem : MonoBehaviour
                 price = 100;
             }
             #endregion
-            iManager.coin += iManager.mapOreCollection[temp] * price;
-            iManager.mapOreCollection[temp] = 0;
+            iManager.coin += iManager.oreCollection[temp] * price;
+            iManager.oreCollection[temp] = 0;
             #region Stone selling quest
             /*if (questManager.isThereQuest)
             {
                 if (questManager.currentActiveQuest.questType == QuestType.SellStone)
                 {
-                    questManager.currentActiveQuest.Increase(iManager.mapOreCollection[temp]);
+                    questManager.currentActiveQuest.Increase(iManager.oreCollection[temp]);
                 }
             }
             if (questManager.activeEQuest.questType == QuestType.SellStone)
             {
-                questManager.activeEQuest.Increase(iManager.mapOreCollection[temp]);
+                questManager.activeEQuest.Increase(iManager.oreCollection[temp]);
             }
             if (questManager.activeIQuest.questType == QuestType.SellStone)
             {
-                questManager.activeIQuest.Increase(iManager.mapOreCollection[temp]);
+                questManager.activeIQuest.Increase(iManager.oreCollection[temp]);
             }
             if (questManager.activeHQuest.questType == QuestType.SellStone)
             {
-                questManager.activeHQuest.Increase(iManager.mapOreCollection[temp]);
+                questManager.activeHQuest.Increase(iManager.oreCollection[temp]);
             }*/
             #endregion
             #region Coal selling quest
@@ -447,20 +448,20 @@ public class ShopSystem : MonoBehaviour
             {
                 if (questManager.currentActiveQuest.questType == QuestType.SellCoal)
                 {
-                    questManager.currentActiveQuest.Increase(iManager.mapOreCollection[temp]);
+                    questManager.currentActiveQuest.Increase(iManager.oreCollection[temp]);
                 }
             }
             if (questManager.activeEQuest.questType == QuestType.SellCoal)
             {
-                questManager.activeEQuest.Increase(iManager.mapOreCollection[temp]);
+                questManager.activeEQuest.Increase(iManager.oreCollection[temp]);
             }
             if (questManager.activeIQuest.questType == QuestType.SellCoal)
             {
-                questManager.activeIQuest.Increase(iManager.mapOreCollection[temp]);
+                questManager.activeIQuest.Increase(iManager.oreCollection[temp]);
             }
             if (questManager.activeHQuest.questType == QuestType.SellCoal)
             {
-                questManager.activeHQuest.Increase(iManager.mapOreCollection[temp]);
+                questManager.activeHQuest.Increase(iManager.oreCollection[temp]);
             }*/
             #endregion
             #region Copper selling quest
@@ -468,20 +469,20 @@ public class ShopSystem : MonoBehaviour
             {
                 if (questManager.currentActiveQuest.questType == QuestType.SellCopper)
                 {
-                    questManager.currentActiveQuest.Increase(iManager.mapOreCollection[temp]);
+                    questManager.currentActiveQuest.Increase(iManager.oreCollection[temp]);
                 }
             }
             if (questManager.activeEQuest.questType == QuestType.SellCopper)
             {
-                questManager.activeEQuest.Increase(iManager.mapOreCollection[temp]);
+                questManager.activeEQuest.Increase(iManager.oreCollection[temp]);
             }
             if (questManager.activeIQuest.questType == QuestType.SellCopper)
             {
-                questManager.activeIQuest.Increase(iManager.mapOreCollection[temp]);
+                questManager.activeIQuest.Increase(iManager.oreCollection[temp]);
             }
             if (questManager.activeHQuest.questType == QuestType.SellCopper)
             {
-                questManager.activeHQuest.Increase(iManager.mapOreCollection[temp]);
+                questManager.activeHQuest.Increase(iManager.oreCollection[temp]);
             }*/
             #endregion
             #region Iron selling quest
@@ -489,20 +490,20 @@ public class ShopSystem : MonoBehaviour
             {
                 if (questManager.currentActiveQuest.questType == QuestType.SellIron)
                 {
-                    questManager.currentActiveQuest.Increase(iManager.mapOreCollection[temp]);
+                    questManager.currentActiveQuest.Increase(iManager.oreCollection[temp]);
                 }
             }
             if (questManager.activeEQuest.questType == QuestType.SellIron)
             {
-                questManager.activeEQuest.Increase(iManager.mapOreCollection[temp]);
+                questManager.activeEQuest.Increase(iManager.oreCollection[temp]);
             }
             if (questManager.activeIQuest.questType == QuestType.SellIron)
             {
-                questManager.activeIQuest.Increase(iManager.mapOreCollection[temp]);
+                questManager.activeIQuest.Increase(iManager.oreCollection[temp]);
             }
             if (questManager.activeHQuest.questType == QuestType.SellIron)
             {
-                questManager.activeHQuest.Increase(iManager.mapOreCollection[temp]);
+                questManager.activeHQuest.Increase(iManager.oreCollection[temp]);
             }*/
             #endregion
             #region Gold selling quest
@@ -510,20 +511,20 @@ public class ShopSystem : MonoBehaviour
             {
                 if (questManager.currentActiveQuest.questType == QuestType.SellGold)
                 {
-                    questManager.currentActiveQuest.Increase(iManager.mapOreCollection[temp]);
+                    questManager.currentActiveQuest.Increase(iManager.oreCollection[temp]);
                 }
             }
             if (questManager.activeEQuest.questType == QuestType.SellGold)
             {
-                questManager.activeEQuest.Increase(iManager.mapOreCollection[temp]);
+                questManager.activeEQuest.Increase(iManager.oreCollection[temp]);
             }
             if (questManager.activeIQuest.questType == QuestType.SellGold)
             {
-                questManager.activeIQuest.Increase(iManager.mapOreCollection[temp]);
+                questManager.activeIQuest.Increase(iManager.oreCollection[temp]);
             }
             if (questManager.activeHQuest.questType == QuestType.SellGold)
             {
-                questManager.activeHQuest.Increase(iManager.mapOreCollection[temp]);
+                questManager.activeHQuest.Increase(iManager.oreCollection[temp]);
             }*/
             #endregion
             #region Ruby selling quest
@@ -531,20 +532,20 @@ public class ShopSystem : MonoBehaviour
             {
                 if (questManager.currentActiveQuest.questType == QuestType.SellRuby)
                 {
-                    questManager.currentActiveQuest.Increase(iManager.mapOreCollection[temp]);
+                    questManager.currentActiveQuest.Increase(iManager.oreCollection[temp]);
                 }
             }
             if (questManager.activeEQuest.questType == QuestType.SellRuby)
             {
-                questManager.activeEQuest.Increase(iManager.mapOreCollection[temp]);
+                questManager.activeEQuest.Increase(iManager.oreCollection[temp]);
             }
             if (questManager.activeIQuest.questType == QuestType.SellRuby)
             {
-                questManager.activeIQuest.Increase(iManager.mapOreCollection[temp]);
+                questManager.activeIQuest.Increase(iManager.oreCollection[temp]);
             }
             if (questManager.activeHQuest.questType == QuestType.SellRuby)
             {
-                questManager.activeHQuest.Increase(iManager.mapOreCollection[temp]);
+                questManager.activeHQuest.Increase(iManager.oreCollection[temp]);
             }*/
             #endregion
             #region Titanium selling quest
@@ -552,20 +553,20 @@ public class ShopSystem : MonoBehaviour
             {
                 if (questManager.currentActiveQuest.questType == QuestType.SellTitanium)
                 {
-                    questManager.currentActiveQuest.Increase(iManager.mapOreCollection[temp]);
+                    questManager.currentActiveQuest.Increase(iManager.oreCollection[temp]);
                 }
             }
             if (questManager.activeEQuest.questType == QuestType.SellTitanium)
             {
-                questManager.activeEQuest.Increase(iManager.mapOreCollection[temp]);
+                questManager.activeEQuest.Increase(iManager.oreCollection[temp]);
             }
             if (questManager.activeIQuest.questType == QuestType.SellTitanium)
             {
-                questManager.activeIQuest.Increase(iManager.mapOreCollection[temp]);
+                questManager.activeIQuest.Increase(iManager.oreCollection[temp]);
             }
             if (questManager.activeHQuest.questType == QuestType.SellTitanium)
             {
-                questManager.activeHQuest.Increase(iManager.mapOreCollection[temp]);
+                questManager.activeHQuest.Increase(iManager.oreCollection[temp]);
             }*/
             #endregion
 
@@ -587,13 +588,13 @@ public class ShopSystem : MonoBehaviour
     {
         for (i = 0; i > -1; i++)
         {
-            if (oreSell[oreNumber] >= iManager.mapOreCollection[oreNumber]) oreSell[oreNumber] = iManager.mapOreCollection[oreNumber];
+            if (oreSell[oreNumber] >= iManager.oreCollection[oreNumber]) oreSell[oreNumber] = iManager.oreCollection[oreNumber];
             else if (i < 3) oreSell[oreNumber] += 1;
-            else if ((iManager.mapOreCollection[oreNumber] - oreSell[oreNumber]) < 10) oreSell[oreNumber] = iManager.mapOreCollection[oreNumber];
+            else if ((iManager.oreCollection[oreNumber] - oreSell[oreNumber]) < 10) oreSell[oreNumber] = iManager.oreCollection[oreNumber];
             else if (i < 5) oreSell[oreNumber] += 10;
-            else if ((iManager.mapOreCollection[oreNumber] - oreSell[oreNumber]) < 100) oreSell[oreNumber] = iManager.mapOreCollection[oreNumber];
+            else if ((iManager.oreCollection[oreNumber] - oreSell[oreNumber]) < 100) oreSell[oreNumber] = iManager.oreCollection[oreNumber];
             else if (i < 8) oreSell[oreNumber] += 100;
-            else if ((iManager.mapOreCollection[oreNumber] - oreSell[oreNumber]) < 1000) oreSell[oreNumber] = iManager.mapOreCollection[oreNumber];
+            else if ((iManager.oreCollection[oreNumber] - oreSell[oreNumber]) < 1000) oreSell[oreNumber] = iManager.oreCollection[oreNumber];
             else oreSell[oreNumber] += 1000;
             yield return new WaitForSeconds(0.2f);
         }
@@ -630,47 +631,47 @@ public class ShopSystem : MonoBehaviour
     {
         bool enough = false;
 
-        if (iManager.coin >= iManager.equipmentList[equipmentList.value].latestPrice)
+        if (iManager.coin >= iManager.eqLatestPrice[equipmentList.value])
         {
-            if (iManager.equipmentList[equipmentList.value].eqLvl != 10 && iManager.equipmentList[equipmentList.value].eqLvl != 20 && iManager.equipmentList[equipmentList.value].eqLvl != 29)
+            if (iManager.eqLevel[equipmentList.value] != 10 && iManager.eqLevel[equipmentList.value] != 20 && iManager.eqLevel[equipmentList.value] != 29)
             {
                 enough = true;
             }
             #region Enough ore checking
             else if (equipmentList.value == 1)
             {
-                if (iManager.mapOreCollection[1] >= iManager.equipmentList[1].oreRequirementValue[0] && iManager.equipmentList[1].eqLvl == 10)
+                if (iManager.oreCollection[1] >= 1000 && iManager.eqLevel[1] == 10)
                 {
                     enough = true;
-                    iManager.mapOreCollection[1] -= iManager.equipmentList[1].oreRequirementValue[0];
+                    iManager.oreCollection[1] -= 1000;
                 }
-                else if (iManager.mapOreCollection[2] >= iManager.equipmentList[1].oreRequirementValue[1] && iManager.equipmentList[1].eqLvl == 20)
+                else if (iManager.oreCollection[2] >= 1000 && iManager.eqLevel[1] == 20)
                 {
                     enough = true;
-                    iManager.mapOreCollection[2] -= iManager.equipmentList[1].oreRequirementValue[1];
+                    iManager.oreCollection[2] -= 1000;
                 }
-                else if (iManager.mapOreCollection[3] >= iManager.equipmentList[1].oreRequirementValue[2] && iManager.equipmentList[1].eqLvl == 29)
+                else if (iManager.oreCollection[3] >= 1000 && iManager.eqLevel[1] == 29)
                 {
                     enough = true;
-                    iManager.mapOreCollection[3] -= iManager.equipmentList[1].oreRequirementValue[2];
+                    iManager.oreCollection[3] -= 1000;
                 }
             }
             else if (equipmentList.value == 2)
             {
-                if (iManager.mapOreCollection[4] >= iManager.equipmentList[2].oreRequirementValue[0] && iManager.equipmentList[2].eqLvl == 10)
+                if (iManager.oreCollection[4] >= 1000 && iManager.eqLevel[2] == 10)
                 {
                     enough = true;
-                    iManager.mapOreCollection[4] -= iManager.equipmentList[2].oreRequirementValue[0];
+                    iManager.oreCollection[4] -= 1000;
                 }
-                else if (iManager.mapOreCollection[5] >= iManager.equipmentList[2].oreRequirementValue[1] && iManager.equipmentList[2].eqLvl == 20)
+                else if (iManager.oreCollection[5] >= 1000 && iManager.eqLevel[2] == 20)
                 {
                     enough = true;
-                    iManager.mapOreCollection[5] -= iManager.equipmentList[2].oreRequirementValue[1];
+                    iManager.oreCollection[5] -= 1000;
                 }
-                else if (iManager.mapOreCollection[6] >= iManager.equipmentList[2].oreRequirementValue[2] && iManager.equipmentList[2].eqLvl == 29)
+                else if (iManager.oreCollection[6] >= 1000 && iManager.eqLevel[2] == 29)
                 {
                     enough = true;
-                    iManager.mapOreCollection[6] -= iManager.equipmentList[2].oreRequirementValue[2];
+                    iManager.oreCollection[6] -= 1000;
                 }
             }
             #endregion
@@ -681,18 +682,18 @@ public class ShopSystem : MonoBehaviour
             StartCoroutine("BrookAnim");
 
             //Equipment value go up (level, attack power)
-            iManager.equipmentList[equipmentList.value].eqLvl++;
-            iManager.equipmentList[equipmentList.value].att += 0.15f;
-            iManager.coin -= iManager.equipmentList[equipmentList.value].latestPrice;
+            iManager.eqLevel[equipmentList.value]++;
+            iManager.eqAttack[equipmentList.value] += 0.15f;
+            iManager.coin -= iManager.eqLatestPrice[equipmentList.value];
 
             //Equipment pricing
-            if (enough && (iManager.equipmentList[equipmentList.value].eqLvl != 10 || iManager.equipmentList[equipmentList.value].eqLvl != 20 || iManager.equipmentList[equipmentList.value].eqLvl != 29))
+            if (enough && (iManager.eqLevel[equipmentList.value] != 10 || iManager.eqLevel[equipmentList.value] != 20 || iManager.eqLevel[equipmentList.value] != 29))
             {
-                if (iManager.equipmentList[equipmentList.value].eqLvl == 11 || iManager.equipmentList[equipmentList.value].eqLvl == 21 || iManager.equipmentList[equipmentList.value].eqLvl == 29)
+                if (iManager.eqLevel[equipmentList.value] == 11 || iManager.eqLevel[equipmentList.value] == 21 || iManager.eqLevel[equipmentList.value] == 29)
                 {
-                    iManager.equipmentList[equipmentList.value].latestPrice += (iManager.equipmentList[equipmentList.value].latestPrice * 50 / 100);
+                    iManager.eqLatestPrice[equipmentList.value] += (iManager.eqLatestPrice[equipmentList.value] * 50 / 100);
                 }
-                else iManager.equipmentList[equipmentList.value].latestPrice += (iManager.equipmentList[equipmentList.value].basePrice * 50 / 100);
+                else iManager.eqLatestPrice[equipmentList.value] += (iManager.eqBasePrice[equipmentList.value] * 50 / 100);
             }
         }
         else
@@ -713,8 +714,8 @@ public class ShopSystem : MonoBehaviour
     }
     public void AdvanceInfoRefresh()
     {
-        coinRequirement[0].text = iManager.coin + " / " + iManager.equipmentList[equipmentList.value].latestPrice.ToString();
-        coinRequirement[1].text = iManager.coin + " / " + iManager.equipmentList[equipmentList.value].latestPrice.ToString();
+        coinRequirement[0].text = iManager.coin + " / " + iManager.eqLatestPrice[equipmentList.value].ToString();
+        coinRequirement[1].text = iManager.coin + " / " + iManager.eqLatestPrice[equipmentList.value].ToString();
 
         #region Equipment Check
         int a = 0, b = 0, c = 0;
@@ -733,7 +734,7 @@ public class ShopSystem : MonoBehaviour
         #endregion
         if (equipmentList.value == 0)
         {
-            if (iManager.equipmentList[equipmentList.value].eqLvl == 10)
+            if (iManager.eqLevel[equipmentList.value] == 10)
             {
                 upgradeType[0].SetActive(true);
                 coinLogo.SetActive(false);
@@ -748,37 +749,55 @@ public class ShopSystem : MonoBehaviour
         {
             upgradeType[0].SetActive(false);
             upgradeType[1].SetActive(false);
-            if (iManager.equipmentList[equipmentList.value].eqLvl == 10)
+            if (iManager.eqLevel[equipmentList.value] == 10)
             {
                 upgradeType[1].SetActive(true);
                 materialOnScreen.sprite = materialImagesSprite[a];
-                materialRequirement.text = iManager.mapOreCollection[a].ToString() + " / " + iManager.equipmentList[equipmentList.value].oreRequirementValue[0].ToString();
-                materialName.text = iManager.equipmentList[equipmentList.value].oreRequirementName[equipmentList.value];
+                materialRequirement.text = iManager.oreCollection[a].ToString() + " / 1000";
+                if (equipmentList.value == 1)
+                {
+                    materialName.text = "Coal";
+                }
+                else if (equipmentList.value == 2)
+                {
+                    materialName.text = "Gold";
+                }
                 coinText[1].SetActive(true);
                 upgradeBtn.SetActive(true);
-                GameObject.Find("upgradeText").GetComponent<TMPro.TextMeshProUGUI>().text = "Advance";
             }
-            else if (iManager.equipmentList[equipmentList.value].eqLvl == 20)
+            else if (iManager.eqLevel[equipmentList.value] == 20)
             {
                 upgradeType[1].SetActive(true);
                 materialOnScreen.sprite = materialImagesSprite[b];
-                materialRequirement.text = iManager.mapOreCollection[b].ToString() + " / " + iManager.equipmentList[equipmentList.value].oreRequirementValue[1].ToString();
-                materialName.text = iManager.equipmentList[equipmentList.value].oreRequirementName[equipmentList.value];
+                materialRequirement.text = iManager.oreCollection[b].ToString() + " / 1000";
+                if (equipmentList.value == 1)
+                {
+                    materialName.text = "Copper";
+                }
+                else if (equipmentList.value == 2)
+                {
+                    materialName.text = "Ruby";
+                }
                 coinText[1].SetActive(true);
                 upgradeBtn.SetActive(true);
-                GameObject.Find("upgradeText").GetComponent<TMPro.TextMeshProUGUI>().text = "Advance";
             }
-            else if (iManager.equipmentList[equipmentList.value].eqLvl == 29)
+            else if (iManager.eqLevel[equipmentList.value] == 29)
             {
                 upgradeType[1].SetActive(true);
                 materialOnScreen.sprite = materialImagesSprite[c];
-                materialRequirement.text = iManager.mapOreCollection[c].ToString() + " / " + iManager.equipmentList[equipmentList.value].oreRequirementValue[2].ToString();
-                materialName.text = iManager.equipmentList[equipmentList.value].oreRequirementName[equipmentList.value];
+                materialRequirement.text = iManager.oreCollection[c].ToString() + " / 1000";
+                if (equipmentList.value == 1)
+                {
+                    materialName.text = "Iron";
+                }
+                else if (equipmentList.value == 2)
+                {
+                    materialName.text = "Titanium";
+                }
                 coinText[1].SetActive(true);
                 upgradeBtn.SetActive(true);
-                GameObject.Find("upgradeText").GetComponent<TMPro.TextMeshProUGUI>().text = "Advance";
             }
-            else if (iManager.equipmentList[equipmentList.value].eqLvl == 30)
+            else if (iManager.eqLevel[equipmentList.value] == 30)
             {
                 upgradeType[0].SetActive(true);
                 coinLogo.SetActive(false);
@@ -793,11 +812,10 @@ public class ShopSystem : MonoBehaviour
                 coinText[0].SetActive(true);
                 coinLogo.SetActive(true);
                 upgradeBtn.SetActive(true);
-                GameObject.Find("upgradeText").GetComponent<TMPro.TextMeshProUGUI>().text = "Upgrade";
             }   
         }
 
-        eqLevel.text = iManager.equipmentList[equipmentList.value].eqLvl.ToString();
+        eqLevel.text = iManager.eqLevel[equipmentList.value].ToString();
     }
     public void UpdateOreMerchant()
     {
@@ -828,7 +846,7 @@ public class ShopSystem : MonoBehaviour
     {
         for (int temp = 0; temp < oreCollection.Length; temp++)
         {
-            oreCollection[temp].text = iManager.mapOreCollection[temp].ToString();
+            oreCollection[temp].text = iManager.oreCollection[temp].ToString();
         }
 
         for (int temp = 0; temp < oreSellValue.Length; temp++)

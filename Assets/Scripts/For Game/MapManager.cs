@@ -13,6 +13,8 @@ public class MapManager : MonoBehaviour
     public Text coin;
     public GameObject settings;
     public AudioSource music;
+
+    public GameObject credit;
     
     private void Start()
     {
@@ -91,6 +93,8 @@ public class MapManager : MonoBehaviour
             EventSystem.current.currentSelectedGameObject.name == "settingArea" ||
             EventSystem.current.currentSelectedGameObject.name == "Setting")))
         {
+            credit.GetComponent<SimpleFade>().Deactivate();
+            credit.SetActive(false);
             settings.SetActive(false);
         }
     }
@@ -134,4 +138,17 @@ public class MapManager : MonoBehaviour
         if (music.volume == 0) music.volume = 1;
         else music.volume = 0;
     }
+    public void Credits()
+    {
+        if (credit.activeSelf)
+        {
+            credit.GetComponent<SimpleFade>().Deactivate();
+            credit.SetActive(false);
+        }
+        else
+        {
+            credit.SetActive(true);
+            credit.GetComponent<SimpleFade>().Activate();
+        }
+    }    
 }

@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Maps/DeepCave.unity
     guid: 0e830d3f628ee3345a629874d8ee436e
+  - enabled: 1
+    path: Assets/Scenes/Update.unity
+    guid: d737aacf348f8854f90e6277af5c7c8c
   m_configObjects: {}
