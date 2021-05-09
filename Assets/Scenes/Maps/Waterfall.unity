@@ -2604,7 +2604,6 @@ MonoBehaviour:
   trueMiningSpeed: 0
   trueMiningPower: 0
   coin: 0
-  isLoaded: 0
 --- !u!1 &2024176913
 GameObject:
   m_ObjectHideFlags: 0

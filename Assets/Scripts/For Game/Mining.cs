@@ -13,6 +13,7 @@ public class Mining : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && EventSystem.current.currentSelectedGameObject == null)
         {
+            SFX.PlaySound("Cave");
             anim.SetBool("Mine", true);
         }
         else
