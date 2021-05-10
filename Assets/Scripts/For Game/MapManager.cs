@@ -38,18 +38,6 @@ public class MapManager : MonoBehaviour
             DontDestroyOnLoad(managerChecker[0]);
         }
 
-        //music gameobject check
-        musicChecker = GameObject.FindGameObjectsWithTag("audio");
-        if (musicChecker.Length == 2)
-        {
-            Destroy(musicChecker[1]);
-            DontDestroyOnLoad(musicChecker[0]);
-        }
-        else
-        {
-            DontDestroyOnLoad(musicChecker[0]);
-        }
-
         music = GameObject.Find("Music").GetComponent<AudioSource>();
     }
     private void Update()
@@ -63,7 +51,8 @@ public class MapManager : MonoBehaviour
             {
                 if (SceneManager.GetActiveScene().name == "Waterfall" ||
                     SceneManager.GetActiveScene().name == "Cave" ||
-                    SceneManager.GetActiveScene().name == "DeepCave")
+                    SceneManager.GetActiveScene().name == "DeepCave" ||
+                    SceneManager.GetActiveScene().name == "EarthMantle")
                 {                    
                     SceneManager.LoadScene("Map");
                 }
@@ -126,6 +115,8 @@ public class MapManager : MonoBehaviour
     {
         if (settings.activeSelf)
         {
+            credit.SetActive(false);
+            credit.GetComponent<SimpleFade>().Deactivate();            
             settings.SetActive(false);
         }
         else

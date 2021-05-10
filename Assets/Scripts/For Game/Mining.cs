@@ -8,12 +8,14 @@ using UnityEngine.EventSystems;
 public class Mining : MonoBehaviour
 {
     public Animator anim;
+    public string scene;
+    bool idle;
 
     void Update()
     {
         if (Input.GetMouseButtonDown(0) && EventSystem.current.currentSelectedGameObject == null)
         {
-            SFX.PlaySound("Cave");
+            SFX.PlaySound(scene);
             anim.SetBool("Mine", true);
         }
         else

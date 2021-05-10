@@ -14,7 +14,6 @@ public class ShopSystem : MonoBehaviour
     public MapManager mapManager;
 
     public TMPro.TextMeshProUGUI eqLevel;
-    public string[] materialNames;
     public Sprite[] materialImagesSprite;
 
     #region Merchant
@@ -103,14 +102,14 @@ public class ShopSystem : MonoBehaviour
 
         #region Ore Merchant UI Conditioning
         //normal sell
-        if (oreSell[0] != 0 || oreSell[1] != 0 || oreSell[2] != 0 || oreSell[3] != 0 || oreSell[4] != 0 || oreSell[5] != 0 || oreSell[6] != 0)
+        if (oreSell[0] != 0 || oreSell[1] != 0 || oreSell[2] != 0 || oreSell[3] != 0 || oreSell[4] != 0 || oreSell[5] != 0 || oreSell[6] != 0 || oreSell[7] != 0 || oreSell[8] != 0 || oreSell[9] != 0)
         {
             sellButton.interactable = true;
         }
         else sellButton.interactable = false;
 
         //sell all
-        if (iManager.oreCollection[0] != 0 || iManager.oreCollection[1] != 0 || iManager.oreCollection[2] != 0 || iManager.oreCollection[3] != 0 || iManager.oreCollection[4] != 0 || iManager.oreCollection[5] != 0 || iManager.oreCollection[6] != 0)
+        if (iManager.oreCollection[0] != 0 || iManager.oreCollection[1] != 0 || iManager.oreCollection[2] != 0 || iManager.oreCollection[3] != 0 || iManager.oreCollection[4] != 0 || iManager.oreCollection[5] != 0 || iManager.oreCollection[6] != 0 || iManager.oreCollection[7] != 0 || iManager.oreCollection[8] != 0 || iManager.oreCollection[9] != 0)
         {
             sellAllButton.interactable = true;
         }
@@ -229,6 +228,18 @@ public class ShopSystem : MonoBehaviour
                 else if (temp == 6) //titanium
                 {
                     price = 100;
+                }
+                else if (temp == 7) //hpruby
+                {
+                    price = 250;
+                }
+                else if (temp == 8) //sapphire
+                {
+                    price = 400;
+                }
+                else if (temp == 9) //emerald
+                {
+                    price = 600;
                 }
                 #endregion
                 iManager.coin += oreSell[temp] * price;
@@ -418,6 +429,18 @@ public class ShopSystem : MonoBehaviour
             else if (temp == 6) //titanium
             {
                 price = 100;
+            }
+            else if (temp == 7) //hpruby
+            {
+                price = 250;
+            }
+            else if (temp == 8) //sapphire
+            {
+                price = 400;
+            }
+            else if (temp == 9) //emerald
+            {
+                price = 600;
             }
             #endregion
             iManager.coin += iManager.oreCollection[temp] * price;
@@ -674,6 +697,24 @@ public class ShopSystem : MonoBehaviour
                     iManager.oreCollection[6] -= 1000;
                 }
             }
+            else if (equipmentList.value == 3)
+            {
+                if (iManager.oreCollection[7] >= 1000 && iManager.eqLevel[3] == 10)
+                {
+                    enough = true;
+                    iManager.oreCollection[7] -= 1000;
+                }
+                else if (iManager.oreCollection[8] >= 1000 && iManager.eqLevel[3] == 20)
+                {
+                    enough = true;
+                    iManager.oreCollection[8] -= 1000;
+                }
+                else if (iManager.oreCollection[9] >= 1000 && iManager.eqLevel[3] == 29)
+                {
+                    enough = true;
+                    iManager.oreCollection[9] -= 1000;
+                }
+            }
             #endregion
         }
 
@@ -731,6 +772,10 @@ public class ShopSystem : MonoBehaviour
         {
             a = 4; b = 5; c = 6;
         }
+        else if (equipmentList.value == 3) //tnt
+        {
+            a = 7; b = 8; c = 9;
+        }
         #endregion
         if (equipmentList.value == 0)
         {
@@ -762,6 +807,10 @@ public class ShopSystem : MonoBehaviour
                 {
                     materialName.text = "Gold";
                 }
+                else if (equipmentList.value == 3)
+                {
+                    materialName.text = "High Purity Ruby";
+                }
                 coinText[1].SetActive(true);
                 upgradeBtn.SetActive(true);
             }
@@ -778,6 +827,10 @@ public class ShopSystem : MonoBehaviour
                 {
                     materialName.text = "Ruby";
                 }
+                else if (equipmentList.value == 3)
+                {
+                    materialName.text = "Sapphire";
+                }
                 coinText[1].SetActive(true);
                 upgradeBtn.SetActive(true);
             }
@@ -793,6 +846,10 @@ public class ShopSystem : MonoBehaviour
                 else if (equipmentList.value == 2)
                 {
                     materialName.text = "Titanium";
+                }
+                else if (equipmentList.value == 3)
+                {
+                    materialName.text = "Emerald";
                 }
                 coinText[1].SetActive(true);
                 upgradeBtn.SetActive(true);
@@ -830,6 +887,9 @@ public class ShopSystem : MonoBehaviour
         oreName[4].text = "Gold";
         oreName[5].text = "Ruby";
         oreName[6].text = "Titanium";
+        oreName[7].text = "High Purity Ruby";
+        oreName[8].text = "Sapphire";
+        oreName[9].text = "Emerald";
     }
     public void MerchantChange()
     {

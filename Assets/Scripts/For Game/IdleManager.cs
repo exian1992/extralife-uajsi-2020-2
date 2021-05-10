@@ -30,6 +30,7 @@ public class IdleManager : MonoBehaviour
     //orechance
     public int[] map12OreChance;
     public int[] map3OreChance;
+    public int[] map4OreChance;
 
     #region Equipment Info
     public int[] eqLevel;
@@ -129,11 +130,10 @@ public class IdleManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-
         if (SceneManager.GetActiveScene().name == "Waterfall" ||
             SceneManager.GetActiveScene().name == "Cave" ||
-            SceneManager.GetActiveScene().name == "DeepCave")
+            SceneManager.GetActiveScene().name == "DeepCave" ||
+            SceneManager.GetActiveScene().name == "EarthMantle")
         {
             //ore remover + generator
             currentBlock = GameObject.FindGameObjectWithTag("ore");
@@ -186,7 +186,8 @@ public class IdleManager : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "Waterfall" ||
             SceneManager.GetActiveScene().name == "Cave" ||
-            SceneManager.GetActiveScene().name == "DeepCave")
+            SceneManager.GetActiveScene().name == "DeepCave" ||
+            SceneManager.GetActiveScene().name == "EarthMantle")
         {
             currentBlock = GameObject.FindGameObjectWithTag("ore");
             Ore ore = currentBlock.GetComponent<Ore>();
@@ -214,6 +215,12 @@ public class IdleManager : MonoBehaviour
             mapOreValueText[0].text = oreCollection[4].ToString();
             mapOreValueText[1].text = oreCollection[5].ToString();
             mapOreValueText[2].text = oreCollection[6].ToString();
+        }
+        else if (SceneManager.GetActiveScene().name == "EarthMantle")
+        {
+            mapOreValueText[0].text = oreCollection[7].ToString();
+            mapOreValueText[1].text = oreCollection[8].ToString();
+            mapOreValueText[2].text = oreCollection[9].ToString();
         }
     }
     #region Tile Stuff
@@ -255,6 +262,21 @@ public class IdleManager : MonoBehaviour
                 Instantiate(prefabs[1], new Vector3(0f, 0f, 0f), Quaternion.Euler(0, 0, 90));
             }
             else if (randomOre < map3OreChance[0])//goldChance)
+            {
+                Instantiate(prefabs[0], new Vector3(0f, 0f, 0f), Quaternion.Euler(0, 0, 90));
+            }
+        }
+        if (SceneManager.GetActiveScene().name == "EarthMantle")
+        {
+            if (randomOre < map4OreChance[2])//emeraldChance)
+            {
+                Instantiate(prefabs[2], new Vector3(0f, 0f, 0f), Quaternion.Euler(0, 0, 90));
+            }
+            else if (randomOre < map4OreChance[1])//sapphireChance)
+            {
+                Instantiate(prefabs[1], new Vector3(0f, 0f, 0f), Quaternion.Euler(0, 0, 90));
+            }
+            else if (randomOre < map4OreChance[0])//hprubyChance)
             {
                 Instantiate(prefabs[0], new Vector3(0f, 0f, 0f), Quaternion.Euler(0, 0, 90));
             }
@@ -379,6 +401,18 @@ public class IdleManager : MonoBehaviour
         {
             oreCollection[6]++;
         }
+        if (ore.GetName() == "HPRuby")
+        {
+            oreCollection[7]++;
+        }
+        if (ore.GetName() == "Sapphire")
+        {
+            oreCollection[8]++;
+        }
+        if (ore.GetName() == "Emerald")
+        {
+            oreCollection[9]++;
+        }
     }
     #endregion
 
@@ -446,6 +480,10 @@ public class IdleManager : MonoBehaviour
         {
             trueMiningPower = eqAttack[2];
         }
+        else if (SceneManager.GetActiveScene().name == "EarthMantle")
+        {
+            trueMiningPower = eqAttack[3];
+        }
         #endregion
         /*if (costumeManager.costumeEquipped && costumeManager.currentActiveCostume.statusTypeCostume == StatusTypeCostume.PowerUp)
         {
@@ -470,7 +508,12 @@ public class IdleManager : MonoBehaviour
 
         for (int i = 0; i < eqLevel.Length; i++)
         {
-            eqLevel[i] = data.eqLevel[i];
+            if (data.eqLevel[i] == 0)
+            {
+                eqLevel[i] = 1;
+            }
+            else eqLevel[i] = data.eqLevel[i];
+
             eqAttack[i] = data.eqAttack[i];
             eqBasePrice[i] = data.eqBasePrice[i];
             eqLatestPrice[i] = data.eqLatestPrice[i];
@@ -554,6 +597,26 @@ public class IdleManager : MonoBehaviour
             map3OreChance[0] = 20;
             map3OreChance[1] = 8;
             map3OreChance[2] = 2;
+        }
+        #endregion
+        #region HandDrill/EarthMantle
+        if (eqLevel[2] <= 10)
+        {
+            map4OreChance[0] = 20;
+            map4OreChance[1] = 0;
+            map4OreChance[2] = 0;
+        }
+        else if (eqLevel[2] <= 20)
+        {
+            map4OreChance[0] = 20;
+            map4OreChance[1] = 6;
+            map4OreChance[2] = 0;
+        }
+        else if (eqLevel[2] <= 30)
+        {
+            map4OreChance[0] = 20;
+            map4OreChance[1] = 8;
+            map4OreChance[2] = 2;
         }
         #endregion
     }

@@ -17,6 +17,7 @@ public class walk : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && EventSystem.current.currentSelectedGameObject == null && anim.GetBool("Mine") == false)
         {
+            SFX.PlaySound("Waterfall");
             anim.SetBool("Mine", true);
         }
         else

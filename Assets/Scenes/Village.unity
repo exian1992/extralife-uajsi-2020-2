@@ -1318,17 +1318,19 @@ MonoBehaviour:
   managerChecker: []
   prefabs: []
   currentBlock: {fileID: 0}
-  oreCollection: 00000000000000000000000000000000000000000000000000000000
+  oreCollection: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
   mapOreValueText: []
   map12OreChance: 00000000000000000000000000000000
   map3OreChance: 000000000000000000000000
-  eqLevel: 010000000100000001000000
+  map4OreChance: 000000000000000000000000
+  eqLevel: 01000000010000000100000001000000
   eqAttack:
   - 1
   - 1
   - 1
-  eqBasePrice: 64000000e803000010270000
-  eqLatestPrice: 64000000e803000010270000
+  - 1
+  eqBasePrice: 64000000e803000010270000a8610000
+  eqLatestPrice: 64000000e803000010270000a8610000
   tempMiningSpeed: 0
   tempMiningPower: 0
   trueMiningSpeed: 0
@@ -1535,7 +1537,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 524.5704, y: 0}
+  m_AnchoredPosition: {x: 528.7974, y: 0}
   m_SizeDelta: {x: 1157.5931, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1218265964

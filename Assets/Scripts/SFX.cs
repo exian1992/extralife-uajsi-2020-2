@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SFX : MonoBehaviour
 {
-    public static AudioClip WaterfallSFX, CaveSFX, DeepCaveSFX;
+    public static AudioClip WaterfallSFX, CaveSFX, DeepCaveSFX; 
     static AudioSource AudioSFX;
 
     // Start is called before the first frame update
@@ -15,12 +15,6 @@ public class SFX : MonoBehaviour
         DeepCaveSFX = Resources.Load<AudioClip>("Deep Cave SFX");
 
         AudioSFX = GetComponent<AudioSource>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-     
     }
 
     public static void PlaySound (string clip)
