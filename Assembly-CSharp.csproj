@@ -65,7 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Images\Mining Idle Assets\Character Artist\Lv.1 Waterfall\Klein (Main Character)\Walk\walk.cs" />
-    <Compile Include="Assets\Scripts\Experimental\TimeTest.cs" />
+    <Compile Include="Assets\Scenes\Experimental\TimeTest.cs" />
     <Compile Include="Assets\Scripts\For Game\IdleManager.cs" />
     <Compile Include="Assets\Scripts\For Game\MapManager.cs" />
     <Compile Include="Assets\Scripts\For Game\Mining.cs" />
