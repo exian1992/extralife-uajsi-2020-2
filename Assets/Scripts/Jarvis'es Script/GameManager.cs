@@ -123,7 +123,7 @@ public class GameManager : MonoBehaviour
             currentOreName.text = ore.GetName();
 
             //touch input
-            if (Input.GetMouseButtonDown(0))
+            /*if (Input.GetMouseButtonDown(0))
             {
                 if (EventSystem.current.IsPointerOverGameObject()) return;
                 #region Tap Quest
@@ -149,7 +149,7 @@ public class GameManager : MonoBehaviour
                 }
                 #endregion
                 AttackOre();
-            }
+            }*/
 
             //tile moving
             if (currentOreHealth <= 0)
@@ -217,7 +217,7 @@ public class GameManager : MonoBehaviour
         if (ore.GetName() == "Stone")
         {
             map1OreCollection[0]++;
-            #region Stone mining quest
+            /*#region Stone mining quest
                 if (questManager.isThereQuest)
                 {
                     if (questManager.currentActiveQuest.questType == QuestType.MineStone)
@@ -238,12 +238,12 @@ public class GameManager : MonoBehaviour
                     questManager.activeHQuest.Increase(1);
                 }
                 questManager.QuestCompleteCheck();
-            #endregion
+            #endregion*/
         }
         if (ore.GetName() == "Coal")
         {
             map1OreCollection[1]++;
-            #region Coal mining quest
+            /*#region Coal mining quest
                 if (questManager.isThereQuest)
                 {
                     if (questManager.currentActiveQuest.questType == QuestType.MineCoal)
@@ -264,12 +264,12 @@ public class GameManager : MonoBehaviour
                     questManager.activeHQuest.Increase(1);
                 }
                 questManager.QuestCompleteCheck();
-                #endregion
+                #endregion*/
         }
         if (ore.GetName() == "Bronze")
         {
             map1OreCollection[2]++;
-            #region Bronze mining quest
+            /*#region Bronze mining quest
                 if (questManager.isThereQuest)
                 {
                     if (questManager.currentActiveQuest.questType == QuestType.MineBronze)
@@ -290,12 +290,12 @@ public class GameManager : MonoBehaviour
                     questManager.activeHQuest.Increase(1);
                 }
                 questManager.QuestCompleteCheck();
-                #endregion
+                #endregion*/
         }
         if (ore.GetName() == "Iron")
         {
             map1OreCollection[3]++;
-            #region Iron mining quest
+            /*#region Iron mining quest
                 if (questManager.isThereQuest)
                 {
                     if (questManager.currentActiveQuest.questType == QuestType.MineIron)
@@ -316,7 +316,7 @@ public class GameManager : MonoBehaviour
                     questManager.activeHQuest.Increase(1);
                 }
                 questManager.QuestCompleteCheck();
-                #endregion
+                #endregion*/
         }
     }
     #endregion
@@ -459,7 +459,7 @@ public class GameManager : MonoBehaviour
         map1OreCollection[2] = data.copper;
         map1OreCollection[3] = data.iron;
 
-        eqLvl = data.eqLvl;
+        //eqLvl = data.eqLvl;
 
         coin = data.coin;
     }

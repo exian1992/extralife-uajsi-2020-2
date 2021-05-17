@@ -66,6 +66,8 @@
   <ItemGroup>
     <Compile Include="Assets\Images\Mining Idle Assets\Character Artist\Lv.1 Waterfall\Klein (Main Character)\Walk\walk.cs" />
     <Compile Include="Assets\Scenes\Experimental\TimeTest.cs" />
+    <Compile Include="Assets\Scripts\For Game\AllManager.cs" />
+    <Compile Include="Assets\Scripts\For Game\HireNPCManager.cs" />
     <Compile Include="Assets\Scripts\For Game\IdleManager.cs" />
     <Compile Include="Assets\Scripts\For Game\MapManager.cs" />
     <Compile Include="Assets\Scripts\For Game\Mining.cs" />
@@ -81,7 +83,6 @@
     <Compile Include="Assets\Scripts\Jarvis'es Script\Quests\DailyQuest\EasyQuest.cs" />
     <Compile Include="Assets\Scripts\Jarvis'es Script\Quests\DailyQuest\HardQuest.cs" />
     <Compile Include="Assets\Scripts\Jarvis'es Script\Quests\DailyQuest\IntermediateQuest.cs" />
-    <Compile Include="Assets\Scripts\Jarvis'es Script\Quests\QuestInfo.cs" />
     <Compile Include="Assets\Scripts\Jarvis'es Script\Quests\QuestManager.cs" />
     <Compile Include="Assets\Scripts\Jarvis'es Script\Quests\QuestType.cs" />
     <Compile Include="Assets\Scripts\Jarvis'es Script\SaveSystem.cs" />

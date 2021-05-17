@@ -7,10 +7,12 @@ using UnityEngine.SceneManagement;
 
 public class MapManager : MonoBehaviour
 {
-    public IdleManager iManager;
+    AllManager allManager;
+    IdleManager iManager;
+
     public string toWhatShop;
     public GameObject[] managerChecker, musicChecker;
-    public Text coin;
+    public TMPro.TextMeshProUGUI coin;
     public GameObject settings;
     public AudioSource music;
 
@@ -19,8 +21,6 @@ public class MapManager : MonoBehaviour
     private void Start()
     {
         Application.targetFrameRate = -1;
-
-        iManager = GameObject.Find("IdleManager").GetComponent<IdleManager>();
 
         //map manager gameobject check
         managerChecker = GameObject.FindGameObjectsWithTag("mManager"); //mManager = mapManager
@@ -37,16 +37,29 @@ public class MapManager : MonoBehaviour
         {
             DontDestroyOnLoad(managerChecker[0]);
         }
+        musicChecker = GameObject.FindGameObjectsWithTag("audio");
 
-        music = GameObject.Find("Music").GetComponent<AudioSource>();
+        if (musicChecker.Length == 2 && musicChecker[0].GetComponent<AudioSource>().clip == musicChecker[1].GetComponent<AudioSource>().clip)
+        {
+            Destroy(musicChecker[1]);            
+        }
+        else if (musicChecker.Length == 2)
+        {
+            Destroy(musicChecker[0]);
+            DontDestroyOnLoad(musicChecker[1]);
+        }
+        else DontDestroyOnLoad(musicChecker[0]);
     }
     private void Update()
     {
-        coin = GameObject.Find("CoinText").GetComponent<Text>();
+        allManager = GameObject.Find("AllManager").GetComponent<AllManager>();
+        iManager = GameObject.Find("IdleManager").GetComponent<IdleManager>();
+
+        coin = GameObject.Find("CoinText").GetComponent<TMPro.TextMeshProUGUI>();
         coin.text = iManager.coin.ToString();
 
-        //if (Application.platform == RuntimePlatform.Android)
-        //{
+        if (Application.platform == RuntimePlatform.Android)
+        {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 if (SceneManager.GetActiveScene().name == "Waterfall" ||
@@ -63,7 +76,7 @@ public class MapManager : MonoBehaviour
                 }
                 else if (SceneManager.GetActiveScene().name == "Shop")
                 {
-                    iManager.SaveAllProgress();
+                    allManager.SaveAllProgress();
                     SceneManager.LoadScene("Village");
                 }
                 else if (SceneManager.GetActiveScene().name == "Map")
@@ -71,7 +84,7 @@ public class MapManager : MonoBehaviour
                     SceneManager.LoadScene("Village");
                 }
             }
-        //}
+        }
 
         //setting menu close when clicked outside setting area
         if (Input.GetMouseButtonUp(0) && 
@@ -89,8 +102,7 @@ public class MapManager : MonoBehaviour
     }
     public void MoveScene(string sceneName)
     {
-        iManager = GameObject.Find("IdleManager").GetComponent<IdleManager>();
-        iManager.SaveAllProgress();
+        allManager.SaveAllProgress();
 
         if (SceneManager.GetActiveScene().name == "Village")
         {

@@ -6,12 +6,11 @@ using UnityEngine.UI;
 
 public class ShopSystem : MonoBehaviour
 {
-    //GameManager gManager;
     IdleManager iManager;
-    QuestManager questManager;
+    QuestManager qManager;
     PetManager petManager;
     CostumeManager costumeManager;
-    public MapManager mapManager;
+    MapManager mapManager;
 
     public TMPro.TextMeshProUGUI eqLevel;
     public Sprite[] materialImagesSprite;
@@ -68,12 +67,7 @@ public class ShopSystem : MonoBehaviour
     
     void Start()
     {
-        #region GameObject Initiation
-        //gManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         iManager = GameObject.Find("IdleManager").GetComponent<IdleManager>();
-        //questManager = GameObject.Find("QuestManager").GetComponent<QuestManager>();
-        //petManager = GameObject.Find("PetManager").GetComponent<PetManager>();
-        //costumeManager = GameObject.Find("CostumeManager").GetComponent<CostumeManager>();
         mapManager = GameObject.Find("MapManager").GetComponent<MapManager>();
 
         buyDogeBtn = buyDoge.GetComponent<Button>();
@@ -81,7 +75,6 @@ public class ShopSystem : MonoBehaviour
 
         buyLynnBtn = buyLynn.GetComponent<Button>();
         buyBrookBtn = buyBrook.GetComponent<Button>();
-        #endregion
 
         if (mapManager.toWhatShop == "merchant")
         {
@@ -98,6 +91,11 @@ public class ShopSystem : MonoBehaviour
     }
     private void Update()
     {
+        iManager = GameObject.Find("IdleManager").GetComponent<IdleManager>();
+        qManager = GameObject.Find("QuestManager").GetComponent<QuestManager>();
+        //petManager = GameObject.Find("PetManager").GetComponent<PetManager>();
+        //costumeManager = GameObject.Find("CostumeManager").GetComponent<CostumeManager>();
+        
         RefreshText();
 
         #region Ore Merchant UI Conditioning
@@ -244,157 +242,183 @@ public class ShopSystem : MonoBehaviour
                 #endregion
                 iManager.coin += oreSell[temp] * price;
                 iManager.oreCollection[temp] -= oreSell[temp];
+                //trouble here
                 #region Stone selling quest
-                /*if (questManager.isThereQuest)
+                if (temp == 0)
                 {
-                    if (questManager.currentActiveQuest.questType == QuestType.SellStone)
+                    if (qManager.activeEQuest.questType == QuestType.SellStone)
                     {
-                        questManager.currentActiveQuest.Increase(oreSell[temp]);
+                        qManager.questProgress[0] += oreSell[temp];
+                    }
+                    if (qManager.activeIQuest.questType == QuestType.SellStone)
+                    {
+                        qManager.questProgress[1] += oreSell[temp];
+                    }
+                    if (qManager.activeHQuest.questType == QuestType.SellStone)
+                    {
+                        qManager.questProgress[2] += oreSell[temp];
                     }
                 }
-                if (questManager.activeEQuest.questType == QuestType.SellStone)
-                {
-                    questManager.activeEQuest.Increase(oreSell[temp]);
-                }
-                if (questManager.activeIQuest.questType == QuestType.SellStone)
-                {
-                    questManager.activeIQuest.Increase(oreSell[temp]);
-                }
-                if (questManager.activeHQuest.questType == QuestType.SellStone)
-                {
-                    questManager.activeHQuest.Increase(oreSell[temp]);
-                }*/
                 #endregion
                 #region Coal selling quest
-                /*if (questManager.isThereQuest)
+                if (temp == 1)
                 {
-                    if (questManager.currentActiveQuest.questType == QuestType.SellCoal)
+                    if (qManager.activeEQuest.questType == QuestType.SellCoal)
                     {
-                        questManager.currentActiveQuest.Increase(oreSell[temp]);
+                        qManager.questProgress[0] += oreSell[temp];
+                    }
+                    if (qManager.activeIQuest.questType == QuestType.SellCoal)
+                    {
+                        qManager.questProgress[1] += oreSell[temp];
+                    }
+                    if (qManager.activeHQuest.questType == QuestType.SellCoal)
+                    {
+                        qManager.questProgress[2] += oreSell[temp];
                     }
                 }
-                if (questManager.activeEQuest.questType == QuestType.SellCoal)
-                {
-                    questManager.activeEQuest.Increase(oreSell[temp]);
-                }
-                if (questManager.activeIQuest.questType == QuestType.SellCoal)
-                {
-                    questManager.activeIQuest.Increase(oreSell[temp]);
-                }
-                if (questManager.activeHQuest.questType == QuestType.SellCoal)
-                {
-                    questManager.activeHQuest.Increase(oreSell[temp]);
-                }*/
                 #endregion
                 #region Copper selling quest
-                /*if (questManager.isThereQuest)
+                if (temp == 2)
                 {
-                    if (questManager.currentActiveQuest.questType == QuestType.SellCopper)
+                    if (qManager.activeEQuest.questType == QuestType.SellCopper)
                     {
-                        questManager.currentActiveQuest.Increase(oreSell[temp]);
+                        qManager.questProgress[0] += oreSell[temp];
+                    }
+                    if (qManager.activeIQuest.questType == QuestType.SellCopper)
+                    {
+                        qManager.questProgress[1] += oreSell[temp];
+                    }
+                    if (qManager.activeHQuest.questType == QuestType.SellCopper)
+                    {
+                        qManager.questProgress[2] += oreSell[temp];
                     }
                 }
-                if (questManager.activeEQuest.questType == QuestType.SellCopper)
-                {
-                    questManager.activeEQuest.Increase(oreSell[temp]);
-                }
-                if (questManager.activeIQuest.questType == QuestType.SellCopper)
-                {
-                    questManager.activeIQuest.Increase(oreSell[temp]);
-                }
-                if (questManager.activeHQuest.questType == QuestType.SellCopper)
-                {
-                    questManager.activeHQuest.Increase(oreSell[temp]);
-                }*/
                 #endregion
                 #region Iron selling quest
-                /*if (questManager.isThereQuest)
+                if (temp == 3)
                 {
-                    if (questManager.currentActiveQuest.questType == QuestType.SellIron)
+                    if (qManager.activeEQuest.questType == QuestType.SellIron)
                     {
-                        questManager.currentActiveQuest.Increase(oreSell[temp]);
+                        qManager.questProgress[0] += oreSell[temp];
+                    }
+                    if (qManager.activeIQuest.questType == QuestType.SellIron)
+                    {
+                        qManager.questProgress[1] += oreSell[temp];
+                    }
+                    if (qManager.activeHQuest.questType == QuestType.SellIron)
+                    {
+                        qManager.questProgress[2] += oreSell[temp];
                     }
                 }
-                if (questManager.activeEQuest.questType == QuestType.SellIron)
-                {
-                    questManager.activeEQuest.Increase(oreSell[temp]);
-                }
-                if (questManager.activeIQuest.questType == QuestType.SellIron)
-                {
-                    questManager.activeIQuest.Increase(oreSell[temp]);
-                }
-                if (questManager.activeHQuest.questType == QuestType.SellIron)
-                {
-                    questManager.activeHQuest.Increase(oreSell[temp]);
-                }*/
                 #endregion
                 #region Gold selling quest
-                /*if (questManager.isThereQuest)
+                if (temp == 4)
                 {
-                    if (questManager.currentActiveQuest.questType == QuestType.SellGold)
+                    if (qManager.activeEQuest.questType == QuestType.SellGold)
                     {
-                        questManager.currentActiveQuest.Increase(oreSell[temp]);
+                        qManager.questProgress[0] += oreSell[temp];
+                    }
+                    if (qManager.activeIQuest.questType == QuestType.SellGold)
+                    {
+                        qManager.questProgress[1] += oreSell[temp];
+                    }
+                    if (qManager.activeHQuest.questType == QuestType.SellGold)
+                    {
+                        qManager.questProgress[2] += oreSell[temp];
                     }
                 }
-                if (questManager.activeEQuest.questType == QuestType.SellGold)
-                {
-                    questManager.activeEQuest.Increase(oreSell[temp]);
-                }
-                if (questManager.activeIQuest.questType == QuestType.SellGold)
-                {
-                    questManager.activeIQuest.Increase(oreSell[temp]);
-                }
-                if (questManager.activeHQuest.questType == QuestType.SellGold)
-                {
-                    questManager.activeHQuest.Increase(oreSell[temp]);
-                }*/
                 #endregion
                 #region Ruby selling quest
-                /*if (questManager.isThereQuest)
+                if (temp == 5)
                 {
-                    if (questManager.currentActiveQuest.questType == QuestType.SellRuby)
+                    if (qManager.activeEQuest.questType == QuestType.SellRuby)
                     {
-                        questManager.currentActiveQuest.Increase(oreSell[temp]);
+                        qManager.questProgress[0] += oreSell[temp];
+                    }
+                    if (qManager.activeIQuest.questType == QuestType.SellRuby)
+                    {
+                        qManager.questProgress[1] += oreSell[temp];
+                    }
+                    if (qManager.activeHQuest.questType == QuestType.SellRuby)
+                    {
+                        qManager.questProgress[2] += oreSell[temp];
                     }
                 }
-                if (questManager.activeEQuest.questType == QuestType.SellRuby)
-                {
-                    questManager.activeEQuest.Increase(oreSell[temp]);
-                }
-                if (questManager.activeIQuest.questType == QuestType.SellRuby)
-                {
-                    questManager.activeIQuest.Increase(oreSell[temp]);
-                }
-                if (questManager.activeHQuest.questType == QuestType.SellRuby)
-                {
-                    questManager.activeHQuest.Increase(oreSell[temp]);
-                }*/
                 #endregion
                 #region Titanium selling quest
-                /*if (questManager.isThereQuest)
+                if (temp == 6)
                 {
-                    if (questManager.currentActiveQuest.questType == QuestType.SellTitanium)
+                    if (qManager.activeEQuest.questType == QuestType.SellTitanium)
                     {
-                        questManager.currentActiveQuest.Increase(oreSell[temp]);
+                        qManager.questProgress[0] += oreSell[temp];
+                    }
+                    if (qManager.activeIQuest.questType == QuestType.SellTitanium)
+                    {
+                        qManager.questProgress[1] += oreSell[temp];
+                    }
+                    if (qManager.activeHQuest.questType == QuestType.SellTitanium)
+                    {
+                        qManager.questProgress[2] += oreSell[temp];
                     }
                 }
-                if (questManager.activeEQuest.questType == QuestType.SellTitanium)
+                #endregion
+                #region HPRuby selling quest
+                if (temp == 7)
                 {
-                    questManager.activeEQuest.Increase(oreSell[temp]);
+                    if (qManager.activeEQuest.questType == QuestType.SellHPRuby)
+                    {
+                        qManager.questProgress[0] += oreSell[temp];
+                    }
+                    if (qManager.activeIQuest.questType == QuestType.SellHPRuby)
+                    {
+                        qManager.questProgress[1] += oreSell[temp];
+                    }
+                    if (qManager.activeHQuest.questType == QuestType.SellHPRuby)
+                    {
+                        qManager.questProgress[2] += oreSell[temp];
+                    }
                 }
-                if (questManager.activeIQuest.questType == QuestType.SellTitanium)
+                #endregion
+                #region Sapphire selling quest
+                if (temp == 8)
                 {
-                    questManager.activeIQuest.Increase(oreSell[temp]);
+                    if (qManager.activeEQuest.questType == QuestType.SellSapphire)
+                    {
+                        qManager.questProgress[0] += oreSell[temp];
+                    }
+                    if (qManager.activeIQuest.questType == QuestType.SellSapphire)
+                    {
+                        qManager.questProgress[1] += oreSell[temp];
+                    }
+                    if (qManager.activeHQuest.questType == QuestType.SellSapphire)
+                    {
+                        qManager.questProgress[2] += oreSell[temp];
+                    }
                 }
-                if (questManager.activeHQuest.questType == QuestType.SellTitanium)
+                #endregion
+                #region Emerald selling quest
+                if (temp == 9)
                 {
-                    questManager.activeHQuest.Increase(oreSell[temp]);
-                }*/
+                    if (qManager.activeEQuest.questType == QuestType.SellEmerald)
+                    {
+                        qManager.questProgress[0] += oreSell[temp];
+                    }
+                    if (qManager.activeIQuest.questType == QuestType.SellEmerald)
+                    {
+                        qManager.questProgress[1] += oreSell[temp];
+                    }
+                    if (qManager.activeHQuest.questType == QuestType.SellEmerald)
+                    {
+                        qManager.questProgress[2] += oreSell[temp];
+                    }
+                }                
                 #endregion
 
-                oreSell[temp] = 0;
+                oreSell[temp] = 0;                
             }            
         }
+        iManager.SaveProgress();
+        qManager.SaveProgress();
     }
     public void SellAllOre()
     {
@@ -444,157 +468,183 @@ public class ShopSystem : MonoBehaviour
             }
             #endregion
             iManager.coin += iManager.oreCollection[temp] * price;
-            iManager.oreCollection[temp] = 0;
+            
             #region Stone selling quest
-            /*if (questManager.isThereQuest)
+            if (temp == 0)
             {
-                if (questManager.currentActiveQuest.questType == QuestType.SellStone)
+                if (qManager.activeEQuest.questType == QuestType.SellStone)
                 {
-                    questManager.currentActiveQuest.Increase(iManager.oreCollection[temp]);
+                    qManager.questProgress[0] += iManager.oreCollection[temp];
+                }
+                if (qManager.activeIQuest.questType == QuestType.SellStone)
+                {
+                    qManager.questProgress[1] += iManager.oreCollection[temp];
+                }
+                if (qManager.activeHQuest.questType == QuestType.SellStone)
+                {
+                    qManager.questProgress[2] += iManager.oreCollection[temp];
                 }
             }
-            if (questManager.activeEQuest.questType == QuestType.SellStone)
-            {
-                questManager.activeEQuest.Increase(iManager.oreCollection[temp]);
-            }
-            if (questManager.activeIQuest.questType == QuestType.SellStone)
-            {
-                questManager.activeIQuest.Increase(iManager.oreCollection[temp]);
-            }
-            if (questManager.activeHQuest.questType == QuestType.SellStone)
-            {
-                questManager.activeHQuest.Increase(iManager.oreCollection[temp]);
-            }*/
             #endregion
             #region Coal selling quest
-            /*if (questManager.isThereQuest)
+            if (temp == 1)
             {
-                if (questManager.currentActiveQuest.questType == QuestType.SellCoal)
+                if (qManager.activeEQuest.questType == QuestType.SellCoal)
                 {
-                    questManager.currentActiveQuest.Increase(iManager.oreCollection[temp]);
+                    qManager.questProgress[0] += iManager.oreCollection[temp];
+                }
+                if (qManager.activeIQuest.questType == QuestType.SellCoal)
+                {
+                    qManager.questProgress[1] += iManager.oreCollection[temp];
+                }
+                if (qManager.activeHQuest.questType == QuestType.SellCoal)
+                {
+                    qManager.questProgress[2] += iManager.oreCollection[temp];
                 }
             }
-            if (questManager.activeEQuest.questType == QuestType.SellCoal)
-            {
-                questManager.activeEQuest.Increase(iManager.oreCollection[temp]);
-            }
-            if (questManager.activeIQuest.questType == QuestType.SellCoal)
-            {
-                questManager.activeIQuest.Increase(iManager.oreCollection[temp]);
-            }
-            if (questManager.activeHQuest.questType == QuestType.SellCoal)
-            {
-                questManager.activeHQuest.Increase(iManager.oreCollection[temp]);
-            }*/
             #endregion
             #region Copper selling quest
-            /*if (questManager.isThereQuest)
+            if (temp == 2)
             {
-                if (questManager.currentActiveQuest.questType == QuestType.SellCopper)
+                if (qManager.activeEQuest.questType == QuestType.SellCopper)
                 {
-                    questManager.currentActiveQuest.Increase(iManager.oreCollection[temp]);
+                    qManager.questProgress[0] += iManager.oreCollection[temp];
+                }
+                if (qManager.activeIQuest.questType == QuestType.SellCopper)
+                {
+                    qManager.questProgress[1] += iManager.oreCollection[temp];
+                }
+                if (qManager.activeHQuest.questType == QuestType.SellCopper)
+                {
+                    qManager.questProgress[2] += iManager.oreCollection[temp];
                 }
             }
-            if (questManager.activeEQuest.questType == QuestType.SellCopper)
-            {
-                questManager.activeEQuest.Increase(iManager.oreCollection[temp]);
-            }
-            if (questManager.activeIQuest.questType == QuestType.SellCopper)
-            {
-                questManager.activeIQuest.Increase(iManager.oreCollection[temp]);
-            }
-            if (questManager.activeHQuest.questType == QuestType.SellCopper)
-            {
-                questManager.activeHQuest.Increase(iManager.oreCollection[temp]);
-            }*/
             #endregion
             #region Iron selling quest
-            /*if (questManager.isThereQuest)
+            if (temp == 3)
             {
-                if (questManager.currentActiveQuest.questType == QuestType.SellIron)
+                if (qManager.activeEQuest.questType == QuestType.SellIron)
                 {
-                    questManager.currentActiveQuest.Increase(iManager.oreCollection[temp]);
+                    qManager.questProgress[0] += iManager.oreCollection[temp];
+                }
+                if (qManager.activeIQuest.questType == QuestType.SellIron)
+                {
+                    qManager.questProgress[1] += iManager.oreCollection[temp];
+                }
+                if (qManager.activeHQuest.questType == QuestType.SellIron)
+                {
+                    qManager.questProgress[2] += iManager.oreCollection[temp];
                 }
             }
-            if (questManager.activeEQuest.questType == QuestType.SellIron)
-            {
-                questManager.activeEQuest.Increase(iManager.oreCollection[temp]);
-            }
-            if (questManager.activeIQuest.questType == QuestType.SellIron)
-            {
-                questManager.activeIQuest.Increase(iManager.oreCollection[temp]);
-            }
-            if (questManager.activeHQuest.questType == QuestType.SellIron)
-            {
-                questManager.activeHQuest.Increase(iManager.oreCollection[temp]);
-            }*/
             #endregion
             #region Gold selling quest
-            /*if (questManager.isThereQuest)
+            if (temp == 4)
             {
-                if (questManager.currentActiveQuest.questType == QuestType.SellGold)
+                if (qManager.activeEQuest.questType == QuestType.SellGold)
                 {
-                    questManager.currentActiveQuest.Increase(iManager.oreCollection[temp]);
+                    qManager.questProgress[0] += iManager.oreCollection[temp];
+                }
+                if (qManager.activeIQuest.questType == QuestType.SellGold)
+                {
+                    qManager.questProgress[1] += iManager.oreCollection[temp];
+                }
+                if (qManager.activeHQuest.questType == QuestType.SellGold)
+                {
+                    qManager.questProgress[2] += iManager.oreCollection[temp];
                 }
             }
-            if (questManager.activeEQuest.questType == QuestType.SellGold)
-            {
-                questManager.activeEQuest.Increase(iManager.oreCollection[temp]);
-            }
-            if (questManager.activeIQuest.questType == QuestType.SellGold)
-            {
-                questManager.activeIQuest.Increase(iManager.oreCollection[temp]);
-            }
-            if (questManager.activeHQuest.questType == QuestType.SellGold)
-            {
-                questManager.activeHQuest.Increase(iManager.oreCollection[temp]);
-            }*/
             #endregion
             #region Ruby selling quest
-            /*if (questManager.isThereQuest)
+            if (temp == 5)
             {
-                if (questManager.currentActiveQuest.questType == QuestType.SellRuby)
+                if (qManager.activeEQuest.questType == QuestType.SellRuby)
                 {
-                    questManager.currentActiveQuest.Increase(iManager.oreCollection[temp]);
+                    qManager.questProgress[0] += iManager.oreCollection[temp];
+                }
+                if (qManager.activeIQuest.questType == QuestType.SellRuby)
+                {
+                    qManager.questProgress[1] += iManager.oreCollection[temp];
+                }
+                if (qManager.activeHQuest.questType == QuestType.SellRuby)
+                {
+                    qManager.questProgress[2] += iManager.oreCollection[temp];
                 }
             }
-            if (questManager.activeEQuest.questType == QuestType.SellRuby)
-            {
-                questManager.activeEQuest.Increase(iManager.oreCollection[temp]);
-            }
-            if (questManager.activeIQuest.questType == QuestType.SellRuby)
-            {
-                questManager.activeIQuest.Increase(iManager.oreCollection[temp]);
-            }
-            if (questManager.activeHQuest.questType == QuestType.SellRuby)
-            {
-                questManager.activeHQuest.Increase(iManager.oreCollection[temp]);
-            }*/
             #endregion
             #region Titanium selling quest
-            /*if (questManager.isThereQuest)
+            if (temp == 6)
             {
-                if (questManager.currentActiveQuest.questType == QuestType.SellTitanium)
+                if (qManager.activeEQuest.questType == QuestType.SellTitanium)
                 {
-                    questManager.currentActiveQuest.Increase(iManager.oreCollection[temp]);
+                    qManager.questProgress[0] += iManager.oreCollection[temp];
+                }
+                if (qManager.activeIQuest.questType == QuestType.SellTitanium)
+                {
+                    qManager.questProgress[1] += iManager.oreCollection[temp];
+                }
+                if (qManager.activeHQuest.questType == QuestType.SellTitanium)
+                {
+                    qManager.questProgress[2] += iManager.oreCollection[temp];
                 }
             }
-            if (questManager.activeEQuest.questType == QuestType.SellTitanium)
+            #endregion
+            #region HPRuby selling quest
+            if (temp == 7)
             {
-                questManager.activeEQuest.Increase(iManager.oreCollection[temp]);
+                if (qManager.activeEQuest.questType == QuestType.SellHPRuby)
+                {
+                    qManager.questProgress[0] += iManager.oreCollection[temp];
+                }
+                if (qManager.activeIQuest.questType == QuestType.SellHPRuby)
+                {
+                    qManager.questProgress[1] += iManager.oreCollection[temp];
+                }
+                if (qManager.activeHQuest.questType == QuestType.SellHPRuby)
+                {
+                    qManager.questProgress[2] += iManager.oreCollection[temp];
+                }
             }
-            if (questManager.activeIQuest.questType == QuestType.SellTitanium)
+            #endregion
+            #region Sapphire selling quest
+            if (temp == 8)
             {
-                questManager.activeIQuest.Increase(iManager.oreCollection[temp]);
+                if (qManager.activeEQuest.questType == QuestType.SellSapphire)
+                {
+                    qManager.questProgress[0] += iManager.oreCollection[temp];
+                }
+                if (qManager.activeIQuest.questType == QuestType.SellSapphire)
+                {
+                    qManager.questProgress[1] += iManager.oreCollection[temp];
+                }
+                if (qManager.activeHQuest.questType == QuestType.SellSapphire)
+                {
+                    qManager.questProgress[2] += iManager.oreCollection[temp];
+                }
             }
-            if (questManager.activeHQuest.questType == QuestType.SellTitanium)
+            #endregion
+            #region Emerald selling quest
+            if (temp == 9)
             {
-                questManager.activeHQuest.Increase(iManager.oreCollection[temp]);
-            }*/
+                if (qManager.activeEQuest.questType == QuestType.SellEmerald)
+                {
+                    qManager.questProgress[0] += iManager.oreCollection[temp];
+                }
+                if (qManager.activeIQuest.questType == QuestType.SellEmerald)
+                {
+                    qManager.questProgress[1] += iManager.oreCollection[temp];
+                }
+                if (qManager.activeHQuest.questType == QuestType.SellEmerald)
+                {
+                    qManager.questProgress[2] += iManager.oreCollection[temp];
+                }
+            }
             #endregion
 
-            oreSell[temp] = 0;
+            iManager.oreCollection[temp] = 0;
+            oreSell[temp] = 0;            
         }
+        iManager.SaveProgress();
+        qManager.SaveProgress();
     }
     #region OreInc
     Coroutine oreInc = null, oreDec = null;

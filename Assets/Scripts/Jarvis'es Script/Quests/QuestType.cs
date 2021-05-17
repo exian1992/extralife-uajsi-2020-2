@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum QuestType
 {
-    MineStone, MineCoal, MineBronze, MineIron,
-    SellStone, SellCoal, SellBronze, SellIron,
+    MineStone, MineCoal, MineCopper, MineIron, MineGold, MineRuby, MineTitanium, MineHPRuby, MineSapphire, MineEmerald, MineHPSapphire, MineDiamond, MineAlexandrite, MineDwarfmium,
+    SellStone, SellCoal, SellCopper, SellIron, SellGold, SellRuby, SellTitanium, SellHPRuby, SellSapphire, SellEmerald, SellHPSapphire, SellDiamond, SellAlexandrite, SellDwarfmium,
     Tap
 }

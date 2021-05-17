@@ -70,6 +70,19 @@ public static class SaveSystem
         formatter.Serialize(stream, data);
         stream.Close();
     }
+    public static void SaveNPCManager(HireNPCManager npcManager)
+    {
+        BinaryFormatter formatter = new BinaryFormatter();
+
+        //string path = "D:/SaveFile/questData.uwansummoney";
+        string path = Application.persistentDataPath + "/npcData.uwansummoney";
+        FileStream stream = new FileStream(path, FileMode.Create);
+
+        GameData data = new GameData(npcManager);
+
+        formatter.Serialize(stream, data);
+        stream.Close();
+    }
 
     //load data
     public static GameData LoadData ()
@@ -156,6 +169,26 @@ public static class SaveSystem
     {
         //string path = "D:/SaveFile/costumeData.uwansummoney";
         string path = Application.persistentDataPath + "/costumeData.uwansummoney";
+        if (File.Exists(path))
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream stream = new FileStream(path, FileMode.Open);
+
+            GameData data = formatter.Deserialize(stream) as GameData;
+            stream.Close();
+
+            return data;
+        }
+        else
+        {
+            Debug.LogError("save file not found in " + path);
+            return null;
+        }
+    }
+    public static GameData LoadNPCManager()
+    {
+        //string path = "D:/SaveFile/costumeData.uwansummoney";
+        string path = Application.persistentDataPath + "/npcData.uwansummoney";
         if (File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();

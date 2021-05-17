@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Maps/EarthMantle.unity
     guid: d9e5a68c3a881d3438f357a5b3e1778d
+  - enabled: 1
+    path: Assets/Scenes/VillageChief.unity
+    guid: 88aef907a717a6849b3e4702cae38898
   m_configObjects: {}

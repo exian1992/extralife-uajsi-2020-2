@@ -14,8 +14,8 @@ public class IdleManager : MonoBehaviour
     public GameObject[] prefabs;
     GameData data, pData;
 
-    //GameObject qManager, pManager, cManager;
-    //QuestManager questManager;
+    HireNPCManager npcManager;
+    [SerializeField] QuestManager qManager;
     //PetManager petManager;
     //CostumeManager costumeManager;
 
@@ -25,7 +25,7 @@ public class IdleManager : MonoBehaviour
 
     //ore info
     public int[] oreCollection;
-    public Text[] mapOreValueText;
+    public TMPro.TextMeshProUGUI[] mapOreValueText;
 
     //orechance
     public int[] map12OreChance;
@@ -64,13 +64,10 @@ public class IdleManager : MonoBehaviour
         else
         {
             DontDestroyOnLoad(managerChecker[0]);            
-        }        
-        //qManager = GameObject.Find("QuestManager");
-        //questManager = qManager.GetComponent<QuestManager>();
-        //pManager = GameObject.Find("PetManager");
-        //petManager = pManager.GetComponent<PetManager>();
-        //cManager = GameObject.Find("CostumeManager");
-        //costumeManager = cManager.GetComponent<CostumeManager>();
+        }
+
+        UpdateManager();
+        
 
         string saveData = Application.persistentDataPath + "/dataBank.uwansummoney"; //always change this every update, and on saveSystem
         string previousData = Application.persistentDataPath + "/data.uwansummoney"; //this too, on saveSystem also
@@ -84,17 +81,15 @@ public class IdleManager : MonoBehaviour
             }
 
             ChanceChecker();
-            SaveAllProgress();
+            SaveProgress();
             data = SaveSystem.LoadData();            
         }
         else
         {
             data = SaveSystem.LoadData();
 
-            //questManager.LoadQuestState();
             Debug.Log("opt 2");
             LoadData();
-            SaveAllProgress();
         }
 
 
@@ -144,31 +139,21 @@ public class IdleManager : MonoBehaviour
             //touch input
             if (Input.GetMouseButtonDown(0))
             {
-                //if (EventSystem.current.currentSelectedGameObject == null) return;
                 #region Tap Quest
-                /*if (questManager.activeEQuest.questType == QuestType.Tap)
+                if (qManager.activeEQuest.questType == QuestType.Tap)
                 {
-                    questManager.activeEQuest.Increase(1);
+                    qManager.questProgress[0]++;
                 }
-                if (questManager.activeIQuest.questType == QuestType.Tap)
+                if (qManager.activeIQuest.questType == QuestType.Tap)
                 {
-                    questManager.activeIQuest.Increase(1);
+                    qManager.questProgress[1]++;
                 }
-                if (questManager.activeHQuest.questType == QuestType.Tap)
+                if (qManager.activeHQuest.questType == QuestType.Tap)
                 {
-                    questManager.activeHQuest.Increase(1);
-                }
-                if (questManager.isThereQuest)
-                {
-                    if (questManager.currentActiveQuest.questType == QuestType.Tap)
-                    {
-                        questManager.currentActiveQuest.Increase(1);
-                        questManager.QuestCompleteCheck();
-                    }
-                }*/
+                    qManager.questProgress[2]++;
+                }                
                 #endregion
                 AttackOre();
-                Debug.Log(EventSystem.current.currentSelectedGameObject);
             }
 
             //tile replaced
@@ -179,6 +164,7 @@ public class IdleManager : MonoBehaviour
                 TileGenerator();
             }
 
+            UpdateManager();
             RefreshText();
         }
     }
@@ -231,52 +217,52 @@ public class IdleManager : MonoBehaviour
 
         //stone 10, coal 5, bronze 4, iron 1
         if(SceneManager.GetActiveScene().name == "Waterfall")
-            if (randomOre < map12OreChance[0])//stoneChance)
+            if (randomOre < map12OreChance[0])  //stoneChance
             {
                 Instantiate(prefabs[0], new Vector3(0f, 0f, 0f), Quaternion.Euler(0, 0, 90));
             }
 
         if (SceneManager.GetActiveScene().name == "Cave")
         {
-            if (randomOre < map12OreChance[3])//ironChance)
+            if (randomOre < map12OreChance[3]) //ironChance
             {
                 Instantiate(prefabs[2], new Vector3(0f, 0f, 0f), Quaternion.Euler(0, 0, 90));
             }
-            else if (randomOre < map12OreChance[2])//copperChance)
+            else if (randomOre < map12OreChance[2]) //copperChance
             {
                 Instantiate(prefabs[1], new Vector3(0f, 0f, 0f), Quaternion.Euler(0, 0, 90));
             }
-            else if (randomOre < map12OreChance[1])//coalChance)
+            else if (randomOre < map12OreChance[1]) //coalChance
             {
                 Instantiate(prefabs[0], new Vector3(0f, 0f, 0f), Quaternion.Euler(0, 0, 90));
             }
         }
         if (SceneManager.GetActiveScene().name == "DeepCave")
         {
-            if (randomOre < map3OreChance[2])//titaniumChance)
+            if (randomOre < map3OreChance[2]) //titaniumChance
             {
                 Instantiate(prefabs[2], new Vector3(0f, 0f, 0f), Quaternion.Euler(0, 0, 90));
             }
-            else if (randomOre < map3OreChance[1])//rubyChance)
+            else if (randomOre < map3OreChance[1]) //rubyChance
             {
                 Instantiate(prefabs[1], new Vector3(0f, 0f, 0f), Quaternion.Euler(0, 0, 90));
             }
-            else if (randomOre < map3OreChance[0])//goldChance)
+            else if (randomOre < map3OreChance[0]) //goldChance
             {
                 Instantiate(prefabs[0], new Vector3(0f, 0f, 0f), Quaternion.Euler(0, 0, 90));
             }
         }
         if (SceneManager.GetActiveScene().name == "EarthMantle")
         {
-            if (randomOre < map4OreChance[2])//emeraldChance)
+            if (randomOre < map4OreChance[2]) //emeraldChance
             {
                 Instantiate(prefabs[2], new Vector3(0f, 0f, 0f), Quaternion.Euler(0, 0, 90));
             }
-            else if (randomOre < map4OreChance[1])//sapphireChance)
+            else if (randomOre < map4OreChance[1]) //sapphireChance
             {
                 Instantiate(prefabs[1], new Vector3(0f, 0f, 0f), Quaternion.Euler(0, 0, 90));
             }
-            else if (randomOre < map4OreChance[0])//hprubyChance)
+            else if (randomOre < map4OreChance[0]) //hprubyChance
             {
                 Instantiate(prefabs[0], new Vector3(0f, 0f, 0f), Quaternion.Euler(0, 0, 90));
             }
@@ -289,129 +275,181 @@ public class IdleManager : MonoBehaviour
         {
             oreCollection[0]++;
             #region Stone mining quest
-            /*if (questManager.isThereQuest)
+            if (qManager.activeEQuest.questType == QuestType.MineStone)
             {
-                if (questManager.currentActiveQuest.questType == QuestType.MineStone)
-                {
-                    questManager.currentActiveQuest.Increase(1);
-                }
+                qManager.questProgress[0]++;
             }
-            if (questManager.activeEQuest.questType == QuestType.MineStone)
+            if (qManager.activeIQuest.questType == QuestType.MineStone)
             {
-                questManager.activeEQuest.Increase(1);
+                qManager.questProgress[1]++;
             }
-            if (questManager.activeIQuest.questType == QuestType.MineStone)
+            if (qManager.activeHQuest.questType == QuestType.MineStone)
             {
-                questManager.activeIQuest.Increase(1);
+                qManager.questProgress[2]++;
             }
-            if (questManager.activeHQuest.questType == QuestType.MineStone)
-            {
-                questManager.activeHQuest.Increase(1);
-            }
-            questManager.QuestCompleteCheck();*/
             #endregion
         }
         if (ore.GetName() == "Coal")
         {
             oreCollection[1]++;
             #region Coal mining quest
-            /*if (questManager.isThereQuest)
+            if (qManager.activeEQuest.questType == QuestType.MineCoal)
             {
-                if (questManager.currentActiveQuest.questType == QuestType.MineCoal)
-                {
-                    questManager.currentActiveQuest.Increase(1);
-                }
+                qManager.questProgress[0]++;
             }
-            if (questManager.activeEQuest.questType == QuestType.MineCoal)
+            if (qManager.activeIQuest.questType == QuestType.MineCoal)
             {
-                questManager.activeEQuest.Increase(1);
+                qManager.questProgress[1]++;
             }
-            if (questManager.activeIQuest.questType == QuestType.MineCoal)
+            if (qManager.activeHQuest.questType == QuestType.MineCoal)
             {
-                questManager.activeIQuest.Increase(1);
+                qManager.questProgress[2]++;
             }
-            if (questManager.activeHQuest.questType == QuestType.MineCoal)
-            {
-                questManager.activeHQuest.Increase(1);
-            }
-            questManager.QuestCompleteCheck();*/
             #endregion
         }
         if (ore.GetName() == "Copper")
         {
             oreCollection[2]++;
             #region Copper mining quest
-            /*if (questManager.isThereQuest)
+            if (qManager.activeEQuest.questType == QuestType.MineCopper)
             {
-                if (questManager.currentActiveQuest.questType == QuestType.MineCopper)
-                {
-                    questManager.currentActiveQuest.Increase(1);
-                }
+                qManager.questProgress[0]++;
             }
-            if (questManager.activeEQuest.questType == QuestType.MineCopper)
+            if (qManager.activeIQuest.questType == QuestType.MineStone)
             {
-                questManager.activeEQuest.Increase(1);
+                qManager.questProgress[1]++;
             }
-            if (questManager.activeIQuest.questType == QuestType.MineCopper)
+            if (qManager.activeHQuest.questType == QuestType.MineStone)
             {
-                questManager.activeIQuest.Increase(1);
+                qManager.questProgress[2]++;
             }
-            if (questManager.activeHQuest.questType == QuestType.MineCopper)
-            {
-                questManager.activeHQuest.Increase(1);
-            }
-            questManager.QuestCompleteCheck();*/
             #endregion
         }
         if (ore.GetName() == "Iron")
         {
             oreCollection[3]++;
             #region Iron mining quest
-            /*if (questManager.isThereQuest)
+            if (qManager.activeEQuest.questType == QuestType.MineIron)
             {
-                if (questManager.currentActiveQuest.questType == QuestType.MineIron)
-                {
-                    questManager.currentActiveQuest.Increase(1);
-                }
+                qManager.questProgress[0]++;
             }
-            if (questManager.activeEQuest.questType == QuestType.MineIron)
+            if (qManager.activeIQuest.questType == QuestType.MineIron)
             {
-                questManager.activeEQuest.Increase(1);
+                qManager.questProgress[1]++;
             }
-            if (questManager.activeIQuest.questType == QuestType.MineIron)
+            if (qManager.activeHQuest.questType == QuestType.MineIron)
             {
-                questManager.activeIQuest.Increase(1);
+                qManager.questProgress[2]++;
             }
-            if (questManager.activeHQuest.questType == QuestType.MineIron)
-            {
-                questManager.activeHQuest.Increase(1);
-            }
-            questManager.QuestCompleteCheck();*/
             #endregion
         }
         if (ore.GetName() == "Gold")
         {
             oreCollection[4]++;
+            #region Gold mining quest
+            if (qManager.activeEQuest.questType == QuestType.MineGold)
+            {
+                qManager.questProgress[0]++;
+            }
+            if (qManager.activeIQuest.questType == QuestType.MineGold)
+            {
+                qManager.questProgress[1]++;
+            }
+            if (qManager.activeHQuest.questType == QuestType.MineGold)
+            {
+                qManager.questProgress[2]++;
+            }
+            #endregion
         }
         if (ore.GetName() == "Ruby")
         {
             oreCollection[5]++;
+            #region Ruby mining quest
+            if (qManager.activeEQuest.questType == QuestType.MineRuby)
+            {
+                qManager.questProgress[0]++;
+            }
+            if (qManager.activeIQuest.questType == QuestType.MineRuby)
+            {
+                qManager.questProgress[1]++;
+            }
+            if (qManager.activeHQuest.questType == QuestType.MineRuby)
+            {
+                qManager.questProgress[2]++;
+            }
+            #endregion
         }
         if (ore.GetName() == "Titanium")
         {
             oreCollection[6]++;
+            #region Titanium mining quest
+            if (qManager.activeEQuest.questType == QuestType.MineTitanium)
+            {
+                qManager.questProgress[0]++;
+            }
+            if (qManager.activeIQuest.questType == QuestType.MineTitanium)
+            {
+                qManager.questProgress[1]++;
+            }
+            if (qManager.activeHQuest.questType == QuestType.MineTitanium)
+            {
+                qManager.questProgress[2]++;
+            }
+            #endregion
         }
         if (ore.GetName() == "HPRuby")
         {
             oreCollection[7]++;
+            #region HPRuby mining quest
+            if (qManager.activeEQuest.questType == QuestType.MineHPRuby)
+            {
+                qManager.questProgress[0]++;
+            }
+            if (qManager.activeIQuest.questType == QuestType.MineHPRuby)
+            {
+                qManager.questProgress[1]++;
+            }
+            if (qManager.activeHQuest.questType == QuestType.MineHPRuby)
+            {
+                qManager.questProgress[2]++;
+            }
+            #endregion
         }
         if (ore.GetName() == "Sapphire")
         {
             oreCollection[8]++;
+            #region Sapphire mining quest
+            if (qManager.activeEQuest.questType == QuestType.MineSapphire)
+            {
+                qManager.questProgress[0]++;
+            }
+            if (qManager.activeIQuest.questType == QuestType.MineSapphire)
+            {
+                qManager.questProgress[1]++;
+            }
+            if (qManager.activeHQuest.questType == QuestType.MineSapphire)
+            {
+                qManager.questProgress[2]++;
+            }
+            #endregion
         }
         if (ore.GetName() == "Emerald")
         {
             oreCollection[9]++;
+            #region Emerald mining quest
+            if (qManager.activeEQuest.questType == QuestType.MineEmerald)
+            {
+                qManager.questProgress[0]++;
+            }
+            if (qManager.activeIQuest.questType == QuestType.MineEmerald)
+            {
+                qManager.questProgress[1]++;
+            }
+            if (qManager.activeHQuest.questType == QuestType.MineEmerald)
+            {
+                qManager.questProgress[2]++;
+            }
+            #endregion
         }
     }
     #endregion
@@ -521,35 +559,9 @@ public class IdleManager : MonoBehaviour
 
         coin = data.coin;
     }
-    public void ShowQuest()
-    {
-        //questPopUp.SetActive(true);
-    }
-    public void HideQuest()
-    {
-        //questPopUp.SetActive(false);
-        //dQuestPopUp.SetActive(false);
-    }
-    public void SwitchDaily()
-    {
-        //questPopUp.SetActive(false);
-        //dQuestPopUp.SetActive(true);
-    }
-    public void SwitchQuest()
-    {
-        //questPopUp.SetActive(true);
-        //dQuestPopUp.SetActive(false);
-    }
-    void OnApplicationQuit()
-    {
-        SaveAllProgress();
-    }
-    public void SaveAllProgress()
+    public void SaveProgress()
     {
         SaveSystem.SaveData(this);
-        //SaveSystem.SaveQuestState(questManager);
-        //SaveSystem.SavePetManager(petManager);
-        //SaveSystem.SaveCostumeManager(costumeManager);
     }
     public void ChanceChecker()
     {
@@ -636,5 +648,14 @@ public class IdleManager : MonoBehaviour
     public void FeedbackLink()
     {
         Application.OpenURL("https://forms.gle/GCG8jeUtf5qtg1uUA");
+    }
+    void UpdateManager()
+    {
+        npcManager = GameObject.Find("HireNPCManager").GetComponent<HireNPCManager>();
+        qManager = GameObject.Find("QuestManager").GetComponent<QuestManager>();
+        //pManager = GameObject.Find("PetManager");
+        //petManager = pManager.GetComponent<PetManager>();
+        //cManager = GameObject.Find("CostumeManager");
+        //costumeManager = cManager.GetComponent<CostumeManager>();
     }
 }

@@ -6,25 +6,14 @@ using System;
 using System.IO;
 using Random = UnityEngine.Random;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class QuestManager : MonoBehaviour
 {
     GameData data;
+    IdleManager iManager;
 
-    GameObject gameManager;
-    GameManager gManager;
-    public QuestInfo[] questInfo;
-    public QuestInfo currentActiveQuest;
-    public bool isThereQuest;
-
-    public Text description;
-    public Text coinRewardValue;
-    public int randomQuest = 0;
-
-    public Text currentQuest;
-
-    public GameObject claimReward;
-    public GameObject notification;
+    public GameObject questScreen;
 
     //daily quest
     public EasyQuest[] eQuestList;
@@ -34,214 +23,202 @@ public class QuestManager : MonoBehaviour
     public EasyQuest activeEQuest;
     public IntermediateQuest activeIQuest;
     public HardQuest activeHQuest;
-    public int dQuestE = 0, dQuestI = 0, dQuestH = 0;
-    public bool eComplete, iComplete, hComplete;
 
-    public Text eQuestText, iQuestText, hQuestText;
-    public Text eProgress, iProgress, hProgress;
+    public float[] questProgress;
+
+    public int dQuestE, dQuestI, dQuestH;
+    public bool eComplete, iComplete, hComplete;
+    public TextMeshProUGUI eQuestText, iQuestText, hQuestText;
+    public TextMeshProUGUI eProgress, iProgress, hProgress;
     public Slider eSlider, iSlider, hSlider;
     public Button eClaim, iClaim, hClaim;
-
+    public Button eRefresh, iRefresh, hRefresh;
+    
     private void Start()
     {
-        //string path = "D:/SaveFile/questData.uwansummoney";
         string path = Application.persistentDataPath + "/questData.uwansummoney";
         if (!File.Exists(path))
         {
-            dQuestE = Random.Range(0, 3);
-            activeEQuest = eQuestList[dQuestE];
-            dQuestI = Random.Range(0, 3);
-            activeIQuest = iQuestList[dQuestI];
-            dQuestH = Random.Range(0, 3);
-            activeHQuest = hQuestList[dQuestH];
-            SaveSystem.SaveQuestState(this);
+            RefreshQuest();
+            SaveProgress();
         }
         else
-        { 
+        {
             LoadQuestState();
             activeEQuest = eQuestList[dQuestE];
             activeIQuest = iQuestList[dQuestI];
             activeHQuest = hQuestList[dQuestH];
-        }
-
-        if (isThereQuest)
-        {
-            currentActiveQuest = questInfo[randomQuest];
-            currentQuest.text = currentActiveQuest.questDescription;
-            QuestCompleteCheck();
-        }
-        gameManager = GameObject.Find("GameManager");
-        gManager = gameManager.GetComponent<GameManager>();
+        }        
     }
     private void Update()
     {
-        description.text = questInfo[randomQuest].questDescription;
-        coinRewardValue.text = questInfo[randomQuest].coinReward.ToString();
-        if (currentActiveQuest == null)
+        if (SceneManager.GetActiveScene().name == "VillageChief" && questScreen.activeSelf)
         {
-            isThereQuest = false;
-            currentQuest.text = "unassigned quest"; 
+            QuestCompleteCheck();
+
+            //temporary refresh quest button
+            if (eComplete)
+            {
+                eRefresh.interactable = false;
+            }
+            else eRefresh.interactable = true;
+            if (iComplete)
+            {
+                iRefresh.interactable = false;
+            }
+            else iRefresh.interactable = true;
+            if (hComplete)
+            {
+                hRefresh.interactable = false;
+            }
+            else hRefresh.interactable = true;
+
+            RefreshText();
         }
 
-        #region Daily quest refreshText
-        eQuestText.text = activeEQuest.questDescription;
-        iQuestText.text = activeIQuest.questDescription;
-        hQuestText.text = activeHQuest.questDescription;
-        if (SceneManager.GetActiveScene().name == "MainGameplay")
-        {
-            if (activeEQuest.currentAmount <= activeEQuest.requiredAmount)
-            {
-                eProgress.text = activeEQuest.currentAmount + " / " + activeEQuest.requiredAmount;
-                eSlider.value = activeEQuest.currentAmount / activeEQuest.requiredAmount;
-            }
-            else
-            {
-                eProgress.text = activeEQuest.requiredAmount + " / " + activeEQuest.requiredAmount;
-                eSlider.value = 1f;
-            }
-            if (activeIQuest.currentAmount <= activeIQuest.requiredAmount)
-            {
-                iProgress.text = activeIQuest.currentAmount + " / " + activeIQuest.requiredAmount;
-                iSlider.value = activeIQuest.currentAmount / activeIQuest.requiredAmount;
-            }
-            else
-            {
-                iProgress.text = activeIQuest.requiredAmount + " / " + activeIQuest.requiredAmount;
-                iSlider.value = 1f;
-            }
-            if (activeIQuest.currentAmount <= activeIQuest.requiredAmount)
-            {
-                hProgress.text = activeHQuest.currentAmount + " / " + activeHQuest.requiredAmount;
-                hSlider.value = activeHQuest.currentAmount / activeHQuest.requiredAmount;
-            }
-            else
-            {
-                hProgress.text = activeHQuest.requiredAmount + " / " + activeHQuest.requiredAmount;
-                hSlider.value = 1f;
-            }
-        }
-        #endregion
-    }
-    public void AcceptQuest()
-    {
-        //int questTotal = currentActiveQuest.Length;
-        if (currentActiveQuest != null)
-        {
-            Debug.Log("you have an ongoing quest!");
-        }
-        else
-        {
-            currentActiveQuest = questInfo[randomQuest];
-            currentQuest.text = currentActiveQuest.questDescription;
-            isThereQuest = true;
-        }        
-    }
-    public void ClaimQuestReward()
-    {
-        currentActiveQuest.currentAmount = 0;
-
-        gManager.coin += currentActiveQuest.coinReward;
-        notification.SetActive(false);
-        claimReward.SetActive(false);
-        currentActiveQuest = null;
-        randomQuest = Random.Range(0, questInfo.Length);
-        isThereQuest = false;
+        iManager = GameObject.Find("IdleManager").GetComponent<IdleManager>();
     }
     public void LoadQuestState()
     {
         data = SaveSystem.LoadQuestState();
-        randomQuest = data.randomQuest;
-        isThereQuest = data.isThereQuest;
 
         dQuestE = data.dQuestE;
         dQuestI = data.dQuestI;
         dQuestH = data.dQuestH;
+
         eComplete = data.eComplete;
         iComplete = data.iComplete;
         hComplete = data.hComplete;
-    }
-    private void OnApplicationQuit()
-    {
-        SaveSystem.SaveQuestState(this);
+
+        questProgress[0] = data.questProgress[0];
+        questProgress[1] = data.questProgress[1];
+        questProgress[2] = data.questProgress[2];
     }
     public void QuestCompleteCheck()
     {
-        if (isThereQuest)
-        {
-            if (currentActiveQuest.IsReached())
-            {
-                claimReward.SetActive(true);
-                notification.SetActive(true);
-            }
-        }
-        if (activeEQuest.IsReached() && !eComplete)
+        //easy
+        if (activeEQuest.IsReached(questProgress[0]) && !eComplete)
         {
             eClaim.interactable = true;
         }
-        if (activeIQuest.IsReached() && !iComplete)
+        else eClaim.interactable = false;
+        //intermediate
+        if (activeIQuest.IsReached(questProgress[1]) && !iComplete)
         {
             iClaim.interactable = true;
         }
-        if (activeHQuest.IsReached() && !hComplete)
+        else iClaim.interactable = false;
+        //hard
+        if (activeHQuest.IsReached(questProgress[2]) && !hComplete)
         {
             hClaim.interactable = true;
         }
+        else hClaim.interactable = false;
+    }
+    public void ResetEQuest()
+    {
+        questProgress[0] = 0;
+        dQuestE = Random.Range(0, eQuestList.Length);
+        activeEQuest = eQuestList[dQuestE];
+        eComplete = false;
+    }
+    public void ResetIQuest()
+    {
+        questProgress[1] = 0;
+        dQuestI = Random.Range(0, iQuestList.Length);
+        activeIQuest = iQuestList[dQuestI];
+        iComplete = false;
+    }
+    public void ResetHQuest()
+    {
+        questProgress[2] = 0;
+        dQuestH = Random.Range(0, hQuestList.Length);
+        activeHQuest = hQuestList[dQuestH];
+        hComplete = false;
     }
     public void RefreshQuest()
     {
-        activeEQuest.currentAmount = 0;
-        activeIQuest.currentAmount = 0;
-        activeHQuest.currentAmount = 0;
+        questProgress[0] = 0;
+        questProgress[1] = 0;
+        questProgress[2] = 0;
 
         //random manager with eqLvl
-        if (data.eqLvl == 1)
-        {
-            dQuestE = Random.Range(0, 3);
-            dQuestI = Random.Range(0, 3);
-            dQuestH = Random.Range(0, 3);
-        }
-        else if (data.eqLvl == 2)
-        {
-            dQuestE = Random.Range(0, 5);
-            dQuestI = Random.Range(0, 5);
-            dQuestH = Random.Range(0, 5);
-        }
-        else if (data.eqLvl == 3)
-        {
-            dQuestE = Random.Range(0, 7);
-            dQuestI = Random.Range(0, 7);
-            dQuestH = Random.Range(0, 7);
-        }
-        else
-        {
-            dQuestE = Random.Range(0, eQuestList.Length);
-            dQuestI = Random.Range(0, iQuestList.Length);
-            dQuestH = Random.Range(0, hQuestList.Length);
-        }
+        //conditioning with eq lvl (missing)
+        dQuestE = Random.Range(0, eQuestList.Length);
+        dQuestI = Random.Range(0, iQuestList.Length);
+        dQuestH = Random.Range(0, hQuestList.Length);
         
         activeEQuest = eQuestList[dQuestE];
         activeIQuest = iQuestList[dQuestI];
         activeHQuest = hQuestList[dQuestH];
+
         eComplete = false;
         iComplete = false;
         hComplete = false;
     }
     public void ClaimEQuest()
     {
-        gManager.coin += activeEQuest.coinReward;
+        iManager.coin += activeEQuest.coinReward;
         eComplete = true;
         eClaim.interactable = false;
+        SaveSystem.SaveQuestState(this);
     }
     public void ClaimIQuest()
     {
-        gManager.coin += activeIQuest.coinReward;
+        iManager.coin += activeIQuest.coinReward;
         iComplete = true;
         iClaim.interactable = false;
+        SaveSystem.SaveQuestState(this);
     }
     public void ClaimHQuest()
     {
-        gManager.coin += activeHQuest.coinReward;
+        iManager.coin += activeHQuest.coinReward;
         hComplete = true;
         hClaim.interactable = false;
+        SaveSystem.SaveQuestState(this);
+    }
+    void RefreshText()
+    {
+        eQuestText.text = activeEQuest.questDescription;
+        iQuestText.text = activeIQuest.questDescription;
+        hQuestText.text = activeHQuest.questDescription;
+
+        //Easy
+        if (questProgress[0] <= activeEQuest.requiredAmount)
+        {
+            eProgress.text = questProgress[0] + " / " + activeEQuest.requiredAmount;
+            eSlider.value = questProgress[0] / activeEQuest.requiredAmount;
+        }
+        else
+        {
+            eProgress.text = activeEQuest.requiredAmount + " / " + activeEQuest.requiredAmount;
+            eSlider.value = 1f;
+        }
+        //Intermediate
+        if (questProgress[1] <= activeIQuest.requiredAmount)
+        {
+            iProgress.text = questProgress[1] + " / " + activeIQuest.requiredAmount;
+            iSlider.value = questProgress[1] / activeIQuest.requiredAmount;
+        }
+        else
+        {
+            iProgress.text = activeIQuest.requiredAmount + " / " + activeIQuest.requiredAmount;
+            iSlider.value = 1f;
+        }
+        //Hard
+        if (questProgress[2] <= activeHQuest.requiredAmount)
+        {
+            hProgress.text = questProgress[2] + " / " + activeHQuest.requiredAmount;
+            hSlider.value = questProgress[2] / activeHQuest.requiredAmount;
+        }
+        else
+        {
+            hProgress.text = activeHQuest.requiredAmount + " / " + activeHQuest.requiredAmount;
+            hSlider.value = 1f;
+        }
+    }
+    public void SaveProgress()
+    {
+        SaveSystem.SaveQuestState(this);
     }
 }

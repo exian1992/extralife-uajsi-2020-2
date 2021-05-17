@@ -13,14 +13,8 @@ public class HardQuest : ScriptableObject
     public QuestType questType;
 
     public float requiredAmount;
-    public float currentAmount;
-
-    public void Increase(float a)
+    public bool IsReached(float current)
     {
-        currentAmount += a;
-    }
-    public bool IsReached()
-    {
-        return (currentAmount >= requiredAmount);
+        return (current >= requiredAmount);
     }
 }

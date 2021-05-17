@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 
 public class walk : MonoBehaviour
 {
-    private float speed = 30f;
+    private float speed = 70f;
     public Animator anim;
 
     // Update is called once per frame
