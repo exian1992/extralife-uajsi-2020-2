@@ -62,10 +62,13 @@ public class MapManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
+                allManager.SaveAllProgress();
+
                 if (SceneManager.GetActiveScene().name == "Waterfall" ||
                     SceneManager.GetActiveScene().name == "Cave" ||
                     SceneManager.GetActiveScene().name == "DeepCave" ||
-                    SceneManager.GetActiveScene().name == "EarthMantle")
+                    SceneManager.GetActiveScene().name == "EarthMantle" ||
+                    SceneManager.GetActiveScene().name == "DwarfVillage")
                 {                    
                     SceneManager.LoadScene("Map");
                 }
@@ -74,15 +77,12 @@ public class MapManager : MonoBehaviour
                     //"are u sure?" thing
                     Application.Quit();
                 }
-                else if (SceneManager.GetActiveScene().name == "Shop")
-                {
-                    allManager.SaveAllProgress();
+                else if (SceneManager.GetActiveScene().name == "Shop" ||
+                         SceneManager.GetActiveScene().name == "Map" ||
+                         SceneManager.GetActiveScene().name == "VillageChief")
+                {                    
                     SceneManager.LoadScene("Village");
-                }
-                else if (SceneManager.GetActiveScene().name == "Map")
-                {
-                    SceneManager.LoadScene("Village");
-                }
+                }             
             }
         }
 
