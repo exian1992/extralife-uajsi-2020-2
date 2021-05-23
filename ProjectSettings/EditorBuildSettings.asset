@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Shop.unity
     guid: 34ce70bed33e0c545aca9b36e3f3c30d
   - enabled: 1
+    path: Assets/Scenes/VillageChief.unity
+    guid: 88aef907a717a6849b3e4702cae38898
+  - enabled: 1
     path: Assets/Scenes/Maps/Waterfall.unity
     guid: 8b83f1688e8a5a44f9ce73e911a85d99
   - enabled: 1
@@ -27,6 +30,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Maps/EarthMantle.unity
     guid: d9e5a68c3a881d3438f357a5b3e1778d
   - enabled: 1
-    path: Assets/Scenes/VillageChief.unity
-    guid: 88aef907a717a6849b3e4702cae38898
+    path: Assets/Scenes/Maps/DwarfVillage.unity
+    guid: 58733a324d525144da7e042a222ca380
   m_configObjects: {}

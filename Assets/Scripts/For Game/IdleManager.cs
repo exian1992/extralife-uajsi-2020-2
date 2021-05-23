@@ -28,9 +28,10 @@ public class IdleManager : MonoBehaviour
     public TMPro.TextMeshProUGUI[] mapOreValueText;
 
     //orechance
-    public int[] map12OreChance;
+    public int[] map2OreChance;
     public int[] map3OreChance;
     public int[] map4OreChance;
+    public int[] map6OreChance;
 
     #region Equipment Info
     public int[] eqLevel;
@@ -128,7 +129,9 @@ public class IdleManager : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "Waterfall" ||
             SceneManager.GetActiveScene().name == "Cave" ||
             SceneManager.GetActiveScene().name == "DeepCave" ||
-            SceneManager.GetActiveScene().name == "EarthMantle")
+            SceneManager.GetActiveScene().name == "EarthMantle" ||
+            SceneManager.GetActiveScene().name == "DwarfVillage" ||
+            SceneManager.GetActiveScene().name == "EarthCore")
         {
             //ore remover + generator
             currentBlock = GameObject.FindGameObjectWithTag("ore");
@@ -173,7 +176,9 @@ public class IdleManager : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "Waterfall" ||
             SceneManager.GetActiveScene().name == "Cave" ||
             SceneManager.GetActiveScene().name == "DeepCave" ||
-            SceneManager.GetActiveScene().name == "EarthMantle")
+            SceneManager.GetActiveScene().name == "EarthMantle" ||
+            SceneManager.GetActiveScene().name == "DwarfVillage" ||
+            SceneManager.GetActiveScene().name == "EarthCore")
         {
             currentBlock = GameObject.FindGameObjectWithTag("ore");
             Ore ore = currentBlock.GetComponent<Ore>();
@@ -208,6 +213,16 @@ public class IdleManager : MonoBehaviour
             mapOreValueText[1].text = oreCollection[8].ToString();
             mapOreValueText[2].text = oreCollection[9].ToString();
         }
+        else if (SceneManager.GetActiveScene().name == "DwarfVillage")
+        {
+            mapOreValueText[0].text = oreCollection[10].ToString();
+        }
+        else if (SceneManager.GetActiveScene().name == "EarthCore")
+        {
+            mapOreValueText[0].text = oreCollection[11].ToString();
+            mapOreValueText[1].text = oreCollection[12].ToString();
+            mapOreValueText[2].text = oreCollection[13].ToString();
+        }
     }
     #region Tile Stuff
     void TileGenerator()
@@ -216,55 +231,51 @@ public class IdleManager : MonoBehaviour
         int randomOre = Random.Range(0, 20);
 
         //stone 10, coal 5, bronze 4, iron 1
-        if(SceneManager.GetActiveScene().name == "Waterfall")
-            if (randomOre < map12OreChance[0])  //stoneChance
-            {
-                Instantiate(prefabs[0], new Vector3(0f, 0f, 0f), Quaternion.Euler(0, 0, 90));
-            }
+        if(SceneManager.GetActiveScene().name == "Waterfall" || SceneManager.GetActiveScene().name == "DwarfVillage")
+            Instantiate(prefabs[0], new Vector3(0f, 0f, 0f), Quaternion.Euler(0, 0, 90));
 
         if (SceneManager.GetActiveScene().name == "Cave")
         {
-            if (randomOre < map12OreChance[3]) //ironChance
+            for (int i = 2; i >= 0; i--)
             {
-                Instantiate(prefabs[2], new Vector3(0f, 0f, 0f), Quaternion.Euler(0, 0, 90));
-            }
-            else if (randomOre < map12OreChance[2]) //copperChance
-            {
-                Instantiate(prefabs[1], new Vector3(0f, 0f, 0f), Quaternion.Euler(0, 0, 90));
-            }
-            else if (randomOre < map12OreChance[1]) //coalChance
-            {
-                Instantiate(prefabs[0], new Vector3(0f, 0f, 0f), Quaternion.Euler(0, 0, 90));
+                if (randomOre < map2OreChance[i]) //ironChance
+                {
+                    Instantiate(prefabs[i], new Vector3(0f, 0f, 0f), Quaternion.Euler(0, 0, 90));
+                    break;
+                }
             }
         }
         if (SceneManager.GetActiveScene().name == "DeepCave")
         {
-            if (randomOre < map3OreChance[2]) //titaniumChance
+            for (int i = 2; i >= 0; i--)
             {
-                Instantiate(prefabs[2], new Vector3(0f, 0f, 0f), Quaternion.Euler(0, 0, 90));
-            }
-            else if (randomOre < map3OreChance[1]) //rubyChance
-            {
-                Instantiate(prefabs[1], new Vector3(0f, 0f, 0f), Quaternion.Euler(0, 0, 90));
-            }
-            else if (randomOre < map3OreChance[0]) //goldChance
-            {
-                Instantiate(prefabs[0], new Vector3(0f, 0f, 0f), Quaternion.Euler(0, 0, 90));
+                if (randomOre < map3OreChance[i]) //ironChance
+                {
+                    Instantiate(prefabs[i], new Vector3(0f, 0f, 0f), Quaternion.Euler(0, 0, 90));
+                    break;
+                }
             }
         }
         if (SceneManager.GetActiveScene().name == "EarthMantle")
         {
-            if (randomOre < map4OreChance[2]) //emeraldChance
+            for (int i = 2; i >= 0; i--)
             {
-                Instantiate(prefabs[2], new Vector3(0f, 0f, 0f), Quaternion.Euler(0, 0, 90));
+                if (randomOre < map4OreChance[i]) //ironChance
+                {
+                    Instantiate(prefabs[i], new Vector3(0f, 0f, 0f), Quaternion.Euler(0, 0, 90));
+                    break;
+                }
             }
-            else if (randomOre < map4OreChance[1]) //sapphireChance
+        }
+        if (SceneManager.GetActiveScene().name == "EarthCore")
+        {
+            for (int i = 2; i >= 0; i--)
             {
-                Instantiate(prefabs[1], new Vector3(0f, 0f, 0f), Quaternion.Euler(0, 0, 90));
-            }
-            else if (randomOre < map4OreChance[0]) //hprubyChance
-            {
-                Instantiate(prefabs[0], new Vector3(0f, 0f, 0f), Quaternion.Euler(0, 0, 90));
+                if (randomOre < map6OreChance[i]) //ironChance
+                {
+                    Instantiate(prefabs[i], new Vector3(0f, 0f, 0f), Quaternion.Euler(0, 0, 90));
+                    break;
+                }
             }
         }
     }
@@ -451,6 +462,78 @@ public class IdleManager : MonoBehaviour
             }
             #endregion
         }
+        if (ore.GetName() == "Dwarfnium")
+        {
+            oreCollection[10]++;
+            #region Dwarfnium mining quest
+            if (qManager.activeEQuest.questType == QuestType.MineDwarfnium)
+            {
+                qManager.questProgress[0]++;
+            }
+            if (qManager.activeIQuest.questType == QuestType.MineDwarfnium)
+            {
+                qManager.questProgress[1]++;
+            }
+            if (qManager.activeHQuest.questType == QuestType.MineDwarfnium)
+            {
+                qManager.questProgress[2]++;
+            }
+            #endregion
+        }
+        if (ore.GetName() == "HPSapphire")
+        {
+            oreCollection[11]++;
+            #region HPSapphire mining quest
+            if (qManager.activeEQuest.questType == QuestType.MineHPSapphire)
+            {
+                qManager.questProgress[0]++;
+            }
+            if (qManager.activeIQuest.questType == QuestType.MineHPSapphire)
+            {
+                qManager.questProgress[1]++;
+            }
+            if (qManager.activeHQuest.questType == QuestType.MineHPSapphire)
+            {
+                qManager.questProgress[2]++;
+            }
+            #endregion
+        }
+        if (ore.GetName() == "Diamond")
+        {
+            oreCollection[12]++;
+            #region HPSapphire mining quest
+            if (qManager.activeEQuest.questType == QuestType.MineDiamond)
+            {
+                qManager.questProgress[0]++;
+            }
+            if (qManager.activeIQuest.questType == QuestType.MineDiamond)
+            {
+                qManager.questProgress[1]++;
+            }
+            if (qManager.activeHQuest.questType == QuestType.MineDiamond)
+            {
+                qManager.questProgress[2]++;
+            }
+            #endregion
+        }
+        if (ore.GetName() == "Alexandrite")
+        {
+            oreCollection[13]++;
+            #region HPSapphire mining quest
+            if (qManager.activeEQuest.questType == QuestType.MineAlexandrite)
+            {
+                qManager.questProgress[0]++;
+            }
+            if (qManager.activeIQuest.questType == QuestType.MineAlexandrite)
+            {
+                qManager.questProgress[1]++;
+            }
+            if (qManager.activeHQuest.questType == QuestType.MineAlexandrite)
+            {
+                qManager.questProgress[2]++;
+            }
+            #endregion
+        }
     }
     #endregion
 
@@ -461,19 +544,19 @@ public class IdleManager : MonoBehaviour
         {
             int randomGain = Random.Range(0, 20);
             //stone 10, coal 5, bronze 4, iron 1
-            if (randomGain < map12OreChance[3])//ironChance)
+            if (randomGain < map2OreChance[3])//ironChance)
             {
                 oreCollection[3]++;
             }
-            else if (randomGain < map12OreChance[2])//copperChance)//2
+            else if (randomGain < map2OreChance[2])//copperChance)//2
             {
                 oreCollection[2]++;
             }
-            else if (randomGain < map12OreChance[1])//coalChance)//6
+            else if (randomGain < map2OreChance[1])//coalChance)//6
             {
                 oreCollection[1]++;
             }
-            else if (randomGain < map12OreChance[0])//stoneChance)//12
+            else if (randomGain < map2OreChance[0])//stoneChance)//12
             {
                 oreCollection[0]++;
             }
@@ -522,6 +605,14 @@ public class IdleManager : MonoBehaviour
         {
             trueMiningPower = eqAttack[3];
         }
+        else if (SceneManager.GetActiveScene().name == "DwarfVillage")
+        {
+            trueMiningPower = eqAttack[4];
+        }
+        else if (SceneManager.GetActiveScene().name == "EarthCore")
+        {
+            trueMiningPower = eqAttack[5];
+        }
         #endregion
         /*if (costumeManager.costumeEquipped && costumeManager.currentActiveCostume.statusTypeCostume == StatusTypeCostume.PowerUp)
         {
@@ -565,30 +656,24 @@ public class IdleManager : MonoBehaviour
     }
     public void ChanceChecker()
     {
-        #region Gloves/Waterfall
-        if (eqLevel[0] <= 10)
-        {
-            map12OreChance[0] = 20;
-        }
-        #endregion
         #region Pickaxe/Cave
         if (eqLevel[1] <= 10)
         {
-            map12OreChance[1] = 20;
-            map12OreChance[2] = 0;
-            map12OreChance[3] = 0;
+            map2OreChance[0] = 20;
+            map2OreChance[1] = 0;
+            map2OreChance[2] = 0;
         }
         else if (eqLevel[1] <= 20)
         {
-            map12OreChance[1] = 20;
-            map12OreChance[2] = 6;
-            map12OreChance[3] = 0;
+            map2OreChance[0] = 20;
+            map2OreChance[1] = 6;
+            map2OreChance[2] = 0;
         }
         else if (eqLevel[1] <= 30)
         {
-            map12OreChance[1] = 20;
-            map12OreChance[2] = 8;
-            map12OreChance[3] = 2;
+            map2OreChance[0] = 20;
+            map2OreChance[1] = 8;
+            map2OreChance[2] = 2;
         }
         #endregion
         #region TNT/DeepCave
@@ -629,6 +714,26 @@ public class IdleManager : MonoBehaviour
             map4OreChance[0] = 20;
             map4OreChance[1] = 8;
             map4OreChance[2] = 2;
+        }
+        #endregion
+        #region PlasmaDrill/EarthCore
+        if (eqLevel[2] <= 10)
+        {
+            map6OreChance[0] = 20;
+            map6OreChance[1] = 0;
+            map6OreChance[2] = 0;
+        }
+        else if (eqLevel[2] <= 20)
+        {
+            map6OreChance[0] = 20;
+            map6OreChance[1] = 6;
+            map6OreChance[2] = 0;
+        }
+        else if (eqLevel[2] <= 30)
+        {
+            map6OreChance[0] = 20;
+            map6OreChance[1] = 8;
+            map6OreChance[2] = 2;
         }
         #endregion
     }

@@ -7,13 +7,14 @@ using UnityEngine.EventSystems;
 
 public class walk : MonoBehaviour
 {
-    private float speed = 70f;
+    private float speed = 150f;
     public Animator anim;
 
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(2 * Time.deltaTime * speed, 0, 0);
+        //transform.Translate(2 * Time.deltaTime * speed, 0, 0);
+        transform.Translate(Vector3.right * (Time.deltaTime * speed));
 
         if (Input.GetMouseButtonDown(0) && EventSystem.current.currentSelectedGameObject == null && anim.GetBool("Mine") == false)
         {
