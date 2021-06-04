@@ -64,6 +64,64 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\GPGSIds.cs" />
+    <Compile Include="Assets\GooglePlayGames\BasicApi\Achievement.cs" />
+    <Compile Include="Assets\GooglePlayGames\BasicApi\CommonStatusCodes.cs" />
+    <Compile Include="Assets\GooglePlayGames\BasicApi\CommonTypes.cs" />
+    <Compile Include="Assets\GooglePlayGames\BasicApi\DummyClient.cs" />
+    <Compile Include="Assets\GooglePlayGames\BasicApi\Events\Event.cs" />
+    <Compile Include="Assets\GooglePlayGames\BasicApi\Events\IEvent.cs" />
+    <Compile Include="Assets\GooglePlayGames\BasicApi\Events\IEventsClient.cs" />
+    <Compile Include="Assets\GooglePlayGames\BasicApi\IPlayGamesClient.cs" />
+    <Compile Include="Assets\GooglePlayGames\BasicApi\LeaderboardScoreData.cs" />
+    <Compile Include="Assets\GooglePlayGames\BasicApi\Nearby\AdvertisingResult.cs" />
+    <Compile Include="Assets\GooglePlayGames\BasicApi\Nearby\ConnectionRequest.cs" />
+    <Compile Include="Assets\GooglePlayGames\BasicApi\Nearby\ConnectionResponse.cs" />
+    <Compile Include="Assets\GooglePlayGames\BasicApi\Nearby\DummyNearbyConnectionClient.cs" />
+    <Compile Include="Assets\GooglePlayGames\BasicApi\Nearby\EndpointDetails.cs" />
+    <Compile Include="Assets\GooglePlayGames\BasicApi\Nearby\INearbyConnectionClient.cs" />
+    <Compile Include="Assets\GooglePlayGames\BasicApi\Nearby\NearbyConnectionConfiguration.cs" />
+    <Compile Include="Assets\GooglePlayGames\BasicApi\PlayGamesClientConfiguration.cs" />
+    <Compile Include="Assets\GooglePlayGames\BasicApi\Player.cs" />
+    <Compile Include="Assets\GooglePlayGames\BasicApi\PlayerProfile.cs" />
+    <Compile Include="Assets\GooglePlayGames\BasicApi\PlayerStats.cs" />
+    <Compile Include="Assets\GooglePlayGames\BasicApi\SavedGame\ISavedGameClient.cs" />
+    <Compile Include="Assets\GooglePlayGames\BasicApi\SavedGame\ISavedGameMetadata.cs" />
+    <Compile Include="Assets\GooglePlayGames\BasicApi\SavedGame\SavedGameMetadataUpdate.cs" />
+    <Compile Include="Assets\GooglePlayGames\BasicApi\ScorePageToken.cs" />
+    <Compile Include="Assets\GooglePlayGames\BasicApi\SignInHelper.cs" />
+    <Compile Include="Assets\GooglePlayGames\BasicApi\SignInInteractivity.cs" />
+    <Compile Include="Assets\GooglePlayGames\BasicApi\SignInStatus.cs" />
+    <Compile Include="Assets\GooglePlayGames\BasicApi\Video\CaptureOverlayStateListener.cs" />
+    <Compile Include="Assets\GooglePlayGames\BasicApi\Video\IVideoClient.cs" />
+    <Compile Include="Assets\GooglePlayGames\BasicApi\Video\VideoCapabilities.cs" />
+    <Compile Include="Assets\GooglePlayGames\BasicApi\Video\VideoCaptureState.cs" />
+    <Compile Include="Assets\GooglePlayGames\GameInfo.cs" />
+    <Compile Include="Assets\GooglePlayGames\ISocialPlatform\PlayGamesAchievement.cs" />
+    <Compile Include="Assets\GooglePlayGames\ISocialPlatform\PlayGamesLeaderboard.cs" />
+    <Compile Include="Assets\GooglePlayGames\ISocialPlatform\PlayGamesLocalUser.cs" />
+    <Compile Include="Assets\GooglePlayGames\ISocialPlatform\PlayGamesPlatform.cs" />
+    <Compile Include="Assets\GooglePlayGames\ISocialPlatform\PlayGamesScore.cs" />
+    <Compile Include="Assets\GooglePlayGames\ISocialPlatform\PlayGamesUserProfile.cs" />
+    <Compile Include="Assets\GooglePlayGames\OurUtils\Logger.cs" />
+    <Compile Include="Assets\GooglePlayGames\OurUtils\Misc.cs" />
+    <Compile Include="Assets\GooglePlayGames\OurUtils\NearbyHelperObject.cs" />
+    <Compile Include="Assets\GooglePlayGames\OurUtils\PlatformUtils.cs" />
+    <Compile Include="Assets\GooglePlayGames\OurUtils\PlayGamesHelperObject.cs" />
+    <Compile Include="Assets\GooglePlayGames\Platforms\Android\AndroidClient.cs" />
+    <Compile Include="Assets\GooglePlayGames\Platforms\Android\AndroidEventsClient.cs" />
+    <Compile Include="Assets\GooglePlayGames\Platforms\Android\AndroidHelperFragment.cs" />
+    <Compile Include="Assets\GooglePlayGames\Platforms\Android\AndroidJavaConverter.cs" />
+    <Compile Include="Assets\GooglePlayGames\Platforms\Android\AndroidNearbyConnectionClient.cs" />
+    <Compile Include="Assets\GooglePlayGames\Platforms\Android\AndroidSavedGameClient.cs" />
+    <Compile Include="Assets\GooglePlayGames\Platforms\Android\AndroidSnapshotMetadata.cs" />
+    <Compile Include="Assets\GooglePlayGames\Platforms\Android\AndroidTaskUtils.cs" />
+    <Compile Include="Assets\GooglePlayGames\Platforms\Android\AndroidTokenClient.cs" />
+    <Compile Include="Assets\GooglePlayGames\Platforms\Android\AndroidVideoClient.cs" />
+    <Compile Include="Assets\GooglePlayGames\Platforms\NearbyConnectionClientFactory.cs" />
+    <Compile Include="Assets\GooglePlayGames\Platforms\PlayGamesClientFactory.cs" />
+    <Compile Include="Assets\GooglePlayGames\Platforms\TokenClient.cs" />
+    <Compile Include="Assets\GooglePlayGames\PluginVersion.cs" />
     <Compile Include="Assets\Images\Mining Idle Assets\Character Artist\Lv.1 Waterfall\Klein (Main Character)\Walk\walk.cs" />
     <Compile Include="Assets\Scenes\Experimental\TimeTest.cs" />
     <Compile Include="Assets\Scripts\For Game\AllManager.cs" />
@@ -88,6 +146,7 @@
     <Compile Include="Assets\Scripts\Jarvis'es Script\SaveSystem.cs" />
     <Compile Include="Assets\Scripts\Jarvis'es Script\ShopSystem.cs" />
     <Compile Include="Assets\Scripts\Plugin\Firebase Init.cs" />
+    <Compile Include="Assets\Scripts\Plugin\Log in Play Games.cs" />
     <Compile Include="Assets\Scripts\Plugin\Realtime.cs" />
     <Compile Include="Assets\Scripts\SFX.cs" />
     <Compile Include="Assets\Scripts\UI\SimpleFade.cs" />
@@ -107,6 +166,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\Images\Mining Idle Assets\Character Artist\Level Character.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
+    <None Include="Assets\GooglePlayGames\Plugins\Android\GooglePlayGamesManifest.plugin\AndroidManifest.xml" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
@@ -299,40 +359,40 @@
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.18f1/Editor/Data/Managed/UnityEditor.dll</HintPath>
     </Reference>
     <Reference Include="Firebase.Analytics">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/PackageCache/com.google.firebase.analytics@7.1.0/Firebase/Plugins/Firebase.Analytics.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/PackageCache/com.google.firebase.analytics@7.1.0/Firebase/Plugins/Firebase.Analytics.dll</HintPath>
     </Reference>
     <Reference Include="Firebase.App">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/PackageCache/com.google.firebase.app@7.1.0/Firebase/Plugins/Firebase.App.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/PackageCache/com.google.firebase.app@7.1.0/Firebase/Plugins/Firebase.App.dll</HintPath>
     </Reference>
     <Reference Include="Firebase.Platform">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/PackageCache/com.google.firebase.app@7.1.0/Firebase/Plugins/Firebase.Platform.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/PackageCache/com.google.firebase.app@7.1.0/Firebase/Plugins/Firebase.Platform.dll</HintPath>
     </Reference>
     <Reference Include="Firebase.TaskExtension">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/PackageCache/com.google.firebase.app@7.1.0/Firebase/Plugins/Firebase.TaskExtension.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/PackageCache/com.google.firebase.app@7.1.0/Firebase/Plugins/Firebase.TaskExtension.dll</HintPath>
     </Reference>
     <Reference Include="Google.MiniJson">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/PackageCache/com.google.firebase.app@7.1.0/Firebase/Plugins/Google.MiniJson.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/PackageCache/com.google.firebase.app@7.1.0/Firebase/Plugins/Google.MiniJson.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Compat">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/PackageCache/com.google.firebase.app@7.1.0/Parse/Plugins/dotNet45/Unity.Compat.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/PackageCache/com.google.firebase.app@7.1.0/Parse/Plugins/dotNet45/Unity.Compat.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Tasks">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/PackageCache/com.google.firebase.app@7.1.0/Parse/Plugins/dotNet45/Unity.Tasks.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/PackageCache/com.google.firebase.app@7.1.0/Parse/Plugins/dotNet45/Unity.Tasks.dll</HintPath>
     </Reference>
     <Reference Include="Firebase.Auth">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/PackageCache/com.google.firebase.auth@7.1.0/Firebase/Plugins/Firebase.Auth.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/PackageCache/com.google.firebase.auth@7.1.0/Firebase/Plugins/Firebase.Auth.dll</HintPath>
     </Reference>
     <Reference Include="Firebase.Database">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/PackageCache/com.google.firebase.database@7.1.0/Firebase/Plugins/Firebase.Database.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/PackageCache/com.google.firebase.database@7.1.0/Firebase/Plugins/Firebase.Database.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Editor">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/PackageCache/com.unity.analytics@3.3.5/Unity.Analytics.Editor.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/PackageCache/com.unity.analytics@3.3.5/Unity.Analytics.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.Tracker">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/PackageCache/com.unity.analytics@3.3.5/Unity.Analytics.Tracker.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/PackageCache/com.unity.analytics@3.3.5/Unity.Analytics.Tracker.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.StandardEvents">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/PackageCache/com.unity.analytics@3.3.5/AnalyticsStandardEvents/Unity.Analytics.StandardEvents.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/PackageCache/com.unity.analytics@3.3.5/AnalyticsStandardEvents/Unity.Analytics.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.18f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
@@ -680,85 +740,85 @@
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.18f1/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Xml.Serialization.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline.Editor">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Monetization">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEngine.Monetization.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEngine.Monetization.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.multiplayer-hlapi.Editor">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Editor.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Advertisements">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEngine.Advertisements.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEngine.Advertisements.dll</HintPath>
     </Reference>
     <Reference Include="Google.Play.Billing.Editor">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Google.Play.Billing.Editor.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Google.Play.Billing.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Purchasing">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEngine.Purchasing.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEngine.Purchasing.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.Purchasing">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEditor.Purchasing.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEditor.Purchasing.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Google.Play.Billing">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Google.Play.Billing.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Google.Play.Billing.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Google.Android.AppBundle.Editor">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Google.Android.AppBundle.Editor.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Google.Android.AppBundle.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.multiplayer-weaver.Editor">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/com.unity.multiplayer-weaver.Editor.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/com.unity.multiplayer-weaver.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.XR.LegacyInputHelpers">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Sprite.Editor">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Tilemap.Editor">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.SpatialTracking">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.SpatialTracking">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.Advertisements.Editor">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEngine.Advertisements.Editor.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEngine.Advertisements.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Analytics.DataPrivacy">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.XR.LegacyInputHelpers">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.multiplayer-hlapi.Runtime">
-      <HintPath>D:/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/ScriptAssemblies/com.unity.multiplayer-hlapi.Runtime.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
