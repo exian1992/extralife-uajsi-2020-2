@@ -73,8 +73,12 @@
     <Compile Include="Assets\GooglePlayGames\Editor\GPGSUtil.cs" />
     <Compile Include="Assets\GooglePlayGames\Editor\NearbyConnectionUI.cs" />
     <Compile Include="Assets\Unity-Logs-Viewer\Reporter\Editor\ReporterEditor.cs" />
+    <None Include="Assets\GoogleSignIn\Editor\GoogleSignInDependencies.xml" />
+    <None Include="Assets\GoogleSignIn\Editor\m2repository\com\google\signin\google-signin-support\maven-metadata.xml" />
     <None Include="Assets\GooglePlayGames\Editor\m2repository\com\google\games\gpgs-plugin-support\maven-metadata.xml" />
+    <None Include="Assets\GoogleSignIn\Editor\google-signin-plugin_v1.0.4.txt" />
     <None Include="Assets\GooglePlayGames\Editor\template-GameInfo.txt" />
+    <None Include="Assets\GoogleSignIn\Editor\GoogleSignInSupportDependencies.xml" />
     <None Include="Assets\GooglePlayGames\Editor\GooglePlayGamesPlugin_v0.10.12.txt" />
     <None Include="Assets\GooglePlayGames\Editor\GooglePlayGamesPluginDependencies.xml" />
     <None Include="Assets\GooglePlayGames\Editor\template-AndroidManifest.txt" />

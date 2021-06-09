@@ -1538,6 +1538,7 @@ MonoBehaviour:
   map2OreChance: 000000000000000000000000
   map3OreChance: 000000000000000000000000
   map4OreChance: 000000000000000000000000
+  map6OreChance: 
   eqLevel: 0100000001000000010000000100000001000000
   eqAttack:
   - 1
@@ -1934,6 +1935,51 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1271794858
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1271794860}
+  - component: {fileID: 1271794859}
+  m_Layer: 0
+  m_Name: Sign in
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1271794859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1271794858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 566edd9fde690534fa223fb55a0b6585, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  infoText: {fileID: 0}
+  webClientId: jdalosk4bd63gcd6ggt3s2n1vu4nh3i2
+--- !u!4 &1271794860
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1271794858}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1381226609}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1380411761
 GameObject:
   m_ObjectHideFlags: 0
@@ -2031,6 +2077,7 @@ Transform:
   - {fileID: 598200474}
   - {fileID: 2023897550}
   - {fileID: 396768093}
+  - {fileID: 1271794860}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2517,6 +2564,41 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5645439837087712127, guid: d6bd789a4f9440f4cb5cadd577ba8490,
+        type: 3}
+      propertyPath: m_Interactable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5645439837087712127, guid: d6bd789a4f9440f4cb5cadd577ba8490,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5645439837087712127, guid: d6bd789a4f9440f4cb5cadd577ba8490,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5645439837087712127, guid: d6bd789a4f9440f4cb5cadd577ba8490,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1271794859}
+    - target: {fileID: 5645439837087712127, guid: d6bd789a4f9440f4cb5cadd577ba8490,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5645439837087712127, guid: d6bd789a4f9440f4cb5cadd577ba8490,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SignInWithGoogle
+      objectReference: {fileID: 0}
+    - target: {fileID: 5645439837087712127, guid: d6bd789a4f9440f4cb5cadd577ba8490,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6bd789a4f9440f4cb5cadd577ba8490, type: 3}
@@ -3442,8 +3524,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npc1Running: 0
   npc2Running: 0
+  npc3Running: 0
   speedUp1: 0
   speedUp2: 0
+  speedUp3: 0
   npc1Button:
   - {fileID: 0}
   - {fileID: 0}
@@ -3452,6 +3536,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  npc3Button: []
   timer:
   - {fileID: 0}
   - {fileID: 0}
@@ -3461,6 +3546,24 @@ MonoBehaviour:
   timerObject:
   - {fileID: 0}
   - {fileID: 0}
+  hour: []
+  map: []
+  npc1Select: 0
+  npc2Select: 0
+  npc3Select: 0
+  hour1: 0
+  hour4: 0
+  hour8: 0
+  mapWaterfall: 0
+  mapCave: 0
+  mapDCave: 0
+  mapEMantle: 0
+  mapDwarf: 0
+  mapECore: 0
+  hourBtn: []
+  mapBtn: []
+  confirm: {fileID: 0}
+  npcSelect: {fileID: 0}
 --- !u!1 &2136634803
 GameObject:
   m_ObjectHideFlags: 0

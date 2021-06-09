@@ -122,6 +122,15 @@
     <Compile Include="Assets\GooglePlayGames\Platforms\PlayGamesClientFactory.cs" />
     <Compile Include="Assets\GooglePlayGames\Platforms\TokenClient.cs" />
     <Compile Include="Assets\GooglePlayGames\PluginVersion.cs" />
+    <Compile Include="Assets\GoogleSignIn\Future.cs" />
+    <Compile Include="Assets\GoogleSignIn\GoogleSignIn.cs" />
+    <Compile Include="Assets\GoogleSignIn\GoogleSignInConfiguration.cs" />
+    <Compile Include="Assets\GoogleSignIn\GoogleSignInStatusCode.cs" />
+    <Compile Include="Assets\GoogleSignIn\GoogleSignInUser.cs" />
+    <Compile Include="Assets\GoogleSignIn\Impl\BaseObject.cs" />
+    <Compile Include="Assets\GoogleSignIn\Impl\GoogleSignInImpl.cs" />
+    <Compile Include="Assets\GoogleSignIn\Impl\NativeFuture.cs" />
+    <Compile Include="Assets\GoogleSignIn\Impl\SignInHelperObject.cs" />
     <Compile Include="Assets\Images\Mining Idle Assets\Character Artist\Lv.1 Waterfall\Klein (Main Character)\Walk\walk.cs" />
     <Compile Include="Assets\Scenes\Experimental\TimeTest.cs" />
     <Compile Include="Assets\Scripts\For Game\AllManager.cs" />
@@ -146,7 +155,7 @@
     <Compile Include="Assets\Scripts\Jarvis'es Script\SaveSystem.cs" />
     <Compile Include="Assets\Scripts\Jarvis'es Script\ShopSystem.cs" />
     <Compile Include="Assets\Scripts\Plugin\Firebase Init.cs" />
-    <Compile Include="Assets\Scripts\Plugin\Log in Play Games.cs" />
+    <Compile Include="Assets\Scripts\Plugin\GoogleSignInDemo.cs" />
     <Compile Include="Assets\Scripts\Plugin\Realtime.cs" />
     <Compile Include="Assets\Scripts\SFX.cs" />
     <Compile Include="Assets\Scripts\UI\SimpleFade.cs" />
