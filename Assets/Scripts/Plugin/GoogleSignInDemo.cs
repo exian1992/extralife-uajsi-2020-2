@@ -135,6 +135,5 @@ public class GoogleSignInDemo : MonoBehaviour
 
         GoogleSignIn.DefaultInstance.SignIn().ContinueWith(OnAuthenticationFinished);
     }
-
     private void AddToInformation(string str) { infoText.text += "\n" + str; }
 }
