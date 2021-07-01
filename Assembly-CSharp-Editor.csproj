@@ -284,6 +284,18 @@
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/16.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
+    <Reference Include="GoogleMobileAds.Common">
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Assets/GoogleMobileAds/GoogleMobileAds.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="GoogleMobileAds.Core">
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Assets/GoogleMobileAds/GoogleMobileAds.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="GoogleMobileAds">
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Assets/GoogleMobileAds/GoogleMobileAds.dll</HintPath>
+    </Reference>
+    <Reference Include="GoogleMobileAds.Unity">
+      <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Assets/GoogleMobileAds/GoogleMobileAds.Unity.dll</HintPath>
+    </Reference>
     <Reference Include="Google.IOSResolver_v1.2.164">
       <HintPath>C:/Users/Kay's/Documents/GitHub/extralife-uajsi-2020-2/Library/PackageCache/com.google.external-dependency-manager@1.2.164/ExternalDependencyManager/Editor/Google.IOSResolver_v1.2.164.dll</HintPath>
     </Reference>
@@ -795,6 +807,10 @@
     <ProjectReference Include="Assembly-CSharp-Editor-firstpass.csproj">
       <Project>{F16BACF3-E79E-62D2-BEAB-276E2AB312DE}</Project>
       <Name>Assembly-CSharp-Editor-firstpass</Name>
+    </ProjectReference>
+    <ProjectReference Include="GoogleMobileAds.Editor.csproj">
+      <Project>{007A5646-74F2-D9FA-A50F-19BCB959A32F}</Project>
+      <Name>GoogleMobileAds.Editor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
