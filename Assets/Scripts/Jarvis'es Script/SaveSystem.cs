@@ -85,7 +85,7 @@ public static class SaveSystem
     }
 
     //load data
-    public static GameData LoadData ()
+    public static GameData LoadData()
     {
         //string path = "D:/SaveFile/data.uwansummoney";
         string path = Application.persistentDataPath + "/dataBank.uwansummoney"; //change this every update

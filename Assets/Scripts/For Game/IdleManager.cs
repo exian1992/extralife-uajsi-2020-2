@@ -133,7 +133,7 @@ public class IdleManager : MonoBehaviour
             SceneManager.GetActiveScene().name == "DwarfVillage" ||
             SceneManager.GetActiveScene().name == "EarthCore")
         {
-            //ore remover + generator
+            //ore update
             currentBlock = GameObject.FindGameObjectWithTag("ore");
             Ore ore = currentBlock.GetComponent<Ore>();
 
@@ -501,7 +501,7 @@ public class IdleManager : MonoBehaviour
         if (ore.GetName() == "Diamond")
         {
             oreCollection[12]++;
-            #region HPSapphire mining quest
+            #region Diamond mining quest
             if (qManager.activeEQuest.questType == QuestType.MineDiamond)
             {
                 qManager.questProgress[0]++;
@@ -519,7 +519,7 @@ public class IdleManager : MonoBehaviour
         if (ore.GetName() == "Alexandrite")
         {
             oreCollection[13]++;
-            #region HPSapphire mining quest
+            #region Alexandrite mining quest
             if (qManager.activeEQuest.questType == QuestType.MineAlexandrite)
             {
                 qManager.questProgress[0]++;
@@ -640,12 +640,51 @@ public class IdleManager : MonoBehaviour
             if (data.eqLevel[i] == 0)
             {
                 eqLevel[i] = 1;
+                eqAttack[i] = 1;
             }
-            else eqLevel[i] = data.eqLevel[i];
-
-            eqAttack[i] = data.eqAttack[i];
+            else
+            {
+                eqLevel[i] = data.eqLevel[i];
+                if (data.eqAttack[i] != 1 + (0.15f * (eqLevel[i] - 1)))
+                {
+                    eqAttack[i] = 1 + (0.15f * (eqLevel[i] - 1));
+                }
+                else eqAttack[i] = data.eqAttack[i];
+            }
+                        
             eqBasePrice[i] = data.eqBasePrice[i];
             eqLatestPrice[i] = data.eqLatestPrice[i];
+        }
+
+        if (eqBasePrice[0] == 0)
+        {
+            eqBasePrice[0] = 100;
+            eqLatestPrice[0] = 100;
+        }
+        if (eqBasePrice[1] == 0)
+        {
+            eqBasePrice[1] = 1000;
+            eqLatestPrice[1] = 1000;
+        }
+        if (eqBasePrice[2] == 0)
+        {
+            eqBasePrice[2] = 10000;
+            eqLatestPrice[2] = 10000;
+        }
+        if (eqBasePrice[3] == 0)
+        {
+            eqBasePrice[3] = 25000;
+            eqLatestPrice[3] = 25000;
+        }
+        if (eqBasePrice[4] == 0)
+        {
+            eqBasePrice[4] = 75000;
+            eqLatestPrice[4] = 75000;
+        }
+        if (eqBasePrice[5] == 0)
+        {
+            eqBasePrice[5] = 150000;
+            eqLatestPrice[5] = 150000;
         }
 
         coin = data.coin;
@@ -697,19 +736,19 @@ public class IdleManager : MonoBehaviour
         }
         #endregion
         #region HandDrill/EarthMantle
-        if (eqLevel[2] <= 10)
+        if (eqLevel[3] <= 10)
         {
             map4OreChance[0] = 20;
             map4OreChance[1] = 0;
             map4OreChance[2] = 0;
         }
-        else if (eqLevel[2] <= 20)
+        else if (eqLevel[3] <= 20)
         {
             map4OreChance[0] = 20;
             map4OreChance[1] = 6;
             map4OreChance[2] = 0;
         }
-        else if (eqLevel[2] <= 30)
+        else if (eqLevel[3] <= 30)
         {
             map4OreChance[0] = 20;
             map4OreChance[1] = 8;
@@ -717,19 +756,19 @@ public class IdleManager : MonoBehaviour
         }
         #endregion
         #region PlasmaDrill/EarthCore
-        if (eqLevel[2] <= 10)
+        if (eqLevel[5] <= 10)
         {
             map6OreChance[0] = 20;
             map6OreChance[1] = 0;
             map6OreChance[2] = 0;
         }
-        else if (eqLevel[2] <= 20)
+        else if (eqLevel[5] <= 20)
         {
             map6OreChance[0] = 20;
             map6OreChance[1] = 6;
             map6OreChance[2] = 0;
         }
-        else if (eqLevel[2] <= 30)
+        else if (eqLevel[5] <= 30)
         {
             map6OreChance[0] = 20;
             map6OreChance[1] = 8;

@@ -38,7 +38,7 @@ public class HireNPCManager : MonoBehaviour
         string saveData = Application.persistentDataPath + "/npcData.uwansummoney";
         if (!File.Exists(saveData))
         {
-            //SaveProgress();
+            SaveProgress();
         }
         else LoadData();
     }
@@ -56,6 +56,7 @@ public class HireNPCManager : MonoBehaviour
                         npc1Button[0].SetActive(false);
                         npc1Button[1].SetActive(false);
                         npc1Button[2].SetActive(true);
+                        npc1Button[2].GetComponent<Button>().interactable = true;
 
                         timerObject[0].SetActive(false);
                         status[0].text = "Complete";
@@ -63,8 +64,11 @@ public class HireNPCManager : MonoBehaviour
                     else
                     {
                         npc1Button[0].SetActive(false);
-                        npc1Button[1].SetActive(true);
-                        npc1Button[2].SetActive(false);
+                        //npc1Button[1].SetActive(true);
+                        //npc1Button[2].SetActive(false);
+                        npc1Button[1].SetActive(false);
+                        npc1Button[2].SetActive(true);
+                        npc1Button[2].GetComponent<Button>().interactable = false;
 
                         timerObject[0].SetActive(true);
                         status[0].text = "Mining";
@@ -97,8 +101,11 @@ public class HireNPCManager : MonoBehaviour
                     else
                     {
                         npc2Button[0].SetActive(false);
-                        npc2Button[1].SetActive(true);
-                        npc2Button[2].SetActive(false);
+                        //npc2Button[1].SetActive(true);
+                        //npc2Button[2].SetActive(false);
+                        npc2Button[1].SetActive(false);
+                        npc2Button[2].SetActive(true);
+                        npc2Button[2].GetComponent<Button>().interactable = false;
 
                         timerObject[1].SetActive(true);
                         status[1].text = "Mining";
@@ -130,8 +137,11 @@ public class HireNPCManager : MonoBehaviour
                     else
                     {
                         npc3Button[0].SetActive(false);
-                        npc3Button[1].SetActive(true);
-                        npc3Button[2].SetActive(false);
+                        //npc3Button[1].SetActive(true);
+                        //npc3Button[2].SetActive(false);
+                        npc3Button[1].SetActive(false);
+                        npc3Button[2].SetActive(true);
+                        npc3Button[2].GetComponent<Button>().interactable = false;
 
                         timerObject[2].SetActive(true);
                         status[2].text = "Mining";
@@ -157,14 +167,23 @@ public class HireNPCManager : MonoBehaviour
         data = SaveSystem.LoadNPCManager();
         npc1 = data.npc1;
         npc2 = data.npc2;
+        npc3 = data.npc3;
         npc1Running = data.npc1Running;
         npc2Running = data.npc2Running;
+        npc3Running = data.npc3Running;
         speedUp1 = data.speedUp1;
         speedUp2 = data.speedUp2;
+        speedUp3 = data.speedUp3;
+        hour[0] = data.hour[0];
+        hour[1] = data.hour[1];
+        hour[2] = data.hour[2];
+        map[0] = data.map[0];
+        map[1] = data.map[1];
+        map[2] = data.map[2];
     }
     public void SaveProgress()
     {
-        //SaveSystem.SaveNPCManager(this);
+        SaveSystem.SaveNPCManager(this);
     }
     public void SpeedUp1()
     {

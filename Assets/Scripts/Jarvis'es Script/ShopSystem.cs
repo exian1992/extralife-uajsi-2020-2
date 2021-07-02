@@ -100,14 +100,14 @@ public class ShopSystem : MonoBehaviour
 
         #region Ore Merchant UI Conditioning
         //normal sell
-        if (oreSell[0] != 0 || oreSell[1] != 0 || oreSell[2] != 0 || oreSell[3] != 0 || oreSell[4] != 0 || oreSell[5] != 0 || oreSell[6] != 0 || oreSell[7] != 0 || oreSell[8] != 0 || oreSell[9] != 0)
+        if (oreSell[0] != 0 || oreSell[1] != 0 || oreSell[2] != 0 || oreSell[3] != 0 || oreSell[4] != 0 || oreSell[5] != 0 || oreSell[6] != 0 || oreSell[7] != 0 || oreSell[8] != 0 || oreSell[9] != 0 || oreSell[10] != 0 || oreSell[11] != 0 || oreSell[12] != 0 || oreSell[13] != 0)
         {
             sellButton.interactable = true;
         }
         else sellButton.interactable = false;
 
         //sell all
-        if (iManager.oreCollection[0] != 0 || iManager.oreCollection[1] != 0 || iManager.oreCollection[2] != 0 || iManager.oreCollection[3] != 0 || iManager.oreCollection[4] != 0 || iManager.oreCollection[5] != 0 || iManager.oreCollection[6] != 0 || iManager.oreCollection[7] != 0 || iManager.oreCollection[8] != 0 || iManager.oreCollection[9] != 0)
+        if (iManager.oreCollection[0] != 0 || iManager.oreCollection[1] != 0 || iManager.oreCollection[2] != 0 || iManager.oreCollection[3] != 0 || iManager.oreCollection[4] != 0 || iManager.oreCollection[5] != 0 || iManager.oreCollection[6] != 0 || iManager.oreCollection[7] != 0 || iManager.oreCollection[8] != 0 || iManager.oreCollection[9] != 0 || iManager.oreCollection[10] != 0 || iManager.oreCollection[11] != 0 || iManager.oreCollection[12] != 0 || iManager.oreCollection[13] != 0)
         {
             sellAllButton.interactable = true;
         }
@@ -239,10 +239,25 @@ public class ShopSystem : MonoBehaviour
                 {
                     price = 600;
                 }
+                else if (temp == 10) //dwarfnium
+                {
+                    price = 500;
+                }
+                else if (temp == 11) //hpsapphire
+                {
+                    price = 1000;
+                }
+                else if (temp == 12) //diamond
+                {
+                    price = 1500;
+                }
+                else if (temp == 12) //alexandrite
+                {
+                    price = 3000;
+                }
                 #endregion
                 iManager.coin += oreSell[temp] * price;
                 iManager.oreCollection[temp] -= oreSell[temp];
-                //trouble here
                 #region Stone selling quest
                 if (temp == 0)
                 {
@@ -413,6 +428,74 @@ public class ShopSystem : MonoBehaviour
                     }
                 }                
                 #endregion
+                #region Dwarfnium selling quest
+                if (temp == 10)
+                {
+                    if (qManager.activeEQuest.questType == QuestType.SellDwarfnium)
+                    {
+                        qManager.questProgress[0] += oreSell[temp];
+                    }
+                    if (qManager.activeIQuest.questType == QuestType.SellDwarfnium)
+                    {
+                        qManager.questProgress[1] += oreSell[temp];
+                    }
+                    if (qManager.activeHQuest.questType == QuestType.SellDwarfnium)
+                    {
+                        qManager.questProgress[2] += oreSell[temp];
+                    }
+                }                
+                #endregion
+                #region HPSapphire selling quest
+                if (temp == 11)
+                {
+                    if (qManager.activeEQuest.questType == QuestType.SellHPSapphire)
+                    {
+                        qManager.questProgress[0] += oreSell[temp];
+                    }
+                    if (qManager.activeIQuest.questType == QuestType.SellHPSapphire)
+                    {
+                        qManager.questProgress[1] += oreSell[temp];
+                    }
+                    if (qManager.activeHQuest.questType == QuestType.SellHPSapphire)
+                    {
+                        qManager.questProgress[2] += oreSell[temp];
+                    }
+                }                
+                #endregion
+                #region Diamond selling quest
+                if (temp == 12)
+                {
+                    if (qManager.activeEQuest.questType == QuestType.SellDiamond)
+                    {
+                        qManager.questProgress[0] += oreSell[temp];
+                    }
+                    if (qManager.activeIQuest.questType == QuestType.SellDiamond)
+                    {
+                        qManager.questProgress[1] += oreSell[temp];
+                    }
+                    if (qManager.activeHQuest.questType == QuestType.SellDiamond)
+                    {
+                        qManager.questProgress[2] += oreSell[temp];
+                    }
+                }                
+                #endregion
+                #region Alexandrite selling quest
+                if (temp == 13)
+                {
+                    if (qManager.activeEQuest.questType == QuestType.SellAlexandrite)
+                    {
+                        qManager.questProgress[0] += oreSell[temp];
+                    }
+                    if (qManager.activeIQuest.questType == QuestType.SellAlexandrite)
+                    {
+                        qManager.questProgress[1] += oreSell[temp];
+                    }
+                    if (qManager.activeHQuest.questType == QuestType.SellAlexandrite)
+                    {
+                        qManager.questProgress[2] += oreSell[temp];
+                    }
+                }                
+                #endregion
 
                 oreSell[temp] = 0;                
             }            
@@ -465,6 +548,22 @@ public class ShopSystem : MonoBehaviour
             else if (temp == 9) //emerald
             {
                 price = 600;
+            }
+            else if (temp == 10) //dwarfnium
+            {
+                price = 500;
+            }
+            else if (temp == 11) //hpsapphire
+            {
+                price = 1000;
+            }
+            else if (temp == 12) //diamond
+            {
+                price = 1500;
+            }
+            else if (temp == 12) //alexandrite
+            {
+                price = 3000;
             }
             #endregion
             iManager.coin += iManager.oreCollection[temp] * price;
@@ -639,6 +738,74 @@ public class ShopSystem : MonoBehaviour
                 }
             }
             #endregion
+            #region Dwarfnium selling quest
+            if (temp == 10)
+            {
+                if (qManager.activeEQuest.questType == QuestType.SellDwarfnium)
+                {
+                    qManager.questProgress[0] += oreSell[temp];
+                }
+                if (qManager.activeIQuest.questType == QuestType.SellDwarfnium)
+                {
+                    qManager.questProgress[1] += oreSell[temp];
+                }
+                if (qManager.activeHQuest.questType == QuestType.SellDwarfnium)
+                {
+                    qManager.questProgress[2] += oreSell[temp];
+                }
+            }
+            #endregion
+            #region HPSapphire selling quest
+            if (temp == 11)
+            {
+                if (qManager.activeEQuest.questType == QuestType.SellHPSapphire)
+                {
+                    qManager.questProgress[0] += oreSell[temp];
+                }
+                if (qManager.activeIQuest.questType == QuestType.SellHPSapphire)
+                {
+                    qManager.questProgress[1] += oreSell[temp];
+                }
+                if (qManager.activeHQuest.questType == QuestType.SellHPSapphire)
+                {
+                    qManager.questProgress[2] += oreSell[temp];
+                }
+            }
+            #endregion
+            #region Diamond selling quest
+            if (temp == 12)
+            {
+                if (qManager.activeEQuest.questType == QuestType.SellDiamond)
+                {
+                    qManager.questProgress[0] += oreSell[temp];
+                }
+                if (qManager.activeIQuest.questType == QuestType.SellDiamond)
+                {
+                    qManager.questProgress[1] += oreSell[temp];
+                }
+                if (qManager.activeHQuest.questType == QuestType.SellDiamond)
+                {
+                    qManager.questProgress[2] += oreSell[temp];
+                }
+            }
+            #endregion
+            #region Alexandrite selling quest
+            if (temp == 13)
+            {
+                if (qManager.activeEQuest.questType == QuestType.SellAlexandrite)
+                {
+                    qManager.questProgress[0] += oreSell[temp];
+                }
+                if (qManager.activeIQuest.questType == QuestType.SellAlexandrite)
+                {
+                    qManager.questProgress[1] += oreSell[temp];
+                }
+                if (qManager.activeHQuest.questType == QuestType.SellAlexandrite)
+                {
+                    qManager.questProgress[2] += oreSell[temp];
+                }
+            }
+            #endregion
 
             iManager.oreCollection[temp] = 0;
             oreSell[temp] = 0;            
@@ -710,7 +877,7 @@ public class ShopSystem : MonoBehaviour
             {
                 enough = true;
             }
-            #region Enough ore checking
+            #region Enough ore checking for advance
             else if (equipmentList.value == 1)
             {
                 if (iManager.oreCollection[1] >= 1000 && iManager.eqLevel[1] == 10)
@@ -763,6 +930,24 @@ public class ShopSystem : MonoBehaviour
                 {
                     enough = true;
                     iManager.oreCollection[9] -= 1000;
+                }
+            }
+            else if (equipmentList.value == 5)
+            {
+                if (iManager.oreCollection[11] >= 1000 && iManager.eqLevel[5] == 10)
+                {
+                    enough = true;
+                    iManager.oreCollection[11] -= 1000;
+                }
+                else if (iManager.oreCollection[12] >= 1000 && iManager.eqLevel[5] == 20)
+                {
+                    enough = true;
+                    iManager.oreCollection[12] -= 1000;
+                }
+                else if (iManager.oreCollection[13] >= 1000 && iManager.eqLevel[5] == 29)
+                {
+                    enough = true;
+                    iManager.oreCollection[13] -= 1000;
                 }
             }
             #endregion
@@ -826,6 +1011,14 @@ public class ShopSystem : MonoBehaviour
         {
             a = 7; b = 8; c = 9;
         }
+        else if (equipmentList.value == 4) //hand drill
+        {
+            a = 10; b = 10; c = 10;
+        }
+        else if (equipmentList.value == 5) //plasma drill
+        {
+            a = 11; b = 12; c = 13;
+        }
         #endregion
         if (equipmentList.value == 0)
         {
@@ -838,6 +1031,33 @@ public class ShopSystem : MonoBehaviour
                 upgradeBtn.SetActive(false);
                 TMPro.TextMeshProUGUI tmp = GameObject.Find("coinRequirement").GetComponent<TMPro.TextMeshProUGUI>();
                 tmp.text = "Max lvl reached!";
+            }
+            else
+            {
+                upgradeType[0].SetActive(true);
+                coinText[0].SetActive(true);
+                coinLogo.SetActive(true);
+                upgradeBtn.SetActive(true);
+            }
+        }
+        else if (equipmentList.value == 4)
+        {
+            if (iManager.eqLevel[equipmentList.value] == 10)
+            {
+                upgradeType[0].SetActive(true);
+                coinLogo.SetActive(false);
+                upgradeType[1].SetActive(false);
+                coinText[0].SetActive(false);
+                upgradeBtn.SetActive(false);
+                TMPro.TextMeshProUGUI tmp = GameObject.Find("coinRequirement").GetComponent<TMPro.TextMeshProUGUI>();
+                tmp.text = "Max lvl reached!";
+            }
+            else
+            {
+                upgradeType[0].SetActive(true);
+                coinText[0].SetActive(true);
+                coinLogo.SetActive(true);
+                upgradeBtn.SetActive(true);
             }
         }
         else if (equipmentList.value != 0)
@@ -861,6 +1081,10 @@ public class ShopSystem : MonoBehaviour
                 {
                     materialName.text = "High Purity Ruby";
                 }
+                else if (equipmentList.value == 5)
+                {
+                    materialName.text = "High Purity Sapphire";
+                }
                 coinText[1].SetActive(true);
                 upgradeBtn.SetActive(true);
             }
@@ -881,6 +1105,10 @@ public class ShopSystem : MonoBehaviour
                 {
                     materialName.text = "Sapphire";
                 }
+                else if (equipmentList.value == 5)
+                {
+                    materialName.text = "Diamond";
+                }
                 coinText[1].SetActive(true);
                 upgradeBtn.SetActive(true);
             }
@@ -900,6 +1128,10 @@ public class ShopSystem : MonoBehaviour
                 else if (equipmentList.value == 3)
                 {
                     materialName.text = "Emerald";
+                }
+                else if (equipmentList.value == 5)
+                {
+                    materialName.text = "Alexandrite";
                 }
                 coinText[1].SetActive(true);
                 upgradeBtn.SetActive(true);
@@ -940,6 +1172,10 @@ public class ShopSystem : MonoBehaviour
         oreName[7].text = "High Purity Ruby";
         oreName[8].text = "Sapphire";
         oreName[9].text = "Emerald";
+        oreName[10].text = "Dwarfnium";
+        oreName[11].text = "High Purity Sapphire";
+        oreName[12].text = "Diamond";
+        oreName[13].text = "Alexandrite";
     }
     public void MerchantChange()
     {

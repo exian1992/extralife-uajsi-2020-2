@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Maps/DwarfVillage.unity
     guid: 58733a324d525144da7e042a222ca380
+  - enabled: 1
+    path: Assets/Scenes/Maps/EarthCore.unity
+    guid: 613a56b827c3f1c4ea3458175b19e2c2
   m_configObjects: {}

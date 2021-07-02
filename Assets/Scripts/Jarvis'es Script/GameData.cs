@@ -8,7 +8,7 @@ public class GameData
 {
     //IdleManager
     public int coin, stone, coal, copper, iron, gold, ruby, titanium;
-    public int[] oreCollection = new int[16];
+    public int[] oreCollection = new int[14];
     //public bool isLoaded = true;
 
     public int[] eqLevel = new int[6];
@@ -31,10 +31,12 @@ public class GameData
     public bool isItEquippedCostume = false;
     public bool otherCostumeUnlocked = false;
 
-    //hireNPC
-    public DateTime npc1, npc2;
-    public bool npc1Running, npc2Running;
-    public bool speedUp1, speedUp2;
+    //HireNPC
+    public DateTime npc1, npc2, npc3;
+    public bool npc1Running, npc2Running, npc3Running;
+    public bool speedUp1, speedUp2, speedUp3;
+    public string[] hour = new string[3];
+    public string[] map = new string[3];
     public GameData(GameManager gManager)
     {
 
@@ -95,9 +97,18 @@ public class GameData
     {
         npc1 = npcManager.npc1;
         npc2 = npcManager.npc2;
+        npc3 = npcManager.npc3;
         npc1Running = npcManager.npc1Running;
         npc2Running = npcManager.npc2Running;
+        npc3Running = npcManager.npc3Running;
         speedUp1 = npcManager.speedUp1;
         speedUp2 = npcManager.speedUp2;
+        speedUp3 = npcManager.speedUp3;
+        hour[0] = npcManager.hour[0];
+        hour[1] = npcManager.hour[1];
+        hour[2] = npcManager.hour[2];
+        map[0] = npcManager.map[0];
+        map[1] = npcManager.map[1];
+        map[2] = npcManager.map[2];
     }
 }
