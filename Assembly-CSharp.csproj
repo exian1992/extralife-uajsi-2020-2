@@ -154,6 +154,7 @@
     <Compile Include="Assets\Scripts\Jarvis'es Script\Quests\QuestType.cs" />
     <Compile Include="Assets\Scripts\Jarvis'es Script\SaveSystem.cs" />
     <Compile Include="Assets\Scripts\Jarvis'es Script\ShopSystem.cs" />
+    <Compile Include="Assets\Scripts\Plugin\AdsManager.cs" />
     <Compile Include="Assets\Scripts\Plugin\Firebase Init.cs" />
     <Compile Include="Assets\Scripts\Plugin\GoogleSignInDemo.cs" />
     <Compile Include="Assets\Scripts\Plugin\Realtime.cs" />
